@@ -575,17 +575,6 @@
   <p class="rotulo">Ari Labs</p>
   <h1><span class="l1">Tu trabajo sigue igual.</span> <span class="l2">La forma de hacerlo, <em>no</em>.</span></h1>
   <p class="sub">Apps y webs para negocios pequeños de Mérida. Sin nube, sin mensualidades caras.</p>
-  <div class="contacto">
-    <button class="boton" id="boton" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="opciones">Escríbenos</button>
-    <div class="opciones" id="opciones">
-      <a class="opcion" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">
-        <b>Correo</b><span>Ari.ice.signal@gmail.com</span>
-      </a>
-      <a class="opcion" href="https://wa.link/eut47p" target="_blank" rel="noopener">
-        <b>WhatsApp</b><span>Te contesto el mismo día</span>
-      </a>
-    </div>
-  </div>
 </section>
 
 <section class="final">
@@ -769,29 +758,8 @@
     if (nosotros) nosotros.classList.add('visto');
   }
 
-  // ---- los botones: se hunden al tocarlos y vuelven con muelle ----
-  var boton = document.getElementById('boton');
-  var contacto = document.querySelector('.contacto');
-  var mBoton = new Muelle(1, 320, 22);
-  var botonVivo = false;
-  function dibujarBoton(){
-    boton.style.transform = 'scale(' + mBoton.v + ')';
-    if (mBoton.paso(1/60)) requestAnimationFrame(dibujarBoton);
-    else botonVivo = false;
-  }
-  function moverBoton(d){
-    mBoton.ir(d);
-    if (!botonVivo){ botonVivo = true; requestAnimationFrame(dibujarBoton); }
-  }
-  if (boton && !quieto){
-    boton.addEventListener('pointerdown', function(){ moverBoton(0.955); });
-    boton.addEventListener('pointerup',   function(){ moverBoton(1); });
-    boton.addEventListener('pointerleave',function(){ moverBoton(1); });
-    boton.addEventListener('pointercancel',function(){ moverBoton(1); });
-  }
-
   // ---- "Escríbenos" abre los dos caminos: correo o WhatsApp ----
-  // (hay dos: el del cierre y el de nosotros; cada uno con sus opciones)
+  // Solo hay uno, el de Nosotros: el del cierre se quitó por repetido.
   var contactos = Array.prototype.slice.call(document.querySelectorAll('.contacto'));
   contactos.forEach(function(caja){
     var b = caja.querySelector('.boton');
