@@ -1330,6 +1330,8 @@
     var empujon = 0;        // cuánto ha empujado dentro del tramo actual
     var UMBRAL = 0.85;      // cuánto hay que empujar para pasar de tramo
                             // (antes 0.55: pasaba de golpe y no se apreciaba)
+    var autoHecho = false;  // el primer tramo ya se hizo solo
+    var autoCorriendo = false;
 
     function medir(){
       var alto = window.innerHeight || 1;
@@ -1349,6 +1351,49 @@
       empujon = 0;
       window.scrollTo(0, actual === 0 ? 0 : tramos[actual - 1]);
     }
+
+    // ---- el primer tramo se hace solo ----
+    // La galaxia se abre y el nombre aparece sin que nadie toque nada: el
+    // que entra ve de qué va la cosa antes de decidir bajar. Si toca la
+    // pantalla a media, manda él y el viaje se rinde.
+    function viajeSolo(){
+      if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
+      autoCorriendo = true;
+      var destino = tramos[0];
+      var desde = window.scrollY;
+      var trecho = destino - desde;
+      var ms = 4200;          // lento: se ve la galaxia abrirse y el nombre llegar
+      var t0 = 0;
+      function paso(t){
+        if (!autoCorriendo) return;
+        if (!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / ms);
+        // arranca y frena solo, como un coche
+        var suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        window.scrollTo(0, desde + trecho * suave);
+        if (p < 1){
+          requestAnimationFrame(paso);
+        } else {
+          autoCorriendo = false;
+          autoHecho = true;
+          actual = 1;         // ya está en el nombre: el siguiente empujón sigue
+          empujon = 0;
+        }
+      }
+      requestAnimationFrame(paso);
+    }
+
+    // si el que entra toca, el viaje se rinde y manda él
+    ['touchstart','wheel','keydown'].forEach(function(ev){
+      window.addEventListener(ev, function(){
+        if (autoCorriendo){
+          autoCorriendo = false;
+          autoHecho = true;
+          actual = 1;
+          empujon = 0;
+        }
+      }, {passive:true});
+    });
 
     function soltar(){
       suelto = true;
@@ -1442,11 +1487,30 @@
     //  ya no se dispara: manda el recorrido por tramos)
     ['bajaBoton','bajaChatBoton'].forEach(function(id){
       var b = document.getElementById(id);
-      if (b) b.addEventListener('click', function(){ empujar(1e9); });
+      if (b) b.addEventListener('click', function(){
+        // si el viaje solo va a medias, el botón lo corta y sigue él
+        if (autoCorriendo){ autoCorriendo = false; autoHecho = true; actual = 1; empujon = 0; }
+        empujar(1e9);
+      });
     });
 
     document.documentElement.classList.add('recorriendo');
     medir();
+    // el primer tramo arranca solo, pero se espera a que las letras estén
+    // puestas (si no, el nombre llega tarde y el viaje se ve cortado)
+    var arrancado = false;
+    function arrancar(){
+      if (arrancado) return;
+      arrancado = true;
+      if (!suelto) medir();
+      setTimeout(viajeSolo, 700);   // un respiro para que se vea la galaxia
+    }
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(arrancar);
+      setTimeout(arrancar, 1500);   // por si las letras tardan demasiado
+    } else {
+      setTimeout(arrancar, 400);
+    }
     // las letras de Google llegan después y cambian el alto: se vuelve a medir
     if (document.fonts && document.fonts.ready){
       document.fonts.ready.then(function(){ if (!suelto) medir(); });
