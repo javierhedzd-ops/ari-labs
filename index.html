@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portada · Ari Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --hielo-100:#f2fbfe;
+    --hielo-200:#def6fd;
+    --hielo-300:#c3eaf7;
+    --hielo-400:#9ed8ee;
+    --hielo-500:#6fb9d4;
+    --hielo-700:#1f4a5c;
+    --hielo-900:#0e0f11;
+    --noche:#0b1a21;
+    --tinta:#12181b;
+    --papel:#fbfcfd;
+    --gris:#5c6b72;
+    --margen:clamp(20px,5vw,56px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--noche);color:var(--papel);
+    font-family:"Newsreader",Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .chico{font-family:"Inter",system-ui,sans-serif}
+
+  /* ---------- galaxia de fondo ---------- */
+  #galaxia{
+    position:fixed;inset:0;width:100%;height:100%;
+    z-index:0;pointer-events:none;
+    opacity:1;
+    background:
+      radial-gradient(120% 80% at 50% 45%, #0b1526 0%, #070d18 45%, #03060c 100%);
+  }
+  /* todo lo demás va por encima: la galaxia es solo fondo */
+  body > *:not(#galaxia):not(.baja-ya){position:relative;z-index:1}
+  .viaje, .escena, .final{background:transparent}
+  /* el cierre va en la paleta ice: fondo noche, letra clara (antes era papel) */
+  footer{background:#081116}
+  /* el texto se lee siempre: un velo suave sobre la red, solo donde hay letras */
+  /* el texto se lee siempre: sombra suave en las letras, sin cajas ni velos */
+  .escena .interior, .final .interior{
+    text-shadow:0 1px 3px rgba(5,9,11,.9), 0 0 10px rgba(5,9,11,.7);
+  }
+
+  .barra{z-index:50}
+
+  /* ---------- barra de arriba ---------- */
+  .barra{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.1rem var(--margen);
+    font-family:"Inter",sans-serif;font-size:.72rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--hielo-300);
+    mix-blend-mode:difference;
+    transition:background .4s ease,backdrop-filter .4s ease;
+  }
+  .barra.pegada{
+    mix-blend-mode:normal;
+    background:rgba(21,31,36,.55);
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
+  }
+  .barra b{font-weight:500;color:var(--papel)}
+
+  /* ---------- el viaje: el scroll te mete en la galaxia ---------- */
+  .viaje{
+    position:relative;
+    height:380vh;              /* el largo del viaje */
+  }
+  .viaje-fijo{
+    position:sticky;top:0;height:100vh;
+    display:flex;align-items:flex-end;
+    padding:0 var(--margen) 14vh;
+    pointer-events:none;
+  }
+  .llegada{
+    opacity:0;transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .llegada.llega{opacity:1;transform:none}
+  .marca{
+    font-weight:300;font-size:clamp(3.4rem,17vw,7rem);
+    line-height:.9;letter-spacing:-.045em;margin:0;
+    font-optical-sizing:auto;
+  }
+  .lema{
+    font-family:"Inter",sans-serif;font-size:.8rem;letter-spacing:.06em;
+    color:var(--hielo-400);margin:1.6rem 0 0;max-width:26ch;line-height:1.6;
+  }
+
+  /* ---------- escena del teléfono ---------- */
+  .escena{
+    position:relative;
+    height:420vh;              /* el largo del scroll que arma la app */
+  }
+  .fija{
+    position:sticky;top:0;height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    /* el teléfono se va desvaneciendo al final de la escena: sin corte seco */
+    opacity:var(--opFija,1);
+  }
+  .halo{
+    position:absolute;width:70vmin;height:70vmin;border-radius:50%;
+    background:radial-gradient(circle,rgba(109,151,171,.30),transparent 65%);
+    filter:blur(20px);pointer-events:none;
+  }
+
+  /* el teléfono */
+  .telf{
+    position:relative;
+    width:min(64vw,270px);
+    aspect-ratio:9/19;
+    border-radius:2.6rem;
+    background:#0b1114;
+    border:1px solid rgba(158,216,238,.28);
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.9), inset 0 0 0 6px #0b1114;
+    padding:.55rem;
+    transform:scale(.92);
+    will-change:transform,opacity;
+  }
+  .pantalla{
+    position:relative;height:100%;border-radius:2.1rem;overflow:hidden;
+    background:linear-gradient(180deg,#101a20,#0b1114 60%);
+    display:flex;flex-direction:column;
+  }
+  .muesca{
+    position:absolute;top:.5rem;left:50%;transform:translateX(-50%);
+    width:34%;height:.42rem;border-radius:99px;background:#05090b;z-index:5;
+  }
+  .estado{
+    display:flex;justify-content:space-between;
+    padding:.7rem 1rem .2rem;
+    font-family:"Inter",sans-serif;font-size:.55rem;color:var(--hielo-400);
+    letter-spacing:.06em;
+  }
+  .cabecera{
+    display:flex;align-items:center;gap:.5rem;
+    padding:.5rem 1rem .7rem;
+    border-bottom:1px solid rgba(201,221,230,.10);
+  }
+  .punto{
+    width:.42rem;height:.42rem;border-radius:50%;background:var(--hielo-400);
+    box-shadow:0 0 0 0 rgba(157,192,208,.6);
+    animation:latir 2.4s ease-out infinite;
+  }
+  @keyframes latir{
+    0%{box-shadow:0 0 0 0 rgba(157,192,208,.55)}
+    70%{box-shadow:0 0 0 .5rem rgba(157,192,208,0)}
+    100%{box-shadow:0 0 0 0 rgba(157,192,208,0)}
+  }
+  .cabecera span{font-family:"Inter",sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--hielo-300)}
+
+  .chat{
+    flex:1;display:flex;flex-direction:column;gap:.55rem;
+    padding:.9rem .8rem 1rem;overflow:hidden;
+  }
+  .msg{
+    max-width:88%;padding:.55rem .7rem;border-radius:.9rem;
+    font-family:"Inter",sans-serif;font-size:.68rem;line-height:1.45;
+    opacity:0;transform:translateY(10px);
+    will-change:transform,opacity;
+  }
+  .msg.yo{
+    align-self:flex-end;background:var(--hielo-200);color:var(--hielo-900);
+    border-bottom-right-radius:.25rem;
+  }
+  .msg.ella{
+    align-self:flex-start;background:rgba(201,221,230,.10);color:var(--hielo-100);
+    border:1px solid rgba(201,221,230,.14);
+    border-bottom-left-radius:.25rem;
+  }
+  .msg.ella b{color:var(--hielo-300);font-weight:500}
+  .msg.visible{opacity:1;transform:none}
+
+  .lista{
+    align-self:flex-start;width:88%;
+    display:flex;flex-direction:column;gap:.3rem;margin-top:.1rem;
+  }
+  .fila{
+    display:flex;align-items:center;gap:.45rem;
+    padding:.42rem .55rem;border-radius:.55rem;
+    background:rgba(201,221,230,.07);
+    border:1px solid rgba(201,221,230,.12);
+    font-family:"Inter",sans-serif;font-size:.6rem;color:var(--hielo-200);
+    opacity:0;transform:translateX(-8px);
+    will-change:transform,opacity;
+  }
+  .fila.visible{opacity:1;transform:none}
+  .fila i{
+    width:.3rem;height:.3rem;border-radius:50%;background:var(--hielo-400);
+    flex:none;font-style:normal;
+  }
+  .fila.hecha{color:var(--hielo-500)}
+  .fila.hecha i{background:var(--hielo-500)}
+
+  .escribiendo{
+    align-self:flex-start;display:flex;gap:.22rem;padding:.55rem .7rem;
+    border-radius:.9rem;background:rgba(201,221,230,.10);
+    opacity:0;will-change:opacity;
+  }
+  .escribiendo.visible{opacity:1}
+  .escribiendo s{
+    width:.28rem;height:.28rem;border-radius:50%;background:var(--hielo-400);
+    animation:sube 1.1s infinite ease-in-out;
+  }
+  .escribiendo s:nth-child(2){animation-delay:.15s}
+  .escribiendo s:nth-child(3){animation-delay:.3s}
+  @keyframes sube{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-3px);opacity:1}}
+
+
+  /* ---------- variantes de la entrada del teléfono (prueba) ---------- */
+  .telf{transform-origin:50% 50%}
+  /* B: la pantalla se enciende */
+  .telf .pantalla::after{
+    content:"";position:absolute;inset:0;background:#05090b;
+    opacity:0;pointer-events:none;z-index:9;
+  }
+  .telf.apagado .pantalla::after{opacity:1}
+  .telf.apagado .pantalla > *{opacity:0}
+  .telf .pantalla > *{transition:opacity .45s ease}
+  /* C: el chat entra solo */
+  .telf.quieto{transform:scale(1) !important;opacity:1 !important}
+
+  /* ---------- el señalamiento de bajar (primera pantalla) ---------- */
+  .baja-ya{
+    position:fixed;left:50%;bottom:2.2rem;transform:translateX(-50%);
+    z-index:40;display:flex;flex-direction:column;align-items:center;gap:.7rem;
+    font-size:.82rem;letter-spacing:.30em;text-transform:uppercase;
+    color:var(--hielo-400);pointer-events:none;
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  /* el aviso de bajar también se puede tocar: lleva al nombre sin prisa */
+  .baja-ya button{
+    pointer-events:auto;cursor:pointer;
+    background:none;border:0;padding:.6rem 1rem;margin:0;
+    font:inherit;letter-spacing:inherit;text-transform:inherit;
+    color:inherit;display:flex;flex-direction:column;align-items:center;gap:.7rem;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .baja-ya button:focus-visible{outline:1px solid var(--hielo-400);outline-offset:6px;border-radius:4px}
+  .baja-ya i{
+    display:block;width:1.5px;height:3.2rem;
+    background:linear-gradient(var(--hielo-400),transparent);
+    animation:respira 2.2s ease-in-out infinite;
+  }
+  .baja-ya i::after{
+    content:"";display:block;width:5px;height:5px;margin:-1px auto 0;
+    border-right:1px solid var(--hielo-400);border-bottom:1px solid var(--hielo-400);
+    transform:rotate(45deg);
+  }
+  @keyframes respira{
+    0%,100%{opacity:.25;transform:translateY(0)}
+    50%{opacity:1;transform:translateY(6px)}
+  }
+  .baja-ya.fuera{opacity:0;transform:translate(-50%,10px)}
+  /* el segundo aviso nace escondido: solo sale cuando el teléfono ya está puesto */
+  #bajaChat{opacity:0;transform:translate(-50%,10px)}
+  #bajaChat.sale{opacity:1;transform:translateX(-50%)}
+
+  /* pista de scroll */
+  .pista{
+    position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);
+    font-family:"Inter",sans-serif;font-size:.6rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--hielo-500);
+    display:flex;flex-direction:column;align-items:center;gap:.5rem;
+    transition:opacity .4s ease;
+  }
+  .pista::after{
+    content:"";width:1px;height:2rem;
+    background:linear-gradient(var(--hielo-500),transparent);
+    animation:baja 1.8s ease-in-out infinite;
+  }
+  @keyframes baja{0%,100%{opacity:.2;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- cierre ---------- */
+  /* Paleta ice: fondo noche, letra clara, azul hielo en lo que importa.
+     Nace de la galaxia: el fondo se aclara desde arriba, sin corte seco. */
+  .cierre{
+    position:relative;
+    /* el cierre no tiene fondo propio: la galaxia se ve igual que arriba,
+       sin velo ni degradado que la tape. El pie ya tiene su propio fondo. */
+    background:transparent;
+    color:var(--hielo-100);
+    padding:22vh var(--margen) 16vh;
+    overflow:hidden;
+  }
+  /* el resplandor que sube desde la galaxia: fuera, porque aclaraba la mitad
+     de abajo y se notaba como un velo encima de la galaxia */
+  .cierre::before{display:none}
+  .cierre > *{position:relative}
+  .cierre .rotulo{
+    font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--hielo-400);margin:0 0 2.4rem;
+  }
+  .cierre h1{
+    font-weight:300;font-size:clamp(2.7rem,11vw,4.6rem);
+    line-height:1.04;letter-spacing:-.03em;margin:0;max-width:13ch;
+    /* como "Ari Labs": la letra no es blanca maciza, deja pasar la galaxia.
+       Se recorta el fondo de detrás dentro de las letras y se aclara un poco
+       para que se lean sin perder la transparencia. */
+    color:transparent;
+    background-image:linear-gradient(180deg,rgba(255,255,255,.92),rgba(222,246,253,.62));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:none;
+    filter:drop-shadow(0 1px 6px rgba(5,9,11,.55));
+  }
+  .cierre h1 em{
+    font-style:italic;
+    background-image:linear-gradient(180deg,rgba(158,216,238,.95),rgba(111,185,212,.55));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+  }
+  .cierre h1 span{display:block}
+  .cierre h1 .l1, .cierre h1 .l2{
+    opacity:0;transform:translateY(18px);
+    transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
+  }
+  .cierre.visto h1 .l1{opacity:1;transform:none;transition-delay:.16s}
+  .cierre.visto h1 .l2{opacity:1;transform:none;transition-delay:.30s}
+  .cierre .rotulo, .cierre p.sub, .cierre .contacto{
+    opacity:0;transform:translateY(14px);
+    transition:opacity .7s cubic-bezier(.2,.9,.2,1),transform .7s cubic-bezier(.2,.9,.2,1);
+  }
+  .cierre.visto .rotulo{opacity:1;transform:none;transition-delay:.05s}
+  .cierre.visto p.sub{opacity:1;transform:none;transition-delay:.34s}
+  .cierre.visto .contacto{opacity:1;transform:none;transition-delay:.5s}
+  /* los dos caminos para escribir: salen al tocar "Escríbenos" */
+  .contacto{
+    display:flex;flex-direction:column;align-items:center;
+    margin-top:2.8rem;
+  }
+  .opciones{
+    display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:20rem;
+    margin-top:.9rem;
+    /* cerradas: no ocupan sitio ni se pueden tocar */
+    max-height:0;opacity:0;overflow:hidden;pointer-events:none;
+    transition:max-height .45s cubic-bezier(.2,.9,.2,1),opacity .3s ease,margin-top .3s ease;
+  }
+  .contacto.abierto .opciones{
+    max-height:20rem;opacity:1;pointer-events:auto;
+  }
+  .opcion{
+    display:flex;flex-direction:column;gap:.15rem;
+    padding:.85rem 1.1rem;border-radius:14px;text-decoration:none;
+    background:rgba(158,216,238,.06);
+    box-shadow:inset 0 0 0 1px rgba(158,216,238,.22);
+    transition:background .2s ease,box-shadow .2s ease,transform .12s ease-out;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .opcion b{
+    font-family:"Inter",sans-serif;font-size:.82rem;font-weight:500;
+    letter-spacing:.06em;color:var(--hielo-200);
+  }
+  .opcion span{
+    font-family:"Inter",sans-serif;font-size:.72rem;
+    color:rgba(222,246,253,.5);overflow-wrap:anywhere;
+  }
+  .opcion:active{transform:scale(.98);background:rgba(158,216,238,.14)}
+  @media (hover:hover){
+    .opcion:hover{background:rgba(158,216,238,.12);box-shadow:inset 0 0 0 1px rgba(158,216,238,.4)}
+  }
+  .cierre p.sub{
+    font-family:"Inter",sans-serif;font-size:1.05rem;line-height:1.7;
+    color:rgba(222,246,253,.62);margin:2.4rem 0 0;max-width:30ch;
+  }
+  .boton{
+    position:relative;display:inline-block;margin-top:0;padding:1.05rem 2rem;
+    background:var(--hielo-400);color:var(--hielo-900);text-decoration:none;
+    font-family:"Inter",sans-serif;font-size:.82rem;letter-spacing:.08em;
+    font-weight:500;border-radius:99px;border:0;cursor:pointer;
+    transition:transform .12s ease-out, background .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  /* el halo que respira mientras espera */
+  .boton::after{
+    content:"";position:absolute;inset:-6px;border-radius:99px;
+    border:1px solid rgba(158,216,238,.45);
+    animation:late 3s ease-in-out infinite;pointer-events:none;
+  }
+  @keyframes late{
+    0%,100%{opacity:.15;transform:scale(1)}
+    50%{opacity:.7;transform:scale(1.06)}
+  }
+  .boton:active{transform:scale(.96);background:var(--hielo-300)}
+  .boton{will-change:transform}
+  .final{
+    /* la galaxia se apaga poco a poco hasta el negro: el cambio de color
+       entra desde arriba, sin borde ni salto */
+    background:linear-gradient(180deg,
+      rgba(8,17,22,0) 0%,
+      rgba(8,17,22,.35) 22%,
+      rgba(8,17,22,.72) 45%,
+      rgba(8,17,22,.93) 68%,
+      #081116 88%);
+    color:var(--hielo-100);
+    padding:20vh var(--margen);text-align:center;
+  }
+  .final p{
+    opacity:0;transform:translateY(24px);
+    transition:opacity .9s cubic-bezier(.2,.9,.2,1),transform .9s cubic-bezier(.22,1.15,.36,1);
+    font-weight:300;font-size:clamp(2.8rem,12vw,5rem);
+    line-height:1.02;letter-spacing:-.035em;margin:0 auto;max-width:11ch;
+    /* que resalte: letra más blanca y un resplandor de hielo detrás,
+       como si la galaxia todavía la iluminara desde abajo */
+    color:#ffffff;
+    text-shadow:0 0 28px rgba(158,216,238,.45), 0 0 70px rgba(158,216,238,.22);
+  }
+  .final p em{
+    font-style:italic;
+    /* el "menos ruido" en azul hielo encendido, no apagado */
+    color:var(--hielo-300);
+    text-shadow:0 0 26px rgba(158,216,238,.55), 0 0 64px rgba(158,216,238,.28);
+  }
+  .final.visto p{opacity:1;transform:none}
+  footer{
+    background:#081116;padding:0 var(--margen) 8vh;text-align:center;
+    font-family:"Inter",sans-serif;font-size:.72rem;color:rgba(222,246,253,.35);
+  }
+  footer .legal{
+    display:flex;gap:1.4rem;justify-content:center;margin-top:.9rem;
+  }
+  footer .legal a{
+    color:rgba(222,246,253,.45);text-decoration:none;
+    border-bottom:1px solid rgba(158,216,238,.18);padding-bottom:.1rem;
+    transition:color .2s ease,border-color .2s ease;
+  }
+  footer .legal a:hover{color:var(--hielo-300);border-color:rgba(158,216,238,.5)}
+  @media (prefers-reduced-motion: reduce){
+    .punto, .pista::after, .escribiendo s{animation:none}
+    .msg, .fila{transform:none !important}
+    .boton{transition:none}
+    .cierre .rotulo, .cierre h1 span, .cierre p.sub, .cierre .boton,
+    .final p, .boton::after{opacity:1 !important;transform:none !important;transition:none;animation:none}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="galaxia" aria-hidden="true"></canvas>
+
+<div class="barra chico"><b>Ari Labs</b><span>Mérida</span></div>
+
+<!-- el señalamiento: que se sepa que hay que bajar -->
+<div class="baja-ya chico" id="bajaYa">
+  <button type="button" id="bajaBoton" aria-label="Bajar al nombre de Ari Labs">
+    <span>Baja</span>
+    <i></i>
+  </button>
+</div>
+
+<!-- ============ VIAJE: entras al centro de la galaxia y pasas entre los mundos ============ -->
+<section class="viaje" id="viaje">
+  <div class="viaje-fijo">
+    <div class="llegada" id="llegada">
+      <h1 class="marca">Ari Labs</h1>
+      <p class="lema">Software para negocios pequeños. Mérida, Yucatán.</p>
+    </div>
+  </div>
+</section>
+
+<section class="escena" id="escena">
+  <div class="fija">
+    <div class="halo"></div>
+
+    <div class="telf" id="telf">
+      <div class="pantalla">
+        <div class="muesca"></div>
+        <div class="estado chico"><span>8:14</span><span>▮▮▮</span></div>
+        <div class="cabecera">
+          <span class="punto"></span>
+          <span>Ari · en línea</span>
+        </div>
+
+        <div class="chat" id="chat">
+          <div class="msg yo" data-paso="1">Ari, buenos días. ¿Qué tenemos para hoy?</div>
+          <div class="msg ella" data-paso="2">Buenos días, Javi. Tres cosas. Y una te va a doler.</div>
+          <div class="msg yo" data-paso="3">¿Qué fue?</div>
+          <div class="msg ella" data-paso="4">Ahí te van:</div>
+
+          <div class="lista" id="lista">
+            <div class="fila" data-paso="5"><i></i>Terminar la web de Ari Labs</div>
+            <div class="fila" data-paso="6"><i></i>Probar la app de citas</div>
+            <div class="fila" data-paso="7"><i></i>Revisar el respaldo del domingo</div>
+          </div>
+
+          <div class="msg yo" data-paso="8">Oye, ¿y tú qué quieres hacer?</div>
+          <div class="escribiendo" data-paso="9"><s></s><s></s><s></s></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pista chico" id="pista">Baja</div>
+  </div>
+</section>
+
+<!-- el segundo paso: del teléfono al chat, sin que el dedo tenga que pelearse -->
+<div class="baja-ya chico" id="bajaChat">
+  <button type="button" id="bajaChatBoton" aria-label="Bajar al chat del teléfono">
+    <span>Baja</span>
+    <i></i>
+  </button>
+</div>
+
+<!-- ============ CIERRE ============ -->
+<section class="cierre">
+  <p class="rotulo">Ari Labs</p>
+  <h1><span class="l1">Tu trabajo sigue igual.</span> <span class="l2">La forma de hacerlo, <em>no</em>.</span></h1>
+  <p class="sub">Apps y webs para negocios pequeños de Mérida. Sin nube, sin mensualidades caras.</p>
+  <div class="contacto">
+    <button class="boton" id="boton" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="opciones">Escríbenos</button>
+    <div class="opciones" id="opciones">
+      <a class="opcion" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">
+        <b>Correo</b><span>Ari.ice.signal@gmail.com</span>
+      </a>
+      <a class="opcion" href="https://wa.link/eut47p" target="_blank" rel="noopener">
+        <b>WhatsApp</b><span>Te contesto el mismo día</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <p>Mismo trabajo. <em>Menos ruido.</em></p>
+</section>
+
+<footer>
+  <span>Ari Labs · Mérida, Yucatán · 2026</span>
+  <nav class="legal">
+    <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var escena = document.getElementById('escena');
+  var telf   = document.getElementById('telf');
+  var pista  = document.getElementById('pista');
+  var fija   = escena.querySelector('.fija');
+  var pasos  = Array.prototype.slice.call(document.querySelectorAll('[data-paso]'));
+  var ultimo = 0;
+
+
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- muelle: cada valor persigue su destino, sin duración fija ----
+  function Muelle(v, rigidez, amortiguado){
+    this.v = v; this.destino = v; this.vel = 0;
+    this.k = rigidez || 170; this.c = amortiguado || 26;
+  }
+  Muelle.prototype.ir = function(d){ this.destino = d; };
+  Muelle.prototype.paso = function(dt){
+    var f = (this.destino - this.v) * this.k - this.vel * this.c;
+    this.vel += f * dt;
+    this.v   += this.vel * dt;
+    if (Math.abs(this.destino - this.v) < 0.0005 && Math.abs(this.vel) < 0.0005){
+      this.v = this.destino; this.vel = 0; return false;
+    }
+    return true;
+  };
+
+  var mTelf   = new Muelle(0, 90, 30);    // 0 = chico, 1 = grande (sin rebote)
+  var mPista  = new Muelle(1, 200, 30);
+
+  // ---- los mensajes: cada uno con su propio muelle ----
+  var items = pasos.map(function(el){
+    return { el:el, y:new Muelle(10, 210, 26), o:new Muelle(0, 210, 26), dentro:false };
+  });
+
+  // ---- el chat va pegado al scroll, no al reloj ----
+  // Cada mensaje tiene su tramo: aparece cuando el dedo llega a él y, si
+  // subes, se va. Así el que baja manda: si se para, el chat se para.
+  var REPARTO = 0.72;   // el chat se arma en el 72% del recorrido; el resto, respiro
+
+  function repartir(avance){
+    var n = pasos.length;
+    var dentro = Math.min(1, avance / REPARTO) * n;   // 0 a n, con decimales
+    items.forEach(function(it, i){
+      // cada mensaje entra en su tramo y tarda un poco en asentarse
+      var p = Math.min(1, Math.max(0, dentro - i));
+      var suave = p * p * (3 - 2 * p);
+      it.y.ir(10 * (1 - suave));
+      it.o.ir(suave);
+      it.dentro = p > 0;
+    });
+  }
+
+  // ---- un solo bucle de dibujo para todo ----
+  var corriendo = false, ultimoT = 0;
+  function bucle(t){
+    var dt = Math.min(0.05, (t - ultimoT) / 1000 || 0.016);
+    ultimoT = t;
+    var sigue = false;
+
+    if (mTelf.paso(dt)){
+      // sale del centro de la galaxia: chiquito y arriba, y crece hasta su sitio
+      var e = Math.min(1, Math.max(0, mTelf.v));
+      var suave = e * e * (3 - 2 * e);
+      var escala = 0.10 + suave * 0.90;
+      if (escala > 1) escala = 1;          // nunca más grande de su tamaño
+      if (escala < 0.10) escala = 0.10;
+      // el centro de la galaxia está en el medio de la pantalla; el teléfono
+      // también, así que solo hay que encogerlo desde ahí y dejarlo crecer
+      telf.style.transform = 'scale(' + escala + ')';
+      telf.style.opacity = suave > 0.01 ? 1 : 0;
+      sigue = true;
+    }
+    if (mPista.paso(dt)){
+      pista.style.opacity = mPista.v;
+      sigue = true;
+    }
+    items.forEach(function(it){
+      var a = it.y.paso(dt), b = it.o.paso(dt);
+      if (a || b){
+        it.el.style.transform = 'translateY(' + it.y.v + 'px)';
+        it.el.style.opacity = it.o.v;
+        sigue = true;
+      }
+    });
+
+    if (sigue){
+      requestAnimationFrame(bucle);
+    } else {
+      corriendo = false;
+    }
+  }
+
+  function despertar(){
+    if (!corriendo){ corriendo = true; ultimoT = 0; requestAnimationFrame(bucle); }
+  }
+
+  function pintar(){
+    var r = escena.getBoundingClientRect();
+    var total = escena.offsetHeight - window.innerHeight;
+    var avance = Math.min(1, Math.max(0, -r.top / total));
+
+    // el teléfono ya está puesto: no crece ni se mueve, solo se arma el chat
+    mTelf.ir(1);
+    mPista.ir(avance > 0.04 ? 0 : 1);
+
+    // ---- la salida: el teléfono se va y el cierre entra encima ----
+    // Antes el cambio era un corte seco: el teléfono desaparecía y de golpe
+    // aparecía el fondo del cierre. Ahora, en el último 22% de la escena, el
+    // teléfono se desvanece y se aleja un poco mientras el cierre sube.
+    var salida = Math.min(1, Math.max(0, (avance - 0.78) / 0.22));
+    var suaveSal = salida * salida * (3 - 2 * salida);
+    fija.style.setProperty('--opFija', String(1 - suaveSal));
+    fija.style.transform = 'translateY(' + (-suaveSal * 6) + 'vh) scale(' + (1 - suaveSal * 0.06) + ')';
+    fija.style.pointerEvents = suaveSal > 0.5 ? 'none' : '';
+
+    repartir(avance);
+    despertar();
+  }
+
+  // ---- lo que entra al llegar: cierre y final ----
+  var cierre = document.querySelector('.cierre');
+  var final  = document.querySelector('.final');
+  var barra  = document.querySelector('.barra');
+
+  if ('IntersectionObserver' in window){
+    var ojo = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(en){
+        if (en.isIntersecting) en.target.classList.add('visto');
+      });
+    }, {threshold:0.25});
+    ojo.observe(cierre);
+    ojo.observe(final);
+  } else {
+    cierre.classList.add('visto'); final.classList.add('visto');
+  }
+
+  // ---- los botones: se hunden al tocarlos y vuelven con muelle ----
+  var boton = document.getElementById('boton');
+  var contacto = document.querySelector('.contacto');
+  var mBoton = new Muelle(1, 320, 22);
+  var botonVivo = false;
+  function dibujarBoton(){
+    boton.style.transform = 'scale(' + mBoton.v + ')';
+    if (mBoton.paso(1/60)) requestAnimationFrame(dibujarBoton);
+    else botonVivo = false;
+  }
+  function moverBoton(d){
+    mBoton.ir(d);
+    if (!botonVivo){ botonVivo = true; requestAnimationFrame(dibujarBoton); }
+  }
+  if (boton && !quieto){
+    boton.addEventListener('pointerdown', function(){ moverBoton(0.955); });
+    boton.addEventListener('pointerup',   function(){ moverBoton(1); });
+    boton.addEventListener('pointerleave',function(){ moverBoton(1); });
+    boton.addEventListener('pointercancel',function(){ moverBoton(1); });
+  }
+
+  // ---- "Escríbenos" abre los dos caminos: correo o WhatsApp ----
+  if (boton && contacto){
+    var cerrarOpciones = function(){
+      contacto.classList.remove('abierto');
+      boton.setAttribute('aria-expanded','false');
+      boton.textContent = 'Escríbenos';
+    };
+    boton.addEventListener('click', function(){
+      var abierto = contacto.classList.toggle('abierto');
+      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      boton.textContent = abierto ? 'Elige cómo' : 'Escríbenos';
+    });
+    // si toca fuera, se cierran
+    document.addEventListener('pointerdown', function(e){
+      if (!contacto.classList.contains('abierto')) return;
+      if (contacto.contains(e.target)) return;
+      cerrarOpciones();
+    });
+    // Escape las cierra y devuelve el foco al botón
+    document.addEventListener('keydown', function(e){
+      if (e.key !== 'Escape') return;
+      if (!contacto.classList.contains('abierto')) return;
+      cerrarOpciones();
+      boton.focus();
+    });
+  }
+
+  // ---- la galaxia de fondo: espiral que gira y respira como si hablara ----
+  // Sale de ~/ari-imagen/galaxia-01.html (la del modo voz), recortada a lo
+  // que hace falta aquí: sin botones, sin micrófono y con la voz inventada.
+  (function(){
+    var lona = document.getElementById('galaxia');
+    if (!lona) return;
+    var ctx = lona.getContext('2d');
+
+    var HIELO = [127, 212, 255];
+    var CLARO = [214, 242, 255];
+    var HONDO = [27, 111, 158];
+    var CANTIDAD = 1500;   // antes 2600: se pintaban una por una y pesaba
+
+    // ---- colores de la galaxia de verdad (como la foto de referencia) ----
+    var NUCLEO_CALIDO = [255, 236, 190];   // el centro: blanco dorado
+    var NUCLEO_ORO    = [255, 190, 110];   // el resplandor anaranjado
+    var BRAZO_AZUL    = [120, 170, 255];   // brazos: azul intenso
+    var BRAZO_ROSADO  = [235, 150, 200];   // zonas rosadas y violáceas
+    var BRAZO_VIOLETA = [150, 130, 235];
+    var POLVO         = [70, 45, 35];      // vetas de polvo oscuro
+    var ESTRELLA_FRIA = [200, 225, 255];
+    var ESTRELLA_CALIDA = [255, 245, 225];
+
+    function rgba(c, a){ return 'rgba(' + (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + a + ')'; }
+    // ---- colores ya escritos, guardados ----
+    // Cada estrella pedía su texto 'rgba(...)' en cada cuadro (miles de textos
+    // nuevos por segundo) y el recolector de basura hacía micro-pausas: eso se
+    // sentía como trabones. Ahora el texto se escribe una vez por color y
+    // nivel de brillo (0 a 1 en pasos de 1/32) y se reutiliza.
+    var cacheColor = {};
+    function color(c, a){
+      if (a <= 0) return 'rgba(0,0,0,0)';
+      if (a > 1) a = 1;
+      var clave = (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + ((a * 32) | 0);
+      var s = cacheColor[clave];
+      if (!s){
+        s = 'rgba(' + (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + (((a * 32) | 0) / 32) + ')';
+        cacheColor[clave] = s;
+      }
+      return s;
+    }
+    function mezclar(a, b, t){
+      return [a[0] + (b[0]-a[0])*t, a[1] + (b[1]-a[1])*t, a[2] + (b[2]-a[2])*t];
+    }
+
+    // ---- las estrellas de la espiral ----
+    // Dos brazos que salen del centro y se enrollan. Cada estrella lleva su
+    // color: dorado cerca del núcleo, azul y rosado en los brazos.
+    function crearEspiral(n){
+      var estrellas = [];
+      for (var i = 0; i < n; i++){
+        var brazo = i % 2;
+        var u = Math.pow(Math.random(), 0.62);      // más densidad hacia el centro
+        // el brazo se abre en espiral: cuanto más lejos, más vueltas
+        var angulo = u * 5.6 + brazo * Math.PI + (Math.random() - 0.5) * 0.42;
+        var radio = 0.05 + u * 0.95;
+        // dispersión: más ancha en el medio del brazo, apretada en el centro
+        var dispersion = (Math.random() - 0.5) * 0.13 * Math.sin(u * Math.PI) + (Math.random() - 0.5) * 0.03;
+        var r = Math.max(0.01, radio + dispersion);
+
+        // color según dónde esté: núcleo dorado, brazos azules con rosado
+        var tono;
+        if (r < 0.16){
+          tono = mezclar(NUCLEO_CALIDO, NUCLEO_ORO, Math.random() * 0.7);
+        } else if (r < 0.34){
+          tono = mezclar(NUCLEO_ORO, BRAZO_AZUL, (r - 0.16) / 0.18);
+        } else {
+          var suerte = Math.random();
+          if (suerte < 0.18) tono = BRAZO_ROSADO;
+          else if (suerte < 0.34) tono = BRAZO_VIOLETA;
+          else tono = mezclar(BRAZO_AZUL, ESTRELLA_FRIA, Math.random() * 0.5);
+        }
+
+        estrellas.push({
+          angulo: angulo,
+          angulo0: angulo,          // de dónde salió: al rebobinar vuelve ahí
+          radio: r,
+          tam: 0.6 + Math.random() * 1.7,
+          brillo: 0.45 + Math.random() * 0.55,
+          color: tono,
+          fase: Math.random() * Math.PI * 2,
+          velocidad: 0.9 + Math.random() * 0.3,
+          entra: Math.random() * 1.05      // cuándo sale disparada al bajar
+        });
+      }
+      return estrellas;
+    }
+
+    // ---- la nebulosa: se pinta una vez y luego solo se gira ----
+    // Manchas de color a lo largo de los brazos (azul, rosado, violeta) y
+    // vetas de polvo oscuro encima, que es lo que le da cuerpo de galaxia.
+    function crearNebulosa(tam){
+      var c = document.createElement('canvas');
+      c.width = tam; c.height = tam;
+      var g = c.getContext('2d');
+      var centro = tam / 2;
+
+      // 1) el resplandor del núcleo, ancho y dorado
+      var haloNucleo = g.createRadialGradient(centro, centro, 0, centro, centro, centro * 0.42);
+      haloNucleo.addColorStop(0, rgba(NUCLEO_CALIDO, 0.55));
+      haloNucleo.addColorStop(0.35, rgba(NUCLEO_ORO, 0.28));
+      haloNucleo.addColorStop(1, rgba(NUCLEO_ORO, 0));
+      g.fillStyle = haloNucleo;
+      g.beginPath(); g.arc(centro, centro, centro * 0.42, 0, Math.PI * 2); g.fill();
+
+      // 2) las manchas de los brazos
+      for (var i = 0; i < 420; i++){
+        var brazo = i % 2;
+        var u = Math.pow(Math.random(), 0.7);
+        var ang = u * 5.6 + brazo * Math.PI + (Math.random() - 0.5) * 0.55;
+        var rad = (0.05 + u * 0.95) * centro * 0.94;
+        var x = centro + Math.cos(ang) * rad;
+        var y = centro + Math.sin(ang) * rad;
+        var t2 = (5 + Math.random() * 24) * (1 - u * 0.3);
+        var suerte = Math.random();
+        var color = suerte < 0.22 ? BRAZO_ROSADO : (suerte < 0.42 ? BRAZO_VIOLETA : BRAZO_AZUL);
+        var mancha = g.createRadialGradient(x, y, 0, x, y, t2);
+        mancha.addColorStop(0, rgba(color, 0.10 + Math.random() * 0.13));
+        mancha.addColorStop(1, rgba(color, 0));
+        g.fillStyle = mancha;
+        g.beginPath(); g.arc(x, y, t2, 0, Math.PI * 2); g.fill();
+      }
+
+      // 3) las vetas de polvo oscuro: van por dentro del brazo, un poco
+      //    desfasadas, y cortan la luz. Sin esto parece una espiral de puntos.
+      g.globalCompositeOperation = 'source-over';
+      for (var j = 0; j < 190; j++){
+        var brazo2 = j % 2;
+        var u2 = 0.12 + Math.pow(Math.random(), 0.8) * 0.88;
+        var ang2 = u2 * 5.6 + brazo2 * Math.PI - 0.16 + (Math.random() - 0.5) * 0.22;
+        var rad2 = (0.05 + u2 * 0.95) * centro * 0.94;
+        var x2 = centro + Math.cos(ang2) * rad2;
+        var y2 = centro + Math.sin(ang2) * rad2;
+        var t3 = (3 + Math.random() * 13) * (1 - u2 * 0.25);
+        var polvo = g.createRadialGradient(x2, y2, 0, x2, y2, t3);
+        polvo.addColorStop(0, rgba(POLVO, 0.16 + Math.random() * 0.16));
+        polvo.addColorStop(1, rgba(POLVO, 0));
+        g.fillStyle = polvo;
+        g.beginPath(); g.arc(x2, y2, t3, 0, Math.PI * 2); g.fill();
+      }
+
+      return c;
+    }
+
+    // ---- el cielo de fondo: miles de estrellas lejanas, quietas ----
+    // Es lo que hace que la primera vista parezca espacio de verdad.
+    function crearCielo(n){
+      var lista = [];
+      for (var i = 0; i < n; i++){
+        lista.push({
+          x: Math.random(),
+          y: Math.random(),
+          tam: 0.25 + Math.pow(Math.random(), 2.2) * 1.5,
+          brillo: 0.15 + Math.random() * 0.75,
+          // algunas son más azules, otras más blancas
+          frio: Math.random() < 0.5
+        });
+      }
+      return lista;
+    }
+
+    var cielo = crearCielo(340);
+
+    var estrellas = crearEspiral(CANTIDAD);
+    // la nebulosa se pinta en un momento libre, no en el primer cuadro:
+    // si no, el primer segundo de la página va a tirones
+    var nebulosa = document.createElement('canvas');
+    nebulosa.width = 384; nebulosa.height = 384;
+    var nebulosaLista = false;
+
+    // el halo del centro, pintado una sola vez
+    var halo = (function(){
+      var c = document.createElement('canvas');
+      c.width = 256; c.height = 256;
+      var g = c.getContext('2d');
+      var grad = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+      grad.addColorStop(0, rgba(NUCLEO_ORO, 0.26));
+      grad.addColorStop(0.35, rgba(HIELO, 0.12));
+      grad.addColorStop(1, rgba(HIELO, 0));
+      g.fillStyle = grad;
+      g.beginPath(); g.arc(128, 128, 128, 0, Math.PI * 2); g.fill();
+      return c;
+    })();
+    function pintarNebulosa(){
+      if (nebulosaLista) return;
+      nebulosaLista = true;
+      var hecha = crearNebulosa(384);
+      nebulosa.getContext('2d').drawImage(hecha, 0, 0);
+    }
+    var fugaces = [];
+    var proximaFugaz = 2 + Math.random() * 4;
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // en pantallas de más de 2x (o si el teléfono va justo) se pinta a 1.5x:
+    // la galaxia es suave y no se nota, y cuesta casi la mitad por cuadro
+    if (dpr > 2) dpr = 2;
+    if ((window.innerWidth * window.innerHeight) > 700000 && dpr > 1.5) dpr = 1.5;
+    var ancho = 0, alto = 0, cx = 0, cy = 0, R = 0;
+    var t = 0, ultimo = 0, visible = true;
+
+    // ---- el viaje: 0 = mirando el centro desde fuera, 1 = dentro, entre los mundos ----
+    var viaje = 0;
+    var viajeObj = 0;
+    var empuje = 0;         // cuánto la está agarrando (0 a 1)
+    var empujeObj = 0;
+    var agarrada = false, ultimoX = 0, ultimoY = 0;
+
+    function leerScroll(){
+      var alto1 = window.innerHeight || 1;
+      // el viaje dura lo que mide la sección del viaje
+      // (antes 2.2 pantallas: se sentía eterno; luego 1.1: se abría de golpe.
+      //  Ahora 1.8: el cambio es fluido, se ve la galaxia abrirse)
+      var largo = alto1 * 2.4;
+      viajeObj = Math.min(1, Math.max(0, window.scrollY / largo));
+    }
+
+    // ---- la voz: frases con sílabas, como si estuviera hablando ----
+    var voz = 0, vozObj = 0, hablando = 0, vozT = 0;
+    var proximaFrase = 0.8, frase = 0, fraseLargo = 0, silaba = 0, silabaLargo = 0.2;
+    function pasoVoz(dt){
+      vozT += dt;
+      if (hablando < 0.02 && vozT >= proximaFrase){
+        hablando = 1; frase = 0; fraseLargo = 1.2 + Math.random() * 2.3;
+        silaba = 0; silabaLargo = 0.12 + Math.random() * 0.14;
+      }
+      if (hablando > 0.02){
+        frase += dt; silaba += dt;
+        if (silaba >= silabaLargo){
+          silaba = 0; silabaLargo = 0.10 + Math.random() * 0.16;
+          vozObj = Math.random() < 0.12 ? 0.05 : 0.35 + Math.random() * 0.65;
+        }
+        if (frase >= fraseLargo){
+          hablando = 0; vozObj = 0;
+          proximaFrase = vozT + 0.5 + Math.random() * 1.6;
+        }
+      }
+      voz += (vozObj - voz) * Math.min(1, dt * 14);
+      return voz;
+    }
+
+    function medir(){
+      ancho = window.innerWidth; alto = window.innerHeight;
+      lona.width = Math.floor(ancho * dpr);
+      lona.height = Math.floor(alto * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = ancho / 2;
+      // el centro de la galaxia va en el centro de la pantalla
+      cy = alto * 0.5;
+      R = Math.min(ancho * 0.52, alto * 0.30);
+      leerScroll();
+    }
+
+    function dibujar(ahora){
+      if (!visible){ ultimo = ahora; return; }
+      var dt = ultimo ? Math.min((ahora - ultimo) / 1000, 0.05) : 0.016;
+      ultimo = ahora;
+      t += dt;
+
+      var v = 0;   // sin voz: la galaxia no late ni parpadea sola
+
+      // lo de Javi entra suave, no de golpe
+      // (antes dt*3.2: la galaxia iba con freno detrás del dedo y se sentía
+      //  trabada. Ahora sigue el scroll casi al instante.)
+      viaje  += (viajeObj - viaje) * Math.min(1, dt * 2.2);
+      empuje += (empujeObj - empuje) * Math.min(1, dt * 10);
+
+      // al hablar: más brillo, más pulso y giro más vivo
+      var brillo = 0.62;
+      var pulso = 0.45;
+      var giro = 1;
+
+      // ---- el apretón: al empezar a bajar, la galaxia se concentra ----
+      // Primero se aprieta hacia dentro (como cuando Ari pasa de escuchar a
+      // pensar) y de ahí se abre y te metes dentro. Así el viaje no arranca
+      // de golpe: tiene un gesto.
+      // Suave: el apretón es leve y no tuerce nada. Si se nota el tirón,
+      // se siente forzado.
+      var aprieta = 0;
+      if (viaje > 0.001 && viaje < 0.55){
+        // sube y se suelta muy despacio a lo largo del 55% del recorrido
+        aprieta = Math.sin((viaje / 0.55) * Math.PI);
+      }
+      var concentra = aprieta * 0.05;   // cuánto se recoge (muy leve)
+      var tuerce = 0;                   // sin giro: girar se veía forzado
+
+      var latido = 0;
+      // al entrar se ve el centro desde fuera; al bajar te metes dentro
+      var tiempo = viaje;
+      var radio = R * (1 + tiempo * 2.2);
+      var centroX = cx;
+      var centroY = cy;
+
+      ctx.clearRect(0, 0, ancho, alto);
+
+      // ---- el cielo: estrellas lejanas que se quedan quietas ----
+      // Al bajar se alejan un poco (paralaje), como si te metieras de verdad.
+      var fuga = 1 + tiempo * 0.35;
+      for (var c = 0; c < cielo.length; c++){
+        var es = cielo[c];
+        var ex = centroX + (es.x * ancho - centroX) * fuga;
+        var ey = centroY + (es.y * alto - centroY) * fuga;
+        if (ex < -4 || ex > ancho + 4 || ey < -4 || ey > alto + 4) continue;
+        ctx.fillStyle = es.frio
+          ? color(ESTRELLA_FRIA, es.brillo * 0.85)
+          : color(ESTRELLA_CALIDA, es.brillo * 0.7);
+        ctx.beginPath(); ctx.arc(ex, ey, es.tam, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // nebulosa: gira más despacio y se aplasta como el disco
+      // La inclinación es la de la foto: el disco en diagonal, no plano.
+      var INCLINA = 0.46;          // cuánto se aplasta el disco (0 = de canto)
+      var GIRO_DISCO = -0.42;      // el disco va torcido, en diagonal
+      ctx.save();
+      ctx.translate(centroX, centroY);
+      ctx.rotate(GIRO_DISCO);
+      ctx.scale(1, INCLINA);
+      ctx.globalAlpha = 0.9 * (1 - tiempo * 0.5);
+      var lado = radio * 2.1;
+      if (nebulosaLista) ctx.drawImage(nebulosa, -lado / 2, -lado / 2, lado, lado);
+      ctx.restore();
+      ctx.globalAlpha = 1;
+
+      // halo general: dorado en el centro, azul hielo hacia fuera
+      // (se pinta en una lona aparte y se estira: un degradado enorme por
+      //  cuadro era de lo más caro de todo)
+      if (nebulosaLista){
+        var ladoHalo = radio * 3.8;
+        ctx.globalAlpha = 1 - tiempo * 0.5;
+        ctx.drawImage(halo, centroX - ladoHalo / 2, centroY - ladoHalo / 2, ladoHalo, ladoHalo);
+        ctx.globalAlpha = 1;
+      }
+
+      // estrellas
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 0; i < estrellas.length; i++){
+        var e = estrellas[i];
+        // gira siempre; al reventar, cada una sale en línea recta por su lado
+        var ang = e.angulo + tuerce;
+        var rad = e.radio * radio * (1 - concentra);
+        // el disco va en diagonal: se gira el punto y luego se aplasta
+        var px = Math.cos(ang) * rad, py = Math.sin(ang) * rad * INCLINA;
+        var x = centroX + px * Math.cos(GIRO_DISCO) - py * Math.sin(GIRO_DISCO);
+        var y = centroY + px * Math.sin(GIRO_DISCO) + py * Math.cos(GIRO_DISCO);
+        var parpadeo = 1;
+        var alfa = e.brillo * parpadeo * brillo;
+
+        // ---- al bajar, sus propias estrellas se acercan y pasan de largo ----
+        // Cada una tiene su momento: cuando el viaje llega a él, se lanza
+        // hacia ti y sale por el borde, dejando estela como una fugaz.
+        var cerca = Math.min(1, Math.max(0, (tiempo - e.entra) / 0.75));
+        if (cerca > 0){
+          var s2 = cerca * cerca * (3 - 2 * cerca);     // arranca suave y acelera
+          var dx = x - centroX, dy = y - centroY;
+          var largo = Math.sqrt(dx * dx + dy * dy) || 1;
+          var ux = dx / largo, uy = dy / largo;
+          // se aleja del centro hacia el borde, cada vez más rápido
+          var salto = s2 * Math.max(ancho, alto) * 0.85;
+          var x2 = x + ux * salto;
+          var y2 = y + uy * salto;
+          var tam2 = e.tam * (1 + s2 * 2.2);
+          var alfa2 = alfa * (1 - s2 * 0.35);
+
+          // la estela: de dónde viene hasta dónde está
+          var cola = 0.06 + s2 * 0.30;
+          // el degradado de la estela se rehace solo si cambió de verdad
+          // (antes se creaba uno nuevo por estrella y por cuadro)
+          var claveEstela = Math.round(x2) + ',' + Math.round(y2) + ',' + Math.round(ux * 100) + ',' + Math.round(uy * 100) + ',' + Math.round(salto * cola) + ',' + Math.round(alfa2 * 20);
+          if (e.claveEstela !== claveEstela){
+            e.claveEstela = claveEstela;
+            var estela = ctx.createLinearGradient(x2, y2, x2 - ux * salto * cola, y2 - uy * salto * cola);
+            estela.addColorStop(0, rgba(CLARO, Math.min(1, alfa2 * 1.1)));
+            estela.addColorStop(0.35, rgba(HIELO, alfa2 * 0.45));
+            estela.addColorStop(1, rgba(HIELO, 0));
+            e.estela = estela;
+          }
+          ctx.strokeStyle = e.estela;
+          ctx.lineWidth = Math.max(0.7, tam2 * 0.7);
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(x2, y2);
+          ctx.lineTo(x2 - ux * salto * cola, y2 - uy * salto * cola);
+          ctx.stroke();
+
+          // la cabeza de la fugaz
+          ctx.fillStyle = rgba(CLARO, Math.min(1, alfa2));
+          ctx.beginPath(); ctx.arc(x2, y2, tam2, 0, Math.PI * 2); ctx.fill();
+          continue;   // ya está pintada como fugaz
+        }
+        if (alfa > 1) alfa = 1;
+        ctx.fillStyle = color(e.color, alfa);
+        ctx.beginPath(); ctx.arc(x, y, e.tam, 0, Math.PI * 2); ctx.fill();
+
+        // destello de cuatro puntas en las estrellas grandes
+        if (e.tam > 1.55){
+          var largo = e.tam * (3.2 + Math.sin(t * 1.3 + e.fase) * 0.8);
+          ctx.strokeStyle = color(e.color, alfa * 0.55);
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(x - largo, y); ctx.lineTo(x + largo, y);
+          ctx.moveTo(x, y - largo); ctx.lineTo(x, y + largo);
+          ctx.stroke();
+        }
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+
+      // núcleo: blanco dorado, como el de la foto. Al agarrarla se enciende.
+      var nucleoR = R * (0.22 + empuje * 0.10) * (1 + tiempo * 0.9);
+      var nucleo = ctx.createRadialGradient(centroX, centroY, 0, centroX, centroY, nucleoR);
+      nucleo.addColorStop(0, rgba([255, 255, 255], Math.min(1, (0.95 + empuje * 0.05) * brillo)));
+      nucleo.addColorStop(0.25, rgba(NUCLEO_CALIDO, Math.min(1, (0.7 + empuje * 0.2) * brillo)));
+      nucleo.addColorStop(0.6, rgba(NUCLEO_ORO, Math.min(1, (0.3 + empuje * 0.2) * brillo)));
+      nucleo.addColorStop(1, rgba(NUCLEO_ORO, 0));
+      ctx.fillStyle = nucleo;
+      ctx.beginPath(); ctx.arc(centroX, centroY, nucleoR, 0, Math.PI * 2); ctx.fill();
+
+      // el anillo que se abre al agarrarla: se ve que responde al dedo
+      if (empuje > 0.02){
+        ctx.strokeStyle = rgba(HIELO, 0.35 * empuje);
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.ellipse(centroX, centroY, radio * (1.05 + empuje * 0.25), radio * INCLINA * (1.05 + empuje * 0.25), GIRO_DISCO, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      if (!quieto && !document.hidden) requestAnimationFrame(dibujar);
+    }
+
+    // ---- los dedos: mantener presionada y arrastrar a los lados ----
+    // La galaxia es fondo y no debe robar el scroll: solo se agarra si el dedo
+    // se queda quieto un momento (mantener presionada). Al moverse, se mueve ella.
+    var ESPERA = 140;          // ms quieto antes de agarrarla
+    var relojAgarre = null;
+    var xInicio = 0, yInicio = 0;
+
+    function soltar(){
+      agarrada = false;
+      empujeObj = 0;
+      if (relojAgarre){ clearTimeout(relojAgarre); relojAgarre = null; }
+    }
+
+    lona.addEventListener('pointerdown', function(ev){
+      if (quieto) return;
+      xInicio = ev.clientX; yInicio = ev.clientY;
+      ultimoX = ev.clientX; ultimoY = ev.clientY;
+      if (relojAgarre) clearTimeout(relojAgarre);
+      relojAgarre = setTimeout(function(){
+        agarrada = true;
+        empujeObj = 1;
+        if (navigator.vibrate) navigator.vibrate(8);
+      }, ESPERA);
+    });
+
+    lona.addEventListener('pointermove', function(ev){
+      if (!agarrada){
+        // si se mueve antes de tiempo, es scroll: no la agarramos
+        if (Math.abs(ev.clientX - xInicio) > 8 || Math.abs(ev.clientY - yInicio) > 8){
+          if (relojAgarre){ clearTimeout(relojAgarre); relojAgarre = null; }
+        }
+        return;
+      }
+      // agarrada: el dedo solo la mantiene encendida; no la mueve de sitio
+      ultimoX = ev.clientX; ultimoY = ev.clientY;
+    });
+
+    lona.addEventListener('pointerup', soltar);
+    lona.addEventListener('pointercancel', soltar);
+    lona.addEventListener('pointerleave', function(){ if (agarrada) soltar(); });
+
+    window.addEventListener('scroll', leerScroll, {passive:true});
+
+    // el nombre llega al final del viaje
+    var llegada = document.getElementById('llegada');
+    function mirarLlegada(){
+      if (!llegada) return;
+      var alto1 = window.innerHeight || 1;
+      llegada.classList.toggle('llega', window.scrollY > alto1 * 1.75);
+    }
+    var pedidoLlegada = false;
+    window.addEventListener('scroll', function(){
+      if (!pedidoLlegada){ pedidoLlegada = true; requestAnimationFrame(function(){ pedidoLlegada = false; mirarLlegada(); }); }
+    }, {passive:true});
+    mirarLlegada();
+
+    // solo se anima cuando está en pantalla (ahorra batería)
+    if (typeof IntersectionObserver === 'function'){
+      new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }, {threshold: 0.05}).observe(lona);
+    }
+    window.addEventListener('resize', medir);
+    document.addEventListener('visibilitychange', function(){
+      if (!quieto && !document.hidden){
+        ultimo = 0;
+        requestAnimationFrame(dibujar);
+      }
+    });
+    medir();
+    if (quieto){
+      // con "reducir movimiento" se pinta una vez y se queda quieta
+      pintarNebulosa();
+      dibujar(performance.now());
+    } else {
+      // primero se ve la galaxia (estrellas y núcleo) y la nebulosa entra
+      // en cuanto el teléfono tiene un rato libre: así no hay tirón al abrir
+      requestAnimationFrame(dibujar);
+      if (window.requestIdleCallback){
+        requestIdleCallback(pintarNebulosa, {timeout: 1200});
+      } else {
+        setTimeout(pintarNebulosa, 300);
+      }
+    }
+  })();
+
+  window.addEventListener('scroll', pintar, {passive:true});
+  window.addEventListener('resize', pintar);
+  var bajaYa = document.getElementById('bajaYa');
+  // la barra y el aviso "BAJA" se miran una vez por cuadro, no en cada
+  // evento de scroll (en un teléfono llegan decenas por segundo)
+  var pedidoBarra = false;
+  function mirarBarra(){
+    pedidoBarra = false;
+    barra.classList.toggle('pegada', window.scrollY > window.innerHeight * 0.6);
+    if (bajaYa) bajaYa.classList.toggle('fuera', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', function(){
+    if (!pedidoBarra){ pedidoBarra = true; requestAnimationFrame(mirarBarra); }
+  }, {passive:true});
+  pintar();
+
+
+  // ---- variante de la entrada del teléfono (prueba A / B / C) ----
+  (function(){
+    var q = new URLSearchParams(location.search);
+    // para las fotos de prueba: saltar a una altura concreta
+    if (q.get('y')){ setTimeout(function(){ window.scrollTo(0, parseInt(q.get('y'),10) || 0); }, 300); }
+    var modo = (q.get('t') || 'a').toLowerCase();
+    if (modo === 'a') return;                 // A es lo que ya hay
+
+    var pantalla = telf.querySelector('.pantalla');
+    var hijos = Array.prototype.slice.call(pantalla.children);
+
+    if (modo === 'b'){
+      // B: el teléfono ya está en su sitio, apagado; la pantalla se enciende
+      telf.classList.add('apagado');
+      var encendido = false;
+      var mirar = setInterval(function(){
+        var r = escena.getBoundingClientRect();
+        var total = escena.offsetHeight - window.innerHeight;
+        var av = Math.min(1, Math.max(0, -r.top / total));
+        if (!encendido && av > 0.30){
+          encendido = true;
+          telf.classList.remove('apagado');
+          clearInterval(mirar);
+        }
+      }, 120);
+      // el teléfono no crece: aparece ya puesto
+      telf.style.transform = 'scale(1)';
+      telf.style.opacity = '1';
+      mTelf.v = 1; mTelf.destino = 1; mTelf.vel = 0;
+      var pasoOriginal = mTelf.paso.bind(mTelf);
+      mTelf.paso = function(){ return false; };
+      mTelf.ir = function(){};
+    }
+
+    if (modo === 'c'){
+      // C: el teléfono quieto y el chat cayendo solo
+      telf.classList.add('quieto');
+      mTelf.v = 1; mTelf.destino = 1; mTelf.vel = 0;
+      mTelf.paso = function(){ return false; };
+      mTelf.ir = function(){};
+      telf.style.transform = 'scale(1)';
+      telf.style.opacity = '1';
+    }
+  })();
+
+  // ---- las tres paradas del recorrido ----
+  // 1) el nombre de Ari Labs, llegando suave para ver la galaxia
+  // 2) el teléfono ya puesto
+  // 3) el chat, que se arma solo hasta el cierre
+  // Cada aviso "Baja" se puede tocar y lleva a la parada siguiente sin
+  // pelearse con el dedo. Si el que baja quiere ir a su aire, manda él.
+  (function(){
+    var alto1 = window.innerHeight || 1;
+    var PARADA = alto1 * 1.75;      // donde el nombre ya está puesto
+    var yaParo = false;
+    var frenando = false;
+    var suelta = 0;
+
+    // lleva la página a la parada sin saltar: poco a poco, frenando
+    function llevar(desde){
+      var falta = PARADA - desde;
+      if (Math.abs(falta) < 1){ window.scrollTo(0, PARADA); return; }
+      // arranca rápido y va soltando, como un freno de verdad
+      var paso = falta * 0.18;
+      if (Math.abs(paso) < 0.6) paso = falta > 0 ? 0.6 : -0.6;
+      window.scrollTo(0, desde + paso);
+      requestAnimationFrame(function(){ llevar(desde + paso); });
+    }
+
+    function frenar(){
+      if (yaParo || frenando) return;
+      if (window.scrollY < PARADA - 2) return;
+      frenando = true;
+      yaParo = true;
+      llevar(window.scrollY);
+      // se queda quieta un momento y luego se suelta sola
+      suelta = setTimeout(function(){ frenando = false; }, 1100);
+    }
+
+    window.addEventListener('scroll', function(){
+      if (frenando){
+        // mientras frena, si intenta pasar, se le aguanta sin tirones
+        if (window.scrollY > PARADA + 4){
+          window.scrollTo(0, PARADA);
+        }
+        return;
+      }
+      frenar();
+    }, {passive:true});
+
+    // si suelta el dedo justo antes, también se frena
+    window.addEventListener('touchend', function(){
+      setTimeout(frenar, 60);
+    }, {passive:true});
+    window.addEventListener('wheel', function(){
+      setTimeout(frenar, 60);
+    }, {passive:true});
+
+    // ---- el viaje suave: de aquí a allá, sin saltos ----
+    var viajando = false;
+    var viajeId = 0;
+    function viajar(destino, ms, alLlegar){
+      if (viajando) return;
+      viajando = true;
+      var miId = ++viajeId;
+      var desde = window.scrollY;
+      var trecho = destino - desde;
+      var t0 = 0;
+      function paso(t){
+        // si el que baja tocó la pantalla, el viaje se rinde y manda él
+        if (miId !== viajeId || !viajando) return;
+        if (!t0) t0 = t;
+        var p = Math.min(1, (t - t0) / ms);
+        // arranca y frena solo: el mismo freno de un coche
+        var suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        window.scrollTo(0, desde + trecho * suave);
+        if (p < 1){
+          requestAnimationFrame(paso);
+        } else {
+          viajando = false;
+          if (alLlegar) alLlegar();
+        }
+      }
+      requestAnimationFrame(paso);
+    }
+
+    // si el que baja toca la pantalla, el viaje se corta y manda él
+    ['touchstart','wheel'].forEach(function(ev){
+      window.addEventListener(ev, function(){
+        if (viajando){ viajando = false; viajeId++; }
+      }, {passive:true});
+    });
+
+    var boton1 = document.getElementById('bajaBoton');
+    var boton2 = document.getElementById('bajaChatBoton');
+    var aviso2 = document.getElementById('bajaChat');
+
+    // 1) al nombre: recorrido largo y tranquilo por la galaxia
+    if (boton1) boton1.addEventListener('click', function(){
+      yaParo = true; frenando = false;
+      viajar(PARADA, 2600);
+    });
+
+    // 2) al teléfono: donde ya está puesto y se ve entero
+    if (boton2) boton2.addEventListener('click', function(){
+      var r = escena.getBoundingClientRect();
+      var arriba = window.scrollY + r.top;
+      viajar(arriba + (escena.offsetHeight - window.innerHeight) * 0.06, 1800);
+    });
+
+    // el segundo aviso sale cuando el teléfono ya está en su sitio y se va
+    // cuando el chat empieza a armarse (no antes: si no, se queda pegado)
+    function mirarAviso2(){
+      if (!aviso2) return;
+      var r = escena.getBoundingClientRect();
+      var total = escena.offsetHeight - window.innerHeight;
+      var av = Math.min(1, Math.max(0, -r.top / total));
+      aviso2.classList.toggle('sale', av > 0.02 && av < 0.22);
+    }
+    window.addEventListener('scroll', mirarAviso2, {passive:true});
+    mirarAviso2();
+  })();
+})();
+</script>
+</body>
+</html>
