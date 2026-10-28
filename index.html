@@ -964,6 +964,13 @@
       //  tiempo a apreciarla antes de llegar al nombre)
       var largo = alto1 * 3.2;
       viajeObj = Math.min(1, Math.max(0, window.scrollY / largo));
+      // el nombre se condensa en cuanto la galaxia ya está abierta del todo
+      // (antes se esperaba a bajar 1,75 pantallas: el nombre ya estaba puesto
+      //  y el gesto no se veía nunca)
+      if (viajeObj > 0.97 && !nombreHecho){
+        nombreHecho = true;
+        condensar();
+      }
     }
 
     // ---- la voz: frases con sílabas, como si estuviera hablando ----
@@ -1333,12 +1340,6 @@
       var alto1 = window.innerHeight || 1;
       var llego = window.scrollY > alto1 * 1.75;
       llegada.classList.toggle('llega', llego);
-      // ---- el nombre se condensa: las estrellas del centro se juntan y
-      // dibujan "Ari Labs", y luego se sueltan y vuelven a su sitio ----
-      if (llego && !nombreHecho){
-        nombreHecho = true;
-        condensar();
-      }
     }
     var pedidoLlegada = false;
     window.addEventListener('scroll', function(){
