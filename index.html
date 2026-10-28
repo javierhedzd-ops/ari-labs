@@ -1356,16 +1356,21 @@
     // La galaxia se abre y el nombre aparece sin que nadie toque nada: el
     // que entra ve de qué va la cosa antes de decidir bajar. Si toca la
     // pantalla a media, manda él y el viaje se rinde.
+    var autoId = 0;         // para que un viaje viejo no siga pintando
+
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
+      // si ya se movió por su cuenta (aunque no haya tocado), no se le encima
+      if (window.scrollY > 4) return;
       autoCorriendo = true;
+      var miId = ++autoId;
       var destino = tramos[0];
       var desde = window.scrollY;
       var trecho = destino - desde;
       var ms = 4200;          // lento: se ve la galaxia abrirse y el nombre llegar
       var t0 = 0;
       function paso(t){
-        if (!autoCorriendo) return;
+        if (!autoCorriendo || miId !== autoId) return;
         if (!t0) t0 = t;
         var p = Math.min(1, (t - t0) / ms);
         // arranca y frena solo, como un coche
@@ -1383,17 +1388,27 @@
       requestAnimationFrame(paso);
     }
 
-    // si el que entra toca, el viaje se rinde y manda él
-    ['touchstart','wheel','keydown'].forEach(function(ev){
-      window.addEventListener(ev, function(){
-        if (autoCorriendo){
-          autoCorriendo = false;
-          autoHecho = true;
-          actual = 1;
-          empujon = 0;
-        }
-      }, {passive:true});
+    // ---- si el que entra toca, el viaje se rinde y manda él ----
+    // Se corta el viaje y se deja la página donde está: el tope la lleva al
+    // principio del tramo en el cuadro siguiente, sin saltos raros.
+    function cortarSolo(){
+      if (!autoCorriendo) return;
+      autoCorriendo = false;
+      autoId++;
+      autoHecho = true;
+      actual = 1;
+      empujon = 0;
+    }
+    // el dedo y el teclado son intención clara: cortan siempre
+    ['touchstart','keydown'].forEach(function(ev){
+      window.addEventListener(ev, cortarSolo, {passive:true});
     });
+    // la rueda no: el scroll programático también la dispara en algunos
+    // navegadores, y la inercia de la rueda cortaría el viaje sin querer
+    window.addEventListener('wheel', function(e){
+      if (Math.abs(e.deltaY) < 2) return;
+      cortarSolo();
+    }, {passive:true});
 
     function soltar(){
       suelto = true;
@@ -1489,7 +1504,7 @@
       var b = document.getElementById(id);
       if (b) b.addEventListener('click', function(){
         // si el viaje solo va a medias, el botón lo corta y sigue él
-        if (autoCorriendo){ autoCorriendo = false; autoHecho = true; actual = 1; empujon = 0; }
+        cortarSolo();
         empujar(1e9);
       });
     });
