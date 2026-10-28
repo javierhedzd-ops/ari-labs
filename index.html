@@ -1301,6 +1301,141 @@
     }
   })();
 
+  // ---- el recorrido obligatorio ----
+  // La página no deja bajar a su aire hasta que se ha visto todo: el viaje
+  // por la galaxia, el nombre, el teléfono y el chat. Cada tramo se recorre
+  // con el dedo (o la rueda) y, al llegar al final del tramo, la página se
+  // queda ahí hasta que se vuelve a empujar. Al terminar el último tramo se
+  // suelta del todo: de ahí en adelante se baja y se sube rápido.
+  // Si el sistema pide menos movimiento, no se engancha nada.
+  (function(){
+    if (quieto) return;
+
+    var viajeSec = document.getElementById('viaje');
+    var escenaSec = document.getElementById('escena');
+    if (!viajeSec || !escenaSec) return;
+
+    var tramos = [];        // dónde acaba cada tramo (en píxeles de scroll)
+    var actual = 0;         // en qué tramo va
+    var suelto = false;     // ya se vio todo: scroll libre
+    var empujon = 0;        // cuánto ha empujado dentro del tramo actual
+    var UMBRAL = 0.55;      // cuánto hay que empujar para pasar de tramo
+
+    function medir(){
+      var alto = window.innerHeight || 1;
+      var arribaEscena = window.scrollY + escenaSec.getBoundingClientRect().top;
+      var largoEscena = escenaSec.offsetHeight - alto;
+      tramos = [
+        alto * 1.75,                                  // 1) el nombre puesto
+        arribaEscena + largoEscena * 0.06,            // 2) el teléfono puesto
+        arribaEscena + largoEscena * 0.92             // 3) el chat armado
+      ];
+      if (suelto) return;
+      // si la página se recargó a media bajada, se coloca en su tramo
+      var y = window.scrollY;
+      actual = 0;
+      while (actual < tramos.length && y > tramos[actual] + 2) actual++;
+      if (actual >= tramos.length){ soltar(); return; }
+      empujon = 0;
+      window.scrollTo(0, actual === 0 ? 0 : tramos[actual - 1]);
+    }
+
+    function soltar(){
+      suelto = true;
+      document.documentElement.classList.remove('recorriendo');
+    }
+
+    // el tope: no deja pasar del tramo actual
+    function topar(){
+      if (suelto) return;
+      var techo = actual === 0 ? 0 : tramos[actual - 1];
+      if (window.scrollY < techo - 1) window.scrollTo(0, techo);
+    }
+
+    // un empujón del dedo o de la rueda
+    function empujar(cuanto){
+      if (suelto || cuanto <= 0) return;
+      var techo = actual === 0 ? 0 : tramos[actual - 1];
+      var fin = tramos[actual];
+      var largo = Math.max(1, fin - techo);
+      empujon += cuanto / largo;
+      if (empujon >= UMBRAL){
+        // se pasa al tramo siguiente de un tirón suave
+        empujon = 0;
+        actual++;
+        if (actual >= tramos.length){ soltar(); return; }
+        var destino = tramos[actual - 1];
+        var desde = window.scrollY;
+        var t0 = 0;
+        var ms = 520;
+        function paso(t){
+          if (!t0) t0 = t;
+          var p = Math.min(1, (t - t0) / ms);
+          var s = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          window.scrollTo(0, desde + (destino - desde) * s);
+          if (p < 1) requestAnimationFrame(paso);
+        }
+        requestAnimationFrame(paso);
+      }
+    }
+
+    // ---- el dedo ----
+    var yTocado = 0, tocando = false;
+    window.addEventListener('touchstart', function(e){
+      if (suelto) return;
+      tocando = true;
+      yTocado = e.touches[0].clientY;
+    }, {passive:true});
+
+    window.addEventListener('touchmove', function(e){
+      if (suelto || !tocando) return;
+      var y = e.touches[0].clientY;
+      var delta = yTocado - y;      // sube el dedo = baja la página
+      yTocado = y;
+      if (delta > 0) empujar(delta);
+      topar();
+    }, {passive:true});
+
+    window.addEventListener('touchend', function(){
+      tocando = false;
+      topar();
+    }, {passive:true});
+
+    // ---- la rueda del ratón ----
+    window.addEventListener('wheel', function(e){
+      if (suelto) return;
+      if (e.deltaY > 0) empujar(e.deltaY);
+      topar();
+    }, {passive:true});
+
+    // ---- el teclado ----
+    window.addEventListener('keydown', function(e){
+      if (suelto) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
+        empujar(window.innerHeight * 0.5);
+        topar();
+      }
+    });
+
+    // ---- la barra de scroll: si la arrastran, se aguanta ----
+    window.addEventListener('scroll', function(){
+      if (!suelto) topar();
+    }, {passive:true});
+
+    // ---- los botones "Baja" también cuentan como empujón ----
+    // (se enganchan antes que los suyos, así que el viaje largo de 2,6 s
+    //  ya no se dispara: manda el recorrido por tramos)
+    ['bajaBoton','bajaChatBoton'].forEach(function(id){
+      var b = document.getElementById(id);
+      if (b) b.addEventListener('click', function(){ empujar(1e9); });
+    });
+
+    document.documentElement.classList.add('recorriendo');
+    medir();
+    window.addEventListener('resize', function(){ if (!suelto) medir(); });
+    window.addEventListener('orientationchange', function(){ setTimeout(function(){ if (!suelto) medir(); }, 250); });
+  })();
+
   // ---- las tres paradas del recorrido ----
   // 1) el nombre de Ari Labs, llegando suave para ver la galaxia
   // 2) el teléfono ya puesto
