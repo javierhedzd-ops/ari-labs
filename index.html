@@ -1358,34 +1358,52 @@
     // pantalla a media, manda él y el viaje se rinde.
     var autoId = 0;         // para que un viaje viejo no siga pintando
 
+    // ---- el recorrido entero se hace solo ----
+    // Entras y la página se cuenta sola: la galaxia se abre, llega el nombre,
+    // sale el teléfono y el chat se arma mensaje a mensaje. Al terminar se
+    // suelta y el dedo manda. Si el que entra toca a media, se rinde y manda él.
+    // Los tiempos son de reloj (no de scroll) para que el chat se arme solo.
+    var GUION = [
+      {hasta:0, ms:4200},     // 1) la galaxia se abre hasta el nombre
+      {hasta:1, ms:2600},     // 2) el nombre se va y sale el teléfono
+      {hasta:2, ms:9000}      // 3) el chat se arma mensaje a mensaje
+    ];
+
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
       // si ya se movió por su cuenta (aunque no haya tocado), no se le encima
       if (window.scrollY > 4) return;
       autoCorriendo = true;
       var miId = ++autoId;
-      var destino = tramos[0];
+      var i = 0;
       var desde = window.scrollY;
-      var trecho = destino - desde;
-      var ms = 4200;          // lento: se ve la galaxia abrirse y el nombre llegar
       var t0 = 0;
-      function paso(t){
+
+      function tramo(t){
         if (!autoCorriendo || miId !== autoId) return;
         if (!t0) t0 = t;
-        var p = Math.min(1, (t - t0) / ms);
+        var g = GUION[i];
+        var p = Math.min(1, (t - t0) / g.ms);
         // arranca y frena solo, como un coche
         var suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-        window.scrollTo(0, desde + trecho * suave);
+        window.scrollTo(0, desde + (tramos[g.hasta] - desde) * suave);
         if (p < 1){
-          requestAnimationFrame(paso);
+          requestAnimationFrame(tramo);
+        } else if (i < GUION.length - 1){
+          i++;
+          desde = tramos[GUION[i - 1].hasta];
+          t0 = 0;
+          requestAnimationFrame(tramo);
         } else {
+          // se contó todo: se suelta y el que quiera sigue bajando
           autoCorriendo = false;
           autoHecho = true;
-          actual = 1;         // ya está en el nombre: el siguiente empujón sigue
+          actual = tramos.length;
           empujon = 0;
+          soltar();
         }
       }
-      requestAnimationFrame(paso);
+      requestAnimationFrame(tramo);
     }
 
     // ---- si el que entra toca, el viaje se rinde y manda él ----
@@ -1396,7 +1414,11 @@
       autoCorriendo = false;
       autoId++;
       autoHecho = true;
-      actual = 1;
+      // se queda en el tramo donde iba, no se le adelanta
+      var y = window.scrollY;
+      actual = 0;
+      while (actual < tramos.length && y > tramos[actual] + 2) actual++;
+      if (actual >= tramos.length){ soltar(); return; }
       empujon = 0;
     }
     // el dedo y el teclado son intención clara: cortan siempre
