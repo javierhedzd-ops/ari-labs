@@ -1418,14 +1418,17 @@
     // el tope: no deja pasar del tramo actual
     // (con 2 px de margen: si el navegador redondea, no se pelea consigo mismo)
     function topar(){
-      if (suelto) return;
+      // mientras corre la introducción no hay tope: la página la mueve ella
+      // sola y el tope solo la devolvía, y eso se veía como un rebote
+      if (suelto || autoCorriendo) return;
       var techo = actual === 0 ? 0 : tramos[actual - 1];
       if (window.scrollY < techo - 2) window.scrollTo(0, techo);
     }
 
     // un empujón del dedo o de la rueda
     function empujar(cuanto){
-      if (suelto || cuanto <= 0) return;
+      // a media introducción el dedo no manda: la entrada se termina sola
+      if (suelto || autoCorriendo || cuanto <= 0) return;
       var techo = actual === 0 ? 0 : tramos[actual - 1];
       var fin = tramos[actual];
       var largo = Math.max(1, fin - techo);
