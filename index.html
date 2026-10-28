@@ -23,7 +23,9 @@
     --margen:clamp(20px,5vw,56px);
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  /* sin scroll suave del navegador: la introducción mueve la página cuadro a
+     cuadro y el navegador, si no, la persigue y se ve a tirones */
+  html{scroll-behavior:auto}
   body{
     margin:0;background:var(--noche);color:var(--papel);
     font-family:"Newsreader",Georgia,serif;
@@ -1372,6 +1374,7 @@
     // frenos ni escalones, y el chat se arma a su ritmo porque va pegado al
     // scroll.
     var VELOCIDAD = 1.05;     // pantallas por segundo (unos 5,5 s en un móvil)
+    var ARRANQUE = 900;       // ms que tarda en coger la velocidad (entra suave)
 
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
@@ -1391,7 +1394,11 @@
         // el tiempo sale del largo: siempre la misma velocidad, sin frenos
         var ms = (recorrido / (alto * VELOCIDAD)) * 1000;
         var p = Math.min(1, (t - t0) / ms);
-        window.scrollTo(0, desde + recorrido * p);
+        // entra suave: los primeros 900 ms acelera poco a poco, no de golpe
+        var k = Math.min(1, (t - t0) / ARRANQUE);
+        var entra = k * k * (3 - 2 * k);          // curva suave de 0 a 1
+        var avance = p * (0.35 + 0.65 * entra);   // al principio avanza menos
+        window.scrollTo(0, desde + recorrido * Math.min(1, avance));
         if (p < 1){
           requestAnimationFrame(paso);
         } else {
