@@ -470,13 +470,7 @@
 
 <div class="barra chico"><b>Ari Labs</b><span>Mérida</span></div>
 
-<!-- el señalamiento: que se sepa que hay que bajar -->
-<div class="baja-ya chico" id="bajaYa">
-  <button type="button" id="bajaBoton" aria-label="Bajar al nombre de Ari Labs">
-    <span>Baja</span>
-    <i></i>
-  </button>
-</div>
+<!-- el aviso "Baja" ya no va: la introducción se lleva sola hasta el cierre -->
 
 <!-- ============ VIAJE: entras al centro de la galaxia y pasas entre los mundos ============ -->
 <section class="viaje" id="viaje">
@@ -1405,16 +1399,12 @@
 
   window.addEventListener('scroll', pintar, {passive:true});
   window.addEventListener('resize', pintar);
-  var bajaYa = document.getElementById('bajaYa');
-  // la barra y el aviso "BAJA" se miran una vez por cuadro, no en cada
-  // evento de scroll (en un teléfono llegan decenas por segundo)
+  // la barra se mira una vez por cuadro, no en cada evento de scroll
+  // (en un teléfono llegan decenas por segundo)
   var pedidoBarra = false;
   function mirarBarra(){
     pedidoBarra = false;
     barra.classList.toggle('pegada', window.scrollY > window.innerHeight * 0.6);
-    // el aviso "Baja" ya no hace falta: la introducción se lleva sola hasta
-    // el cierre. Se quita del todo en cuanto la página se mueve.
-    if (bajaYa) bajaYa.classList.toggle('fuera', window.scrollY > 4);
   }
   window.addEventListener('scroll', function(){
     if (!pedidoBarra){ pedidoBarra = true; requestAnimationFrame(mirarBarra); }
@@ -1707,10 +1697,9 @@
       if (!suelto) topar();
     }, {passive:true});
 
-    // ---- los botones "Baja" también cuentan como empujón ----
-    // (se enganchan antes que los suyos, así que el viaje largo de 2,6 s
-    //  ya no se dispara: manda el recorrido por tramos)
-    ['bajaBoton','bajaChatBoton'].forEach(function(id){
+    // ---- el botón "Baja" del teléfono también cuenta como empujón ----
+    // (el de la primera pantalla se quitó: la introducción se lleva sola)
+    ['bajaChatBoton'].forEach(function(id){
       var b = document.getElementById(id);
       if (b) b.addEventListener('click', function(){
         // a media introducción el botón no hace nada: la entrada se termina
@@ -1823,16 +1812,8 @@
       }, {passive:true});
     });
 
-    var boton1 = document.getElementById('bajaBoton');
     var boton2 = document.getElementById('bajaChatBoton');
     var aviso2 = document.getElementById('bajaChat');
-
-    // 1) al nombre: recorrido largo y tranquilo por la galaxia
-    if (boton1) boton1.addEventListener('click', function(){
-      if (autoCorriendo) return;   // la introducción se termina sola
-      yaParo = true; frenando = false;
-      viajar(PARADA, 2600);
-    });
 
     // 2) al teléfono: donde ya está puesto y se ve entero
     if (boton2) boton2.addEventListener('click', function(){
