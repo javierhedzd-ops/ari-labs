@@ -246,6 +246,11 @@
     color:inherit;display:flex;flex-direction:column;align-items:center;gap:.7rem;
     -webkit-tap-highlight-color:transparent;
   }
+  /* el espacio de la última letra (letter-spacing) empuja el texto a la
+     izquierda y la flechita quedaba descuadrada: se le devuelve a mano */
+  .baja-ya button > span{
+    display:block;margin-right:-.30em;line-height:1;
+  }
   .baja-ya button:focus-visible{outline:1px solid var(--hielo-400);outline-offset:6px;border-radius:4px}
   .baja-ya i{
     display:block;width:1.5px;height:3.2rem;
@@ -253,7 +258,10 @@
     animation:respira 2.2s ease-in-out infinite;
   }
   .baja-ya i::after{
-    content:"";display:block;width:5px;height:5px;margin:-1px auto 0;
+    content:"";display:block;width:5px;height:5px;
+    /* el cuadrado girado 45° mide 7,07 px de ancho: se corre 1 px para que
+       su punta caiga justo en el eje de la línea */
+    margin:-1px auto 0;position:relative;left:1px;
     border-right:1px solid var(--hielo-400);border-bottom:1px solid var(--hielo-400);
     transform:rotate(45deg);
   }
@@ -938,8 +946,9 @@
       var alto1 = window.innerHeight || 1;
       // el viaje dura lo que mide la sección del viaje
       // (antes 2.2 pantallas: se sentía eterno; luego 1.1: se abría de golpe.
-      //  Ahora 1.8: el cambio es fluido, se ve la galaxia abrirse)
-      var largo = alto1 * 2.4;
+      //  Ahora 2.4: el cambio es fluido, se ve la galaxia abrirse y da
+      //  tiempo a apreciarla antes de llegar al nombre)
+      var largo = alto1 * 3.2;
       viajeObj = Math.min(1, Math.max(0, window.scrollY / largo));
     }
 
@@ -1319,7 +1328,8 @@
     var actual = 0;         // en qué tramo va
     var suelto = false;     // ya se vio todo: scroll libre
     var empujon = 0;        // cuánto ha empujado dentro del tramo actual
-    var UMBRAL = 0.55;      // cuánto hay que empujar para pasar de tramo
+    var UMBRAL = 0.85;      // cuánto hay que empujar para pasar de tramo
+                            // (antes 0.55: pasaba de golpe y no se apreciaba)
 
     function medir(){
       var alto = window.innerHeight || 1;
@@ -1368,7 +1378,7 @@
         var destino = tramos[actual - 1];
         var desde = window.scrollY;
         var t0 = 0;
-        var ms = 520;
+        var ms = 900;   // el salto de un tramo al otro, sin prisa
         function paso(t){
           if (!t0) t0 = t;
           var p = Math.min(1, (t - t0) / ms);
