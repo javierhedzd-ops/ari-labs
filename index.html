@@ -275,6 +275,9 @@
   /* el segundo aviso nace escondido: solo sale cuando el teléfono ya está puesto */
   #bajaChat{opacity:0;transform:translate(-50%,10px)}
   #bajaChat.sale{opacity:1;transform:translateX(-50%)}
+  /* la introducción se lleva sola hasta el cierre: los avisos "Baja" no
+     salen mientras corre (ni el de arriba ni el del teléfono) */
+  html.recorriendo .baja-ya{opacity:0 !important;pointer-events:none !important}
 
   /* pista de scroll */
   .pista{
@@ -1265,7 +1268,9 @@
   function mirarBarra(){
     pedidoBarra = false;
     barra.classList.toggle('pegada', window.scrollY > window.innerHeight * 0.6);
-    if (bajaYa) bajaYa.classList.toggle('fuera', window.scrollY > 60);
+    // el aviso "Baja" ya no hace falta: la introducción se lleva sola hasta
+    // el cierre. Se quita del todo en cuanto la página se mueve.
+    if (bajaYa) bajaYa.classList.toggle('fuera', window.scrollY > 4);
   }
   window.addEventListener('scroll', function(){
     if (!pedidoBarra){ pedidoBarra = true; requestAnimationFrame(mirarBarra); }
@@ -1375,6 +1380,8 @@
     // scroll.
     var VELOCIDAD = 1.05;     // pantallas por segundo (unos 5,5 s en un móvil)
     var ARRANQUE = 900;       // ms que tarda en coger la velocidad (entra suave)
+    var PAUSA = 700;          // ms que se queda mirando el teléfono puesto
+    var SEGUNDO = 2600;       // ms del segundo trecho: del teléfono al cierre
 
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
@@ -1402,12 +1409,19 @@
         if (p < 1){
           requestAnimationFrame(paso);
         } else {
-          // se contó todo: se suelta y el que quiera sigue bajando
-          autoCorriendo = false;
-          autoHecho = true;
-          actual = tramos.length;
-          empujon = 0;
-          soltar();
+          // el teléfono ya está puesto: se queda un momento mirándolo y
+          // sigue hasta el cierre, para que no se quede parado a medias
+          setTimeout(function(){
+            if (!autoCorriendo || miId !== autoId) return;
+            var destino = document.documentElement.scrollHeight - window.innerHeight;
+            viajar(destino, SEGUNDO, function(){
+              autoCorriendo = false;
+              autoHecho = true;
+              actual = tramos.length;
+              empujon = 0;
+              soltar();
+            });
+          }, PAUSA);
         }
       }
       requestAnimationFrame(paso);
@@ -1594,7 +1608,7 @@
     var viajando = false;
     var viajeId = 0;
     function viajar(destino, ms, alLlegar){
-      if (viajando) return;
+      // si ya hay un viaje en marcha, el nuevo manda (el viejo se rinde)
       viajando = true;
       var miId = ++viajeId;
       var desde = window.scrollY;
@@ -1619,8 +1633,10 @@
     }
 
     // si el que baja toca la pantalla, el viaje se corta y manda él
+    // (menos durante la introducción: esa se termina sola)
     ['touchstart','wheel'].forEach(function(ev){
       window.addEventListener(ev, function(){
+        if (autoCorriendo) return;
         if (viajando){ viajando = false; viajeId++; }
       }, {passive:true});
     });
@@ -1631,12 +1647,14 @@
 
     // 1) al nombre: recorrido largo y tranquilo por la galaxia
     if (boton1) boton1.addEventListener('click', function(){
+      if (autoCorriendo) return;   // la introducción se termina sola
       yaParo = true; frenando = false;
       viajar(PARADA, 2600);
     });
 
     // 2) al teléfono: donde ya está puesto y se ve entero
     if (boton2) boton2.addEventListener('click', function(){
+      if (autoCorriendo) return;   // la introducción se termina sola
       var r = escena.getBoundingClientRect();
       var arriba = window.scrollY + r.top;
       viajar(arriba + (escena.offsetHeight - window.innerHeight) * 0.06, 1800);
