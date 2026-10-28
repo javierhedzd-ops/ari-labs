@@ -641,7 +641,8 @@
 
   // ---- los mensajes: cada uno con su propio muelle ----
   var items = pasos.map(function(el){
-    return { el:el, y:new Muelle(10, 210, 26), o:new Muelle(0, 210, 26), dentro:false };
+    return { el:el, y:new Muelle(10, 210, 26), o:new Muelle(0, 210, 26), dentro:false,
+             tyUltimo:null, opUltimo:null };
   });
 
   // ---- el chat va pegado al scroll, no al reloj ----
@@ -689,8 +690,18 @@
     items.forEach(function(it){
       var a = it.y.paso(dt), b = it.o.paso(dt);
       if (a || b){
-        it.el.style.transform = 'translateY(' + it.y.v + 'px)';
-        it.el.style.opacity = it.o.v;
+        // solo se escribe en el estilo si el número cambió de verdad: escribir
+        // el mismo valor en cada cuadro obliga al navegador a rehacer la capa
+        var ty = Math.round(it.y.v * 10) / 10;
+        var op = Math.round(it.o.v * 100) / 100;
+        if (ty !== it.tyUltimo){
+          it.tyUltimo = ty;
+          it.el.style.transform = 'translateY(' + ty + 'px)';
+        }
+        if (op !== it.opUltimo){
+          it.opUltimo = op;
+          it.el.style.opacity = op;
+        }
         sigue = true;
       }
     });
@@ -955,6 +966,28 @@
 
     var cielo = crearCielo(340);
 
+    // ---- el cielo, pintado una sola vez ----
+    // Antes se recorrían 340 estrellas por cuadro y cada una pedía su color:
+    // eso, sumado a las 1500 de la espiral, era lo que hacía que la animación
+    // fuera a tirones. El cielo no se mueve casi nada (solo se aleja al bajar),
+    // así que se pinta en una lona y por cuadro solo se estira.
+    var cieloLona = document.createElement('canvas');
+    var cieloListo = false;
+    function pintarCielo(){
+      if (cieloListo) return;
+      cieloListo = true;
+      var w = Math.max(1, Math.floor(ancho)), h = Math.max(1, Math.floor(alto));
+      cieloLona.width = w; cieloLona.height = h;
+      var g = cieloLona.getContext('2d');
+      for (var c = 0; c < cielo.length; c++){
+        var es = cielo[c];
+        g.fillStyle = es.frio
+          ? color(ESTRELLA_FRIA, es.brillo * 0.85)
+          : color(ESTRELLA_CALIDA, es.brillo * 0.7);
+        g.beginPath(); g.arc(es.x * w, es.y * h, es.tam, 0, Math.PI * 2); g.fill();
+      }
+    }
+
     var estrellas = crearEspiral(CANTIDAD);
     // la nebulosa se pinta en un momento libre, no en el primer cuadro:
     // si no, el primer segundo de la página va a tirones
@@ -1059,6 +1092,9 @@
       // el centro de la galaxia va en el centro de la pantalla
       cy = alto * 0.5;
       R = Math.min(ancho * 0.52, alto * 0.30);
+      // el cielo cambió de tamaño: se vuelve a pintar
+      cieloListo = false;
+      pintarCielo();
       leerScroll();
     }
 
@@ -1108,16 +1144,11 @@
 
       // ---- el cielo: estrellas lejanas que se quedan quietas ----
       // Al bajar se alejan un poco (paralaje), como si te metieras de verdad.
-      var fuga = 1 + tiempo * 0.35;
-      for (var c = 0; c < cielo.length; c++){
-        var es = cielo[c];
-        var ex = centroX + (es.x * ancho - centroX) * fuga;
-        var ey = centroY + (es.y * alto - centroY) * fuga;
-        if (ex < -4 || ex > ancho + 4 || ey < -4 || ey > alto + 4) continue;
-        ctx.fillStyle = es.frio
-          ? color(ESTRELLA_FRIA, es.brillo * 0.85)
-          : color(ESTRELLA_CALIDA, es.brillo * 0.7);
-        ctx.beginPath(); ctx.arc(ex, ey, es.tam, 0, Math.PI * 2); ctx.fill();
+      // Ya está pintado en su lona: aquí solo se estira desde el centro.
+      if (cieloListo){
+        var fuga = 1 + tiempo * 0.35;
+        var wC = ancho * fuga, hC = alto * fuga;
+        ctx.drawImage(cieloLona, centroX - wC / 2, centroY - hC / 2, wC, hC);
       }
 
       // nebulosa: gira más despacio y se aplasta como el disco
@@ -1238,7 +1269,9 @@
             f = 1 - k2 * k2 * (3 - 2 * k2);
           }
           var gN = ctxNombre;
-          gN.clearRect(0, 0, ancho, alto);
+          gN.setTransform(1, 0, 0, 1, 0, 0);
+          gN.clearRect(0, 0, lonaNombre.width, lonaNombre.height);
+          gN.setTransform(dpr, 0, 0, dpr, 0, 0);
           gN.globalCompositeOperation = 'lighter';
           // un poco de temblor mientras está formado: no es una foto
           var vivo = f > 0.98 ? 1 : 0;
@@ -1266,13 +1299,19 @@
       ctx.globalCompositeOperation = 'source-over';
 
       // núcleo: blanco dorado, como el de la foto. Al agarrarla se enciende.
+      // El degradado del núcleo se rehace solo cuando cambia de verdad: antes
+      // se creaba uno nuevo en cada cuadro y eso también daba tirones.
       var nucleoR = R * (0.22 + empuje * 0.10) * (1 + tiempo * 0.9);
-      var nucleo = ctx.createRadialGradient(centroX, centroY, 0, centroX, centroY, nucleoR);
-      nucleo.addColorStop(0, rgba([255, 255, 255], Math.min(1, (0.95 + empuje * 0.05) * brillo)));
-      nucleo.addColorStop(0.25, rgba(NUCLEO_CALIDO, Math.min(1, (0.7 + empuje * 0.2) * brillo)));
-      nucleo.addColorStop(0.6, rgba(NUCLEO_ORO, Math.min(1, (0.3 + empuje * 0.2) * brillo)));
-      nucleo.addColorStop(1, rgba(NUCLEO_ORO, 0));
-      ctx.fillStyle = nucleo;
+      var claveNucleo = Math.round(nucleoR) + ',' + Math.round(empuje * 20) + ',' + Math.round(brillo * 20);
+      if (claveNucleo !== nucleoClave){
+        nucleoClave = claveNucleo;
+        nucleoGrad = ctx.createRadialGradient(centroX, centroY, 0, centroX, centroY, nucleoR);
+        nucleoGrad.addColorStop(0, rgba([255, 255, 255], Math.min(1, (0.95 + empuje * 0.05) * brillo)));
+        nucleoGrad.addColorStop(0.25, rgba(NUCLEO_CALIDO, Math.min(1, (0.7 + empuje * 0.2) * brillo)));
+        nucleoGrad.addColorStop(0.6, rgba(NUCLEO_ORO, Math.min(1, (0.3 + empuje * 0.2) * brillo)));
+        nucleoGrad.addColorStop(1, rgba(NUCLEO_ORO, 0));
+      }
+      ctx.fillStyle = nucleoGrad;
       ctx.beginPath(); ctx.arc(centroX, centroY, nucleoR, 0, Math.PI * 2); ctx.fill();
 
       // el anillo que se abre al agarrarla: se ve que responde al dedo
@@ -1340,6 +1379,7 @@
     var condensando = false;
     var corriendoGalaxia = false;
     var radioActual = 1, centroActualX = 0, centroActualY = 0;
+    var nucleoGrad = null, nucleoClave = '';   // el degradado del núcleo, guardado
     var condT = 0;            // segundos desde que empezó
     var condPuntos = [];      // a dónde va cada estrella (x, y en pantalla)
     var condOrigen = [];      // de dónde sale cada una
@@ -1384,6 +1424,13 @@
       var cuantas = Math.min(pts.length, Math.floor(estrellas.length * 0.55));
       condPuntos = [];
       condOrigen = [];
+      // el nombre se pinta en su propia lona, no en la de la galaxia: así no
+      // hay que borrar y repintar la pantalla entera en cada cuadro
+      var gN = ctxNombre;
+      gN.setTransform(1, 0, 0, 1, 0, 0);
+      gN.clearRect(0, 0, lonaNombre.width, lonaNombre.height);
+      gN.setTransform(dpr, 0, 0, dpr, 0, 0);
+      gN.globalCompositeOperation = 'lighter';
       for (var k = 0; k < cuantas; k++){
         var e = estrellas[orden[k]];
         // dónde está ahora mismo en pantalla (misma cuenta que al dibujar)
@@ -1393,8 +1440,16 @@
         var x = centroActualX + px * Math.cos(GIRO_DISCO) - py * Math.sin(GIRO_DISCO);
         var y = centroActualY + px * Math.sin(GIRO_DISCO) + py * Math.cos(GIRO_DISCO);
         condOrigen.push([x, y]);
-        condPuntos.push(pts[Math.floor(k * pts.length / cuantas)]);
+        var d = pts[Math.floor(k * pts.length / cuantas)];
+        condPuntos.push(d);
+        // el punto de partida se pinta ya: si no, el nombre aparecía de golpe
+        gN.fillStyle = rgba(HIELO, 0.16);
+        gN.beginPath(); gN.arc(x, y, 2.9, 0, Math.PI * 2); gN.fill();
+        gN.fillStyle = rgba(CLARO, 0.45);
+        gN.beginPath(); gN.arc(x, y, 1.1, 0, Math.PI * 2); gN.fill();
       }
+      gN.globalCompositeOperation = 'source-over';
+      lonaNombre.style.opacity = '1';
       condT = 0;
       condensando = true;
       if (!corriendoGalaxia){ corriendoGalaxia = true; requestAnimationFrame(dibujar); }
@@ -1443,7 +1498,15 @@
     }
   })();
 
-  window.addEventListener('scroll', pintar, {passive:true});
+  // el scroll llega decenas de veces por segundo: se pinta una vez por cuadro,
+  // no en cada aviso (pintar de más es lo que se siente como tirón)
+  var pedidoPintar = false;
+  function pintarPronto(){
+    if (pedidoPintar) return;
+    pedidoPintar = true;
+    requestAnimationFrame(function(){ pedidoPintar = false; pintar(); });
+  }
+  window.addEventListener('scroll', pintarPronto, {passive:true});
   window.addEventListener('resize', pintar);
   // la barra se mira una vez por cuadro, no en cada evento de scroll
   // (en un teléfono llegan decenas por segundo)
