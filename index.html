@@ -1346,10 +1346,11 @@
     }
 
     // el tope: no deja pasar del tramo actual
+    // (con 2 px de margen: si el navegador redondea, no se pelea consigo mismo)
     function topar(){
       if (suelto) return;
       var techo = actual === 0 ? 0 : tramos[actual - 1];
-      if (window.scrollY < techo - 1) window.scrollTo(0, techo);
+      if (window.scrollY < techo - 2) window.scrollTo(0, techo);
     }
 
     // un empujón del dedo o de la rueda
@@ -1402,16 +1403,20 @@
     }, {passive:true});
 
     // ---- la rueda del ratón ----
+    // se frena el scroll nativo: si no, el navegador baja por su cuenta y el
+    // tope lo devuelve, y se ve un rebote
     window.addEventListener('wheel', function(e){
       if (suelto) return;
+      e.preventDefault();
       if (e.deltaY > 0) empujar(e.deltaY);
       topar();
-    }, {passive:true});
+    }, {passive:false});
 
     // ---- el teclado ----
     window.addEventListener('keydown', function(e){
       if (suelto) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'End'){
+        e.preventDefault();
         empujar(window.innerHeight * 0.5);
         topar();
       }
@@ -1432,6 +1437,11 @@
 
     document.documentElement.classList.add('recorriendo');
     medir();
+    // las letras de Google llegan después y cambian el alto: se vuelve a medir
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ if (!suelto) medir(); });
+    }
+    window.addEventListener('load', function(){ if (!suelto) medir(); });
     window.addEventListener('resize', function(){ if (!suelto) medir(); });
     window.addEventListener('orientationchange', function(){ setTimeout(function(){ if (!suelto) medir(); }, 250); });
   })();
