@@ -1413,6 +1413,9 @@
           // sigue hasta el cierre, para que no se quede parado a medias
           setTimeout(function(){
             if (!autoCorriendo || miId !== autoId) return;
+            // si alguien movió la página en la pausa, se vuelve al teléfono
+            // antes de seguir: el segundo trecho sale siempre de ahí
+            window.scrollTo(0, fin);
             var destino = document.documentElement.scrollHeight - window.innerHeight;
             viajar(destino, SEGUNDO, function(){
               autoCorriendo = false;
