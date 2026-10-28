@@ -1418,8 +1418,8 @@
       var y = window.scrollY;
       actual = 0;
       while (actual < tramos.length && y > tramos[actual] + 2) actual++;
-      if (actual >= tramos.length){ soltar(); return; }
       empujon = 0;
+      if (actual >= tramos.length){ soltar(); return; }
     }
     // el dedo y el teclado son intención clara: cortan siempre
     ['touchstart','keydown'].forEach(function(ev){
