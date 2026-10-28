@@ -1383,6 +1383,21 @@
     var PAUSA = 700;          // ms que se queda mirando el teléfono puesto
     var SEGUNDO = 2600;       // ms del segundo trecho: del teléfono al cierre
 
+    // dónde se para la introducción: con el cierre entero a la vista (el
+    // titular y el botón "Escríbenos"), no al final de la página. Lo que
+    // queda debajo (el remate y el pie, y luego "Nosotros") lo baja el que
+    // quiera con el dedo.
+    function paradaCierre(){
+      var cierre = document.querySelector('.cierre');
+      var tope = document.documentElement.scrollHeight - window.innerHeight;
+      if (!cierre) return tope;
+      var arriba = window.scrollY + cierre.getBoundingClientRect().top;
+      var alto = cierre.offsetHeight;
+      // el cierre cabe en una pantalla: se para con él justo arriba
+      var y = alto <= window.innerHeight ? arriba : arriba + alto - window.innerHeight;
+      return Math.max(0, Math.min(tope, y));
+    }
+
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
       // si ya se movió por su cuenta (aunque no haya tocado), no se le encima
@@ -1416,7 +1431,10 @@
             // si alguien movió la página en la pausa, se vuelve al teléfono
             // antes de seguir: el segundo trecho sale siempre de ahí
             window.scrollTo(0, fin);
-            var destino = document.documentElement.scrollHeight - window.innerHeight;
+            // se para con el cierre a la vista (titular y "Escríbenos"), no
+            // al final del todo: de ahí para abajo baja el que quiera, que
+            // es donde va la sección "Nosotros"
+            var destino = paradaCierre();
             viajar(destino, SEGUNDO, function(){
               autoCorriendo = false;
               autoHecho = true;
