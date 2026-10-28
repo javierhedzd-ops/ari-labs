@@ -441,6 +441,49 @@
     text-shadow:0 0 26px rgba(158,216,238,.55), 0 0 64px rgba(158,216,238,.28);
   }
   .final.visto p{opacity:1;transform:none}
+
+  /* ---------- nosotros ---------- */
+  /* Va después del remate, ya sobre el negro del pie: letra clara, aire
+     de sobra y el azul hielo solo en lo que importa. */
+  .nosotros{
+    background:#081116;
+    color:var(--hielo-100);
+    padding:14vh var(--margen) 10vh;
+    max-width:34rem;margin:0 auto;
+  }
+  .nosotros .rotulo{
+    font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--hielo-400);margin:0 0 2rem;
+  }
+  .nosotros h2{
+    font-weight:300;font-size:clamp(1.7rem,6.4vw,2.4rem);
+    line-height:1.22;letter-spacing:-.02em;margin:0 0 2rem;
+    color:rgba(255,255,255,.94);
+  }
+  .nosotros h2 em{
+    font-style:italic;color:var(--hielo-300);
+  }
+  .nosotros .texto{
+    font-family:"Inter",sans-serif;font-size:1rem;line-height:1.75;
+    color:rgba(222,246,253,.62);margin:0 0 1.2rem;max-width:32ch;
+  }
+  .nosotros .texto b{font-weight:500;color:var(--hielo-200)}
+  .nosotros .contacto{align-items:flex-start;margin-top:2.4rem}
+  .nosotros .opciones{max-width:22rem}
+  .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
+    opacity:0;transform:translateY(16px);
+    transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
+  }
+  .nosotros.visto .rotulo{opacity:1;transform:none;transition-delay:.05s}
+  .nosotros.visto h2{opacity:1;transform:none;transition-delay:.14s}
+  .nosotros.visto .texto:nth-of-type(1){opacity:1;transform:none;transition-delay:.26s}
+  .nosotros.visto .texto:nth-of-type(2){opacity:1;transform:none;transition-delay:.36s}
+  .nosotros.visto .contacto{opacity:1;transform:none;transition-delay:.46s}
+  @media (prefers-reduced-motion: reduce){
+    .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
+      opacity:1 !important;transform:none !important;transition:none;
+    }
+  }
   footer{
     background:#081116;padding:0 var(--margen) 8vh;text-align:center;
     font-family:"Inter",sans-serif;font-size:.72rem;color:rgba(222,246,253,.35);
@@ -545,6 +588,25 @@
 
 <section class="final">
   <p>Mismo trabajo. <em>Menos ruido.</em></p>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="nosotros" id="nosotros">
+  <p class="rotulo">Nosotros</p>
+  <h2>Ari Labs es un estudio pequeño en Mérida. Hacemos dos cosas: <em>páginas web</em> y <em>apps</em>.</h2>
+  <p class="texto">Puedes escoger un <b>modelo</b> de Ari Labs y lo adaptamos a tu negocio, o pedirlo <b>a la medida</b> desde cero. En los dos casos se piensa para ti: no se copia de otro.</p>
+  <p class="texto">Si quieres una web o una app que se sienta tuya, escríbenos.</p>
+  <div class="contacto">
+    <button class="boton" id="boton2" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="opciones2">Escríbenos</button>
+    <div class="opciones" id="opciones2">
+      <a class="opcion" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">
+        <b>Correo</b><span>Ari.ice.signal@gmail.com</span>
+      </a>
+      <a class="opcion" href="https://wa.link/eut47p" target="_blank" rel="noopener">
+        <b>WhatsApp</b><span>Te contesto el mismo día</span>
+      </a>
+    </div>
+  </div>
 </section>
 
 <footer>
@@ -685,9 +747,10 @@
     despertar();
   }
 
-  // ---- lo que entra al llegar: cierre y final ----
+  // ---- lo que entra al llegar: cierre, final y nosotros ----
   var cierre = document.querySelector('.cierre');
   var final  = document.querySelector('.final');
+  var nosotros = document.querySelector('.nosotros');
   var barra  = document.querySelector('.barra');
 
   if ('IntersectionObserver' in window){
@@ -698,8 +761,10 @@
     }, {threshold:0.25});
     ojo.observe(cierre);
     ojo.observe(final);
+    if (nosotros) ojo.observe(nosotros);
   } else {
     cierre.classList.add('visto'); final.classList.add('visto');
+    if (nosotros) nosotros.classList.add('visto');
   }
 
   // ---- los botones: se hunden al tocarlos y vuelven con muelle ----
@@ -724,31 +789,35 @@
   }
 
   // ---- "Escríbenos" abre los dos caminos: correo o WhatsApp ----
-  if (boton && contacto){
-    var cerrarOpciones = function(){
-      contacto.classList.remove('abierto');
-      boton.setAttribute('aria-expanded','false');
-      boton.textContent = 'Escríbenos';
+  // (hay dos: el del cierre y el de nosotros; cada uno con sus opciones)
+  var contactos = Array.prototype.slice.call(document.querySelectorAll('.contacto'));
+  contactos.forEach(function(caja){
+    var b = caja.querySelector('.boton');
+    if (!b) return;
+    var cerrar = function(){
+      caja.classList.remove('abierto');
+      b.setAttribute('aria-expanded','false');
+      b.textContent = 'Escríbenos';
     };
-    boton.addEventListener('click', function(){
-      var abierto = contacto.classList.toggle('abierto');
-      boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      boton.textContent = abierto ? 'Elige cómo' : 'Escríbenos';
+    b.addEventListener('click', function(){
+      var abierto = caja.classList.toggle('abierto');
+      b.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      b.textContent = abierto ? 'Elige cómo' : 'Escríbenos';
     });
     // si toca fuera, se cierran
     document.addEventListener('pointerdown', function(e){
-      if (!contacto.classList.contains('abierto')) return;
-      if (contacto.contains(e.target)) return;
-      cerrarOpciones();
+      if (!caja.classList.contains('abierto')) return;
+      if (caja.contains(e.target)) return;
+      cerrar();
     });
     // Escape las cierra y devuelve el foco al botón
     document.addEventListener('keydown', function(e){
       if (e.key !== 'Escape') return;
-      if (!contacto.classList.contains('abierto')) return;
-      cerrarOpciones();
-      boton.focus();
+      if (!caja.classList.contains('abierto')) return;
+      cerrar();
+      b.focus();
     });
-  }
+  });
 
   // ---- la galaxia de fondo: espiral que gira y respira como si hablara ----
   // Sale de ~/ari-imagen/galaxia-01.html (la del modo voz), recortada a lo
