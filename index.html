@@ -1435,13 +1435,30 @@
             // al final del todo: de ahí para abajo baja el que quiera, que
             // es donde va la sección "Nosotros"
             var destino = paradaCierre();
-            viajar(destino, SEGUNDO, function(){
-              autoCorriendo = false;
-              autoHecho = true;
-              actual = tramos.length;
-              empujon = 0;
-              soltar();
-            });
+            // el segundo trecho se mueve aquí mismo, sin pasar por viajar():
+            // viajar() se rinde si alguien toca la pantalla, y la entrada
+            // tiene que llegar sola hasta el cierre
+            var desde2 = window.scrollY;
+            var trecho2 = destino - desde2;
+            var t2 = 0;
+            function paso2(t){
+              if (!autoCorriendo || miId !== autoId) return;
+              if (!t2) t2 = t;
+              var p2 = Math.min(1, (t - t2) / SEGUNDO);
+              // arranca y frena solo: el mismo freno de un coche
+              var suave2 = p2 < 0.5 ? 2 * p2 * p2 : 1 - Math.pow(-2 * p2 + 2, 2) / 2;
+              window.scrollTo(0, desde2 + trecho2 * suave2);
+              if (p2 < 1){
+                requestAnimationFrame(paso2);
+              } else {
+                autoCorriendo = false;
+                autoHecho = true;
+                actual = tramos.length;
+                empujon = 0;
+                soltar();
+              }
+            }
+            requestAnimationFrame(paso2);
           }, PAUSA);
         }
       }
