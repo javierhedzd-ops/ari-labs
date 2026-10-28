@@ -1014,6 +1014,10 @@
         nombreHecho = true;
         condensar();
       }
+      // el nombre de "Ari Labs" entra al llegar a su tramo. Antes solo se
+      // miraba al hacer scroll: si la página se abría ya bajada (o la
+      // introducción lo dejaba ahí), el nombre se quedaba invisible.
+      mirarLlegada();
     }
 
     // ---- la voz: frases con sílabas, como si estuviera hablando ----
@@ -1394,6 +1398,7 @@
       condensando = true;
       if (!corriendoGalaxia){ corriendoGalaxia = true; requestAnimationFrame(dibujar); }
     }
+    var llegada = document.getElementById('llegada');
     function mirarLlegada(){
       if (!llegada) return;
       var alto1 = window.innerHeight || 1;
