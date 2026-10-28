@@ -1370,9 +1370,9 @@
     // suelta y el dedo manda. Si el que entra toca a media, se rinde y manda él.
     // Los tiempos son de reloj (no de scroll) para que el chat se arme solo.
     var GUION = [
-      {hasta:0, ms:4200},     // 1) la galaxia se abre hasta el nombre
-      {hasta:1, ms:2600},     // 2) el nombre se va y sale el teléfono
-      {hasta:2, ms:9000}      // 3) el chat se arma mensaje a mensaje
+      {hasta:0, ms:2600},     // 1) la galaxia se abre hasta el nombre
+      {hasta:1, ms:1500},     // 2) el nombre se va y sale el teléfono
+      {hasta:2, ms:5200}      // 3) el chat se arma mensaje a mensaje
     ];
 
     function viajeSolo(){
@@ -1521,21 +1521,9 @@
 
     document.documentElement.classList.add('recorriendo');
     medir();
-    // el primer tramo arranca solo, pero se espera a que las letras estén
-    // puestas (si no, el nombre llega tarde y el viaje se ve cortado)
-    var arrancado = false;
-    function arrancar(){
-      if (arrancado) return;
-      arrancado = true;
-      if (!suelto) medir();
-      setTimeout(viajeSolo, 700);   // un respiro para que se vea la galaxia
-    }
-    if (document.fonts && document.fonts.ready){
-      document.fonts.ready.then(arrancar);
-      setTimeout(arrancar, 1500);   // por si las letras tardan demasiado
-    } else {
-      setTimeout(arrancar, 400);
-    }
+    // la introducción arranca en cuanto se abre la página, sin esperas:
+    // las letras se miden otra vez cuando llegan y el viaje se ajusta solo
+    setTimeout(viajeSolo, 120);
     // las letras de Google llegan después y cambian el alto: se vuelve a medir
     if (document.fonts && document.fonts.ready){
       document.fonts.ready.then(function(){ if (!suelto) medir(); });
