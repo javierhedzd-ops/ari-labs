@@ -665,10 +665,13 @@
     // Antes el cambio era un corte seco: el teléfono desaparecía y de golpe
     // aparecía el fondo del cierre. Ahora, en el último 22% de la escena, el
     // teléfono se desvanece y se aleja un poco mientras el cierre sube.
+    // (Javi, 28/10: el teléfono se quedaba transparente y se veía feo. Ahora
+    //  no se desvanece: se va entero, subiendo y encogiéndose un poco, y el
+    //  cierre entra por debajo. Se ve sólido hasta que sale de la pantalla.)
     var salida = Math.min(1, Math.max(0, (avance - 0.78) / 0.22));
     var suaveSal = salida * salida * (3 - 2 * salida);
-    fija.style.setProperty('--opFija', String(1 - suaveSal));
-    fija.style.transform = 'translateY(' + (-suaveSal * 6) + 'vh) scale(' + (1 - suaveSal * 0.06) + ')';
+    fija.style.setProperty('--opFija', '1');
+    fija.style.transform = 'translateY(' + (-suaveSal * 18) + 'vh) scale(' + (1 - suaveSal * 0.10) + ')';
     fija.style.pointerEvents = suaveSal > 0.5 ? 'none' : '';
 
     // ya contada la introducción, el chat se queda completo: al subir no se
