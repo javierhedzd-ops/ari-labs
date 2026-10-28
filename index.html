@@ -1397,7 +1397,7 @@
         // entra suave: los primeros 900 ms acelera poco a poco, no de golpe
         var k = Math.min(1, (t - t0) / ARRANQUE);
         var entra = k * k * (3 - 2 * k);          // curva suave de 0 a 1
-        var avance = p * (0.35 + 0.65 * entra);   // al principio avanza menos
+        var avance = p * entra;                   // arranca desde cero, sin tirón
         window.scrollTo(0, desde + recorrido * Math.min(1, avance));
         if (p < 1){
           requestAnimationFrame(paso);
