@@ -666,7 +666,13 @@
     fija.style.transform = 'translateY(' + (-suaveSal * 6) + 'vh) scale(' + (1 - suaveSal * 0.06) + ')';
     fija.style.pointerEvents = suaveSal > 0.5 ? 'none' : '';
 
-    repartir(avance);
+    // ya contada la introducción, el chat se queda completo: al subir no se
+    // desarma (la página ya es una página normal, no una animación)
+    if (document.documentElement.classList.contains('contada')){
+      repartir(1);
+    } else {
+      repartir(avance);
+    }
     despertar();
   }
 
@@ -1406,35 +1412,17 @@
       requestAnimationFrame(tramo);
     }
 
-    // ---- si el que entra toca, el viaje se rinde y manda él ----
-    // Se corta el viaje y se deja la página donde está: el tope la lleva al
-    // principio del tramo en el cuadro siguiente, sin saltos raros.
-    function cortarSolo(){
-      if (!autoCorriendo) return;
-      autoCorriendo = false;
-      autoId++;
-      autoHecho = true;
-      // se queda en el tramo donde iba, no se le adelanta
-      var y = window.scrollY;
-      actual = 0;
-      while (actual < tramos.length && y > tramos[actual] + 2) actual++;
-      empujon = 0;
-      if (actual >= tramos.length){ soltar(); return; }
-    }
-    // el dedo y el teclado son intención clara: cortan siempre
-    ['touchstart','keydown'].forEach(function(ev){
-      window.addEventListener(ev, cortarSolo, {passive:true});
-    });
-    // la rueda no: el scroll programático también la dispara en algunos
-    // navegadores, y la inercia de la rueda cortaría el viaje sin querer
-    window.addEventListener('wheel', function(e){
-      if (Math.abs(e.deltaY) < 2) return;
-      cortarSolo();
-    }, {passive:true});
+    // ---- la introducción no se corta ----
+    // Es la entrada, no un vídeo: si el que entra toca o mueve la rueda a
+    // media, no pasa nada, la introducción sigue hasta el final. Cuando
+    // termina, la página se suelta y ya se baja y se sube normal.
 
     function soltar(){
       suelto = true;
       document.documentElement.classList.remove('recorriendo');
+      // al soltarse, todo queda cargado: el chat completo se queda puesto
+      // aunque se suba, y no se vuelve a armar
+      document.documentElement.classList.add('contada');
     }
 
     // el tope: no deja pasar del tramo actual
@@ -1525,8 +1513,8 @@
     ['bajaBoton','bajaChatBoton'].forEach(function(id){
       var b = document.getElementById(id);
       if (b) b.addEventListener('click', function(){
-        // si el viaje solo va a medias, el botón lo corta y sigue él
-        cortarSolo();
+        // a media introducción el botón no hace nada: la entrada se termina
+        if (autoCorriendo) return;
         empujar(1e9);
       });
     });
