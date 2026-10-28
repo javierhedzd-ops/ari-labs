@@ -1041,6 +1041,8 @@
       var radio = R * (1 + tiempo * 2.2);
       var centroX = cx;
       var centroY = cy;
+      // se guardan para saber dónde está cada estrella cuando se condensa
+      radioActual = radio; centroActualX = centroX; centroActualY = centroY;
 
       ctx.clearRect(0, 0, ancho, alto);
 
@@ -1154,6 +1156,41 @@
         }
       }
 
+      // ---- el nombre condensado: las estrellas que se fueron a las letras ----
+      if (condensando){
+        condT += dt;
+        var total = COND_ENTRA + COND_QUEDA + COND_SUELTA;
+        if (condT >= total){
+          condensando = false;
+        } else {
+          // 0 → 1 al formarse, 1 quieto, 1 → 0 al soltarse
+          var f;
+          if (condT < COND_ENTRA){
+            var k1 = condT / COND_ENTRA;
+            f = k1 * k1 * (3 - 2 * k1);
+          } else if (condT < COND_ENTRA + COND_QUEDA){
+            f = 1;
+          } else {
+            var k2 = (condT - COND_ENTRA - COND_QUEDA) / COND_SUELTA;
+            f = 1 - k2 * k2 * (3 - 2 * k2);
+          }
+          // un poco de temblor mientras está formado: no es una foto
+          var vivo = f > 0.98 ? 1 : 0;
+          for (var q = 0; q < condPuntos.length; q++){
+            var o = condOrigen[q], d = condPuntos[q];
+            var tx = o[0] + (d[0] - o[0]) * f;
+            var ty = o[1] + (d[1] - o[1]) * f;
+            if (vivo){
+              tx += Math.sin(t * 2.1 + q) * 0.7;
+              ty += Math.cos(t * 1.7 + q * 1.3) * 0.7;
+            }
+            var alfaN = 0.35 + f * 0.65;
+            ctx.fillStyle = rgba(CLARO, Math.min(1, alfaN));
+            ctx.beginPath(); ctx.arc(tx, ty, 0.9 + f * 0.7, 0, Math.PI * 2); ctx.fill();
+          }
+        }
+      }
+
       ctx.globalCompositeOperation = 'source-over';
 
       // núcleo: blanco dorado, como el de la foto. Al agarrarla se enciende.
@@ -1175,7 +1212,8 @@
         ctx.stroke();
       }
 
-      if (!quieto && !document.hidden) requestAnimationFrame(dibujar);
+      if (!quieto && !document.hidden){ requestAnimationFrame(dibujar); }
+      else { corriendoGalaxia = false; }
     }
 
     // ---- los dedos: mantener presionada y arrastrar a los lados ----
@@ -1221,12 +1259,86 @@
 
     window.addEventListener('scroll', leerScroll, {passive:true});
 
-    // el nombre llega al final del viaje
-    var llegada = document.getElementById('llegada');
+    // ---- el nombre se condensa ----
+    // Al llegar al nombre, las estrellas del centro dejan su sitio y se van a
+    // dibujar las letras de "Ari Labs". Se quedan un momento formadas y luego
+    // se sueltan y vuelven a la galaxia. No es texto que se escribe: es la
+    // galaxia la que se junta para decir su nombre.
+    var nombreHecho = false;
+    var condensando = false;
+    var corriendoGalaxia = false;
+    var radioActual = 1, centroActualX = 0, centroActualY = 0;
+    var condT = 0;            // segundos desde que empezó
+    var condPuntos = [];      // a dónde va cada estrella (x, y en pantalla)
+    var condOrigen = [];      // de dónde sale cada una
+    var COND_ENTRA = 1.1;     // s que tarda en formarse
+    var COND_QUEDA = 1.5;     // s que se queda formado
+    var COND_SUELTA = 1.2;    // s que tarda en soltarse
+
+    function puntosDelNombre(){
+      var alto1 = window.innerHeight || 1;
+      var ancho1 = window.innerWidth || 1;
+      var c = document.createElement('canvas');
+      c.width = Math.floor(ancho1);
+      c.height = Math.floor(alto1);
+      var g = c.getContext('2d');
+      // el nombre va donde va el texto de verdad: abajo, como el titular
+      var tam = Math.min(ancho1 * 0.17, alto1 * 0.11);
+      g.fillStyle = '#fff';
+      g.textBaseline = 'alphabetic';
+      g.font = '300 ' + tam + 'px "Inter", system-ui, sans-serif';
+      var texto = 'Ari Labs';
+      var x0 = ancho1 * 0.06;
+      var y0 = alto1 - alto1 * 0.14;
+      g.fillText(texto, x0, y0);
+      var datos = g.getImageData(0, 0, c.width, c.height).data;
+      var pts = [];
+      var paso = Math.max(3, Math.round(tam / 26));
+      for (var y = 0; y < c.height; y += paso){
+        for (var x = 0; x < c.width; x += paso){
+          if (datos[(y * c.width + x) * 4 + 3] > 128) pts.push([x, y]);
+        }
+      }
+      // si la letra no cargó, se usa la del sistema: igual hay puntos
+      return pts;
+    }
+
+    function condensar(){
+      if (condensando || quieto) return;
+      var pts = puntosDelNombre();
+      if (!pts.length) return;
+      // se eligen las estrellas más cercanas al centro: son las que se ven
+      var orden = estrellas.map(function(e, i){ return i; });
+      orden.sort(function(a, b){ return estrellas[a].radio - estrellas[b].radio; });
+      var cuantas = Math.min(pts.length, Math.floor(estrellas.length * 0.55));
+      condPuntos = [];
+      condOrigen = [];
+      for (var k = 0; k < cuantas; k++){
+        var e = estrellas[orden[k]];
+        // dónde está ahora mismo en pantalla (misma cuenta que al dibujar)
+        var ang = e.angulo;
+        var rad = e.radio * radioActual;
+        var px = Math.cos(ang) * rad, py = Math.sin(ang) * rad * INCLINA;
+        var x = centroActualX + px * Math.cos(GIRO_DISCO) - py * Math.sin(GIRO_DISCO);
+        var y = centroActualY + px * Math.sin(GIRO_DISCO) + py * Math.cos(GIRO_DISCO);
+        condOrigen.push([x, y]);
+        condPuntos.push(pts[Math.floor(k * pts.length / cuantas)]);
+      }
+      condT = 0;
+      condensando = true;
+      if (!corriendoGalaxia){ corriendoGalaxia = true; requestAnimationFrame(dibujar); }
+    }
     function mirarLlegada(){
       if (!llegada) return;
       var alto1 = window.innerHeight || 1;
-      llegada.classList.toggle('llega', window.scrollY > alto1 * 1.75);
+      var llego = window.scrollY > alto1 * 1.75;
+      llegada.classList.toggle('llega', llego);
+      // ---- el nombre se condensa: las estrellas del centro se juntan y
+      // dibujan "Ari Labs", y luego se sueltan y vuelven a su sitio ----
+      if (llego && !nombreHecho){
+        nombreHecho = true;
+        condensar();
+      }
     }
     var pedidoLlegada = false;
     window.addEventListener('scroll', function(){
@@ -1242,6 +1354,7 @@
     document.addEventListener('visibilitychange', function(){
       if (!quieto && !document.hidden){
         ultimo = 0;
+        corriendoGalaxia = true;
         requestAnimationFrame(dibujar);
       }
     });
@@ -1253,6 +1366,7 @@
     } else {
       // primero se ve la galaxia (estrellas y núcleo) y la nebulosa entra
       // en cuanto el teléfono tiene un rato libre: así no hay tirón al abrir
+      corriendoGalaxia = true;
       requestAnimationFrame(dibujar);
       if (window.requestIdleCallback){
         requestIdleCallback(pintarNebulosa, {timeout: 1200});
