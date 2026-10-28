@@ -1504,7 +1504,11 @@
   function pintarPronto(){
     if (pedidoPintar) return;
     pedidoPintar = true;
-    requestAnimationFrame(function(){ pedidoPintar = false; pintar(); });
+    requestAnimationFrame(function(){
+      // si pintar() fallara, la bandera se queda puesta y la página no vuelve
+      // a pintarse nunca: se suelta siempre, pase lo que pase
+      try { pintar(); } finally { pedidoPintar = false; }
+    });
   }
   window.addEventListener('scroll', pintarPronto, {passive:true});
   window.addEventListener('resize', pintar);
