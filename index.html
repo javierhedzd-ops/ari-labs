@@ -1366,10 +1366,12 @@
     // suelta y el dedo manda. Los tiempos son de reloj (no de scroll) para
     // que el chat se arme solo.
     // Un solo recorrido, sin paradas: de la galaxia cerrada al chat completo.
-    // Antes iba por tramos y en cada tramo frenaba y volvía a arrancar; eso
-    // se sentía como que se trababa. Ahora es una sola pasada con velocidad
-    // pareja: arranca suave, va constante y frena al final.
-    var MS_TOTAL = 9500;      // lo que dura la introducción entera
+    // Se mueve igual que cuando Javi bajaba con el dedo: la galaxia se abre
+    // poco a poco, llega el nombre, sale el teléfono y el chat se arma. La
+    // velocidad es pareja (píxeles por segundo), no por tramos: así no hay
+    // frenos ni escalones, y el chat se arma a su ritmo porque va pegado al
+    // scroll.
+    var VELOCIDAD = 0.62;     // pantallas por segundo (unos 9 s en un móvil)
 
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
@@ -1383,11 +1385,13 @@
       function paso(t){
         if (!autoCorriendo || miId !== autoId) return;
         if (!t0) t0 = t;
-        var p = Math.min(1, (t - t0) / MS_TOTAL);
-        // arranca y frena, pero en medio va parejo (sin escalones)
-        var suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        var alto = window.innerHeight || 1;
         var fin = tramos[tramos.length - 1];
-        window.scrollTo(0, desde + (fin - desde) * suave);
+        var recorrido = Math.max(1, fin - desde);
+        // el tiempo sale del largo: siempre la misma velocidad, sin frenos
+        var ms = (recorrido / (alto * VELOCIDAD)) * 1000;
+        var p = Math.min(1, (t - t0) / ms);
+        window.scrollTo(0, desde + recorrido * p);
         if (p < 1){
           requestAnimationFrame(paso);
         } else {
@@ -1516,7 +1520,7 @@
     medir();
     // la introducción arranca en cuanto se abre la página, sin esperas:
     // las letras se miden otra vez cuando llegan y el viaje se ajusta solo
-    setTimeout(viajeSolo, 120);
+    viajeSolo();
     // las letras de Google llegan después y cambian el alto: se vuelve a medir
     if (document.fonts && document.fonts.ready){
       document.fonts.ready.then(function(){ if (!suelto) medir(); });
