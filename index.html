@@ -1358,22 +1358,18 @@
       window.scrollTo(0, actual === 0 ? 0 : tramos[actual - 1]);
     }
 
-    // ---- el primer tramo se hace solo ----
-    // La galaxia se abre y el nombre aparece sin que nadie toque nada: el
-    // que entra ve de qué va la cosa antes de decidir bajar. Si toca la
-    // pantalla a media, manda él y el viaje se rinde.
     var autoId = 0;         // para que un viaje viejo no siga pintando
 
     // ---- el recorrido entero se hace solo ----
     // Entras y la página se cuenta sola: la galaxia se abre, llega el nombre,
     // sale el teléfono y el chat se arma mensaje a mensaje. Al terminar se
-    // suelta y el dedo manda. Si el que entra toca a media, se rinde y manda él.
-    // Los tiempos son de reloj (no de scroll) para que el chat se arme solo.
-    var GUION = [
-      {hasta:0, ms:2600},     // 1) la galaxia se abre hasta el nombre
-      {hasta:1, ms:1500},     // 2) el nombre se va y sale el teléfono
-      {hasta:2, ms:5200}      // 3) el chat se arma mensaje a mensaje
-    ];
+    // suelta y el dedo manda. Los tiempos son de reloj (no de scroll) para
+    // que el chat se arme solo.
+    // Un solo recorrido, sin paradas: de la galaxia cerrada al chat completo.
+    // Antes iba por tramos y en cada tramo frenaba y volvía a arrancar; eso
+    // se sentía como que se trababa. Ahora es una sola pasada con velocidad
+    // pareja: arranca suave, va constante y frena al final.
+    var MS_TOTAL = 9500;      // lo que dura la introducción entera
 
     function viajeSolo(){
       if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
@@ -1381,25 +1377,19 @@
       if (window.scrollY > 4) return;
       autoCorriendo = true;
       var miId = ++autoId;
-      var i = 0;
-      var desde = window.scrollY;
       var t0 = 0;
+      var desde = window.scrollY;
 
-      function tramo(t){
+      function paso(t){
         if (!autoCorriendo || miId !== autoId) return;
         if (!t0) t0 = t;
-        var g = GUION[i];
-        var p = Math.min(1, (t - t0) / g.ms);
-        // arranca y frena solo, como un coche
+        var p = Math.min(1, (t - t0) / MS_TOTAL);
+        // arranca y frena, pero en medio va parejo (sin escalones)
         var suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-        window.scrollTo(0, desde + (tramos[g.hasta] - desde) * suave);
+        var fin = tramos[tramos.length - 1];
+        window.scrollTo(0, desde + (fin - desde) * suave);
         if (p < 1){
-          requestAnimationFrame(tramo);
-        } else if (i < GUION.length - 1){
-          i++;
-          desde = tramos[GUION[i - 1].hasta];
-          t0 = 0;
-          requestAnimationFrame(tramo);
+          requestAnimationFrame(paso);
         } else {
           // se contó todo: se suelta y el que quiera sigue bajando
           autoCorriendo = false;
@@ -1409,7 +1399,7 @@
           soltar();
         }
       }
-      requestAnimationFrame(tramo);
+      requestAnimationFrame(paso);
     }
 
     // ---- la introducción no se corta ----
