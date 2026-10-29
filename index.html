@@ -1109,7 +1109,10 @@
       // lo de Javi entra suave, no de golpe
       // (antes dt*3.2: la galaxia iba con freno detrás del dedo y se sentía
       //  trabada. Ahora sigue el scroll casi al instante.)
-      viaje  += (viajeObj - viaje) * Math.min(1, dt * 2.2);
+      // el viaje sigue al scroll casi al instante. Antes iba con freno
+      // (dt*2.2): al subir de golpe, la galaxia se quedaba atrás y se veía
+      // descuadrada respecto a la página. Ahora va pegada al dedo.
+      viaje  += (viajeObj - viaje) * Math.min(1, dt * 9);
       empuje += (empujeObj - empuje) * Math.min(1, dt * 10);
 
       // al hablar: más brillo, más pulso y giro más vivo
