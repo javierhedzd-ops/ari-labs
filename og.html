@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>og</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#05090b;}
+  .lienzo{
+    position:relative;width:1200px;height:630px;overflow:hidden;
+    background:radial-gradient(120% 90% at 50% 55%, #0b1a21 0%, #070f14 55%, #05090b 100%);
+  }
+  canvas{position:absolute;top:0;left:0;width:1200px;height:630px;z-index:0;}
+  .texto{
+    position:absolute;left:88px;bottom:78px;z-index:2;
+  }
+  .marca{
+    font-family:"Newsreader",Georgia,serif;font-weight:300;
+    font-size:104px;line-height:.92;letter-spacing:-.045em;
+    color:#f2fbff;margin:0;
+  }
+  .lema{
+    font-family:"Inter",sans-serif;font-size:27px;line-height:1.4;
+    color:rgba(222,246,253,.72);margin:22px 0 0;letter-spacing:.005em;
+  }
+  .lema b{font-weight:500;color:#9ed8ee}
+  .barra{
+    position:absolute;left:88px;top:64px;z-index:2;
+    font-family:"Inter",sans-serif;font-size:15px;letter-spacing:.26em;
+    text-transform:uppercase;color:rgba(158,216,238,.55);
+  }
+  .velo{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg, rgba(5,9,11,.86) 0%, rgba(5,9,11,.55) 42%, rgba(5,9,11,0) 72%);
+  }
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <canvas id="c" width="1200" height="630"></canvas>
+  <div class="velo"></div>
+  <div class="barra">Ari Labs · Mérida</div>
+  <div class="texto">
+    <h1 class="marca">Ari Labs</h1>
+    <p class="lema">Páginas web y apps para negocios pequeños.<br><b>Mérida, Yucatán.</b></p>
+  </div>
+</div>
+<script>
+(function(){
+  var W = 1200, H = 630;
+  var cv = document.getElementById('c');
+  var ctx = cv.getContext('2d');
+
+  var HIELO = [127, 212, 255];
+  var NUCLEO_CALIDO = [255, 236, 190];
+  var NUCLEO_ORO    = [255, 190, 110];
+  var BRAZO_AZUL    = [120, 170, 255];
+  var BRAZO_ROSADO  = [235, 150, 200];
+  var BRAZO_VIOLETA = [150, 130, 235];
+  var POLVO         = [70, 45, 35];
+  var ESTRELLA_FRIA = [200, 225, 255];
+  var ESTRELLA_CALIDA = [255, 245, 225];
+
+  function rgba(c, a){ return 'rgba(' + (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + a + ')'; }
+  function mezclar(a, b, t){ return [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t, a[2]+(b[2]-a[2])*t]; }
+
+  // semilla fija: la imagen sale igual cada vez que se genera
+  var semilla = 20261028;
+  function azar(){ semilla = (semilla * 1664525 + 1013904223) % 4294967296; return semilla / 4294967296; }
+
+  // el centro de la galaxia, a la derecha, para que el texto respire a la izquierda
+  var CX = 830, CY = 300, R = 330;
+
+  // ---- cielo ----
+  for (var i = 0; i < 420; i++){
+    var x = azar() * W, y = azar() * H;
+    var t = 0.3 + Math.pow(azar(), 2.2) * 1.6;
+    var b = 0.15 + azar() * 0.7;
+    ctx.fillStyle = azar() < 0.5 ? rgba(ESTRELLA_FRIA, b * 0.85) : rgba(ESTRELLA_CALIDA, b * 0.7);
+    ctx.beginPath(); ctx.arc(x, y, t, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // ---- nebulosa ----
+  ctx.save();
+  ctx.translate(CX, CY);
+  ctx.scale(1, 0.62);   // aplastada como un disco visto de lado
+
+  var halo = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 0.42);
+  halo.addColorStop(0, rgba(NUCLEO_CALIDO, 0.55));
+  halo.addColorStop(0.35, rgba(NUCLEO_ORO, 0.28));
+  halo.addColorStop(1, rgba(NUCLEO_ORO, 0));
+  ctx.fillStyle = halo;
+  ctx.beginPath(); ctx.arc(0, 0, R * 0.42, 0, Math.PI * 2); ctx.fill();
+
+  for (var m = 0; m < 460; m++){
+    var brazo = m % 2;
+    var u = Math.pow(azar(), 0.7);
+    var ang = u * 5.6 + brazo * Math.PI + (azar() - 0.5) * 0.55;
+    var rad = (0.05 + u * 0.95) * R * 0.94;
+    var px = Math.cos(ang) * rad, py = Math.sin(ang) * rad;
+    var tt = (5 + azar() * 24) * (1 - u * 0.3);
+    var s = azar();
+    var col = s < 0.22 ? BRAZO_ROSADO : (s < 0.42 ? BRAZO_VIOLETA : BRAZO_AZUL);
+    var mancha = ctx.createRadialGradient(px, py, 0, px, py, tt);
+    mancha.addColorStop(0, rgba(col, 0.10 + azar() * 0.13));
+    mancha.addColorStop(1, rgba(col, 0));
+    ctx.fillStyle = mancha;
+    ctx.beginPath(); ctx.arc(px, py, tt, 0, Math.PI * 2); ctx.fill();
+  }
+
+  for (var j = 0; j < 200; j++){
+    var brazo2 = j % 2;
+    var u2 = 0.12 + Math.pow(azar(), 0.8) * 0.88;
+    var ang2 = u2 * 5.6 + brazo2 * Math.PI - 0.16 + (azar() - 0.5) * 0.22;
+    var rad2 = (0.05 + u2 * 0.95) * R * 0.94;
+    var qx = Math.cos(ang2) * rad2, qy = Math.sin(ang2) * rad2;
+    var t3 = (3 + azar() * 13) * (1 - u2 * 0.25);
+    var polvo = ctx.createRadialGradient(qx, qy, 0, qx, qy, t3);
+    polvo.addColorStop(0, rgba(POLVO, 0.16 + azar() * 0.16));
+    polvo.addColorStop(1, rgba(POLVO, 0));
+    ctx.fillStyle = polvo;
+    ctx.beginPath(); ctx.arc(qx, qy, t3, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.restore();
+
+  // ---- estrellas de la espiral ----
+  for (var k = 0; k < 1700; k++){
+    var bz = k % 2;
+    var uu = Math.pow(azar(), 0.62);
+    var a = uu * 5.6 + bz * Math.PI + (azar() - 0.5) * 0.42;
+    var rr = 0.05 + uu * 0.95;
+    var disp = (azar() - 0.5) * 0.13 * Math.sin(uu * Math.PI) + (azar() - 0.5) * 0.03;
+    var r = Math.max(0.01, rr + disp);
+
+    var tono;
+    if (r < 0.16) tono = mezclar(NUCLEO_CALIDO, NUCLEO_ORO, azar() * 0.7);
+    else if (r < 0.34) tono = mezclar(NUCLEO_ORO, BRAZO_AZUL, (r - 0.16) / 0.18);
+    else {
+      var su = azar();
+      if (su < 0.18) tono = BRAZO_ROSADO;
+      else if (su < 0.34) tono = BRAZO_VIOLETA;
+      else tono = mezclar(BRAZO_AZUL, ESTRELLA_FRIA, azar() * 0.5);
+    }
+
+    var sx = CX + Math.cos(a) * r * R;
+    var sy = CY + Math.sin(a) * r * R * 0.62;
+    var tam = (0.6 + azar() * 1.7) * 1.6;
+    var br = 0.55 + azar() * 0.45;
+    ctx.fillStyle = rgba(tono, br);
+    ctx.beginPath(); ctx.arc(sx, sy, tam, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // el núcleo, encendido
+  var nucleo = ctx.createRadialGradient(CX, CY, 0, CX, CY, 46);
+  nucleo.addColorStop(0, rgba([255, 250, 235], 0.95));
+  nucleo.addColorStop(0.35, rgba(NUCLEO_CALIDO, 0.5));
+  nucleo.addColorStop(1, rgba(NUCLEO_ORO, 0));
+  ctx.fillStyle = nucleo;
+  ctx.beginPath(); ctx.arc(CX, CY, 46, 0, Math.PI * 2); ctx.fill();
+
+  document.title = 'og-listo';
+  document.body.setAttribute('data-listo','1');
+})();
+</script>
+</body>
+</html>
