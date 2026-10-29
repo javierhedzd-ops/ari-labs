@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://javierhedzd-ops.github.io/ari-labs/sitemap.xml

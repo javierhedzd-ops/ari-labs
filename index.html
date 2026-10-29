@@ -6,12 +6,16 @@
 <title>Ari Labs · Páginas web y apps para negocios pequeños en Mérida</title>
 <meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios pequeños: un modelo adaptado a tu negocio o a la medida desde cero.">
 <meta name="theme-color" content="#0b1a21">
+<link rel="canonical" href="https://javierhedzd-ops.github.io/ari-labs/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ari Labs">
 <meta property="og:title" content="Ari Labs · Páginas web y apps para negocios pequeños">
 <meta property="og:description" content="Estudio pequeño en Mérida, Yucatán. Páginas web y apps para negocios pequeños: modelo adaptado o a la medida.">
 <meta property="og:url" content="https://javierhedzd-ops.github.io/ari-labs/">
-<meta property="og:image" content="https://javierhedzd-ops.github.io/ari-labs/og.png">
+<meta property="og:image" content="https://javierhedzd-ops.github.io/ari-labs/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Ari Labs · Páginas web y apps para negocios pequeños en Mérida">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_MX">
@@ -271,7 +275,7 @@
     font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.24em;
     text-transform:uppercase;color:var(--hielo-400);margin:0 0 2.4rem;
   }
-  .cierre h1{
+  .cierre h2{
     font-weight:300;font-size:clamp(2.7rem,11vw,4.6rem);
     line-height:1.04;letter-spacing:-.03em;margin:0;max-width:13ch;
     /* como "Ari Labs": la letra no es blanca maciza, deja pasar la galaxia.
@@ -284,14 +288,14 @@
     text-shadow:none;
     filter:drop-shadow(0 1px 6px rgba(5,9,11,.55));
   }
-  .cierre h1 em{
+  .cierre h2 em{
     font-style:italic;
     background-image:linear-gradient(180deg,rgba(158,216,238,.95),rgba(111,185,212,.55));
     -webkit-background-clip:text;background-clip:text;
     -webkit-text-fill-color:transparent;color:transparent;
   }
-  .cierre h1 span{display:block}
-  .cierre h1 .l1, .cierre h1 .l2{
+  .cierre h2 span{display:block}
+  .cierre h2 .l1, .cierre h2 .l2{
     opacity:0;transform:translateY(18px);
     transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
   }
@@ -313,11 +317,12 @@
     display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:20rem;
     margin-top:.9rem;
     /* cerradas: no ocupan sitio ni se pueden tocar */
-    max-height:0;opacity:0;overflow:hidden;pointer-events:none;
-    transition:max-height .45s cubic-bezier(.2,.9,.2,1),opacity .3s ease,margin-top .3s ease;
+    max-height:0;opacity:0;overflow:hidden;pointer-events:none;visibility:hidden;
+    transition:max-height .45s cubic-bezier(.2,.9,.2,1),opacity .3s ease,margin-top .3s ease,visibility 0s linear .45s;
   }
   .contacto.abierto .opciones{
-    max-height:20rem;opacity:1;pointer-events:auto;
+    max-height:20rem;opacity:1;pointer-events:auto;visibility:visible;
+    transition-delay:0s;
   }
   .opcion{
     display:flex;flex-direction:column;gap:.15rem;
@@ -334,6 +339,9 @@
   .opcion span{
     font-family:"Inter",sans-serif;font-size:.72rem;
     color:rgba(222,246,253,.5);overflow-wrap:anywhere;
+  }
+  .boton:focus-visible, .opcion:focus-visible, footer .legal a:focus-visible{
+    outline:2px solid var(--hielo-300);outline-offset:4px;
   }
   .opcion:active{transform:scale(.98);background:rgba(158,216,238,.14)}
   @media (hover:hover){
@@ -439,13 +447,13 @@
   }
   footer{
     background:#081116;padding:0 var(--margen) 8vh;text-align:center;
-    font-family:"Inter",sans-serif;font-size:.72rem;color:rgba(222,246,253,.35);
+    font-family:"Inter",sans-serif;font-size:.72rem;color:rgba(222,246,253,.6);
   }
   footer .legal{
     display:flex;gap:1.4rem;justify-content:center;margin-top:.9rem;
   }
   footer .legal a{
-    color:rgba(222,246,253,.45);text-decoration:none;
+    color:rgba(222,246,253,.7);text-decoration:none;
     border-bottom:1px solid rgba(158,216,238,.18);padding-bottom:.1rem;
     transition:color .2s ease,border-color .2s ease;
   }
@@ -454,7 +462,7 @@
     .punto, .escribiendo s{animation:none}
     .msg, .fila{transform:none !important}
     .boton{transition:none}
-    .cierre .rotulo, .cierre h1 span, .cierre p.sub, .cierre .boton,
+    .cierre .rotulo, .cierre h2 span, .cierre p.sub, .cierre .boton,
     .final p, .boton::after{opacity:1 !important;transform:none !important;transition:none;animation:none}
   }
 </style>
@@ -464,7 +472,9 @@
 <canvas id="galaxia" aria-hidden="true"></canvas>
 <canvas id="nombre-galaxia" aria-hidden="true"></canvas>
 
-<div class="barra chico"><b>Ari Labs</b><span>Mérida</span></div>
+<header class="barra chico"><b>Ari Labs</b><span>Mérida</span></header>
+
+<main>
 
 <!-- el aviso "Baja" ya no va: la introducción se lleva sola hasta el cierre -->
 
@@ -515,7 +525,7 @@
 <!-- ============ CIERRE ============ -->
 <section class="cierre">
   <p class="rotulo">Ari Labs</p>
-  <h1><span class="l1">Tu trabajo sigue igual.</span> <span class="l2">La forma de hacerlo, <em>no</em>.</span></h1>
+  <h2><span class="l1">Tu trabajo sigue igual.</span> <span class="l2">La forma de hacerlo, <em>no</em>.</span></h2>
   <p class="sub">Apps y webs para negocios pequeños de Mérida. Sin nube, sin mensualidades caras.</p>
 </section>
 
@@ -530,7 +540,7 @@
   <p class="texto">Puedes escoger un <b>modelo</b> de Ari Labs y lo adaptamos a tu negocio, o pedirlo <b>a la medida</b> desde cero. En los dos casos se piensa para ti: no se copia de otro.</p>
   <p class="texto">Si quieres una web o una app que se sienta tuya, escríbenos.</p>
   <div class="contacto">
-    <button class="boton" id="boton2" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="opciones2">Escríbenos</button>
+    <button class="boton" id="boton2" type="button" aria-expanded="false" aria-controls="opciones2">Escríbenos</button>
     <div class="opciones" id="opciones2">
       <a class="opcion" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">
         <b>Correo</b><span>Ari.ice.signal@gmail.com</span>
@@ -541,6 +551,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <span>Ari Labs · Mérida, Yucatán · 2026</span>
@@ -968,6 +979,14 @@
     var agarrada = false, ultimoX = 0, ultimoY = 0;
 
     function leerScroll(){
+      // ¿ya está tapada? El remate (.final) se funde a negro opaco hacia su
+      // final y debajo solo hay "Nosotros" y el pie, con fondo opaco: en
+      // cuanto el 85% del remate sale por arriba, la galaxia ya no se ve.
+      var fin = document.querySelector('.final');
+      if (fin){
+        var rf = fin.getBoundingClientRect();
+        tapada = rf.top + rf.height * 0.85 <= 0;
+      }
       var alto1 = window.innerHeight || 1;
       // el viaje dura lo que mide la sección del viaje
       // (antes 2.2 pantallas: se sentía eterno; luego 1.1: se abría de golpe.
@@ -987,6 +1006,13 @@
       // introducción lo dejaba ahí), el nombre se quedaba invisible.
       // (se llama por su nombre de ventana: aquí abajo todavía no existe)
       if (typeof window.mirarLlegada === 'function') window.mirarLlegada();
+      despertarGalaxia();
+    }
+    var tapada = false;
+    function despertarGalaxia(){
+      if (quieto || document.hidden || tapada || !visible || corriendoGalaxia) return;
+      corriendoGalaxia = true;
+      requestAnimationFrame(dibujar);
     }
 
     // ---- la voz: frases con sílabas, como si estuviera hablando ----
@@ -1034,7 +1060,10 @@
     }
 
     function dibujar(ahora){
-      if (!visible){ ultimo = ahora; return; }
+      // si no se ve (tapada por "Nosotros" y el pie, o fuera de pantalla), no
+      // se pinta: antes seguía a 60 cuadros por segundo detrás de un fondo
+      // opaco, gastando batería. leerScroll() la despierta al volver.
+      if (!visible || tapada){ ultimo = 0; corriendoGalaxia = false; return; }
       var dt = ultimo ? Math.min((ahora - ultimo) / 1000, 0.05) : 0.016;
       ultimo = ahora;
       t += dt;
@@ -1155,6 +1184,12 @@
 
           // la estela: de dónde viene hasta dónde está
           var cola = 0.06 + s2 * 0.30;
+          // si hasta la punta de la estela ya está fuera de la pantalla, toda
+          // la fugaz lo está (va en línea recta desde el centro hacia fuera):
+          // no se pinta. Al final del viaje eran cientos por cuadro.
+          var colaX = x2 - ux * salto * cola, colaY = y2 - uy * salto * cola;
+          var borde = tam2 + 2;
+          if (colaX < -borde || colaX > ancho + borde || colaY < -borde || colaY > alto + borde) continue;
           // el degradado de la estela se rehace solo si cambió de verdad
           // (antes se creaba uno nuevo por estrella y por cuadro)
           var claveEstela = Math.round(x2) + ',' + Math.round(y2) + ',' + Math.round(ux * 100) + ',' + Math.round(uy * 100) + ',' + Math.round(salto * cola) + ',' + Math.round(alfa2 * 20);
@@ -1408,15 +1443,12 @@
 
     // solo se anima cuando está en pantalla (ahorra batería)
     if (typeof IntersectionObserver === 'function'){
-      new IntersectionObserver(function(e){ visible = e[0].isIntersecting; }, {threshold: 0.05}).observe(lona);
+      new IntersectionObserver(function(e){ visible = e[0].isIntersecting; despertarGalaxia(); }, {threshold: 0.05}).observe(lona);
     }
     window.addEventListener('resize', medir);
     document.addEventListener('visibilitychange', function(){
-      if (!quieto && !document.hidden){
-        ultimo = 0;
-        corriendoGalaxia = true;
-        requestAnimationFrame(dibujar);
-      }
+      ultimo = 0;
+      despertarGalaxia();
     });
     medir();
     if (quieto){
