@@ -760,6 +760,11 @@
     var HIELO = [127, 212, 255];
     var CLARO = [214, 242, 255];
     var HONDO = [27, 111, 158];
+    // La inclinación es la de la foto: el disco en diagonal, no plano.
+    // Van aquí y no dentro de dibujar(): condensar() también las usa y, sin
+    // verlas, fallaba y el nombre de estrellas no salía nunca.
+    var INCLINA = 0.46;          // cuánto se aplasta el disco (0 = de canto)
+    var GIRO_DISCO = -0.42;      // el disco va torcido, en diagonal
     var CANTIDAD = 1500;   // antes 2600: se pintaban una por una y pesaba
 
     // ---- colores de la galaxia de verdad (como la foto de referencia) ----
@@ -994,10 +999,11 @@
       //  tiempo a apreciarla antes de llegar al nombre)
       var largo = alto1 * 3.2;
       viajeObj = Math.min(1, Math.max(0, window.scrollY / largo));
-      // el nombre se condensa en cuanto la galaxia ya está abierta del todo
-      // (antes se esperaba a bajar 1,75 pantallas: el nombre ya estaba puesto
-      //  y el gesto no se veía nunca)
-      if (viajeObj > 0.97 && !nombreHecho){
+      // el nombre se condensa al empezar a bajar, sobre la galaxia: dura unos
+      // 4 s y, si esperaba a que la galaxia estuviera abierta del todo, se
+      // formaba justo cuando subía el teléfono y quedaba tapado detrás.
+      // Solo en el primer tramo: si la página se abre ya bajada, no sale.
+      if (viajeObj > 0.03 && viajeObj < 0.4 && !nombreHecho){
         nombreHecho = true;
         condensar();
       }
@@ -1129,9 +1135,6 @@
       }
 
       // nebulosa: gira más despacio y se aplasta como el disco
-      // La inclinación es la de la foto: el disco en diagonal, no plano.
-      var INCLINA = 0.46;          // cuánto se aplasta el disco (0 = de canto)
-      var GIRO_DISCO = -0.42;      // el disco va torcido, en diagonal
       ctx.save();
       ctx.translate(centroX, centroY);
       ctx.rotate(GIRO_DISCO);
@@ -1367,7 +1370,8 @@
     var condPuntos = [];      // a dónde va cada estrella (x, y en pantalla)
     var condOrigen = [];      // de dónde sale cada una
     var COND_ENTRA = 1.1;     // s que tarda en formarse
-    var COND_QUEDA = 1.5;     // s que se queda formado
+    var COND_QUEDA = 1.0;     // s que se queda formado (antes 1.5: el teléfono
+                              // subía y lo tapaba antes de soltarse)
     var COND_SUELTA = 1.2;    // s que tarda en soltarse
 
     function puntosDelNombre(){
