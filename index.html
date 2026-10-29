@@ -1654,14 +1654,22 @@
       var t0 = 0;
       var desde = window.scrollY;
 
+      // ---- el recorrido entero, de una sola vez ----
+      // Antes eran dos trechos con un salto en medio: al acabar el primero se
+      // forzaba la página al teléfono y el segundo salía de ahí. Si el que
+      // entraba había movido la página a mano, ese salto se veía como un
+      // tirón y la animación se peleaba con el dedo. Ahora es una sola
+      // cuenta: de donde esté hasta el cierre, sin saltos ni frenos.
+      var destino = paradaCierre();
+      var recorrido = destino - desde;
+      var alto = window.innerHeight || 1;
+      // el tiempo sale del largo: siempre la misma velocidad
+      var ms = Math.max(1, (Math.abs(recorrido) / (alto * VELOCIDAD)) * 1000);
+      var t0 = 0;
+
       function paso(t){
         if (!autoCorriendo || miId !== autoId) return;
         if (!t0) t0 = t;
-        var alto = window.innerHeight || 1;
-        var fin = tramos[tramos.length - 1];
-        var recorrido = Math.max(1, fin - desde);
-        // el tiempo sale del largo: siempre la misma velocidad, sin frenos
-        var ms = (recorrido / (alto * VELOCIDAD)) * 1000;
         var p = Math.min(1, (t - t0) / ms);
         // entra suave: los primeros 900 ms acelera poco a poco, no de golpe
         var k = Math.min(1, (t - t0) / ARRANQUE);
@@ -1671,42 +1679,12 @@
         if (p < 1){
           requestAnimationFrame(paso);
         } else {
-          // el teléfono ya está puesto: se queda un momento mirándolo y
-          // sigue hasta el cierre, para que no se quede parado a medias
-          setTimeout(function(){
-            if (!autoCorriendo || miId !== autoId) return;
-            // si alguien movió la página en la pausa, se vuelve al teléfono
-            // antes de seguir: el segundo trecho sale siempre de ahí
-            window.scrollTo(0, fin);
-            // se para con el cierre a la vista (titular y "Escríbenos"), no
-            // al final del todo: de ahí para abajo baja el que quiera, que
-            // es donde va la sección "Nosotros"
-            var destino = paradaCierre();
-            // el segundo trecho se mueve aquí mismo, sin pasar por viajar():
-            // viajar() se rinde si alguien toca la pantalla, y la entrada
-            // tiene que llegar sola hasta el cierre
-            var desde2 = window.scrollY;
-            var trecho2 = destino - desde2;
-            var t2 = 0;
-            function paso2(t){
-              if (!autoCorriendo || miId !== autoId) return;
-              if (!t2) t2 = t;
-              var p2 = Math.min(1, (t - t2) / SEGUNDO);
-              // arranca y frena solo: el mismo freno de un coche
-              var suave2 = p2 < 0.5 ? 2 * p2 * p2 : 1 - Math.pow(-2 * p2 + 2, 2) / 2;
-              window.scrollTo(0, desde2 + trecho2 * suave2);
-              if (p2 < 1){
-                requestAnimationFrame(paso2);
-              } else {
-                autoCorriendo = false;
-                autoHecho = true;
-                actual = tramos.length;
-                empujon = 0;
-                soltar();
-              }
-            }
-            requestAnimationFrame(paso2);
-          }, PAUSA);
+          window.scrollTo(0, destino);
+          autoCorriendo = false;
+          autoHecho = true;
+          actual = tramos.length;
+          empujon = 0;
+          soltar();
         }
       }
       requestAnimationFrame(paso);
@@ -1719,6 +1697,10 @@
 
     function soltar(){
       suelto = true;
+      // si la introducción se corta a medias, no puede seguir pintando: si no,
+      // se pelea con el dedo y la página se va sola
+      autoCorriendo = false;
+      autoId++;
       document.documentElement.classList.remove('recorriendo');
       // al soltarse, todo queda cargado: el chat completo se queda puesto
       // aunque se suba, y no se vuelve a armar
@@ -1731,6 +1713,9 @@
       // mientras corre la introducción no hay tope: la página la mueve ella
       // sola y el tope solo la devolvía, y eso se veía como un rebote
       if (suelto || autoCorriendo) return;
+      // si el que entra mueve la página a mano, manda él: se suelta del todo
+      // (antes se le devolvía al tramo y se sentía como un tirón)
+      if (window.scrollY > tramos[tramos.length - 1] + 2){ soltar(); return; }
       var techo = actual === 0 ? 0 : tramos[actual - 1];
       if (window.scrollY < techo - 2) window.scrollTo(0, techo);
     }
@@ -1810,6 +1795,11 @@
       if (!suelto) topar();
     }, {passive:true});
 
+    // ---- si la página se abre ya bajada, no se le encima ----
+    // (recargar a media bajada, volver con el botón de atrás, un enlace con
+    //  #nosotros...): la introducción solo corre desde arriba del todo
+    if (window.scrollY > 4) soltar();
+
     // ---- el botón "Baja" del teléfono también cuenta como empujón ----
     // (el de la primera pantalla se quitó: la introducción se lleva sola)
     ['bajaChatBoton'].forEach(function(id){
@@ -1821,7 +1811,7 @@
       });
     });
 
-    document.documentElement.classList.add('recorriendo');
+    if (!suelto) document.documentElement.classList.add('recorriendo');
     medir();
     // la introducción arranca en cuanto se abre la página, sin esperas:
     // las letras se miden otra vez cuando llegan y el viaje se ajusta solo
@@ -1869,7 +1859,13 @@
       suelta = setTimeout(function(){ frenando = false; }, 1100);
     }
 
+    // Este freno es de una versión vieja del recorrido (cuando había paradas).
+    // Ahora la introducción corre sola y, si el que entra mueve la página a
+    // mano, manda él: devolverlo a la parada era justo lo que se sentía como
+    // un tirón. Se deja apagado.
+    var FRENO_VIEJO = false;
     window.addEventListener('scroll', function(){
+      if (!FRENO_VIEJO) return;
       if (frenando){
         // mientras frena, si intenta pasar, se le aguanta sin tirones
         if (window.scrollY > PARADA + 4){
@@ -1882,10 +1878,10 @@
 
     // si suelta el dedo justo antes, también se frena
     window.addEventListener('touchend', function(){
-      setTimeout(frenar, 60);
+      if (FRENO_VIEJO) setTimeout(frenar, 60);
     }, {passive:true});
     window.addEventListener('wheel', function(){
-      setTimeout(frenar, 60);
+      if (FRENO_VIEJO) setTimeout(frenar, 60);
     }, {passive:true});
 
     // ---- el viaje suave: de aquí a allá, sin saltos ----
