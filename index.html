@@ -48,7 +48,7 @@
     transition:opacity .25s ease;
   }
   /* todo lo demás va por encima: la galaxia es solo fondo */
-  body > *:not(#galaxia):not(#nombre-galaxia):not(.baja-ya){position:relative;z-index:1}
+  body > *:not(#galaxia):not(#nombre-galaxia){position:relative;z-index:1}
   .viaje, .escena, .final{background:transparent}
   /* el cierre va en la paleta ice: fondo noche, letra clara (antes era papel) */
   footer{background:#081116}
@@ -237,53 +237,6 @@
   .telf .pantalla > *{transition:opacity .45s ease}
   /* C: el chat entra solo */
   .telf.quieto{transform:scale(1) !important;opacity:1 !important}
-
-  /* ---------- el señalamiento de bajar (primera pantalla) ---------- */
-  .baja-ya{
-    position:fixed;left:50%;bottom:2.2rem;transform:translateX(-50%);
-    z-index:40;display:flex;flex-direction:column;align-items:center;gap:.7rem;
-    font-size:.82rem;letter-spacing:.30em;text-transform:uppercase;
-    color:var(--hielo-400);pointer-events:none;
-    transition:opacity .6s ease, transform .6s ease;
-  }
-  /* el aviso de bajar también se puede tocar: lleva al nombre sin prisa */
-  .baja-ya button{
-    pointer-events:auto;cursor:pointer;
-    background:none;border:0;padding:.6rem 1rem;margin:0;
-    font:inherit;letter-spacing:inherit;text-transform:inherit;
-    color:inherit;display:flex;flex-direction:column;align-items:center;gap:.7rem;
-    -webkit-tap-highlight-color:transparent;
-  }
-  /* el espacio de la última letra (letter-spacing) empuja el texto a la
-     izquierda y la flechita quedaba descuadrada: se le devuelve a mano */
-  .baja-ya button > span{
-    display:block;margin-right:-.30em;line-height:1;
-  }
-  .baja-ya button:focus-visible{outline:1px solid var(--hielo-400);outline-offset:6px;border-radius:4px}
-  .baja-ya i{
-    display:block;width:1.5px;height:3.2rem;
-    background:linear-gradient(var(--hielo-400),transparent);
-    animation:respira 2.2s ease-in-out infinite;
-  }
-  .baja-ya i::after{
-    content:"";display:block;width:5px;height:5px;
-    /* el cuadrado girado 45° mide 7,07 px de ancho: se corre 1 px para que
-       su punta caiga justo en el eje de la línea */
-    margin:-1px auto 0;position:relative;left:1px;
-    border-right:1px solid var(--hielo-400);border-bottom:1px solid var(--hielo-400);
-    transform:rotate(45deg);
-  }
-  @keyframes respira{
-    0%,100%{opacity:.25;transform:translateY(0)}
-    50%{opacity:1;transform:translateY(6px)}
-  }
-  .baja-ya.fuera{opacity:0;transform:translate(-50%,10px)}
-  /* el segundo aviso nace escondido: solo sale cuando el teléfono ya está puesto */
-  #bajaChat{opacity:0;transform:translate(-50%,10px)}
-  #bajaChat.sale{opacity:1;transform:translateX(-50%)}
-  /* la introducción se lleva sola hasta el cierre: los avisos "Baja" no
-     salen mientras corre (ni el de arriba ni el del teléfono) */
-  html.recorriendo .baja-ya{opacity:0 !important;pointer-events:none !important}
 
   /* pista de scroll */
   .pista{
@@ -561,14 +514,6 @@
     <div class="pista chico" id="pista">Baja</div>
   </div>
 </section>
-
-<!-- el segundo paso: del teléfono al chat, sin que el dedo tenga que pelearse -->
-<div class="baja-ya chico" id="bajaChat">
-  <button type="button" id="bajaChatBoton" aria-label="Bajar al chat del teléfono">
-    <span>Baja</span>
-    <i></i>
-  </button>
-</div>
 
 <!-- ============ CIERRE ============ -->
 <section class="cierre">
@@ -1813,16 +1758,8 @@
     //  #nosotros...): la introducción solo corre desde arriba del todo
     if (window.scrollY > 4) soltar();
 
-    // ---- el botón "Baja" del teléfono también cuenta como empujón ----
-    // (el de la primera pantalla se quitó: la introducción se lleva sola)
-    ['bajaChatBoton'].forEach(function(id){
-      var b = document.getElementById(id);
-      if (b) b.addEventListener('click', function(){
-        // a media introducción el botón no hace nada: la entrada se termina
-        if (autoCorriendo) return;
-        empujar(1e9);
-      });
-    });
+    // (los avisos "Baja" se quitaron: la introducción se lleva sola y el
+    //  dedo manda; ya no hacen falta)
 
     if (!suelto) document.documentElement.classList.add('recorriendo');
     medir();
@@ -1934,38 +1871,7 @@
       }, {passive:true});
     });
 
-    var boton2 = document.getElementById('bajaChatBoton');
-    var aviso2 = document.getElementById('bajaChat');
-
-    // 2) al teléfono: donde ya está puesto y se ve entero
-    if (boton2) boton2.addEventListener('click', function(){
-      if (autoCorriendo) return;   // la introducción se termina sola
-      var r = escena.getBoundingClientRect();
-      var arriba = window.scrollY + r.top;
-      viajar(arriba + (escena.offsetHeight - window.innerHeight) * 0.06, 1800);
-    });
-
-    // el segundo aviso sale cuando el teléfono ya está en su sitio y se va
-    // cuando el chat empieza a armarse (no antes: si no, se queda pegado).
-    // Y solo mientras se baja: al subir de vuelta a la galaxia no tiene
-    // sentido que aparezca (Javi lo vio salir ahí).
-    var ultimoY = window.scrollY;
-    function mirarAviso2(){
-      if (!aviso2) return;
-      var y = window.scrollY;
-      var bajando = y > ultimoY + 0.5;
-      var subiendo = y < ultimoY - 0.5;
-      ultimoY = y;
-      var r = escena.getBoundingClientRect();
-      var total = escena.offsetHeight - window.innerHeight;
-      var av = Math.min(1, Math.max(0, -r.top / total));
-      var enZona = av > 0.02 && av < 0.22;
-      if (subiendo) aviso2.classList.remove('sale');
-      else if (bajando && enZona) aviso2.classList.add('sale');
-      else if (!enZona) aviso2.classList.remove('sale');
-    }
-    window.addEventListener('scroll', mirarAviso2, {passive:true});
-    mirarAviso2();
+    // (el aviso "Baja" del teléfono se quitó: ya no hace falta)
   })();
 })();
 </script>
