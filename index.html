@@ -6,6 +6,7 @@
 <title>Ari Labs · Páginas web y apps para negocios pequeños en Mérida</title>
 <meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios pequeños: un modelo adaptado a tu negocio o a la medida desde cero.">
 <meta name="theme-color" content="#0b1a21">
+<meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://javierhedzd-ops.github.io/ari-labs/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -20,6 +21,14 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_MX">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Ari Labs",
+ "url":"https://javierhedzd-ops.github.io/ari-labs/","image":"https://javierhedzd-ops.github.io/ari-labs/og.jpg",
+ "description":"Estudio pequeño en Mérida, Yucatán. Páginas web y apps para negocios pequeños: modelo adaptado o a la medida.",
+ "email":"Ari.ice.signal@gmail.com",
+ "address":{"@type":"PostalAddress","addressLocality":"Mérida","addressRegion":"Yucatán","addressCountry":"MX"},
+ "areaServed":"Mérida, Yucatán"}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -242,19 +251,6 @@
   @keyframes sube{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-3px);opacity:1}}
 
 
-  /* ---------- variantes de la entrada del teléfono (prueba) ---------- */
-  .telf{transform-origin:50% 50%}
-  /* B: la pantalla se enciende */
-  .telf .pantalla::after{
-    content:"";position:absolute;inset:0;background:#05090b;
-    opacity:0;pointer-events:none;z-index:9;
-  }
-  .telf.apagado .pantalla::after{opacity:1}
-  .telf.apagado .pantalla > *{opacity:0}
-  .telf .pantalla > *{transition:opacity .45s ease}
-  /* C: el chat entra solo */
-  .telf.quieto{transform:scale(1) !important;opacity:1 !important}
-
   /* ---------- cierre ---------- */
   /* Paleta ice: fondo noche, letra clara, azul hielo en lo que importa.
      Nace de la galaxia: el fondo se aclara desde arriba, sin corte seco. */
@@ -440,6 +436,14 @@
   .nosotros.visto .texto:nth-of-type(2){opacity:1;transform:none;transition-delay:.26s}
   .nosotros.visto .texto:nth-of-type(3){opacity:1;transform:none;transition-delay:.36s}
   .nosotros.visto .contacto{opacity:1;transform:none;transition-delay:.46s}
+  /* teléfonos de 320 px: el chat no cabía en la pantalla del teléfono y se
+     cortaba el último mensaje */
+  @media (max-width:340px){
+    .chat{gap:.4rem;padding:.7rem .7rem .8rem}
+    .msg{font-size:.6rem;padding:.45rem .6rem}
+    .lista{gap:.25rem}
+    .fila{font-size:.54rem;padding:.35rem .5rem}
+  }
   @media (prefers-reduced-motion: reduce){
     .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
       opacity:1 !important;transform:none !important;transition:none;
@@ -466,6 +470,15 @@
     .final p, .boton::after{opacity:1 !important;transform:none !important;transition:none;animation:none}
   }
 </style>
+<noscript><style>
+  /* sin JavaScript no hay animaciones: que todo se vea */
+  .msg, .fila, .escribiendo, .telf, .cierre .rotulo, .cierre h2 span, .cierre p.sub,
+  .final p, .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
+    opacity:1 !important;transform:none !important;
+  }
+  .opciones{max-height:none;opacity:1;visibility:visible;pointer-events:auto}
+  .boton{display:none}
+</style></noscript>
 </head>
 <body>
 
@@ -490,12 +503,12 @@
 
 <section class="escena" id="escena">
   <div class="fija">
-    <div class="halo"></div>
+    <div class="halo" aria-hidden="true"></div>
 
     <div class="telf" id="telf">
       <div class="pantalla">
         <div class="muesca"></div>
-        <div class="estado chico"><span>8:14</span><span>▮▮▮</span></div>
+        <div class="estado chico" aria-hidden="true"><span>8:14</span><span>▮▮▮</span></div>
         <div class="cabecera">
           <span class="punto"></span>
           <span>Ari · en línea</span>
@@ -514,7 +527,7 @@
           </div>
 
           <div class="msg yo" data-paso="8">Oye, ¿y tú qué quieres hacer?</div>
-          <div class="escribiendo" data-paso="9"><s></s><s></s><s></s></div>
+          <div class="escribiendo" data-paso="9" aria-hidden="true"><s></s><s></s><s></s></div>
         </div>
       </div>
     </div>
@@ -1063,6 +1076,9 @@
       cieloListo = false;
       pintarCielo();
       leerScroll();
+      // cambiar el tamaño de la lona la borra: si la galaxia está quieta
+      // ("reducir movimiento") nadie la volvía a pintar y se quedaba negra
+      if (quieto && nebulosaLista) dibujar(performance.now());
     }
 
     function dibujar(ahora){
@@ -1499,49 +1515,10 @@
   pintar();
 
 
-  // ---- variante de la entrada del teléfono (prueba A / B / C) ----
+  // para las fotos de prueba: ?y=1234 abre la página a esa altura
   (function(){
-    var q = new URLSearchParams(location.search);
-    // para las fotos de prueba: saltar a una altura concreta
-    if (q.get('y')){ setTimeout(function(){ window.scrollTo(0, parseInt(q.get('y'),10) || 0); }, 300); }
-    var modo = (q.get('t') || 'a').toLowerCase();
-    if (modo === 'a') return;                 // A es lo que ya hay
-
-    var pantalla = telf.querySelector('.pantalla');
-    var hijos = Array.prototype.slice.call(pantalla.children);
-
-    if (modo === 'b'){
-      // B: el teléfono ya está en su sitio, apagado; la pantalla se enciende
-      telf.classList.add('apagado');
-      var encendido = false;
-      var mirar = setInterval(function(){
-        var r = escena.getBoundingClientRect();
-        var total = escena.offsetHeight - window.innerHeight;
-        var av = Math.min(1, Math.max(0, -r.top / total));
-        if (!encendido && av > 0.30){
-          encendido = true;
-          telf.classList.remove('apagado');
-          clearInterval(mirar);
-        }
-      }, 120);
-      // el teléfono no crece: aparece ya puesto
-      telf.style.transform = 'scale(1)';
-      telf.style.opacity = '1';
-      mTelf.v = 1; mTelf.destino = 1; mTelf.vel = 0;
-      var pasoOriginal = mTelf.paso.bind(mTelf);
-      mTelf.paso = function(){ return false; };
-      mTelf.ir = function(){};
-    }
-
-    if (modo === 'c'){
-      // C: el teléfono quieto y el chat cayendo solo
-      telf.classList.add('quieto');
-      mTelf.v = 1; mTelf.destino = 1; mTelf.vel = 0;
-      mTelf.paso = function(){ return false; };
-      mTelf.ir = function(){};
-      telf.style.transform = 'scale(1)';
-      telf.style.opacity = '1';
-    }
+    var y = new URLSearchParams(location.search).get('y');
+    if (y){ setTimeout(function(){ window.scrollTo(0, parseInt(y, 10) || 0); }, 300); }
   })();
 
   // ---- el recorrido obligatorio ----
@@ -1576,7 +1553,10 @@
         arribaEscena + largoEscena * 0.06,            // 2) el teléfono puesto
         arribaEscena + largoEscena * 0.92             // 3) el chat armado
       ];
-      if (suelto) return;
+      // mientras la introducción corre sola, no se recoloca nada: al llegar
+      // el evento "load" o al cambiar el alto (la barra del navegador del
+      // móvil) la página saltaba hacia atrás en medio de la entrada
+      if (suelto || autoCorriendo) return;
       // si la página se recargó a media bajada, se coloca en su tramo
       var y = window.scrollY;
       actual = 0;
@@ -1680,6 +1660,9 @@
       // al soltarse, todo queda cargado: el chat completo se queda puesto
       // aunque se suba, y no se vuelve a armar
       document.documentElement.classList.add('contada');
+      // ya no hace falta frenar la rueda: si se queda puesto, el navegador
+      // espera a este código en cada giro y el scroll va a tirones
+      window.removeEventListener('wheel', rueda, {passive:false});
     }
 
     // el tope: no deja pasar del tramo actual
@@ -1751,14 +1734,15 @@
     // ---- la rueda del ratón ----
     // se frena el scroll nativo: si no, el navegador baja por su cuenta y el
     // tope lo devuelve, y se ve un rebote
-    window.addEventListener('wheel', function(e){
+    function rueda(e){
       // la rueda también corta la introducción
       if (autoCorriendo) soltar();
       if (suelto) return;
       e.preventDefault();
       if (e.deltaY > 0) empujar(e.deltaY);
       topar();
-    }, {passive:false});
+    }
+    window.addEventListener('wheel', rueda, {passive:false});
 
     // ---- el teclado ----
     window.addEventListener('keydown', function(e){
@@ -1798,104 +1782,6 @@
     window.addEventListener('orientationchange', function(){ setTimeout(function(){ if (!suelto) medir(); }, 250); });
   })();
 
-  // ---- las tres paradas del recorrido ----
-  // 1) el nombre de Ari Labs, llegando suave para ver la galaxia
-  // 2) el teléfono ya puesto
-  // 3) el chat, que se arma solo hasta el cierre
-  // Cada aviso "Baja" se puede tocar y lleva a la parada siguiente sin
-  // pelearse con el dedo. Si el que baja quiere ir a su aire, manda él.
-  (function(){
-    var alto1 = window.innerHeight || 1;
-    var PARADA = alto1 * 1.75;      // donde el nombre ya está puesto
-    var yaParo = false;
-    var frenando = false;
-    var suelta = 0;
-
-    // lleva la página a la parada sin saltar: poco a poco, frenando
-    function llevar(desde){
-      var falta = PARADA - desde;
-      if (Math.abs(falta) < 1){ window.scrollTo(0, PARADA); return; }
-      // arranca rápido y va soltando, como un freno de verdad
-      var paso = falta * 0.18;
-      if (Math.abs(paso) < 0.6) paso = falta > 0 ? 0.6 : -0.6;
-      window.scrollTo(0, desde + paso);
-      requestAnimationFrame(function(){ llevar(desde + paso); });
-    }
-
-    function frenar(){
-      if (yaParo || frenando) return;
-      if (window.scrollY < PARADA - 2) return;
-      frenando = true;
-      yaParo = true;
-      llevar(window.scrollY);
-      // se queda quieta un momento y luego se suelta sola
-      suelta = setTimeout(function(){ frenando = false; }, 1100);
-    }
-
-    // Este freno es de una versión vieja del recorrido (cuando había paradas).
-    // Ahora la introducción corre sola y, si el que entra mueve la página a
-    // mano, manda él: devolverlo a la parada era justo lo que se sentía como
-    // un tirón. Se deja apagado.
-    var FRENO_VIEJO = false;
-    window.addEventListener('scroll', function(){
-      if (!FRENO_VIEJO) return;
-      if (frenando){
-        // mientras frena, si intenta pasar, se le aguanta sin tirones
-        if (window.scrollY > PARADA + 4){
-          window.scrollTo(0, PARADA);
-        }
-        return;
-      }
-      frenar();
-    }, {passive:true});
-
-    // si suelta el dedo justo antes, también se frena
-    window.addEventListener('touchend', function(){
-      if (FRENO_VIEJO) setTimeout(frenar, 60);
-    }, {passive:true});
-    window.addEventListener('wheel', function(){
-      if (FRENO_VIEJO) setTimeout(frenar, 60);
-    }, {passive:true});
-
-    // ---- el viaje suave: de aquí a allá, sin saltos ----
-    var viajando = false;
-    var viajeId = 0;
-    function viajar(destino, ms, alLlegar){
-      // si ya hay un viaje en marcha, el nuevo manda (el viejo se rinde)
-      viajando = true;
-      var miId = ++viajeId;
-      var desde = window.scrollY;
-      var trecho = destino - desde;
-      var t0 = 0;
-      function paso(t){
-        // si el que baja tocó la pantalla, el viaje se rinde y manda él
-        if (miId !== viajeId || !viajando) return;
-        if (!t0) t0 = t;
-        var p = Math.min(1, (t - t0) / ms);
-        // arranca y frena solo: el mismo freno de un coche
-        var suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-        window.scrollTo(0, desde + trecho * suave);
-        if (p < 1){
-          requestAnimationFrame(paso);
-        } else {
-          viajando = false;
-          if (alLlegar) alLlegar();
-        }
-      }
-      requestAnimationFrame(paso);
-    }
-
-    // si el que baja toca la pantalla, el viaje se corta y manda él
-    // (menos durante la introducción: esa se termina sola)
-    ['touchstart','wheel'].forEach(function(ev){
-      window.addEventListener(ev, function(){
-        if (autoCorriendo) return;
-        if (viajando){ viajando = false; viajeId++; }
-      }, {passive:true});
-    });
-
-    // (el aviso "Baja" del teléfono se quitó: ya no hace falta)
-  })();
 })();
 </script>
 </body>
