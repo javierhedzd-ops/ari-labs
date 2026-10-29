@@ -1148,7 +1148,17 @@
       if (cieloListo){
         var fuga = 1 + tiempo * 0.35;
         var wC = ancho * fuga, hC = alto * fuga;
-        ctx.drawImage(cieloLona, centroX - wC / 2, centroY - hC / 2, wC, hC);
+        // el cielo se estira desde el centro: al subir, el borde de la lona
+        // entra en pantalla y se veía una franja oscura abajo. Se pinta la
+        // lona repetida alrededor (solo cuando hace falta) y no hay borde.
+        var x0 = centroX - wC / 2, y0 = centroY - hC / 2;
+        var izq = Math.ceil(Math.max(0, -x0) / wC), der = Math.ceil(Math.max(0, x0 + wC - ancho) / wC);
+        var arr = Math.ceil(Math.max(0, -y0) / hC), aba = Math.ceil(Math.max(0, y0 + hC - alto) / hC);
+        for (var fy = -arr; fy <= aba; fy++){
+          for (var fx = -izq; fx <= der; fx++){
+            ctx.drawImage(cieloLona, x0 + fx * wC, y0 + fy * hC, wC, hC);
+          }
+        }
       }
 
       // nebulosa: gira más despacio y se aplasta como el disco
