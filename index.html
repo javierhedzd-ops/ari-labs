@@ -1946,13 +1946,23 @@
     });
 
     // el segundo aviso sale cuando el teléfono ya está en su sitio y se va
-    // cuando el chat empieza a armarse (no antes: si no, se queda pegado)
+    // cuando el chat empieza a armarse (no antes: si no, se queda pegado).
+    // Y solo mientras se baja: al subir de vuelta a la galaxia no tiene
+    // sentido que aparezca (Javi lo vio salir ahí).
+    var ultimoY = window.scrollY;
     function mirarAviso2(){
       if (!aviso2) return;
+      var y = window.scrollY;
+      var bajando = y > ultimoY + 0.5;
+      var subiendo = y < ultimoY - 0.5;
+      ultimoY = y;
       var r = escena.getBoundingClientRect();
       var total = escena.offsetHeight - window.innerHeight;
       var av = Math.min(1, Math.max(0, -r.top / total));
-      aviso2.classList.toggle('sale', av > 0.02 && av < 0.22);
+      var enZona = av > 0.02 && av < 0.22;
+      if (subiendo) aviso2.classList.remove('sale');
+      else if (bajando && enZona) aviso2.classList.add('sale');
+      else if (!enZona) aviso2.classList.remove('sale');
     }
     window.addEventListener('scroll', mirarAviso2, {passive:true});
     mirarAviso2();
