@@ -3,7 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portada · Ari Labs</title>
+<title>Ari Labs · Páginas web y apps para negocios pequeños en Mérida</title>
+<meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios pequeños: un modelo adaptado a tu negocio o a la medida desde cero.">
+<meta name="theme-color" content="#0b1a21">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ari Labs">
+<meta property="og:title" content="Ari Labs · Páginas web y apps para negocios pequeños">
+<meta property="og:description" content="Estudio pequeño en Mérida, Yucatán. Páginas web y apps para negocios pequeños: modelo adaptado o a la medida.">
+<meta property="og:url" content="https://javierhedzd-ops.github.io/ari-labs/">
+<meta property="og:image" content="https://javierhedzd-ops.github.io/ari-labs/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_MX">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -89,11 +101,12 @@
     padding:0 var(--margen) 14vh;
     pointer-events:none;
   }
+  /* el nombre se ve desde la primera pantalla: antes esperaba a bajar 1,75
+     pantallas y quien entraba no sabía de qué iba la web */
   .llegada{
-    opacity:0;transform:translateY(24px);
+    opacity:1;transform:none;
     transition:opacity .8s ease, transform .8s ease;
   }
-  .llegada.llega{opacity:1;transform:none}
   .marca{
     font-weight:300;font-size:clamp(3.4rem,17vw,7rem);
     line-height:.9;letter-spacing:-.045em;margin:0;
@@ -237,21 +250,6 @@
   .telf .pantalla > *{transition:opacity .45s ease}
   /* C: el chat entra solo */
   .telf.quieto{transform:scale(1) !important;opacity:1 !important}
-
-  /* pista de scroll */
-  .pista{
-    position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);
-    font-family:"Inter",sans-serif;font-size:.6rem;letter-spacing:.22em;
-    text-transform:uppercase;color:var(--hielo-500);
-    display:flex;flex-direction:column;align-items:center;gap:.5rem;
-    transition:opacity .4s ease;
-  }
-  .pista::after{
-    content:"";width:1px;height:2rem;
-    background:linear-gradient(var(--hielo-500),transparent);
-    animation:baja 1.8s ease-in-out infinite;
-  }
-  @keyframes baja{0%,100%{opacity:.2;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
 
   /* ---------- cierre ---------- */
   /* Paleta ice: fondo noche, letra clara, azul hielo en lo que importa.
@@ -453,7 +451,7 @@
   }
   footer .legal a:hover{color:var(--hielo-300);border-color:rgba(158,216,238,.5)}
   @media (prefers-reduced-motion: reduce){
-    .punto, .pista::after, .escribiendo s{animation:none}
+    .punto, .escribiendo s{animation:none}
     .msg, .fila{transform:none !important}
     .boton{transition:none}
     .cierre .rotulo, .cierre h1 span, .cierre p.sub, .cierre .boton,
@@ -511,7 +509,6 @@
       </div>
     </div>
 
-    <div class="pista chico" id="pista">Baja</div>
   </div>
 </section>
 
@@ -557,7 +554,6 @@
 (function(){
   var escena = document.getElementById('escena');
   var telf   = document.getElementById('telf');
-  var pista  = document.getElementById('pista');
   var fija   = escena.querySelector('.fija');
   var pasos  = Array.prototype.slice.call(document.querySelectorAll('[data-paso]'));
   var ultimo = 0;
@@ -582,7 +578,6 @@
   };
 
   var mTelf   = new Muelle(0, 90, 30);    // 0 = chico, 1 = grande (sin rebote)
-  var mPista  = new Muelle(1, 200, 30);
 
   // ---- los mensajes: cada uno con su propio muelle ----
   var items = pasos.map(function(el){
@@ -628,10 +623,6 @@
       telf.style.opacity = suave > 0.01 ? 1 : 0;
       sigue = true;
     }
-    if (mPista.paso(dt)){
-      pista.style.opacity = mPista.v;
-      sigue = true;
-    }
     items.forEach(function(it){
       var a = it.y.paso(dt), b = it.o.paso(dt);
       if (a || b){
@@ -669,7 +660,6 @@
 
     // el teléfono ya está puesto: no crece ni se mueve, solo se arma el chat
     mTelf.ir(1);
-    mPista.ir(avance > 0.04 ? 0 : 1);
 
     // ---- la salida: el teléfono se va y el cierre entra encima ----
     // Antes el cambio era un corte seco: el teléfono desaparecía y de golpe
@@ -1412,19 +1402,9 @@
       condensando = true;
       if (!corriendoGalaxia){ corriendoGalaxia = true; requestAnimationFrame(dibujar); }
     }
-    var llegada = document.getElementById('llegada');
-    window.mirarLlegada = mirarLlegada;
-    function mirarLlegada(){
-      if (!llegada) return;
-      var alto1 = window.innerHeight || 1;
-      var llego = window.scrollY > alto1 * 1.75;
-      llegada.classList.toggle('llega', llego);
-    }
-    var pedidoLlegada = false;
-    window.addEventListener('scroll', function(){
-      if (!pedidoLlegada){ pedidoLlegada = true; requestAnimationFrame(function(){ pedidoLlegada = false; mirarLlegada(); }); }
-    }, {passive:true});
-    mirarLlegada();
+    // el nombre ya no se esconde: se ve desde el principio (ver .llegada en el
+    // CSS). Se deja la función vacía porque leerScroll() la llama.
+    window.mirarLlegada = function(){};
 
     // solo se anima cuando está en pantalla (ahorra batería)
     if (typeof IntersectionObserver === 'function'){
@@ -1648,10 +1628,11 @@
       requestAnimationFrame(paso);
     }
 
-    // ---- la introducción no se corta ----
-    // Es la entrada, no un vídeo: si el que entra toca o mueve la rueda a
-    // media, no pasa nada, la introducción sigue hasta el final. Cuando
-    // termina, la página se suelta y ya se baja y se sube normal.
+    // ---- la introducción se puede cortar ----
+    // Antes no se podía: si a alguien le tardaba o se le trababa, se quedaba
+    // mirando la galaxia sin poder hacer nada. Ahora, si toca la pantalla o
+    // mueve la rueda a media, la introducción se rinde y manda el dedo.
+    // (Javi, 28/10: la entrada no puede secuestrar el scroll.)
 
     function soltar(){
       suelto = true;
@@ -1680,8 +1661,9 @@
 
     // un empujón del dedo o de la rueda
     function empujar(cuanto){
-      // a media introducción el dedo no manda: la entrada se termina sola
-      if (suelto || autoCorriendo || cuanto <= 0) return;
+      // a media introducción, el primer empujón la corta y manda el dedo
+      if (autoCorriendo) soltar();
+      if (suelto || cuanto <= 0) return;
       var techo = actual === 0 ? 0 : tramos[actual - 1];
       var fin = tramos[actual];
       var largo = Math.max(1, fin - techo);
@@ -1709,6 +1691,8 @@
     // ---- el dedo ----
     var yTocado = 0, tocando = false;
     window.addEventListener('touchstart', function(e){
+      // tocar la pantalla corta la introducción: manda el dedo
+      if (autoCorriendo) soltar();
       if (suelto) return;
       tocando = true;
       yTocado = e.touches[0].clientY;
@@ -1732,6 +1716,8 @@
     // se frena el scroll nativo: si no, el navegador baja por su cuenta y el
     // tope lo devuelve, y se ve un rebote
     window.addEventListener('wheel', function(e){
+      // la rueda también corta la introducción
+      if (autoCorriendo) soltar();
       if (suelto) return;
       e.preventDefault();
       if (e.deltaY > 0) empujar(e.deltaY);
@@ -1740,6 +1726,7 @@
 
     // ---- el teclado ----
     window.addEventListener('keydown', function(e){
+      if (autoCorriendo) soltar();
       if (suelto) return;
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'End'){
         e.preventDefault();
