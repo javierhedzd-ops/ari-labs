@@ -1012,14 +1012,8 @@
       //  tiempo a apreciarla antes de llegar al nombre)
       var largo = alto1 * 3.2;
       viajeObj = Math.min(1, Math.max(0, window.scrollY / largo));
-      // el nombre se condensa al empezar a bajar, sobre la galaxia: dura unos
-      // 4 s y, si esperaba a que la galaxia estuviera abierta del todo, se
-      // formaba justo cuando subía el teléfono y quedaba tapado detrás.
-      // Solo en el primer tramo: si la página se abre ya bajada, no sale.
-      if (viajeObj > 0.03 && viajeObj < 0.4 && !nombreHecho){
-        nombreHecho = true;
-        condensar();
-      }
+      // (el nombre hecho de estrellas se quitó: Javi, 30/10. condensar() se
+      //  deja por si vuelve, pero ya no se llama)
       // el nombre de "Ari Labs" entra al llegar a su tramo. Antes solo se
       // miraba al hacer scroll: si la página se abría ya bajada (o la
       // introducción lo dejaba ahí), el nombre se quedaba invisible.
