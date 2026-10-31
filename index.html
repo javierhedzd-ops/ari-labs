@@ -536,6 +536,23 @@
   .revela.visto > *:nth-child(3){transition-delay:.16s}
   .revela.visto > *:nth-child(4){transition-delay:.24s}
   .pantallas.revela.visto figure:nth-child(2){transform:translateY(-18px)}
+  /* ---------- teléfono: la introducción y el chat más cortos (antes ~8 pantallas solo de galaxia) ---------- */
+  @media (max-width:760px){
+    .viaje{height:140vh}
+    .escena{height:200vh}
+    .cierre{padding:12vh var(--margen) 8vh}
+    .final{padding:10vh var(--margen)}
+    .oferta, .modelos, .trabajo, .proceso{padding-top:72px}
+    .nosotros{padding-top:80px;padding-bottom:56px}
+    /* modelos: se pasan con el dedo, de lado, en vez de tres capturas largas una debajo de otra */
+    .vitrina{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * var(--margen));
+      padding:0 var(--margen) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .vitrina::-webkit-scrollbar{display:none}
+    .modelo{flex:0 0 78%;scroll-snap-align:start}
+    .modelo .marco{padding:10px}
+    .modelo img{aspect-ratio:4/5;object-fit:cover;object-position:top}
+  }
+
   /* ---------- con GSAP: el movimiento lo lleva movimiento.js ---------- */
   .con-gsap .revela > *{opacity:1;transform:none;transition:none}
   .final p em{font-style:normal}

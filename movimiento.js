@@ -52,6 +52,8 @@
     gsap.from(m, { y: 80, opacity: 0, duration: 1.1, ease: 'power3.out', delay: i * 0.1,
       scrollTrigger: { trigger: '.vitrina', start: 'top 80%', once: true } });
     var img = m.querySelector('img');
+    // en el teléfono los modelos van en carrusel de lado: sin paralaje dentro del marco
+    if (!window.matchMedia('(min-width: 761px)').matches) return;
     gsap.fromTo(img, { yPercent: 0 }, { yPercent: -12, ease: 'none',
       scrollTrigger: { trigger: m, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
