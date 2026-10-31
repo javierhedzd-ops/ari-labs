@@ -903,14 +903,15 @@
     document.querySelectorAll('.revela').forEach(function(el){ el.classList.add('visto'); });
   }
 
-  // ---- WhatsApp flotante: aparece después de la portada y se esconde junto al contacto ----
+  // ---- WhatsApp flotante: sale en las secciones con contenido (no tapa la galaxia ni
+  //      el titular grande) y se esconde junto al contacto ----
   var flota = document.getElementById('wa-flota');
-  var portada = document.getElementById('viaje');
+  var oferta = document.getElementById('oferta');
   var contacto = nosotros && nosotros.querySelector('.contacto');
   function mirarFlota(){
     if (!flota) return;
     var alto = window.innerHeight || 1;
-    var pasoPortada = portada ? portada.getBoundingClientRect().bottom < alto * 0.5 : true;
+    var pasoPortada = oferta ? oferta.getBoundingClientRect().top < alto * 0.6 : true;
     var r = contacto ? contacto.getBoundingClientRect() : null;
     var contactoVisible = r ? (r.top < alto && r.bottom > 0) : false;
     flota.classList.toggle('ver', pasoPortada && !contactoVisible);
