@@ -295,8 +295,8 @@
     opacity:0;transform:translateY(18px);
     transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
   }
-  .cierre.visto h1 .l1{opacity:1;transform:none;transition-delay:.16s}
-  .cierre.visto h1 .l2{opacity:1;transform:none;transition-delay:.30s}
+  .cierre.visto h2 .l1{opacity:1;transform:none;transition-delay:.16s}
+  .cierre.visto h2 .l2{opacity:1;transform:none;transition-delay:.30s}
   .cierre .rotulo, .cierre p.sub, .cierre .contacto{
     opacity:0;transform:translateY(14px);
     transition:opacity .7s cubic-bezier(.2,.9,.2,1),transform .7s cubic-bezier(.2,.9,.2,1);
@@ -345,7 +345,9 @@
   }
   .cierre p.sub{
     font-family:"Inter",sans-serif;font-size:1.05rem;line-height:1.7;
-    color:rgba(222,246,253,.62);margin:2.4rem 0 0;max-width:30ch;
+    /* encima de las estrellas: más claro y con sombra para que se lea */
+    color:rgba(222,246,253,.88);margin:2.4rem 0 0;max-width:30ch;
+    text-shadow:0 1px 2px rgba(3,6,12,.9), 0 0 18px rgba(3,6,12,.85);
   }
   .boton{
     position:relative;display:inline-block;margin-top:0;padding:1.05rem 2rem;
@@ -404,7 +406,9 @@
     background:#081116;
     color:var(--hielo-100);
     padding:14vh var(--margen) 10vh;
-    max-width:34rem;margin:0 auto;
+    /* el fondo va de lado a lado; solo el texto se queda en 34rem
+       (antes la caja era de 34rem y en compu se veía la galaxia cortada a los lados) */
+    padding-inline:max(var(--margen), calc((100% - 34rem) / 2));
   }
   .nosotros .rotulo{
     font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.24em;
@@ -1515,266 +1519,8 @@
     if (y){ setTimeout(function(){ window.scrollTo(0, parseInt(y, 10) || 0); }, 300); }
   })();
 
-  // ---- el recorrido obligatorio ----
-  // La página no deja bajar a su aire hasta que se ha visto todo: el viaje
-  // por la galaxia, el nombre, el teléfono y el chat. Cada tramo se recorre
-  // con el dedo (o la rueda) y, al llegar al final del tramo, la página se
-  // queda ahí hasta que se vuelve a empujar. Al terminar el último tramo se
-  // suelta del todo: de ahí en adelante se baja y se sube rápido.
-  // Si el sistema pide menos movimiento, no se engancha nada.
-  (function(){
-    if (quieto) return;
-
-    var viajeSec = document.getElementById('viaje');
-    var escenaSec = document.getElementById('escena');
-    if (!viajeSec || !escenaSec) return;
-
-    var tramos = [];        // dónde acaba cada tramo (en píxeles de scroll)
-    var actual = 0;         // en qué tramo va
-    var suelto = false;     // ya se vio todo: scroll libre
-    var empujon = 0;        // cuánto ha empujado dentro del tramo actual
-    var UMBRAL = 0.85;      // cuánto hay que empujar para pasar de tramo
-                            // (antes 0.55: pasaba de golpe y no se apreciaba)
-    var autoHecho = false;  // el primer tramo ya se hizo solo
-    var autoCorriendo = false;
-
-    function medir(){
-      var alto = window.innerHeight || 1;
-      var arribaEscena = window.scrollY + escenaSec.getBoundingClientRect().top;
-      var largoEscena = escenaSec.offsetHeight - alto;
-      tramos = [
-        alto * 1.75,                                  // 1) el nombre puesto
-        arribaEscena + largoEscena * 0.06,            // 2) el teléfono puesto
-        arribaEscena + largoEscena * 0.92             // 3) el chat armado
-      ];
-      // mientras la introducción corre sola, no se recoloca nada: al llegar
-      // el evento "load" o al cambiar el alto (la barra del navegador del
-      // móvil) la página saltaba hacia atrás en medio de la entrada
-      if (suelto || autoCorriendo) return;
-      // si la página se recargó a media bajada, se coloca en su tramo
-      var y = window.scrollY;
-      actual = 0;
-      while (actual < tramos.length && y > tramos[actual] + 2) actual++;
-      if (actual >= tramos.length){ soltar(); return; }
-      empujon = 0;
-      window.scrollTo(0, actual === 0 ? 0 : tramos[actual - 1]);
-    }
-
-    var autoId = 0;         // para que un viaje viejo no siga pintando
-
-    // ---- el recorrido entero se hace solo ----
-    // Entras y la página se cuenta sola: la galaxia se abre, llega el nombre,
-    // sale el teléfono y el chat se arma mensaje a mensaje. Al terminar se
-    // suelta y el dedo manda. Los tiempos son de reloj (no de scroll) para
-    // que el chat se arme solo.
-    // Un solo recorrido, sin paradas: de la galaxia cerrada al chat completo.
-    // Se mueve igual que cuando Javi bajaba con el dedo: la galaxia se abre
-    // poco a poco, llega el nombre, sale el teléfono y el chat se arma. La
-    // velocidad es pareja (píxeles por segundo), no por tramos: así no hay
-    // frenos ni escalones, y el chat se arma a su ritmo porque va pegado al
-    // scroll.
-    var VELOCIDAD = 1.05;     // pantallas por segundo (unos 5,5 s en un móvil)
-    var ARRANQUE = 900;       // ms que tarda en coger la velocidad (entra suave)
-    var PAUSA = 0;            // sin respiro: el cierre entra en cuanto acaba el chat
-    var SEGUNDO = 1000;       // ms del segundo trecho: del teléfono al cierre
-
-    // dónde se para la introducción: con el cierre entero a la vista (el
-    // titular y el botón "Escríbenos"), no al final de la página. Lo que
-    // queda debajo (el remate y el pie, y luego "Nosotros") lo baja el que
-    // quiera con el dedo.
-    function paradaCierre(){
-      var cierre = document.querySelector('.cierre');
-      var tope = document.documentElement.scrollHeight - window.innerHeight;
-      if (!cierre) return tope;
-      var arriba = window.scrollY + cierre.getBoundingClientRect().top;
-      var alto = cierre.offsetHeight;
-      // el cierre cabe en una pantalla: se para con él justo arriba
-      var y = alto <= window.innerHeight ? arriba : arriba + alto - window.innerHeight;
-      return Math.max(0, Math.min(tope, y));
-    }
-
-    function viajeSolo(){
-      if (autoHecho || autoCorriendo || suelto || actual !== 0) return;
-      // si ya se movió por su cuenta (aunque no haya tocado), no se le encima
-      if (window.scrollY > 4) return;
-      autoCorriendo = true;
-      var miId = ++autoId;
-      var t0 = 0;
-      var desde = window.scrollY;
-
-      // ---- el recorrido entero, de una sola vez ----
-      // Antes eran dos trechos con un salto en medio: al acabar el primero se
-      // forzaba la página al teléfono y el segundo salía de ahí. Si el que
-      // entraba había movido la página a mano, ese salto se veía como un
-      // tirón y la animación se peleaba con el dedo. Ahora es una sola
-      // cuenta: de donde esté hasta el cierre, sin saltos ni frenos.
-      var destino = paradaCierre();
-      var recorrido = destino - desde;
-      var alto = window.innerHeight || 1;
-      // el tiempo sale del largo: siempre la misma velocidad
-      var ms = Math.max(1, (Math.abs(recorrido) / (alto * VELOCIDAD)) * 1000);
-      var t0 = 0;
-
-      function paso(t){
-        if (!autoCorriendo || miId !== autoId) return;
-        if (!t0) t0 = t;
-        var p = Math.min(1, (t - t0) / ms);
-        // entra suave: los primeros 900 ms acelera poco a poco, no de golpe
-        var k = Math.min(1, (t - t0) / ARRANQUE);
-        var entra = k * k * (3 - 2 * k);          // curva suave de 0 a 1
-        var avance = p * entra;                   // arranca desde cero, sin tirón
-        window.scrollTo(0, desde + recorrido * Math.min(1, avance));
-        if (p < 1){
-          requestAnimationFrame(paso);
-        } else {
-          window.scrollTo(0, destino);
-          autoCorriendo = false;
-          autoHecho = true;
-          actual = tramos.length;
-          empujon = 0;
-          soltar();
-        }
-      }
-      requestAnimationFrame(paso);
-    }
-
-    // ---- la introducción se puede cortar ----
-    // Antes no se podía: si a alguien le tardaba o se le trababa, se quedaba
-    // mirando la galaxia sin poder hacer nada. Ahora, si toca la pantalla o
-    // mueve la rueda a media, la introducción se rinde y manda el dedo.
-    // (Javi, 28/10: la entrada no puede secuestrar el scroll.)
-
-    function soltar(){
-      suelto = true;
-      // si la introducción se corta a medias, no puede seguir pintando: si no,
-      // se pelea con el dedo y la página se va sola
-      autoCorriendo = false;
-      autoId++;
-      document.documentElement.classList.remove('recorriendo');
-      // al soltarse, todo queda cargado: el chat completo se queda puesto
-      // aunque se suba, y no se vuelve a armar
-      document.documentElement.classList.add('contada');
-      // ya no hace falta frenar la rueda: si se queda puesto, el navegador
-      // espera a este código en cada giro y el scroll va a tirones
-      window.removeEventListener('wheel', rueda, {passive:false});
-    }
-
-    // el tope: no deja pasar del tramo actual
-    // (con 2 px de margen: si el navegador redondea, no se pelea consigo mismo)
-    function topar(){
-      // mientras corre la introducción no hay tope: la página la mueve ella
-      // sola y el tope solo la devolvía, y eso se veía como un rebote
-      if (suelto || autoCorriendo) return;
-      // si el que entra mueve la página a mano, manda él: se suelta del todo
-      // (antes se le devolvía al tramo y se sentía como un tirón)
-      if (window.scrollY > tramos[tramos.length - 1] + 2){ soltar(); return; }
-      var techo = actual === 0 ? 0 : tramos[actual - 1];
-      if (window.scrollY < techo - 2) window.scrollTo(0, techo);
-    }
-
-    // un empujón del dedo o de la rueda
-    function empujar(cuanto){
-      // a media introducción, el primer empujón la corta y manda el dedo
-      if (autoCorriendo) soltar();
-      if (suelto || cuanto <= 0) return;
-      var techo = actual === 0 ? 0 : tramos[actual - 1];
-      var fin = tramos[actual];
-      var largo = Math.max(1, fin - techo);
-      empujon += cuanto / largo;
-      if (empujon >= UMBRAL){
-        // se pasa al tramo siguiente de un tirón suave
-        empujon = 0;
-        actual++;
-        if (actual >= tramos.length){ soltar(); return; }
-        var destino = tramos[actual - 1];
-        var desde = window.scrollY;
-        var t0 = 0;
-        var ms = 900;   // el salto de un tramo al otro, sin prisa
-        function paso(t){
-          if (!t0) t0 = t;
-          var p = Math.min(1, (t - t0) / ms);
-          var s = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-          window.scrollTo(0, desde + (destino - desde) * s);
-          if (p < 1) requestAnimationFrame(paso);
-        }
-        requestAnimationFrame(paso);
-      }
-    }
-
-    // ---- el dedo ----
-    var yTocado = 0, tocando = false;
-    window.addEventListener('touchstart', function(e){
-      // tocar la pantalla corta la introducción: manda el dedo
-      if (autoCorriendo) soltar();
-      if (suelto) return;
-      tocando = true;
-      yTocado = e.touches[0].clientY;
-    }, {passive:true});
-
-    window.addEventListener('touchmove', function(e){
-      if (suelto || !tocando) return;
-      var y = e.touches[0].clientY;
-      var delta = yTocado - y;      // sube el dedo = baja la página
-      yTocado = y;
-      if (delta > 0) empujar(delta);
-      topar();
-    }, {passive:true});
-
-    window.addEventListener('touchend', function(){
-      tocando = false;
-      topar();
-    }, {passive:true});
-
-    // ---- la rueda del ratón ----
-    // se frena el scroll nativo: si no, el navegador baja por su cuenta y el
-    // tope lo devuelve, y se ve un rebote
-    function rueda(e){
-      // la rueda también corta la introducción
-      if (autoCorriendo) soltar();
-      if (suelto) return;
-      e.preventDefault();
-      if (e.deltaY > 0) empujar(e.deltaY);
-      topar();
-    }
-    window.addEventListener('wheel', rueda, {passive:false});
-
-    // ---- el teclado ----
-    window.addEventListener('keydown', function(e){
-      if (autoCorriendo) soltar();
-      if (suelto) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'End'){
-        e.preventDefault();
-        empujar(window.innerHeight * 0.5);
-        topar();
-      }
-    });
-
-    // ---- la barra de scroll: si la arrastran, se aguanta ----
-    window.addEventListener('scroll', function(){
-      if (!suelto) topar();
-    }, {passive:true});
-
-    // ---- si la página se abre ya bajada, no se le encima ----
-    // (recargar a media bajada, volver con el botón de atrás, un enlace con
-    //  #nosotros...): la introducción solo corre desde arriba del todo
-    if (window.scrollY > 4) soltar();
-
-    // (los avisos "Baja" se quitaron: la introducción se lleva sola y el
-    //  dedo manda; ya no hacen falta)
-
-    if (!suelto) document.documentElement.classList.add('recorriendo');
-    medir();
-    // la introducción arranca en cuanto se abre la página, sin esperas:
-    // las letras se miden otra vez cuando llegan y el viaje se ajusta solo
-    viajeSolo();
-    // las letras de Google llegan después y cambian el alto: se vuelve a medir
-    if (document.fonts && document.fonts.ready){
-      document.fonts.ready.then(function(){ if (!suelto) medir(); });
-    }
-    window.addEventListener('load', function(){ if (!suelto) medir(); });
-    window.addEventListener('resize', function(){ if (!suelto) medir(); });
-    window.addEventListener('orientationchange', function(){ setTimeout(function(){ if (!suelto) medir(); }, 250); });
-  })();
+  // (El recorrido obligatorio y la bajada sola se quitaron el 31/10: la página
+  //  baja cuando el visitante quiere; el chat sigue al scroll como antes.)
 
 })();
 </script>
