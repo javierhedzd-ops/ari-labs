@@ -9,6 +9,7 @@
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://javierhedzd-ops.github.io/ari-labs/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="vendor/lenis.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ari Labs">
 <meta property="og:title" content="Ari Labs · Páginas web y apps para negocios pequeños">
@@ -535,6 +536,12 @@
   .revela.visto > *:nth-child(3){transition-delay:.16s}
   .revela.visto > *:nth-child(4){transition-delay:.24s}
   .pantallas.revela.visto figure:nth-child(2){transform:translateY(-18px)}
+  /* ---------- con GSAP: el movimiento lo lleva movimiento.js ---------- */
+  .con-gsap .revela > *{opacity:1;transform:none;transition:none}
+  .final p em{font-style:normal}
+  .pal{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+  .pal > span{display:inline-block;will-change:transform}
+
   /* ---------- WhatsApp siempre a la mano ---------- */
   .wa-flota{
     position:fixed !important;z-index:60 !important;
@@ -678,8 +685,8 @@
 <section class="trabajo" id="trabajo">
   <div class="obra">
     <div class="revela">
-      <h2>Mis citas, la agenda de un músico de eventos</h2>
-      <p class="texto">Rezos, misas, bodas y XV años. Su cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada: fecha, lugar, cobro, canciones y un aviso una hora antes.</p>
+      <h2>Mis citas</h2>
+      <p class="texto">La agenda de un músico de eventos: rezos, misas, bodas y XV años. Su cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada: fecha, lugar, cobro, canciones y un aviso una hora antes.</p>
       <p class="texto">Funciona sin internet, tiene modo claro y oscuro, y la hicimos a la medida de cómo trabaja él.</p>
     </div>
     <div class="pantallas revela">
@@ -1703,5 +1710,9 @@
 
 })();
 </script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script src="movimiento.js" defer></script>
 </body>
 </html>
