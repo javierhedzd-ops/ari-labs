@@ -1,125 +1,188 @@
 <!doctype html>
-<html lang="es-MX" class="oscura">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Modelo de barbería · Ari Labs</title>
-<meta name="description" content="Modelo de página web para barbería o estética, de Ari Labs. Negocio de ejemplo.">
+<meta name="description" content="Modelo de página web para barbería, de Ari Labs. Negocio de ejemplo.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#151517">
+<meta name="theme-color" content="#121317">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../acabado.css">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* Modelo de barbería: negro con rojo de poste de barbería (paleta escogida por Javi). */
-  :root{ --acento:#d23c3c; --acento-claro:#ff9f97; --acento-texto:#ff8b82; --sobre-acento:#fff;
-    --fondo:#111113; --fondo-2:#1c1c20; --tinta:#f2eeec; --suave:#b3aaa8 }
-  .tabla{display:grid;gap:14px;align-items:start}
-  @media (min-width:900px){ .tabla{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)} .cuenta{position:sticky;top:96px} }
-  .servicios{padding:6px}
-  .servicio{display:flex;align-items:center;gap:14px;padding:16px;border-radius:20px;cursor:pointer;transition:background .3s ease}
-  .servicio+.servicio{box-shadow:0 -1px 0 var(--linea)}
-  .servicio input{position:absolute;opacity:0;pointer-events:none}
-  .marca-s{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);transition:background .3s,box-shadow .3s}
-  .marca-s svg{width:14px;height:14px;opacity:0;color:var(--sobre-acento);transition:opacity .2s}
-  .servicio .g{flex:1;min-width:0}
-  .servicio b{display:block;font-weight:600;font-size:1.08rem;letter-spacing:-.015em}
-  .servicio small{color:var(--suave);font-size:.94rem}
-  .servicio:has(input:checked){background:color-mix(in srgb,var(--acento) 12%,transparent)}
-  .servicio input:checked + .marca-s{background:linear-gradient(135deg,var(--acento-claro),var(--acento));box-shadow:0 0 0 4px color-mix(in srgb,var(--acento) 18%,transparent)}
-  .servicio input:checked + .marca-s svg{opacity:1}
-  .servicio input:focus-visible + .marca-s{outline:2px solid var(--acento);outline-offset:3px}
-  .cuenta{padding:clamp(24px,3vw,34px)}
-  .total{font-weight:600;font-size:clamp(3rem,2rem + 3vw,4.4rem);letter-spacing:-.05em;line-height:1;margin:.7rem 0 .5rem;font-variant-numeric:tabular-nums}
-  .cuenta p{color:var(--suave);margin:0 0 1.4rem;min-height:3.2em}
-  .cuenta .boton{width:100%}
+  /* Barbería clásica · grafito y plata (escogida por Javi): marcos con doble filete, letreros centrados con
+     adornos, botones cuadrados de borde doble, tabla de precios pintada en la pared y el rojo del poste.
+     Títulos en Big Shoulders Display. */
+  :root{ --fondo:#0e0f12; --fondo-2:#1a1c21; --brillo:#2b2f36; --plata:#b9c0c9; --plata-tenue:rgba(185,192,201,.45); --rojo:#d23c3c; --rojo-osc:#a72c2c;
+    --crema:#eef0f3; --suave:#a3a9b2; --margen:clamp(18px,5vw,64px); --seco:cubic-bezier(.3,.7,.2,1); color-scheme:dark }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px;background:var(--fondo)}
+  body{margin:0;color:var(--crema);font:400 1.0625rem/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background:radial-gradient(90% 40% at 50% 0%,var(--brillo),transparent 70%) no-repeat,linear-gradient(180deg,var(--fondo-2),var(--fondo) 60%)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--plata);outline-offset:4px}
+  .letrero{font-family:"Big Shoulders Display",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:.86}
+  .aviso{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 12px;padding:8px var(--margen);border-bottom:1px solid var(--plata-tenue);color:var(--suave);font-size:.84rem}
+  .aviso a{color:var(--crema);min-height:44px;display:inline-flex;align-items:center}
+  /* botones cuadrados de borde doble */
+  .cuadro{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 22px;border:0;cursor:pointer;text-decoration:none;
+    font:800 1.05rem/1 "Big Shoulders Display",sans-serif;letter-spacing:.1em;text-transform:uppercase;background:var(--rojo);color:#fff;outline:1px solid var(--rojo);outline-offset:4px;
+    transition:background .25s,outline-offset .25s var(--seco),transform .15s}
+  .cuadro.plata{background:transparent;color:var(--crema);outline-color:var(--plata-tenue);box-shadow:inset 0 0 0 1px var(--plata)}
+  @media (hover:hover){ .cuadro:hover{outline-offset:7px} .cuadro:not(.plata):hover{background:var(--rojo-osc)} }
+  .cuadro:active{transform:scale(.98)}
+  .cuadro:focus-visible{outline:2px solid var(--crema);outline-offset:4px}
+  .cuadro[aria-disabled="true"]{opacity:.45;pointer-events:none}
+  .barra{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:8px var(--margen);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+  .barra.vidrio-b{background:rgba(14,15,18,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:var(--plata-tenue)}
+  .barra a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none;font-family:"Big Shoulders Display";font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+  .barra a:last-child{color:var(--plata)}
+  /* adorno: líneas a los lados de una palabra */
+  .orn{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--plata);font-size:.75rem;letter-spacing:.32em;text-transform:uppercase;font-weight:600}
+  .orn::before,.orn::after{content:"";width:clamp(28px,6vw,60px);height:1px;background:var(--plata)}
+  /* portada: el letrero enmarcado */
+  .portada{padding:clamp(20px,4vw,48px) var(--margen) 0}
+  .marco{max-width:880px;margin:0 auto;padding:7px;border:1px solid var(--plata)}
+  .marco>div{border:1px solid var(--plata-tenue);padding:clamp(30px,6vw,64px) clamp(18px,4vw,48px) clamp(32px,6vw,60px);text-align:center}
+  .portada h1{font-size:clamp(4.6rem,2.6rem + 10vw,10rem);margin:18px 0 14px}
+  .portada h1 span{color:var(--rojo)}
+  .portada p{margin:0 auto 28px;color:var(--suave);max-width:34ch}
+  .botones{display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+  .poste{max-width:880px;height:10px;margin:28px auto 0;background:repeating-linear-gradient(-45deg,var(--rojo) 0 10px,var(--crema) 10px 20px);background-size:200% 100%;animation:poste 6s linear infinite}
+  @keyframes poste{to{background-position:-56.6px 0}}
+  /* secciones */
+  .seccion{max-width:880px;margin:0 auto;padding:clamp(64px,10vw,120px) var(--margen) 0}
+  .seccion h2{font-size:clamp(3rem,2rem + 4vw,5rem);text-align:center;margin:16px 0 14px}
+  .seccion>p{text-align:center;color:var(--suave);max-width:40ch;margin:0 auto 34px}
+  /* la tabla de precios pintada en la pared */
+  .pared{padding:clamp(18px,3vw,30px) clamp(16px,3vw,34px);border:1px solid var(--plata-tenue);background:rgba(238,240,243,.025)}
+  .serv{display:flex;align-items:center;gap:14px;min-height:62px;padding:8px 0;cursor:pointer;border-bottom:1px dashed rgba(185,192,201,.16)}
+  .serv:last-child{border-bottom:0}
+  .serv input{position:absolute;opacity:0;pointer-events:none}
+  .caja-m{width:24px;height:24px;flex:none;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--plata);transition:background .2s,box-shadow .2s}
+  .caja-m svg{width:15px;height:15px;color:#fff;opacity:0;transform:scale(.5);transition:opacity .2s,transform .3s var(--seco)}
+  .serv input:checked+.caja-m{background:var(--rojo);box-shadow:inset 0 0 0 1.5px var(--rojo)}
+  .serv input:checked+.caja-m svg{opacity:1;transform:none}
+  .serv input:focus-visible+.caja-m{outline:2px solid var(--crema);outline-offset:3px}
+  .serv .nombre{display:flex;align-items:baseline;gap:8px;flex:0 1 auto;min-width:0;font-family:"Big Shoulders Display";font-weight:600;font-size:clamp(1.25rem,1.1rem + .6vw,1.55rem);letter-spacing:.04em;text-transform:uppercase}
+  .serv .nombre small{font-family:"Inter Tight";font-size:.8rem;letter-spacing:0;text-transform:none;color:var(--suave);white-space:nowrap}
+  .serv .puntos{flex:1;min-width:16px;border-bottom:2px dotted rgba(238,240,243,.25);translate:0 -5px}
+  .serv .precio{font-family:"Big Shoulders Display";font-weight:800;font-size:clamp(1.3rem,1.15rem + .6vw,1.6rem);color:var(--plata);font-variant-numeric:tabular-nums}
+  .serv input:checked~.precio{color:var(--crema)}
+  /* teléfono chico: el tiempo baja a su renglón; nombre, puntitos y precio quedan en la misma línea */
+  @media (max-width:430px){ .serv{align-items:flex-start;padding:12px 0} .serv .caja-m{margin-top:2px} .serv .nombre{flex-direction:column;gap:2px;line-height:1.05}
+    .serv .puntos{translate:0;margin-top:19px} .serv .precio{line-height:1.05} }
+  /* el ticket: fijo abajo mientras recorres la tabla, sin salir de su sección */
+  .ticket{position:sticky;bottom:max(14px,env(safe-area-inset-bottom));z-index:15;margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:10px 10px 10px 20px;background:rgba(18,19,23,.94);border:1px solid var(--plata);outline:1px solid var(--plata-tenue);outline-offset:3px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  .ticket small{display:block;color:var(--suave);font-size:.78rem}
+  .ticket b{font-family:"Big Shoulders Display";font-weight:800;font-size:1.8rem;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+  .ticket .cuadro{min-height:46px;padding:0 16px;font-size:.98rem;white-space:nowrap}
+  /* la casa */
+  .reglas{display:grid;gap:0;border-top:1px solid var(--plata-tenue)}
+  .regla{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;padding:22px 4px;border-bottom:1px solid var(--plata-tenue)}
+  .regla .rombo{width:10px;height:10px;rotate:45deg;background:var(--rojo);translate:0 -2px}
+  .regla b{display:block;font-family:"Big Shoulders Display";font-weight:800;font-size:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+  .regla span{color:var(--suave)}
+  /* horario en su letrero */
+  .lugar{display:grid;gap:22px}
+  @media (min-width:760px){ .lugar{grid-template-columns:1fr 1fr} }
+  .lugar .marco{margin:0;width:100%}
+  .lugar .marco>div{text-align:left;padding:26px;height:100%}
+  .lugar p{margin:0 0 20px;color:var(--suave)}
+  dl{margin:0}
+  dl div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed rgba(185,192,201,.16);font-variant-numeric:tabular-nums}
+  dl div:last-child{border-bottom:0}
+  dt{font-family:"Big Shoulders Display";font-weight:600;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase}
+  dd{margin:0;color:var(--suave)}
+  .seccion>.nota{text-align:center;color:var(--suave);font-size:.9rem;margin:30px auto 0;max-width:46ch}
+  .pie{margin-top:clamp(70px,10vw,120px);padding:30px var(--margen) max(28px,env(safe-area-inset-bottom));border-top:1px solid var(--plata-tenue);text-align:center;color:var(--suave);font-size:.9rem}
+  .pie b{display:block;font-family:"Big Shoulders Display";font-weight:800;font-size:2rem;letter-spacing:.06em;text-transform:uppercase;color:var(--crema);margin-bottom:4px}
+  .pie a{display:inline-block;padding:12px 4px;margin:-12px -4px}
+  .js .sube{opacity:0;translate:0 20px;transition:opacity .8s var(--seco),translate .8s var(--seco);transition-delay:var(--retraso,0s)}
+  .js .sube.visto{opacity:1;translate:0 0}
+  @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} html{scroll-behavior:auto} .js .sube{opacity:1;translate:none} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <div class="aviso">Modelo de Ari Labs con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así →</a></div>
-<header class="barra">
-  <a class="marca" href="#"><i></i>Tu barbería</a>
-  <nav><a class="liga" href="#tabla">Precios</a><a class="liga" href="#donde">Dónde</a>
-    <a class="boton principal" href="#tabla">Apartar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></nav>
-</header>
+<header class="barra"><a href="#">Tu barbería</a><a href="#precios">Apartar</a></header>
 
 <main>
   <div class="portada">
-    <div>
-      <span class="ceja sube">Barbería</span>
-      <h1 class="sube">Corte y barba</h1>
-      <p class="lema sube">Escoge tu servicio, te decimos cuánto es y apartas tu silla por WhatsApp.</p>
-      <div class="botones sube">
-        <a class="boton principal" href="#tabla">Escoger mi servicio<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
-        <a class="boton secundario" href="#donde">Dónde estamos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span></a>
-      </div>
-    </div>
-    <div class="vidrio relleno sube">
-      <span class="chip">Martes a sábado</span>
-      <ul class="rombos" style="margin-top:1.1rem">
-        <li>Todo incluye lavado y toalla caliente</li>
-        <li>Navaja nueva para cada cliente</li>
-        <li>Lugar para estacionarse enfrente</li>
-      </ul>
-    </div>
+    <div class="marco"><div>
+      <div class="orn">Barbería</div>
+      <h1 class="letrero">Corte<br><span>y</span> barba</h1>
+      <p>Toalla caliente, navaja y buena plática. Escoge tu servicio y aparta tu silla por WhatsApp.</p>
+      <div class="botones"><a class="cuadro" href="#precios">Apartar mi silla</a><a class="cuadro plata" href="#casa">La casa</a></div>
+    </div></div>
+    <div class="poste" aria-hidden="true"></div>
   </div>
 
-  <section class="seccion" id="tabla" aria-labelledby="t-tabla">
-    <h2 class="sube" id="t-tabla">La tabla</h2>
-    <p class="entrada sube">Marca lo que quieres y sale tu cuenta, con el tiempo que vas a estar en la silla.</p>
-    <div class="tabla">
-      <fieldset class="vidrio servicios sube" style="border:0;margin:0">
-        <legend class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Servicios</legend>
-        <label class="servicio"><input type="checkbox" value="Corte clásico" data-precio="180" data-min="40"><span class="marca-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="g"><b>Corte clásico</b><small>Tijera y máquina · 40 min</small></span><span class="precio">$180</span></label>
-        <label class="servicio"><input type="checkbox" value="Fade" data-precio="200" data-min="45"><span class="marca-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="g"><b>Fade</b><small>Bajo, medio o alto · 45 min</small></span><span class="precio">$200</span></label>
-        <label class="servicio"><input type="checkbox" value="Barba" data-precio="150" data-min="30"><span class="marca-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="g"><b>Barba</b><small>Perfilado con navaja y aceite · 30 min</small></span><span class="precio">$150</span></label>
-        <label class="servicio"><input type="checkbox" value="Mascarilla" data-precio="90" data-min="15"><span class="marca-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="g"><b>Mascarilla</b><small>Limpieza de cara · 15 min</small></span><span class="precio">$90</span></label>
-        <label class="servicio"><input type="checkbox" value="Corte de niño" data-precio="150" data-min="30"><span class="marca-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="g"><b>Corte de niño</b><small>Hasta 12 años · 30 min</small></span><span class="precio">$150</span></label>
-        <label class="servicio"><input type="checkbox" value="Ceja" data-precio="60" data-min="10"><span class="marca-s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="g"><b>Ceja</b><small>Para salir impecable · 10 min</small></span><span class="precio">$60</span></label>
+  <section class="seccion" id="precios" aria-labelledby="t-precios">
+    <div class="orn sube">Precios</div>
+    <h2 class="letrero sube" id="t-precios">La tabla</h2>
+    <p class="sube">Marca lo que quieres y sale tu cuenta, con el tiempo que vas a estar en la silla.</p>
+    <div class="armar">
+      <fieldset class="pared sube" id="servicios" style="margin:0">
+        <legend style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Servicios</legend>
+        <label class="serv"><input type="checkbox" value="corte clásico" data-precio="180" data-min="40"><span class="caja-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="nombre">Corte clásico <small>40 min</small></span><span class="puntos"></span><span class="precio">$180</span></label>
+        <label class="serv"><input type="checkbox" value="fade" data-precio="200" data-min="45"><span class="caja-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="nombre">Fade <small>45 min</small></span><span class="puntos"></span><span class="precio">$200</span></label>
+        <label class="serv"><input type="checkbox" value="barba con navaja" data-precio="150" data-min="30"><span class="caja-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="nombre">Barba con navaja <small>30 min</small></span><span class="puntos"></span><span class="precio">$150</span></label>
+        <label class="serv"><input type="checkbox" value="mascarilla" data-precio="90" data-min="15"><span class="caja-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="nombre">Mascarilla <small>15 min</small></span><span class="puntos"></span><span class="precio">$90</span></label>
+        <label class="serv"><input type="checkbox" value="corte de niño" data-precio="150" data-min="30"><span class="caja-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="nombre">Corte de niño <small>30 min</small></span><span class="puntos"></span><span class="precio">$150</span></label>
+        <label class="serv"><input type="checkbox" value="ceja" data-precio="60" data-min="10"><span class="caja-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span><span class="nombre">Ceja <small>10 min</small></span><span class="puntos"></span><span class="precio">$60</span></label>
       </fieldset>
-      <aside class="vidrio cuenta sube" aria-live="polite">
-        <span class="chip">Tu cuenta</span>
-        <div class="total" id="total">$0</div>
-        <p id="detalle">Marca uno o más servicios.</p>
-        <a class="boton principal" id="mandar" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-disabled="true">Apartar mi silla<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
-      </aside>
+      <div class="ticket" aria-live="polite">
+        <span><small id="detalle">Marca uno o más servicios</small><b id="total">$0</b></span>
+        <a class="cuadro" id="mandar" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-disabled="true">Apartar mi silla</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="casa" aria-labelledby="t-casa">
+    <div class="orn sube">La casa</div>
+    <h2 class="letrero sube" id="t-casa">Así trabajamos</h2>
+    <div class="reglas">
+      <div class="regla sube"><span class="rombo"></span><div><b>Toalla caliente</b><span>En cada corte y cada barba, sin cobrarla aparte.</span></div></div>
+      <div class="regla sube"><span class="rombo"></span><div><b>Navaja nueva</b><span>Una para cada cliente, abierta frente a ti.</span></div></div>
+      <div class="regla sube"><span class="rombo"></span><div><b>Sin prisa</b><span>Tu turno es tuyo: si apartaste, te esperamos.</span></div></div>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-lugar">
+    <div class="orn sube">Dónde</div>
+    <h2 class="letrero sube" id="t-lugar">Ven a la silla</h2>
+    <div class="lugar">
+      <div class="marco sube"><div><p>Aquí va tu dirección, con una referencia para que te encuentren fácil.</p><a class="cuadro plata" href="https://maps.google.com/" target="_blank" rel="noopener">Cómo llegar</a></div></div>
+      <div class="marco sube"><div><dl><div><dt>Martes a viernes</dt><dd>10 a. m. a 8 p. m.</dd></div><div><dt>Sábado</dt><dd>9 a. m. a 6 p. m.</dd></div><div><dt>Domingo y lunes</dt><dd>Cerrado</dd></div></dl></div></div>
     </div>
     <p class="nota sube">Servicios y precios de ejemplo: en tu página van los tuyos, y el botón manda el mensaje a tu WhatsApp.</p>
   </section>
-
-  <section class="seccion" id="donde" aria-labelledby="t-donde">
-    <h2 class="sube" id="t-donde">El lugar</h2>
-    <div class="lugar">
-      <div class="vidrio relleno sube"><address>Aquí va tu dirección, con una referencia para que te encuentren fácil.</address>
-        <a class="boton secundario" href="https://maps.google.com/" target="_blank" rel="noopener">Cómo llegar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span></a></div>
-      <dl class="vidrio relleno horario sube"><div><dt>Martes a viernes</dt><dd>10 a. m. a 8 p. m.</dd></div><div><dt>Sábado</dt><dd>9 a. m. a 6 p. m.</dd></div><div><dt>Domingo y lunes</dt><dd>Cerrado</dd></div></dl>
-    </div>
-  </section>
 </main>
 
-<footer class="pie"><span class="nombre">Tu barbería</span><span>Modelo de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</span></footer>
+<footer class="pie"><b>Tu barbería</b>Modelo de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</footer>
 
 <script>
   // La cuenta: suma precio y minutos, y arma el mensaje de WhatsApp.
   // En el modelo real, wa.me lleva el número del negocio: https://wa.me/52XXXXXXXXXX?text=...
   (function () {
-    var marcas = document.querySelectorAll('.servicio input');
+    var marcas = [].slice.call(document.querySelectorAll('.serv input'));
     var total = document.getElementById('total'), detalle = document.getElementById('detalle'), mandar = document.getElementById('mandar');
     function cuenta() {
-      var elegidos = [].filter.call(marcas, function (m) { return m.checked; });
-      var pesos = 0, minutos = 0;
+      var elegidos = marcas.filter(function (m) { return m.checked; }), pesos = 0, minutos = 0;
       elegidos.forEach(function (m) { pesos += +m.dataset.precio; minutos += +m.dataset.min; });
       total.textContent = '$' + pesos;
-      if (!elegidos.length) { detalle.textContent = 'Marca uno o más servicios.'; mandar.setAttribute('aria-disabled', 'true'); return; }
+      if (!elegidos.length) { detalle.textContent = 'Marca uno o más servicios'; mandar.setAttribute('aria-disabled', 'true'); return; }
       var h = Math.floor(minutos / 60), m = minutos % 60, tiempo = ((h ? h + ' h ' : '') + (m ? m + ' min' : '')).trim();
-      var nombres = elegidos.map(function (e) { return e.value.toLowerCase(); });
+      var nombres = elegidos.map(function (e) { return e.value; });
       var lista = nombres.length > 1 ? nombres.slice(0, -1).join(', ') + ' y ' + nombres[nombres.length - 1] : nombres[0];
-      detalle.textContent = 'Son ' + tiempo + ' en la silla: ' + lista + '.';
+      detalle.textContent = elegidos.length + (elegidos.length > 1 ? ' servicios' : ' servicio') + ' · ' + tiempo;
       mandar.removeAttribute('aria-disabled');
-      mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero apartar silla para ' + lista + ' ($' + pesos + '). ¿Qué hora tienen?');
+      mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero apartar silla para ' + lista + ' ($' + pesos + ', ' + tiempo + '). ¿Qué hora tienen?');
     }
     marcas.forEach(function (m) { m.addEventListener('change', cuenta); });
     cuenta();
