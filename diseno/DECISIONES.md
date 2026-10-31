@@ -35,3 +35,9 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 3. Trabajos (Mis citas, con pantallas en un teléfono 3D) · 4. Modelos (restaurante, barbería, consultorio)
 5. Cómo trabajamos · 6. Contacto (diamante otra vez). Ideas pendientes de aprobar: entrada donde el diamante se
    forma de astillas, cursor de cristal en compu.
+
+## Encargo completo (31/10)
+- Documento con todo el sistema visual y cada sección: https://claude.ai/artifact/LV4wkWeHD7KDfyw2WvrJL2
+- Respuestas de Javi: sin precios; en Contacto solo el botón de WhatsApp; el hielo NO se vuelve a armar al final;
+  SÍ bienvenida al abrir (los pedacitos se juntan y forman el hielo, 1 s); se agrega Preguntas frecuentes.
+- Javi solo usa teléfono: preguntas con botones en el chat, nada de comentar documentos.
