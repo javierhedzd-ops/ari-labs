@@ -18,8 +18,13 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   azules que definen la forma sobre el fondo claro, brillos de agua. Sin tonemapping (si no, se ve gris).
   Javi rechazó: cubo, cristal facetado de cartón, reflejos grises, diamante (lo cambió por hielo), líneas en bordes.
 - Movimiento: el diamante gira, respira y sigue el dedo con resorte; 7 astillas en órbitas propias sin chocar.
-  Al bajar un poco, el hielo explota en cámara lenta (por tiempo, 4.5 s, no por velocidad del scroll): pedazos +
-  cientos de partículas de escarcha que se frenan; ~22% se quedan brillando. Al regresar arriba se vuelve a armar (2.6 s).
+  Al bajar un poco, el hielo explota en cámara lenta (por tiempo, 4.5 s, no por velocidad del scroll): solo pedazos,
+  SIN polvo ni chispas (Javi). Al regresar arriba se vuelve a armar (2.6 s).
+- Hielo irregular, no perfecto: caras astilladas (planos de corte al azar), golpes, forma chueca, cada pedazo distinto.
+- Fluidez: pixel ratio 1.5/1.75, foto del fondo para el hielo cada 5 cuadros a 160 px, shader aligerado, textos
+  medidos cada 4 cuadros, esquivar con salida estable (sin brincos).
+- Botones: píldora noche con filo de luz y círculo azul ártico con icono; secundario de hielo esmerilado; brillo
+  que cruza al pasar el ratón, sube 2 px, se aprieta al tocar.
   Los pedazos se reparten, flotan, suben con el scroll, esquivan títulos y textos y no se tocan entre ellos.
 - Tarjetas de hielo más transparentes (fondo .34→.08, blur 9px) para ver los pedazos detrás. Barra de vidrio al bajar.
 - No pude usar fotos (el entorno bloquea sitios de fotos y descargar de Figma; Javi prefirió no cambiarlo).
