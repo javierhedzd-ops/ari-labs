@@ -101,3 +101,6 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   cuidado en los detalles, el espacio, el movimiento y que todo cuadre.
 - Estilos escogidos por Javi: restaurante "cocina alegre" (Caprasimo), barbería "clásica" (Big Shoulders),
   consultorio "cuidado cálido" (Instrument Serif). Bocetos: https://claude.ai/artifact/LiArhxpavjejj8eNYrKuH9
+- (31/10) El estilo "cocina alegre" se ve de heladería y a Javi le gustó así: pasa a ser un **modelo nuevo de heladería**.
+  Quedan 4 modelos: heladería (alegre, Caprasimo, rosa), restaurante (estilo nuevo por escoger), barbería clásica en
+  **grafito y plata** (Big Shoulders) y consultorio cálido (Instrument Serif).
