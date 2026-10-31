@@ -13,12 +13,15 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Paleta Frostline (clara): blanco glaciar #f8fafc, plata #ced6e0, acero #5b6978, azul ártico #64b6ff,
   menta escarcha #b2e4db, noche #2e2e3e (texto y botón principal). Letra Inter Tight.
 - Acabado cristalino: fondo de cáusticas (luz quebrada por el hielo), tarjetas de hielo esmerilado.
-- Objeto: diamante en bruto realista (octaedro redondeado, casi incoloro, vetas, lechoso; referencia: foto de
-  diamante sin tallar que mandó Javi). Material propio (shader) con refracción, poco fuego y entorno de joyería.
-  Javi rechazó: cubo, cristal facetado de cartón, reflejos grises, líneas en los bordes.
+- Objeto: HIELO REAL con forma de diamante en bruto (octaedro redondeado). Shader propio: refracta la escena real
+  (cámara de 6 caras en el centro, cada 2 cuadros), índice 1.31, burbujas, grietas finas, centro nublado, orillas
+  azules que definen la forma sobre el fondo claro, brillos de agua. Sin tonemapping (si no, se ve gris).
+  Javi rechazó: cubo, cristal facetado de cartón, reflejos grises, diamante (lo cambió por hielo), líneas en bordes.
 - Movimiento: el diamante gira, respira y sigue el dedo con resorte; 7 astillas en órbitas propias sin chocar.
-  Al bajar, el diamante se rompe (chispas) y sus pedazos se reparten por toda la web, flotan, suben con el scroll,
-  esquivan los títulos y textos y no se tocan entre ellos.
+  Al bajar un poco, el hielo explota en cámara lenta (por tiempo, 4.5 s, no por velocidad del scroll): pedazos +
+  cientos de partículas de escarcha que se frenan; ~22% se quedan brillando. Al regresar arriba se vuelve a armar (2.6 s).
+  Los pedazos se reparten, flotan, suben con el scroll, esquivan títulos y textos y no se tocan entre ellos.
+- Tarjetas de hielo más transparentes (fondo .34→.08, blur 9px) para ver los pedazos detrás. Barra de vidrio al bajar.
 - No pude usar fotos (el entorno bloquea sitios de fotos y descargar de Figma; Javi prefirió no cambiarlo).
 
 ## Secciones (orden)

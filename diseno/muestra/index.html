@@ -16,7 +16,9 @@
   *{box-sizing:border-box}
   html,body{margin:0;background:#eef3f7;color:var(--tinta);font-family:"Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   #escena{position:fixed;inset:0;width:100%;height:100%;display:block}
-  .barra{position:fixed;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(18px,5vw,64px)}
+  .barra{position:fixed;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(18px,5vw,64px);transition:background .3s ease, box-shadow .3s ease}
+  /* al bajar, la barra se vuelve de vidrio: el nombre ya no se encima sobre las tarjetas */
+  .barra.vidrio{background:rgba(248,250,252,.62);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);box-shadow:0 1px 0 rgba(255,255,255,.8), 0 8px 24px -18px rgba(46,46,62,.35)}
   .barra b{font-weight:600;letter-spacing:-.01em}
   .barra a{background:var(--noche);color:var(--glaciar);text-decoration:none;font-weight:600;padding:.6rem 1.1rem;border-radius:999px;font-size:.95rem}
   .portada{position:relative;z-index:2;min-height:100svh;display:grid;align-content:end;padding:0 clamp(18px,5vw,64px) clamp(36px,8vh,90px);pointer-events:none}
@@ -38,9 +40,9 @@
   .dos{display:grid;gap:14px}
   @media (min-width:860px){ .dos{grid-template-columns:1fr 1fr} }
   .hielo{position:relative;padding:clamp(26px,3.4vw,44px);border-radius:30px;overflow:hidden;
-    background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.22));
-    border:1px solid rgba(255,255,255,.75);
-    -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);
+    background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.08));
+    border:1px solid rgba(255,255,255,.7);
+    -webkit-backdrop-filter:blur(9px) saturate(160%);backdrop-filter:blur(9px) saturate(160%);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 30px 60px -40px rgba(46,46,62,.35);
     transition:transform .5s cubic-bezier(.2,.9,.2,1)}
   /* el destello que cruza la tarjeta, como luz en una placa de hielo */
@@ -100,6 +102,8 @@
 </section>
 
 <script>
+  // la barra se vuelve de vidrio al bajar
+  (function(){ var b = document.querySelector('.barra'); function f(){ b.classList.toggle('vidrio', scrollY > 24); } addEventListener('scroll', f, {passive:true}); f(); })();
   // las piezas entran al llegar, escalonadas
   (function(){
     var piezas = document.querySelectorAll('.sube');
@@ -151,58 +155,64 @@
   // Material de diamante en bruto: casi incoloro, superficie esmerilada con vetas (las líneas de
   // crecimiento del cristal), vetas blancas por dentro, un poco lechoso, refracción con poco "fuego"
   // y reflejos de estudio. Basado en fotos reales de diamantes sin tallar.
+  // Hielo real con forma de diamante: transparente (se ve el fondo deformado detrás), índice del hielo 1.31,
+  // superficie lisa y húmeda con bordes como derretidos, burbujas de aire, grietas blancas finas y el centro
+  // un poco nublado. Azul muy tenue. El entorno que refracta es la escena misma (ver camHielo más abajo).
+  const cuboHielo = new THREE.WebGLCubeRenderTarget(256, { type: THREE.HalfFloatType, generateMipmaps: true, minFilter: THREE.LinearMipmapLinearFilter });
   function materialDiamante() {
     return new THREE.ShaderMaterial({
-      uniforms: { env: { value: cubo.texture }, t: { value: 0 } },
+      uniforms: { env: { value: cuboHielo.texture }, brillo: { value: cubo.texture }, t: { value: 0 } },
       vertexShader: `varying vec3 vN; varying vec3 vP; varying vec3 vO;
         void main(){ vO = position; vec4 w = modelMatrix * vec4(position, 1.0); vP = w.xyz; vN = normalize(mat3(modelMatrix) * normal); gl_Position = projectionMatrix * viewMatrix * w; }`,
-      fragmentShader: `uniform samplerCube env; uniform float t; varying vec3 vN; varying vec3 vP; varying vec3 vO;
+      fragmentShader: `uniform samplerCube env; uniform samplerCube brillo; uniform float t; varying vec3 vN; varying vec3 vP; varying vec3 vO;
         float h(vec3 p){ return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
         float n3(vec3 p){ vec3 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
           return mix(mix(mix(h(i), h(i+vec3(1,0,0)), f.x), mix(h(i+vec3(0,1,0)), h(i+vec3(1,1,0)), f.x), f.y),
                      mix(mix(h(i+vec3(0,0,1)), h(i+vec3(1,0,1)), f.x), mix(h(i+vec3(0,1,1)), h(i+vec3(1,1,1)), f.x), f.y), f.z); }
-        float fbm(vec3 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 4; i++){ v += a * n3(p); p *= 2.07; a *= 0.5; } return v; }
-        // vetas: líneas paralelas en tres direcciones (como las de un octaedro), torcidas por ruido
-        float vetas(vec3 p){
-          float w = fbm(p * 2.5) * 2.0;
-          float a = abs(sin(dot(p, normalize(vec3(1.0, 1.0, 0.2))) * 34.0 + w * 6.0));
-          float b = abs(sin(dot(p, normalize(vec3(-1.0, 0.6, 0.5))) * 29.0 + w * 5.0));
-          float c = abs(sin(dot(p, normalize(vec3(0.2, -1.0, 1.0))) * 41.0 + w * 7.0));
-          return pow(1.0 - min(a, min(b, c)), 9.0) * smoothstep(0.35, 0.75, fbm(p * 1.3 + 4.0));
+        float fbm(vec3 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 4; i++){ v += a * n3(p); p *= 2.03; a *= 0.5; } return v; }
+        // grietas: láminas finas dentro del hielo, en tres planos torcidos por ruido
+        float grietas(vec3 q){
+          float w = (fbm(q * 2.0) - 0.5) * 0.35, g = 0.0;
+          g += smoothstep(0.018, 0.0, abs(dot(q, normalize(vec3(0.8, 0.5, 0.2))) - 0.18 + w)) * smoothstep(0.45, 0.7, fbm(q * 1.7 + 3.0));
+          g += smoothstep(0.014, 0.0, abs(dot(q, normalize(vec3(-0.3, 0.9, 0.4))) + 0.12 + w)) * smoothstep(0.5, 0.75, fbm(q * 1.9 + 9.0));
+          g += smoothstep(0.012, 0.0, abs(dot(q, normalize(vec3(0.2, -0.4, 0.9))) - 0.05 + w)) * smoothstep(0.55, 0.8, fbm(q * 2.3 + 17.0));
+          return g;
         }
+        float burbujas(vec3 q){ float b = n3(q * 16.0); return smoothstep(0.86, 0.9, b) + smoothstep(0.93, 0.95, n3(q * 31.0 + 5.0)) * 0.7; }
         void main(){
           vec3 n = normalize(gl_FrontFacing ? vN : -vN);
-          // superficie esmerilada: pequeños golpes y las vetas en relieve
-          vec3 e = vec3(0.02, 0.0, 0.0);
-          vec3 g = vec3(fbm(vO * 9.0 + e.xyy) - fbm(vO * 9.0 - e.xyy), fbm(vO * 9.0 + e.yxy) - fbm(vO * 9.0 - e.yxy), fbm(vO * 9.0 + e.yyx) - fbm(vO * 9.0 - e.yyx));
-          float vs = vetas(vO);
-          n = normalize(n + g * 2.2 + n * vs * 0.0 + (vec3(h(floor(vO * 40.0))) - 0.5) * 0.06);
+          // superficie húmeda: ondulaciones suaves (derretido) y apenas escarcha
+          vec3 e = vec3(0.03, 0.0, 0.0);
+          vec3 gr = vec3(fbm(vO*2.6+e.xyy)-fbm(vO*2.6-e.xyy), fbm(vO*2.6+e.yxy)-fbm(vO*2.6-e.yxy), fbm(vO*2.6+e.yyx)-fbm(vO*2.6-e.yyx));
+          vec3 fino = vec3(n3(vO*28.0), n3(vO*28.0+3.1), n3(vO*28.0+7.7)) - 0.5;
+          n = normalize(n + gr * 1.6 + fino * 0.05);
           vec3 v = normalize(vP - cameraPosition);
           float cosv = clamp(dot(-v, n), 0.0, 1.0);
-          float fres = 0.10 + 0.90 * pow(1.0 - cosv, 3.0);
-          // por dentro: refracción con poco fuego y un rebote interno
-          vec3 dentro;
+          float fres = 0.02 + 0.98 * pow(1.0 - cosv, 5.0);
+          // lo que se ve a través: el fondo real, deformado (con un pelito de color en las orillas)
+          vec3 detras;
+          detras.r = textureCube(env, refract(v, n, 1.0 / 1.305)).r;
+          detras.g = textureCube(env, refract(v, n, 1.0 / 1.310)).g;
+          detras.b = textureCube(env, refract(v, n, 1.0 / 1.318)).b;
+          // por dentro: recorre el hielo en tres puntos del rayo y junta grietas, burbujas y la nube del centro
+          vec3 rr = refract(v, n, 1.0 / 1.31);
+          float dentro = 0.0, nube = 0.0;
           for (int k = 0; k < 3; k++){
-            float ior = 2.40 + float(k) * 0.02;
-            vec3 r = refract(v, n, 1.0 / ior);
-            vec3 r2 = reflect(r, normalize(-n + (vec3(n3(vO * 3.0 + float(k)), n3(vO * 3.0 + 7.0), n3(vO * 3.0 + 13.0)) - 0.5) * 1.4));
-            vec3 c = textureCube(env, r2).rgb;
-            dentro[k] = k == 0 ? c.r : (k == 1 ? c.g : c.b);
+            vec3 q = vO + rr * (0.18 + float(k) * 0.28);
+            dentro += grietas(q) * 0.55 + burbujas(q) * 0.5;
+            nube += smoothstep(1.1, 0.15, length(q * vec3(1.0, 0.85, 1.0))) * (0.55 + 0.45 * fbm(q * 3.0));
           }
-          float gris = dot(dentro, vec3(0.333));
-          dentro = mix(vec3(gris), dentro, 0.35);                  // casi incoloro: el diamante en bruto es blanco plateado
-          // vetas blancas por dentro, vistas a través del cristal
-          vec3 rr = refract(v, n, 1.0 / 2.42);
-          float interior = vetas(vO * 0.9 + rr * 0.35) * 1.4 + smoothstep(0.62, 0.9, fbm(vO * 3.0 + rr)) * 0.35;
-          vec3 refl = textureCube(env, reflect(v, n)).rgb;
-          refl = mix(vec3(dot(refl, vec3(0.333))), refl, 0.55);   // reflejos un poco menos de color
-          vec3 c = mix(dentro, refl, fres);
-          c += vec3(0.95, 0.98, 1.0) * (interior + vs * 0.9);       // vetas y escarcha que se iluminan
-          c = mix(c, vec3(0.86, 0.9, 0.94), 0.12);                  // un poco lechoso
-          c = pow(c, vec3(1.18)) * 1.25;
+          nube /= 3.0;
+          vec3 c = detras * vec3(0.86, 0.93, 1.0);                       // azul tenue de hielo
+          c = mix(c, vec3(0.97, 0.985, 1.0), nube * 0.42);                // centro nublado
+          c += vec3(1.0) * dentro * 0.55;                                 // grietas y burbujas que atrapan la luz
+          vec3 refl = textureCube(brillo, reflect(v, n)).rgb;
+          float luces = smoothstep(0.75, 1.4, dot(refl, vec3(0.333)));    // solo las tiras de luz: brillos de agua
+          c = mix(c, textureCube(env, reflect(v, n)).rgb, fres * 0.6) + vec3(1.0) * luces * (0.35 + fres);
+          // orillas un poco más azules (donde el hielo es más grueso visto de lado)
+          c = mix(c, c * vec3(0.52, 0.72, 0.93), pow(1.0 - cosv, 1.6) * 0.75);   // orillas: definen la forma sobre el fondo claro
+          // sin tono ni conversión: así el hielo queda igual de claro que el fondo que deja ver (antes se veía gris)
           gl_FragColor = vec4(c, 1.0);
-          #include <tonemapping_fragment>
-          #include <colorspace_fragment>
         }`
     });
   }
@@ -241,6 +251,9 @@
   });
   const fondo = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), fondoMat);
   fondo.position.z = -6; escena.add(fondo);
+  // el hielo refracta la escena real: una cámara de 6 caras en el centro del hielo fotografía el fondo
+  escena.background = new THREE.Color().setRGB(0.90, 0.94, 0.965, THREE.LinearSRGBColorSpace);   // mismo claro que el fondo
+  const camHielo = new THREE.CubeCamera(0.1, 40, cuboHielo); escena.add(camHielo);
 
   // ---- el diamante en bruto: un cristal irregular de caras grandes (envolvente de puntos al azar) ----
   let semilla = 23; const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
@@ -290,6 +303,12 @@
     x.fillStyle = g; x.fillRect(0, 0, 64, 64);
     x.fillStyle = 'rgba(255,255,255,.95)'; x.fillRect(31, 2, 2, 60); x.fillRect(2, 31, 60, 2);
     return new THREE.CanvasTexture(c);
+  })();
+  const polvo = (() => {
+    const c = document.createElement('canvas'); c.width = c.height = 64; const x = c.getContext('2d');
+    const g = x.createRadialGradient(32, 32, 0, 32, 32, 30);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.45, 'rgba(235,246,255,.95)'); g.addColorStop(0.7, 'rgba(140,190,228,.75)'); g.addColorStop(1, 'rgba(140,190,228,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c);
   })();
   const pos = diamante.geometry.attributes.position, nDest = 14, dest = [];
   for (let i = 0; i < nDest; i++) {
@@ -343,8 +362,8 @@
   // destello de la rotura: chispas que salen del centro y se apagan
   const chispas = [];
   for (let i = 0; i < 18; i++) {
-    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: estrella, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 }));
-    sp.userData = { dir: new THREE.Vector3(azar() - 0.5, azar() - 0.5, azar() - 0.5).normalize(), v: 1.5 + azar() * 2.5 };
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: polvo, transparent: true, depthWrite: false, opacity: 0 }));
+    sp.userData = { dir: new THREE.Vector3(azar() - 0.5, azar() - 0.5, azar() - 0.5).normalize(), v: 1.2 + azar() * 2.0 };
     chispas.push(sp); escena.add(sp);
   }
   // textos que los pedazos deben esquivar (títulos y párrafos sueltos; las tarjetas de vidrio no, detrás se ven bonitos)
@@ -384,6 +403,30 @@
     u.esqY = (u.esqY || 0) + (-my2 / pxPorUnidad - (u.esqY || 0)) * 0.12;
     pz.position.x += u.esqX; pz.position.y += u.esqY;
   }
+  // escarcha: cientos de partículas que salen al romperse, se frenan como en cámara lenta y algunas se quedan brillando
+  const nPart = innerWidth < 760 ? 150 : 280;
+  const pGeo = new THREE.BufferGeometry();
+  const pPos = new Float32Array(nPart * 3), pA = new Float32Array(nPart), pS = new Float32Array(nPart);
+  const pDatos = [];
+  for (let i = 0; i < nPart; i++) {
+    const u = azar() * 2 - 1, th = azar() * Math.PI * 2;
+    pDatos.push({ dir: new THREE.Vector3(Math.sqrt(1 - u * u) * Math.cos(th), u, Math.sqrt(1 - u * u) * Math.sin(th)),
+      v: 0.5 + Math.pow(azar(), 0.6) * 3.4, queda: azar() < 0.22, fase: azar() * 6.28, tam: 0.035 + Math.pow(azar(), 3) * 0.13 });
+    pS[i] = pDatos[i].tam;
+  }
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  pGeo.setAttribute('aA', new THREE.BufferAttribute(pA, 1));
+  pGeo.setAttribute('aS', new THREE.BufferAttribute(pS, 1));
+  const escarcha = new THREE.Points(pGeo, new THREE.ShaderMaterial({
+    uniforms: { map: { value: polvo }, escalaPx: { value: innerHeight / 2 } },
+    vertexShader: `attribute float aA; attribute float aS; varying float vA; uniform float escalaPx;
+      void main(){ vA = aA; vec4 mv = modelViewMatrix * vec4(position, 1.0); gl_PointSize = aS * escalaPx * 3.0 / -mv.z; gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `uniform sampler2D map; varying float vA; void main(){ vec4 c = texture2D(map, gl_PointCoord); gl_FragColor = vec4(c.rgb, c.a * vA); }`,
+    transparent: true, depthWrite: false,
+  }));
+  escarcha.frustumCulled = false; escena.add(escarcha);
+  // estado de la rotura (va por tiempo, no por la velocidad del scroll)
+  let estado = 'entero', t0 = 0, rupturaPrev = 0, desde = 1, cuadro = 0;
   const suave = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
   const tmp = new THREE.Vector3();
   // dónde están el título y la barra, pasado a coordenadas 3D (plano z = 0)
@@ -431,7 +474,16 @@
     const escalaBase = movil ? 0.56 : 0.74;
     const respira = 1 + Math.sin(t * 1.1) * 0.015;
     const escala = escalaBase * respira;
-    const ruptura = suave(0.05, 0.6, scrollY / innerHeight);         // 0 entero, 1 todo repartido
+    // la rotura: al bajar un poco se rompe sola, en cámara lenta (4.5 s); al regresar arriba se vuelve a armar
+    const yr = scrollY / innerHeight;
+    if (estado === 'entero' && yr > 0.08) { estado = 'rompiendo'; t0 = t; }
+    if ((estado === 'rompiendo' || estado === 'roto') && yr < 0.03) { estado = 'armando'; t0 = t; desde = rupturaPrev; }
+    let ruptura = 0, kExp = 0;
+    if (quieto) { ruptura = yr > 0.08 ? 1 : 0; kExp = 1; }
+    else if (estado === 'rompiendo') { kExp = Math.min(1, (t - t0) / 4.5); ruptura = 1 - Math.pow(1 - kExp, 4); if (kExp >= 1) estado = 'roto'; }
+    else if (estado === 'roto') { ruptura = 1; kExp = 1; }
+    else if (estado === 'armando') { const k = Math.min(1, (t - t0) / 2.6); ruptura = desde * (1 - k * k * (3 - 2 * k)); kExp = 0; if (k >= 1) estado = 'entero'; }
+    rupturaPrev = ruptura;
     const rG = radioGrande * escala, hueco = movil ? 0.7 : 1.15;   // hueco: lo que ocupan las astillas alrededor
     let x, y;
     // en compu: arriba a la derecha, donde no hay texto (el título va abajo a la izquierda)
@@ -485,7 +537,7 @@
       else a.position.y = Math.max(a.position.y, borde.textoArriba * prof + m);
     });
     // pedazos y astillas: salen del diamante y se reparten; después flotan y suben despacio al bajar
-    const e = ruptura * ruptura * (3 - 2 * ruptura);
+    const e = ruptura;   // ya viene suavizada por tiempo
     const despues = Math.max(0, scrollY - innerHeight * 0.6);
     if (ruptura > 0.001) medirTextos();
     pedazos.forEach(pz => {
@@ -521,13 +573,31 @@
       }
       if (e > 0.05) todos.forEach(x => esquivarTexto(x, x.userData.prof || 1));
     }
+    // escarcha
+    const vivo = estado === 'rompiendo' || estado === 'roto';
+    for (let i = 0; i < nPart; i++) {
+      const d = pDatos[i];
+      if (!vivo) { pA[i] = 0; continue; }
+      const k = kExp, frena = 1 - Math.pow(1 - k, 3);                      // sale rápido y se frena: cámara lenta
+      let x = grupo.position.x + d.dir.x * d.v * frena, y = grupo.position.y + d.dir.y * d.v * frena - 0.35 * k * k, z = d.dir.z * d.v * frena;
+      if (d.queda) { x += Math.sin(t * 0.3 + d.fase) * 0.15 * k; y += Math.cos(t * 0.25 + d.fase) * 0.12 * k + Math.max(0, scrollY - innerHeight * 0.6) * 0.0012; }
+      pPos[i * 3] = x; pPos[i * 3 + 1] = y; pPos[i * 3 + 2] = z;
+      pA[i] = d.queda ? (0.35 + 0.45 * Math.max(0, Math.sin(t * 1.6 + d.fase))) * Math.min(1, k * 3) : Math.pow(1 - k, 1.2) * 0.95;
+    }
+    pGeo.attributes.position.needsUpdate = true; pGeo.attributes.aA.needsUpdate = true;
     // chispas de la rotura
     chispas.forEach(c => {
-      const k = suave(0.0, 0.35, ruptura);
+      const k = vivo ? 1 - Math.pow(1 - kExp, 3) : 0;
       c.position.copy(grupo.position).addScaledVector(c.userData.dir, k * c.userData.v);
-      c.material.opacity = ruptura > 0.001 ? Math.sin(Math.min(1, k) * Math.PI) * 0.9 : 0;
+      c.material.opacity = vivo ? Math.pow(1 - kExp, 1.5) * 0.9 : 0;
       c.scale.setScalar(0.25 + k * 0.4);
     });
+    if (cuadro++ % 2 === 0) {
+      const ocultos = [diamante, escarcha, ...pedazos, ...astillas, ...chispas];
+      const antes = ocultos.map(o => o.visible); ocultos.forEach(o => o.visible = false);
+      camHielo.position.copy(grupo.position); camHielo.update(render, escena);
+      ocultos.forEach((o, i) => o.visible = antes[i]);
+    }
     render.render(escena, camara);
   });
 </script>
