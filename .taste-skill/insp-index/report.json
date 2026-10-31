@@ -1,0 +1,2720 @@
+{
+ "url": "index.html",
+ "at": "2026-10-31T03:42:10.426Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.05,
+    0.04,
+    0.04,
+    0.04,
+    0.1,
+    0.1,
+    0.1,
+    0.01,
+    0.17,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 30,
+    "css": 4,
+    "transitions": 15,
+    "scripted": 11,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 12986,
+     "screens": 14.4,
+     "words": 436,
+     "img": 6,
+     "video": 0,
+     "canvas": 2,
+     "svg": 1,
+     "sections": 9,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 6,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "modelo-restaurante.webp",
+      "modelo-barberia.webp",
+      "modelo-consultorio.webp",
+      "citas-agenda-claro.webp",
+      "citas-agenda.webp",
+      "citas-detalle.webp"
+     ],
+     "blendText": 2,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Ari Labs",
+     "words": 2,
+     "chars": 8,
+     "lines": 1,
+     "size": 112,
+     "vw": 7.8,
+     "font": "Inter Tight",
+     "weight": 300,
+     "tracking": -0.045,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.24,
+     "top": 661,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Ari Labs",
+     "words": 2,
+     "lines": 1,
+     "size": 112,
+     "font": "Inter Tight"
+    },
+    "headings": [
+     {
+      "text": "Ari Labs",
+      "words": 2,
+      "chars": 8,
+      "lines": 1,
+      "size": 112,
+      "vw": 7.8,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.045,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.24,
+      "top": 661,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Tu trabajo sigue igual. La forma de hacerlo, no.",
+      "words": 9,
+      "chars": 48,
+      "lines": 4,
+      "size": 73.6,
+      "vw": 5.1,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1.04,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 7452,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mismo trabajo. Menos ruido.",
+      "words": 4,
+      "chars": 27,
+      "lines": 2,
+      "size": 80,
+      "vw": 5.6,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.36,
+      "top": 8206,
+      "mixedFonts": [
+       "Inter Tight",
+       "Inter Tight italic"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Páginas web y apps para tu negocio",
+      "words": 7,
+      "chars": 34,
+      "lines": 2,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 8676,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Una página para que te encuentren",
+      "words": 6,
+      "chars": 33,
+      "lines": 2,
+      "size": 48,
+      "vw": 3.3,
+      "font": "Inter Tight",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.37,
+      "top": 8893,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Una app para tu forma de trabajar",
+      "words": 7,
+      "chars": 33,
+      "lines": 2,
+      "size": 48,
+      "vw": 3.3,
+      "font": "Inter Tight",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.29,
+      "top": 8893,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Modelos para empezar",
+      "words": 3,
+      "chars": 20,
+      "lines": 2,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 9460,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mis citas, la agenda de un músico de eventos",
+      "words": 9,
+      "chars": 44,
+      "lines": 4,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.36,
+      "top": 11086,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Cómo trabajamos",
+      "words": 2,
+      "chars": 15,
+      "lines": 1,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 11730,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Nos escribes por WhatsApp y nos cuentas qué haces y qué te gustaría resolver.",
+      "words": 14,
+      "chars": 77,
+      "lines": 2,
+      "size": 38.4,
+      "vw": 2.7,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.58,
+      "top": 11827,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Te mandamos una vista previa para que la veas en tu teléfono y nos digas qué cambiar.",
+      "words": 17,
+      "chars": 85,
+      "lines": 2,
+      "size": 38.4,
+      "vw": 2.7,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.58,
+      "top": 11951,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Cuando te gusta, queda funcionando: publicamos tu página o instalamos tu app, y te enseñamos a usarla.",
+      "words": 17,
+      "chars": 102,
+      "lines": 3,
+      "size": 38.4,
+      "vw": 2.7,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.58,
+      "top": 12075,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Ari Labs es un estudio pequeño en Mérida. Hacemos dos cosas: páginas web y apps.",
+      "words": 15,
+      "chars": 80,
+      "lines": 3,
+      "size": 38.4,
+      "vw": 2.7,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.22,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.38,
+      "top": 12336,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 13,
+     "maxLines": 4,
+     "over2Lines": 3,
+     "statements": 4,
+     "centered": 1,
+     "medianWords": 9,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter Tight",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      17,
+      20,
+      21,
+      26,
+      38,
+      48,
+      70,
+      74,
+      80,
+      112
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter Tight",
+      "size": 16.8,
+      "leading": 1.7,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 15.8
+     },
+     "measureChars": 49,
+     "max": {
+      "size": 112,
+      "vw": 7.8,
+      "font": "Inter Tight",
+      "text": "Ari Labs"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.04,
+     "smallText": 2
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0b1a21",
+     "bodyBgHsl": {
+      "h": 199,
+      "s": 0.5,
+      "l": 0.09
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#081116",
+       "top": 8550,
+       "hsl": {
+        "h": 201,
+        "s": 0.47,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#0f2630",
+       "top": 9735,
+       "hsl": {
+        "h": 198,
+        "s": 0.52,
+        "l": 0.12
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f2fbfe",
+       "share": 0.42
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.25
+      },
+      {
+       "color": "#dff5fd",
+       "share": 0.09
+      },
+      {
+       "color": "#def6fd",
+       "share": 0.08
+      },
+      {
+       "color": "#0b1a21",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#9ed8ee",
+      "hsl": {
+       "h": 197,
+       "s": 0.7,
+       "l": 0.78
+      },
+      "fg": "#0e0f11"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 2,
+     "scrims": 1,
+     "gradientSamples": [
+      "canvas#galaxia → radial-gradient(120% 80% at 50% 45%, rgb(11, 21, 38) 0%, rgb(7, 13, 24) 45%, rgb(3, 6, 12) 100%)",
+      "div.pantalla → linear-gradient(rgb(16, 26, 32), rgb(11, 17, 20) 60%)"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 4,
+     "boxRadius": 26,
+     "squareMedia": 5,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 3,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 54,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "inter tight"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 12986,
+    "margins": {
+     "left": 56,
+     "right": 168
+    },
+    "sections": [
+     {
+      "sel": "section#viaje.viaje",
+      "tag": "section",
+      "top": 54,
+      "height": 3420,
+      "words": 8,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Ari Labs",
+       "size": 112,
+       "tag": "h1"
+      },
+      "left": 56,
+      "right": 1032,
+      "textLeft": 56,
+      "textRight": 1032,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section#escena.escena",
+      "tag": "section",
+      "top": 3474,
+      "height": 3780,
+      "words": 6,
+      "media": 0,
+      "middle": 112,
+      "heading": null,
+      "left": 611,
+      "right": 611,
+      "textLeft": 611,
+      "textRight": 611,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section.cierre.visto",
+      "tag": "section",
+      "top": 7254,
+      "height": 772,
+      "words": 24,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Tu trabajo sigue igual.",
+       "size": 74,
+       "tag": "h2"
+      },
+      "left": 56,
+      "right": 908,
+      "textLeft": 56,
+      "textRight": 908,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.final.visto",
+      "tag": "section",
+      "top": 8026,
+      "height": 523,
+      "words": 4,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Mismo trabajo.",
+       "size": 80,
+       "tag": "p"
+      },
+      "left": 482,
+      "right": 482,
+      "textLeft": 482,
+      "textRight": 482,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#oferta.oferta",
+      "tag": "section",
+      "top": 8550,
+      "height": 785,
+      "words": 92,
+      "media": 0,
+      "middle": 124,
+      "heading": {
+       "text": "Páginas web y apps para tu negocio",
+       "size": 70,
+       "tag": "h2"
+      },
+      "left": 144,
+      "right": 256,
+      "textLeft": 144,
+      "textRight": 256,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.revela.visto",
+      "tag": "div",
+      "top": 9460,
+      "height": 233,
+      "words": 21,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 144,
+      "right": 829,
+      "textLeft": 144,
+      "textRight": 829,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.vitrina.revela",
+      "tag": "div",
+      "top": 9735,
+      "height": 1204,
+      "words": 49,
+      "media": 3,
+      "middle": 64,
+      "heading": null,
+      "left": 144,
+      "right": 168,
+      "textLeft": 144,
+      "textRight": 232,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#trabajo.trabajo",
+      "tag": "section",
+      "top": 10940,
+      "height": 644,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#proceso.proceso",
+      "tag": "section",
+      "top": 11584,
+      "height": 610,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#nosotros.nosotros",
+      "tag": "section",
+      "top": 12194,
+      "height": 678,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 7880,
+      "height": 316
+     },
+     {
+      "top": 8380,
+      "height": 288
+     },
+     {
+      "top": 10940,
+      "height": 1928
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Ari Labs",
+      "size": 112,
+      "top": 661,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 56,
+      "n": 4
+     },
+     {
+      "x": 144,
+      "n": 4
+     },
+     {
+      "x": 192,
+      "n": 2
+     },
+     {
+      "x": 837,
+      "n": 2
+     },
+     {
+      "x": 311,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 17,
+    "stage": true,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.09,
+    0.08,
+    0.08,
+    0.08,
+    0.2,
+    0.2,
+    0.2,
+    0.05,
+    0.31,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 27,
+    "css": 4,
+    "transitions": 12,
+    "scripted": 11,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 17387,
+     "screens": 17,
+     "words": 436,
+     "img": 6,
+     "video": 0,
+     "canvas": 2,
+     "svg": 1,
+     "sections": 9,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 2,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "modelo-restaurante.webp",
+      "modelo-barberia.webp"
+     ],
+     "blendText": 2,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Ari Labs",
+     "words": 2,
+     "chars": 8,
+     "lines": 1,
+     "size": 112,
+     "vw": 14.6,
+     "font": "Inter Tight",
+     "weight": 300,
+     "tracking": -0.045,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.46,
+     "top": 768,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Ari Labs",
+     "words": 2,
+     "lines": 1,
+     "size": 112,
+     "font": "Inter Tight"
+    },
+    "headings": [
+     {
+      "text": "Ari Labs",
+      "words": 2,
+      "chars": 8,
+      "lines": 1,
+      "size": 112,
+      "vw": 14.6,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.045,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.46,
+      "top": 768,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Tu trabajo sigue igual. La forma de hacerlo, no.",
+      "words": 9,
+      "chars": 48,
+      "lines": 4,
+      "size": 73.6,
+      "vw": 9.6,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1.04,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.73,
+      "top": 8471,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mismo trabajo. Menos ruido.",
+      "words": 4,
+      "chars": 27,
+      "lines": 2,
+      "size": 80,
+      "vw": 10.4,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.67,
+      "top": 9270,
+      "mixedFonts": [
+       "Inter Tight",
+       "Inter Tight italic"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Páginas web y apps para tu negocio",
+      "words": 7,
+      "chars": 34,
+      "lines": 2,
+      "size": 53,
+      "vw": 6.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.64,
+      "top": 9782,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Una página para que te encuentren",
+      "words": 6,
+      "chars": 33,
+      "lines": 1,
+      "size": 36.1,
+      "vw": 4.7,
+      "font": "Inter Tight",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 9946,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Una app para tu forma de trabajar",
+      "words": 7,
+      "chars": 33,
+      "lines": 1,
+      "size": 36.1,
+      "vw": 4.7,
+      "font": "Inter Tight",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 10181,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Modelos para empezar",
+      "words": 3,
+      "chars": 20,
+      "lines": 2,
+      "size": 53,
+      "vw": 6.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.64,
+      "top": 10624,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mis citas, la agenda de un músico de eventos",
+      "words": 9,
+      "chars": 44,
+      "lines": 2,
+      "size": 53,
+      "vw": 6.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.64,
+      "top": 15226,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Cómo trabajamos",
+      "words": 2,
+      "chars": 15,
+      "lines": 1,
+      "size": 53,
+      "vw": 6.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.64,
+      "top": 16234,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Nos escribes por WhatsApp y nos cuentas qué haces y qué te gustaría resolver.",
+      "words": 14,
+      "chars": 77,
+      "lines": 2,
+      "size": 29.8,
+      "vw": 3.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 16314,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Te mandamos una vista previa para que la veas en tu teléfono y nos digas qué cambiar.",
+      "words": 17,
+      "chars": 85,
+      "lines": 2,
+      "size": 29.8,
+      "vw": 3.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 16409,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Cuando te gusta, queda funcionando: publicamos tu página o instalamos tu app, y te enseñamos a usarla.",
+      "words": 17,
+      "chars": 102,
+      "lines": 2,
+      "size": 29.8,
+      "vw": 3.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 16503,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Ari Labs es un estudio pequeño en Mérida. Hacemos dos cosas: páginas web y apps.",
+      "words": 15,
+      "chars": 80,
+      "lines": 3,
+      "size": 38.4,
+      "vw": 5,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.22,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.71,
+      "top": 16714,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 13,
+     "maxLines": 4,
+     "over2Lines": 2,
+     "statements": 4,
+     "centered": 1,
+     "medianWords": 9,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter Tight",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      17,
+      18,
+      21,
+      22,
+      30,
+      36,
+      38,
+      53,
+      74,
+      80,
+      112
+     ],
+     "sizeCount": 15,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter Tight",
+      "size": 16.8,
+      "leading": 1.7,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 15.8
+     },
+     "measureChars": 49,
+     "max": {
+      "size": 112,
+      "vw": 14.6,
+      "font": "Inter Tight",
+      "text": "Ari Labs"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.04,
+     "smallText": 2
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0b1a21",
+     "bodyBgHsl": {
+      "h": 199,
+      "s": 0.5,
+      "l": 0.09
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#081116",
+       "top": 9638,
+       "hsl": {
+        "h": 201,
+        "s": 0.47,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#0f2630",
+       "top": 10878,
+       "hsl": {
+        "h": 198,
+        "s": 0.52,
+        "l": 0.12
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f2fbfe",
+       "share": 0.42
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.25
+      },
+      {
+       "color": "#dff5fd",
+       "share": 0.09
+      },
+      {
+       "color": "#def6fd",
+       "share": 0.08
+      },
+      {
+       "color": "#0b1a21",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#9ed8ee",
+      "hsl": {
+       "h": 197,
+       "s": 0.7,
+       "l": 0.78
+      },
+      "fg": "#0e0f11"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 2,
+     "scrims": 1,
+     "gradientSamples": [
+      "canvas#galaxia → radial-gradient(120% 80% at 50% 45%, rgb(11, 21, 38) 0%, rgb(7, 13, 24) 45%, rgb(3, 6, 12) 100%)",
+      "div.pantalla → linear-gradient(rgb(16, 26, 32), rgb(11, 17, 20) 60%)"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 1,
+     "boxRadius": 42,
+     "squareMedia": 5,
+     "roundedMedia": 3,
+     "mediaRadius": 26,
+     "textShadow": 3,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 54,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "inter tight"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 17387,
+    "margins": {
+     "left": 38,
+     "right": 38
+    },
+    "sections": [
+     {
+      "sel": "section#viaje.viaje",
+      "tag": "section",
+      "top": 54,
+      "height": 3891,
+      "words": 8,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Ari Labs",
+       "size": 112,
+       "tag": "h1"
+      },
+      "left": 38,
+      "right": 378,
+      "textLeft": 38,
+      "textRight": 378,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": true
+     },
+     {
+      "sel": "section#escena.escena",
+      "tag": "section",
+      "top": 3945,
+      "height": 4301,
+      "words": 6,
+      "media": 0,
+      "middle": 112,
+      "heading": null,
+      "left": 275,
+      "right": 275,
+      "textLeft": 275,
+      "textRight": 275,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": true
+     },
+     {
+      "sel": "section.cierre.visto",
+      "tag": "section",
+      "top": 8246,
+      "height": 819,
+      "words": 24,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Tu trabajo sigue igual.",
+       "size": 74,
+       "tag": "h2"
+      },
+      "left": 38,
+      "right": 254,
+      "textLeft": 38,
+      "textRight": 254,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.final.visto",
+      "tag": "section",
+      "top": 9065,
+      "height": 573,
+      "words": 4,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Mismo trabajo.",
+       "size": 80,
+       "tag": "p"
+      },
+      "left": 146,
+      "right": 146,
+      "textLeft": 146,
+      "textRight": 146,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#oferta.oferta",
+      "tag": "section",
+      "top": 9638,
+      "height": 843,
+      "words": 92,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Páginas web y apps para tu negocio",
+       "size": 53,
+       "tag": "h2"
+      },
+      "left": 38,
+      "right": 190,
+      "textLeft": 38,
+      "textRight": 190,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.revela.visto",
+      "tag": "div",
+      "top": 10624,
+      "height": 192,
+      "words": 21,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 38,
+      "right": 302,
+      "textLeft": 38,
+      "textRight": 302,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.vitrina.revela",
+      "tag": "div",
+      "top": 10858,
+      "height": 4205,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#trabajo.trabajo",
+      "tag": "section",
+      "top": 15063,
+      "height": 1008,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#proceso.proceso",
+      "tag": "section",
+      "top": 16071,
+      "height": 484,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#nosotros.nosotros",
+      "tag": "section",
+      "top": 16555,
+      "height": 708,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 17263,
+      "height": 124,
+      "words": 9,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 303,
+      "right": 303,
+      "textLeft": 303,
+      "textRight": 303,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 8900,
+      "height": 360
+     },
+     {
+      "top": 9444,
+      "height": 332
+     },
+     {
+      "top": 10812,
+      "height": 6448
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Ari Labs",
+      "size": 112,
+      "top": 768,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 38,
+      "n": 8
+     },
+     {
+      "x": 69,
+      "n": 4
+     },
+     {
+      "x": 294,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 17,
+    "stage": true,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.12,
+    0.1,
+    0.1,
+    0.1,
+    0.4,
+    0.4,
+    0.4,
+    0.08,
+    0.4,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 30,
+    "css": 4,
+    "transitions": 15,
+    "scripted": 11,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 13456,
+     "screens": 15.9,
+     "words": 436,
+     "img": 6,
+     "video": 0,
+     "canvas": 2,
+     "svg": 1,
+     "sections": 9,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 3,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "modelo-restaurante.webp",
+      "modelo-barberia.webp",
+      "modelo-consultorio.webp"
+     ],
+     "blendText": 2,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Ari Labs",
+     "words": 2,
+     "chars": 8,
+     "lines": 1,
+     "size": 66.3,
+     "vw": 17,
+     "font": "Inter Tight",
+     "weight": 300,
+     "tracking": -0.045,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.53,
+     "top": 654,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Ari Labs",
+     "words": 2,
+     "lines": 1,
+     "size": 66.3,
+     "font": "Inter Tight"
+    },
+    "headings": [
+     {
+      "text": "Ari Labs",
+      "words": 2,
+      "chars": 8,
+      "lines": 1,
+      "size": 66.3,
+      "vw": 17,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.045,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.53,
+      "top": 654,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Tu trabajo sigue igual. La forma de hacerlo, no.",
+      "words": 9,
+      "chars": 48,
+      "lines": 4,
+      "size": 43.2,
+      "vw": 11.1,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.03,
+      "leading": 1.04,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.84,
+      "top": 6992,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mismo trabajo. Menos ruido.",
+      "words": 4,
+      "chars": 27,
+      "lines": 2,
+      "size": 46.8,
+      "vw": 12,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 7599,
+      "mixedFonts": [
+       "Inter Tight",
+       "Inter Tight italic"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Páginas web y apps para tu negocio",
+      "words": 7,
+      "chars": 34,
+      "lines": 2,
+      "size": 36.4,
+      "vw": 9.3,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 7982,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Una página para que te encuentren",
+      "words": 6,
+      "chars": 33,
+      "lines": 2,
+      "size": 28.8,
+      "vw": 7.4,
+      "font": "Inter Tight",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.75,
+      "top": 8110,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Una app para tu forma de trabajar",
+      "words": 7,
+      "chars": 33,
+      "lines": 2,
+      "size": 28.8,
+      "vw": 7.4,
+      "font": "Inter Tight",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.75,
+      "top": 8361,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Modelos para empezar",
+      "words": 3,
+      "chars": 20,
+      "lines": 2,
+      "size": 36.4,
+      "vw": 9.3,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 8813,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mis citas, la agenda de un músico de eventos",
+      "words": 9,
+      "chars": 44,
+      "lines": 2,
+      "size": 36.4,
+      "vw": 9.3,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 11466,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Cómo trabajamos",
+      "words": 2,
+      "chars": 15,
+      "lines": 1,
+      "size": 36.4,
+      "vw": 9.3,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.035,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 12331,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Nos escribes por WhatsApp y nos cuentas qué haces y qué te gustaría resolver.",
+      "words": 14,
+      "chars": 77,
+      "lines": 3,
+      "size": 23,
+      "vw": 5.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 12394,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Te mandamos una vista previa para que la veas en tu teléfono y nos digas qué cambiar.",
+      "words": 17,
+      "chars": 85,
+      "lines": 3,
+      "size": 23,
+      "vw": 5.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 12496,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Cuando te gusta, queda funcionando: publicamos tu página o instalamos tu app, y te enseñamos a usarla.",
+      "words": 17,
+      "chars": 102,
+      "lines": 4,
+      "size": 23,
+      "vw": 5.9,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 12599,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Ari Labs es un estudio pequeño en Mérida. Hacemos dos cosas: páginas web y apps.",
+      "words": 15,
+      "chars": 80,
+      "lines": 4,
+      "size": 27.2,
+      "vw": 7,
+      "font": "Inter Tight",
+      "weight": 300,
+      "tracking": -0.02,
+      "leading": 1.22,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 12824,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 13,
+     "maxLines": 4,
+     "over2Lines": 2,
+     "statements": 4,
+     "centered": 1,
+     "medianWords": 9,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter Tight",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      15,
+      16,
+      17,
+      19,
+      21,
+      23,
+      27,
+      29,
+      36,
+      43,
+      47,
+      66
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter Tight",
+      "size": 16.8,
+      "leading": 1.7,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 15.8
+     },
+     "measureChars": 41,
+     "max": {
+      "size": 66.3,
+      "vw": 17,
+      "font": "Inter Tight",
+      "text": "Ari Labs"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.04,
+     "smallText": 2
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0b1a21",
+     "bodyBgHsl": {
+      "h": 199,
+      "s": 0.5,
+      "l": 0.09
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0b1114",
+       "top": 3420,
+       "hsl": {
+        "h": 200,
+        "s": 0.29,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#081116",
+       "top": 7864,
+       "hsl": {
+        "h": 201,
+        "s": 0.47,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#0f2630",
+       "top": 9037,
+       "hsl": {
+        "h": 198,
+        "s": 0.52,
+        "l": 0.12
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#f2fbfe",
+       "share": 0.42
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.25
+      },
+      {
+       "color": "#dff5fd",
+       "share": 0.09
+      },
+      {
+       "color": "#def6fd",
+       "share": 0.08
+      },
+      {
+       "color": "#0b1a21",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#9ed8ee",
+      "hsl": {
+       "h": 197,
+       "s": 0.7,
+       "l": 0.78
+      },
+      "fg": "#0e0f11"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 0,
+     "radius": "pill",
+     "height": 50,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 1,
+     "shadowSamples": [],
+     "gradients": 2,
+     "scrims": 1,
+     "gradientSamples": [
+      "canvas#galaxia → radial-gradient(120% 80% at 50% 45%, rgb(11, 21, 38) 0%, rgb(7, 13, 24) 45%, rgb(3, 6, 12) 100%)",
+      "div.pantalla → linear-gradient(rgb(16, 26, 32), rgb(11, 17, 20) 60%)"
+     ],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 3,
+     "boxRadius": 26,
+     "squareMedia": 5,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 3,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 54,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "inter tight"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 13456,
+    "margins": {
+     "left": 20,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "section#viaje.viaje",
+      "tag": "section",
+      "top": 54,
+      "height": 3207,
+      "words": 8,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Ari Labs",
+       "size": 66,
+       "tag": "h1"
+      },
+      "left": 20,
+      "right": 162,
+      "textLeft": 20,
+      "textRight": 162,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section#escena.escena",
+      "tag": "section",
+      "top": 3261,
+      "height": 3545,
+      "words": 6,
+      "media": 0,
+      "middle": 91,
+      "heading": null,
+      "left": 96,
+      "right": 96,
+      "textLeft": 96,
+      "textRight": 96,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section.cierre.visto",
+      "tag": "section",
+      "top": 6806,
+      "height": 624,
+      "words": 24,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Tu trabajo sigue igual.",
+       "size": 43,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 87,
+      "textLeft": 20,
+      "textRight": 87,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.final.visto",
+      "tag": "section",
+      "top": 7431,
+      "height": 433,
+      "words": 4,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Mismo trabajo.",
+       "size": 47,
+       "tag": "p"
+      },
+      "left": 56,
+      "right": 56,
+      "textLeft": 56,
+      "textRight": 56,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#oferta.oferta",
+      "tag": "section",
+      "top": 7864,
+      "height": 831,
+      "words": 92,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Páginas web y apps para tu negocio",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 24,
+      "textLeft": 20,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.revela.visto",
+      "tag": "div",
+      "top": 8813,
+      "height": 182,
+      "words": 21,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 29,
+      "textLeft": 20,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "a.modelo.grande",
+      "tag": "a",
+      "top": 9037,
+      "height": 747,
+      "words": 19,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 34,
+      "textLeft": 20,
+      "textRight": 51,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "a.modelo",
+      "tag": "a",
+      "top": 9808,
+      "height": 747,
+      "words": 15,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 34,
+      "textLeft": 20,
+      "textRight": 35,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "a.modelo",
+      "tag": "a",
+      "top": 10580,
+      "height": 747,
+      "words": 15,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 32,
+      "textLeft": 20,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#trabajo.trabajo",
+      "tag": "section",
+      "top": 11327,
+      "height": 865,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#proceso.proceso",
+      "tag": "section",
+      "top": 12193,
+      "height": 497,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#nosotros.nosotros",
+      "tag": "section",
+      "top": 12690,
+      "height": 657,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 7292,
+      "height": 300
+     },
+     {
+      "top": 7700,
+      "height": 276
+     },
+     {
+      "top": 11328,
+      "height": 2016
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Ari Labs",
+      "size": 66,
+      "top": 654,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 20,
+      "n": 8
+     },
+     {
+      "x": 48,
+      "n": 4
+     },
+     {
+      "x": 170,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 17,
+    "stage": true,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 1440,
+   "message": "4 headline(s) wrap past two lines at 1440px: \"Tu trabajo sigue igual. La forma de hacerlo, no.\" → 4 lines (9 words, 73.6px); \"Mis citas, la agenda de un músico de eventos\" → 4 lines (9 words, 70.4px); \"Cuando te gusta, queda funcionando: publicamos t\" → 3 lines (17 words, 38.4px, a paragraph set above 36px); \"Ari Labs es un estudio pequeño en Mérida. Hacemo\" → 3 lines (15 words, 38.4px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 36px or less."
+  },
+  {
+   "level": "WARN",
+   "id": "mixed-font-headline",
+   "width": 1440,
+   "message": "1 headline(s) switch typeface or to italic mid-line (the \"one italic serif word\" move).",
+   "fix": "Set the whole headline in one face. Emphasis comes from the words.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "2 gradient fill(s): canvas#galaxia → radial-gradient(120% 80% at 50% 45%, rgb(11, 21, 38) 0%, rgb(7, 13, 24) 45%, rgb(3, 6, 12) 100%) | div.pantalla → linear-gradient(rgb(16, 26, 32), rgb(11, 17, 20) 60%)",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "text-shadow",
+   "width": 1440,
+   "message": "3 text-shadow(s).",
+   "fix": "Remove; fix legibility with a scrim or a different crop.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "14 different font sizes (12, 13, 15, 16, 17, 20, 21, 26, 38, 48, 70, 74, 80, 112).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "blend-text",
+   "width": 1440,
+   "message": "2 text element(s) use mix-blend-mode difference or exclusion.",
+   "fix": "Over anything but black, white or grey, blended text takes random hues (blue on orange, lilac on green) that jurors read as a glitch. Use a solid ink chosen for the ground, or keep the blended text over neutral grounds only.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "small-text",
+   "width": 1440,
+   "message": "2 text block(s) under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The page sits off-centre: its content comes to 56px from the left edge but only to 168px from the right, at 1440px.",
+   "fix": "Give the page one pair of equal margins. Check the wrapper for a max-width without margin-inline: auto, a grid with an empty last column, or padding on one side only. If one side is meant to hold air, it must still be closed by something that reaches the margin (a picture, the navigation's last item, a figure)."
+  },
+  {
+   "level": "FAIL",
+   "id": "lopsided",
+   "width": 1440,
+   "message": "2 sections keep all their content on one side and leave 63% of the width empty: \"Tu trabajo sigue igual.\" (right 908px empty); div.revela.visto (right 829px empty)",
+   "fix": "Use the whole width the page has set up: put the section's picture, its second column, its list or its figure in the empty half, or set the text larger across the grid. Empty space must be placed, with something on each side of it."
+  },
+  {
+   "level": "WARN",
+   "id": "blank-gap",
+   "width": 1440,
+   "message": "1 stretch(es) of the page hold nothing at all: 1928px at 10940px (the screen is 900px tall).",
+   "fix": "A fixed picture layer covers the screen here, so the DOM cannot tell whether the stretch is empty: check the screenshots. Close the gap: a section gap is 120–240px on desktop and 72–112px on a phone. Look for a min-height: 100vh on a short section, an empty grid row, a hidden element still holding its space, or a reveal that never fired. A deliberate rest is a placed picture or colour field, not nothing.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 1440,
+   "message": "The h1 is a bare name (\"Ari Labs\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "pinned-over-picture",
+   "width": 1440,
+   "message": "Pinned large text slides across pictures while the page scrolls: \"Ari Labs\" (screen 4, 100% over a picture)",
+   "fix": "Jurors read a pinned title crossing drawings or photographs as a collision. Keep the pictures in the column the title does not occupy, or unpin it.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "long-pin",
+   "width": 1440,
+   "message": "The same large text stays on screen for 4 screens in a row: \"Ari Labs\"",
+   "fix": "A pinned element earns two screens, and something must change at each. Shorten the run or give every screen its own content."
+  },
+  {
+   "level": "FAIL",
+   "id": "empty-screens",
+   "width": 1440,
+   "message": "9 of 12 desktop screens are almost empty ground (under 20% of the screen holds text, a picture or a colour field): screens 1, 2, 3, 4, 5, 6, 7, 8, 9.",
+   "fix": "An empty screen is a rest only once per page. Elsewhere it means the section is underbuilt: set its content larger, give it the full information, put it on a colour field, or cut it."
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 768,
+   "message": "2 headline(s) wrap past two lines at 768px: \"Tu trabajo sigue igual. La forma de hacerlo, no.\" → 4 lines (9 words, 73.6px); \"Ari Labs es un estudio pequeño en Mérida. Hacemo\" → 3 lines (15 words, 38.4px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 32px or less."
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 390,
+   "message": "2 headline(s) wrap past two lines at 390px: \"Tu trabajo sigue igual. La forma de hacerlo, no.\" → 4 lines (9 words, 43.2px); \"Ari Labs es un estudio pequeño en Mérida. Hacemo\" → 4 lines (15 words, 27.2px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 24px or less."
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 390,
+   "message": "No visible button in the first phone screen.",
+   "fix": "On a phone the first screen still holds the headline, the supporting sentence and the action; move navigation into one row or a menu so it does not push them down."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-index/desktop-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-index/desktop-page-01.jpg",
+    "/home/user/ari-labs/.taste-skill/insp-index/desktop-page-02.jpg",
+    "/home/user/ari-labs/.taste-skill/insp-index/desktop-page-03.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-index/tablet-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-index/tablet-page-01.jpg",
+    "/home/user/ari-labs/.taste-skill/insp-index/tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-index/mobile-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-index/mobile-page-01.jpg",
+    "/home/user/ari-labs/.taste-skill/insp-index/mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

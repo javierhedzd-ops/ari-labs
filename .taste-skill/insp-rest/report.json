@@ -1,0 +1,1893 @@
+{
+ "url": "modelos/restaurante/index.html",
+ "at": "2026-10-31T03:32:50.104Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.63,
+    0.67,
+    0.63,
+    0.39
+   ],
+   "motion": {
+    "elements": 32,
+    "css": 1,
+    "transitions": 31,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 3237,
+     "screens": 3.6,
+     "words": 277,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "LA COCINA DE CHELA",
+     "words": 4,
+     "chars": 18,
+     "lines": 2,
+     "size": 80,
+     "vw": 5.6,
+     "font": "Imbue",
+     "weight": 400,
+     "tracking": -0.01,
+     "leading": 0.9,
+     "upper": true,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.26,
+     "top": 162,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "LA COCINA DE CHELA",
+     "words": 4,
+     "lines": 2,
+     "size": 80,
+     "font": "Imbue"
+    },
+    "headings": [
+     {
+      "text": "LA COCINA DE CHELA",
+      "words": 4,
+      "chars": 18,
+      "lines": 2,
+      "size": 80,
+      "vw": 5.6,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.26,
+      "top": 162,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "CHOCOLOMO",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 57.6,
+      "vw": 4,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.92,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.51,
+      "top": 498,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$130",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 51.2,
+      "vw": 3.6,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.04,
+      "top": 529,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "LA SEMANA",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.61,
+      "top": 977,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "TODOS LOS DÍAS",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.61,
+      "top": 1831,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "DESAYUNOS",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 41.6,
+      "vw": 2.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.95,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.28,
+      "top": 1933,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "ANTOJITOS",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 41.6,
+      "vw": 2.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.95,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.28,
+      "top": 1933,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "DÓNDE ESTAMOS",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 70.4,
+      "vw": 4.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.29,
+      "top": 2446,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "CHELA",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 128,
+      "vw": 8.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.85,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.64,
+      "top": 2972,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 9,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 3,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Albert Sans",
+       "share": 0.93,
+       "mono": false
+      },
+      {
+       "family": "Imbue",
+       "share": 0.07,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      19,
+      26,
+      42,
+      51,
+      58,
+      70,
+      80,
+      128
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Albert Sans",
+      "size": 19,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.4
+     },
+     "measureChars": 55,
+     "max": {
+      "size": 128,
+      "vw": 8.9,
+      "font": "Imbue",
+      "text": "Chela"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.06,
+     "centerShare": 0.05,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#1f2b4d",
+     "bodyBgHsl": {
+      "h": 224,
+      "s": 0.43,
+      "l": 0.21
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 106,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#e3e1dc",
+       "top": 1775,
+       "hsl": {
+        "h": 43,
+        "s": 0.11,
+        "l": 0.88
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2b4d",
+       "share": 0.48
+      },
+      {
+       "color": "#4d556b",
+       "share": 0.39
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.06
+      },
+      {
+       "color": "#c9cfdf",
+       "share": 0.05
+      },
+      {
+       "color": "#f7941d",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1f2b4d",
+      "hsl": {
+       "h": 224,
+       "s": 0.43,
+       "l": 0.21
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Apartar mi plato por WhatsApp"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 3,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 921
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": null,
+    "fontsLoaded": [
+     "albert sans",
+     "imbue"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 3237,
+    "margins": {
+     "left": 256,
+     "right": 280
+    },
+    "sections": [
+     {
+      "sel": "div.mesa",
+      "tag": "div",
+      "top": 42,
+      "height": 846,
+      "words": 43,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "La Cocina de Chela",
+       "size": 80,
+       "tag": "h1"
+      },
+      "left": 280,
+      "right": 280,
+      "textLeft": 280,
+      "textRight": 312,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#semana.semana",
+      "tag": "section",
+      "top": 921,
+      "height": 855,
+      "words": 89,
+      "media": 0,
+      "middle": 327,
+      "heading": {
+       "text": "La semana",
+       "size": 70,
+       "tag": "h2"
+      },
+      "left": 280,
+      "right": 298,
+      "textLeft": 280,
+      "textRight": 298,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.reverso",
+      "tag": "section",
+      "top": 1775,
+      "height": 583,
+      "words": 68,
+      "media": 0,
+      "middle": 124,
+      "heading": {
+       "text": "Todos los días",
+       "size": 70,
+       "tag": "h2"
+      },
+      "left": 280,
+      "right": 280,
+      "textLeft": 280,
+      "textRight": 280,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#visitanos.donde",
+      "tag": "section",
+      "top": 2390,
+      "height": 487,
+      "words": 36,
+      "media": 1,
+      "middle": 71,
+      "heading": {
+       "text": "Dónde estamos",
+       "size": 70,
+       "tag": "h2"
+      },
+      "left": 280,
+      "right": 280,
+      "textLeft": 280,
+      "textRight": 775,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 2876,
+      "height": 361,
+      "words": 15,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Chela",
+       "size": 128,
+       "tag": "p"
+      },
+      "left": 256,
+      "right": 715,
+      "textLeft": 256,
+      "textRight": 715,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "LA COCINA DE CHELA",
+      "size": 80,
+      "top": 162,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 280,
+      "n": 7
+     },
+     {
+      "x": 752,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 8,
+    "bodySize": 19,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.18,
+    "voidBox": {
+     "x": 780,
+     "y": 120,
+     "w": 660,
+     "h": 360
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.88,
+    1,
+    0.92,
+    0.75
+   ],
+   "motion": {
+    "elements": 32,
+    "css": 1,
+    "transitions": 31,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 3283,
+     "screens": 3.2,
+     "words": 277,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "LA COCINA DE CHELA",
+     "words": 4,
+     "chars": 18,
+     "lines": 2,
+     "size": 56.1,
+     "vw": 7.3,
+     "font": "Imbue",
+     "weight": 400,
+     "tracking": -0.01,
+     "leading": 0.9,
+     "upper": true,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.35,
+     "top": 119,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "LA COCINA DE CHELA",
+     "words": 4,
+     "lines": 2,
+     "size": 56.1,
+     "font": "Imbue"
+    },
+    "headings": [
+     {
+      "text": "LA COCINA DE CHELA",
+      "words": 4,
+      "chars": 18,
+      "lines": 2,
+      "size": 56.1,
+      "vw": 7.3,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.35,
+      "top": 119,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "CHOCOLOMO",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 45.3,
+      "vw": 5.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.92,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.67,
+      "top": 391,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$130",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 42.2,
+      "vw": 5.5,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.07,
+      "top": 418,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "LA SEMANA",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 53.1,
+      "vw": 6.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 759,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "TODOS LOS DÍAS",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 53.1,
+      "vw": 6.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 1548,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "DESAYUNOS",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 34.6,
+      "vw": 4.5,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.95,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 1634,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "ANTOJITOS",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 34.6,
+      "vw": 4.5,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.95,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.41,
+      "top": 1634,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "DÓNDE ESTAMOS",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 53.1,
+      "vw": 6.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 2090,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "CHELA",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 85.1,
+      "vw": 11.1,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.85,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3055,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 9,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 3,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Albert Sans",
+       "share": 0.93,
+       "mono": false
+      },
+      {
+       "family": "Imbue",
+       "share": 0.07,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      18,
+      23,
+      35,
+      42,
+      45,
+      53,
+      56,
+      85
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Albert Sans",
+      "size": 17.9,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.4
+     },
+     "measureChars": 55,
+     "max": {
+      "size": 85.1,
+      "vw": 11.1,
+      "font": "Imbue",
+      "text": "Chela"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.06,
+     "centerShare": 0.05,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#1f2b4d",
+     "bodyBgHsl": {
+      "h": 224,
+      "s": 0.43,
+      "l": 0.21
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 81,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#e3e1dc",
+       "top": 1510,
+       "hsl": {
+        "h": 43,
+        "s": 0.11,
+        "l": 0.88
+       }
+      },
+      {
+       "color": "#f4f4f2",
+       "top": 2436,
+       "hsl": {
+        "h": 60,
+        "s": 0.08,
+        "l": 0.95
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2b4d",
+       "share": 0.48
+      },
+      {
+       "color": "#4d556b",
+       "share": 0.39
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.06
+      },
+      {
+       "color": "#c9cfdf",
+       "share": 0.05
+      },
+      {
+       "color": "#f7941d",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1f2b4d",
+      "hsl": {
+       "h": 224,
+       "s": 0.43,
+       "l": 0.21
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Apartar mi plato por WhatsApp"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": null,
+    "fontsLoaded": [
+     "albert sans",
+     "imbue"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 3283,
+    "margins": {
+     "left": 31,
+     "right": 38
+    },
+    "sections": [
+     {
+      "sel": "div.mesa",
+      "tag": "div",
+      "top": 42,
+      "height": 655,
+      "words": 43,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "La Cocina de Chela",
+       "size": 56,
+       "tag": "h1"
+      },
+      "left": 69,
+      "right": 69,
+      "textLeft": 69,
+      "textRight": 92,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#semana.semana",
+      "tag": "section",
+      "top": 721,
+      "height": 789,
+      "words": 89,
+      "media": 0,
+      "middle": 169,
+      "heading": {
+       "text": "La semana",
+       "size": 53,
+       "tag": "h2"
+      },
+      "left": 38,
+      "right": 56,
+      "textLeft": 38,
+      "textRight": 56,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.reverso",
+      "tag": "section",
+      "top": 1510,
+      "height": 518,
+      "words": 68,
+      "media": 0,
+      "middle": 31,
+      "heading": {
+       "text": "Todos los días",
+       "size": 53,
+       "tag": "h2"
+      },
+      "left": 38,
+      "right": 38,
+      "textLeft": 38,
+      "textRight": 38,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#visitanos.donde",
+      "tag": "section",
+      "top": 2051,
+      "height": 942,
+      "words": 36,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Dónde estamos",
+       "size": 53,
+       "tag": "h2"
+      },
+      "left": 38,
+      "right": 38,
+      "textLeft": 38,
+      "textRight": 106,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 2993,
+      "height": 290,
+      "words": 15,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Chela",
+       "size": 85,
+       "tag": "p"
+      },
+      "left": 31,
+      "right": 268,
+      "textLeft": 31,
+      "textRight": 268,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "LA COCINA DE CHELA",
+      "size": 56,
+      "top": 119,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 38,
+      "n": 5
+     },
+     {
+      "x": 69,
+      "n": 2
+     },
+     {
+      "x": 416,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 8,
+    "bodySize": 18,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.91,
+    1,
+    1,
+    0.82,
+    0.73
+   ],
+   "motion": {
+    "elements": 32,
+    "css": 1,
+    "transitions": 31,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 3475,
+     "screens": 4.1,
+     "words": 277,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "LA SEMANA",
+     "words": 2,
+     "chars": 9,
+     "lines": 1,
+     "size": 41.6,
+     "vw": 10.7,
+     "font": "Imbue",
+     "weight": 400,
+     "tracking": -0.01,
+     "leading": 0.9,
+     "upper": true,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.86,
+     "top": 771,
+     "tag": "h2",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "LA COCINA DE CHELA",
+     "words": 4,
+     "lines": 2,
+     "size": 38.7,
+     "font": "Imbue"
+    },
+    "headings": [
+     {
+      "text": "LA COCINA DE CHELA",
+      "words": 4,
+      "chars": 18,
+      "lines": 2,
+      "size": 38.7,
+      "vw": 9.9,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 108,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "CHOCOLOMO",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 32.5,
+      "vw": 8.3,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.92,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.69,
+      "top": 335,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$130",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 32,
+      "vw": 8.2,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.69,
+      "top": 436,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "LA SEMANA",
+      "words": 2,
+      "chars": 9,
+      "lines": 1,
+      "size": 41.6,
+      "vw": 10.7,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 771,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "TODOS LOS DÍAS",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 41.6,
+      "vw": 10.7,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 1797,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "DESAYUNOS",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 7.4,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.95,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 1873,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "ANTOJITOS",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 7.4,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.95,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 2129,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "DÓNDE ESTAMOS",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 41.6,
+      "vw": 10.7,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": -0.01,
+      "leading": 0.9,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 2571,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "CHELA",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 51.1,
+      "vw": 13.1,
+      "font": "Imbue",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.85,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3254,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 9,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 3,
+     "centered": 0,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Albert Sans",
+       "share": 0.93,
+       "mono": false
+      },
+      {
+       "family": "Imbue",
+       "share": 0.07,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      17,
+      20,
+      29,
+      32,
+      33,
+      39,
+      42,
+      51
+     ],
+     "sizeCount": 9,
+     "notLoaded": [],
+     "body": {
+      "font": "Albert Sans",
+      "size": 17,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.4
+     },
+     "measureChars": 39,
+     "max": {
+      "size": 51.1,
+      "vw": 13.1,
+      "font": "Imbue",
+      "text": "Chela"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.06,
+     "centerShare": 0.05,
+     "smallText": 0
+    },
+    "eyebrows": [
+     {
+      "text": "Modelo de con un negocio de ejemplo.",
+      "above": "LA COCINA DE CHELA",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 14,
+      "top": 0
+     },
+     {
+      "text": "Chocolomo",
+      "above": "TODOS LOS DÍAS",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 17,
+      "top": 1674
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#1f2b4d",
+     "bodyBgHsl": {
+      "h": 224,
+      "s": 0.43,
+      "l": 0.21
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 84,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#e3e1dc",
+       "top": 1769,
+       "hsl": {
+        "h": 43,
+        "s": 0.11,
+        "l": 0.88
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2b4d",
+       "share": 0.48
+      },
+      {
+       "color": "#4d556b",
+       "share": 0.39
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.06
+      },
+      {
+       "color": "#c9cfdf",
+       "share": 0.05
+      },
+      {
+       "color": "#f7941d",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1f2b4d",
+      "hsl": {
+       "h": 224,
+       "s": 0.43,
+       "l": 0.21
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": 0,
+     "height": 53,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Apartar mi plato por WhatsApp"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 962
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": null,
+    "fontsLoaded": [
+     "albert sans",
+     "imbue"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 3475,
+    "margins": {
+     "left": 16,
+     "right": 28
+    },
+    "sections": [
+     {
+      "sel": "div.mesa",
+      "tag": "div",
+      "top": 64,
+      "height": 659,
+      "words": 43,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "La Cocina de Chela",
+       "size": 39,
+       "tag": "h1"
+      },
+      "left": 40,
+      "right": 40,
+      "textLeft": 40,
+      "textRight": 54,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#semana.semana",
+      "tag": "section",
+      "top": 743,
+      "height": 1025,
+      "words": 89,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "La semana",
+       "size": 42,
+       "tag": "h2"
+      },
+      "left": 28,
+      "right": 42,
+      "textLeft": 28,
+      "textRight": 42,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.reverso",
+      "tag": "section",
+      "top": 1769,
+      "height": 755,
+      "words": 68,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Todos los días",
+       "size": 42,
+       "tag": "h2"
+      },
+      "left": 28,
+      "right": 28,
+      "textLeft": 28,
+      "textRight": 28,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#visitanos.donde",
+      "tag": "section",
+      "top": 2543,
+      "height": 663,
+      "words": 36,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Dónde estamos",
+       "size": 42,
+       "tag": "h2"
+      },
+      "left": 28,
+      "right": 28,
+      "textLeft": 28,
+      "textRight": 28,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 3206,
+      "height": 269,
+      "words": 15,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Chela",
+       "size": 51,
+       "tag": "p"
+      },
+      "left": 16,
+      "right": 29,
+      "textLeft": 16,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "LA COCINA DE CHELA",
+      "size": 39,
+      "top": 108,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 28,
+      "n": 6
+     },
+     {
+      "x": 40,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 8,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The margins differ: 256px on the left, 280px on the right, at 1440px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 390,
+   "message": "2 eyebrow/kicker label(s) above headings: \"Modelo de con un negocio de ejemplo.\" above \"LA COCINA DE CHELA\"; \"Chocolomo\" above \"TODOS LOS DÍAS\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-rest/desktop-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-rest/desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-rest/tablet-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-rest/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-rest/mobile-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-rest/mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

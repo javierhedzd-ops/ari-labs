@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbería Navaja · Modelo de barbería · Ari Labs</title>
+<meta name="description" content="Modelo de página web para barbería o estética, de Ari Labs. Negocio de ejemplo.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f0f0e">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* La página es la tabla de precios pintada en el espejo: letras grandes, oro solo en lo que se toca. */
+  :root{
+    --negro:#0f0f0e; --tabla:#1b1a18; --tabla-2:#262420; --hueso:#f4f4f4; --tenue:#bdb5a8;
+    --oro:#d9a441; --margen:clamp(16px,4vw,32px);
+    --s-chica:0.95rem; --s-texto:clamp(1.0625rem,1rem + .25vw,1.1875rem); --s-lead:clamp(1.25rem,1.1rem + .7vw,1.6rem);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--negro);color:var(--hueso);font:400 var(--s-texto)/1.55 "Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .display{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.88;letter-spacing:-.005em}
+  .envoltura{max-width:76rem;margin:0 auto;padding:0 var(--margen)}
+  .boton{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:54px;padding:0 1.6rem;border-radius:999px;
+    background:var(--oro);color:var(--negro);font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:1rem;
+    transition:transform .15s ease, background .2s ease}
+  .boton:hover{background:#e8b65a}
+  .boton:active{transform:scale(.97)}
+  :focus-visible{outline:3px solid var(--oro);outline-offset:3px}
+  .boton svg{width:20px;height:20px}
+
+  .aviso-modelo{background:var(--oro);color:var(--negro);font-size:var(--s-chica);text-align:center;padding:.65rem var(--margen)}
+  .aviso-modelo a{font-weight:600}
+
+  header.barra{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.2rem 0}
+  .barra .marca{font-family:"Anton",sans-serif;font-size:1.5rem;text-decoration:none;letter-spacing:.04em}
+  .barra nav{display:flex;gap:1.4rem}
+  .barra nav a{text-decoration:none;font-weight:500;min-height:44px;display:inline-flex;align-items:center}
+  .barra nav a:hover{color:var(--oro)}
+
+  /* portada: el nombre de muro a muro y el poste de barbero como una franja que gira */
+  .portada{display:grid;gap:2rem;padding:clamp(24px,5vw,56px) 0 clamp(48px,8vw,96px);align-items:end}
+  h1{font-size:clamp(5.2rem,2rem + 17vw,17rem);margin:0}
+  .portada .lado{display:grid;gap:1.6rem;align-content:end}
+  .portada .lado p{font-size:var(--s-lead);line-height:1.35;margin:0;max-width:28ch}
+  .poste{height:clamp(14px,2vw,22px);border-radius:999px;overflow:hidden;background:var(--hueso);position:relative}
+  .poste::before{content:"";position:absolute;inset:0 -80px 0 0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 20'%3E%3Cpath d='M0 20L20 0H40L20 20Z' fill='%23b3261e'/%3E%3Cpath d='M40 20L60 0H80L60 20Z' fill='%23255fa6'/%3E%3C/svg%3E") repeat-x;
+    background-size:80px 100%;animation:gira 3s linear infinite}
+  @keyframes gira{to{transform:translateX(80px)}}
+  @media (min-width:900px){ .portada{grid-template-columns:1.35fr 1fr;gap:3rem} }
+
+  /* la tabla: escoges, se suma y sale tu mensaje */
+  section{padding:clamp(56px,9vw,120px) 0 0}
+  h2{font-size:clamp(3rem,1.6rem + 6vw,6.5rem);margin:0 0 1.2rem}
+  .entrada{color:var(--tenue);margin:0 0 2rem;max-width:44ch}
+  .tablero{display:grid;gap:clamp(20px,3vw,40px);align-items:start}
+  .precios{display:grid;gap:4px}
+  .servicio{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"marca nombre precio" "marca desc precio";gap:.2rem 1rem;align-items:center;background:var(--tabla);padding:1.1rem 1.2rem;cursor:pointer;
+    transition:background .2s ease, transform .15s ease}
+  .servicio:hover{background:var(--tabla-2)}
+  .servicio:active{transform:scale(.995)}
+  .servicio input{appearance:none;-webkit-appearance:none;width:26px;height:26px;border-radius:50%;margin:0;background:var(--tabla-2);
+    display:grid;place-items:center;cursor:pointer;transition:background .2s ease}
+  .servicio input::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--negro);transform:scale(0);transition:transform .2s ease}
+  .servicio input:checked{background:var(--oro)}
+  .servicio input:checked::after{transform:scale(1)}
+  .servicio .nombre{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(1.4rem,1rem + 1.4vw,2rem);line-height:1}
+  .servicio input{grid-area:marca} .servicio .nombre{grid-area:nombre} .servicio .precio{grid-area:precio}
+  .servicio .desc{grid-area:desc;font-size:1rem;color:var(--tenue);line-height:1.4}
+  .servicio .precio{font-family:"Anton",sans-serif;font-size:clamp(1.6rem,1.1rem + 1.6vw,2.4rem);color:var(--hueso)}
+  .servicio:has(input:checked){background:var(--tabla-2)}
+  .servicio:has(input:checked) .precio{color:var(--oro)}
+
+  .cuenta{background:var(--hueso);color:var(--negro);padding:clamp(22px,3vw,32px);display:grid;gap:1rem}
+  .cuenta h3{font-family:"Anton",sans-serif;text-transform:uppercase;font-weight:400;font-size:2rem;line-height:1;margin:0}
+  .cuenta .total{font-family:"Anton",sans-serif;font-size:clamp(3rem,2rem + 3vw,4.4rem);line-height:.9;margin:0}
+  .cuenta p{margin:0}
+  .cuenta .boton{background:var(--negro);color:var(--hueso)}
+  .cuenta .boton:hover{background:#2a2925}
+  .cuenta .boton[aria-disabled="true"]{opacity:.45;pointer-events:none}
+  .nota{color:var(--tenue);font-size:var(--s-chica);margin:1rem 0 0;max-width:60ch}
+  @media (min-width:900px){ .tablero{grid-template-columns:1.5fr 1fr} .cuenta{position:sticky;top:24px} }
+
+  /* el lugar */
+  .lugar{display:grid;gap:2rem;align-items:center}
+  .lugar address{font-style:normal;font-size:var(--s-lead);line-height:1.35;margin:0 0 1.4rem;max-width:26ch}
+  .horario{list-style:none;padding:0;margin:0 0 2rem;max-width:26rem}
+  .horario li{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0}
+  .horario li span:last-child{white-space:nowrap;font-weight:600}
+  .plano{width:100%;height:auto;display:block}
+  @media (min-width:900px){ .lugar{grid-template-columns:1fr 1.2fr} }
+
+  footer{padding:clamp(64px,10vw,140px) 0 7rem}
+  footer .display{font-size:clamp(5rem,2rem + 18vw,18rem);margin:0 0 1rem;color:var(--hueso)}
+  footer p{margin:0;color:var(--tenue);font-size:var(--s-chica)}
+
+  .flota{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:10;
+    width:58px;height:58px;border-radius:50%;background:var(--oro);color:var(--negro);display:grid;place-items:center}
+  .flota svg{width:28px;height:28px}
+
+  .js .entra{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.2,1);transition-delay:var(--retraso,0s)}
+  .js .entra.visto{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .js .entra{opacity:1;transform:none;transition:none}
+    .poste::before{animation:none}
+    .boton,.servicio,.servicio input,.servicio input::after{transition:none}
+  }
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<div class="aviso-modelo">Modelo de <a href="../../">Ari Labs</a> con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así</a></div>
+
+<div class="envoltura">
+  <header class="barra">
+    <a class="marca" href="#">Navaja</a>
+    <nav aria-label="Secciones"><a href="#tabla">Precios</a><a href="#lugar">Dónde</a></nav>
+  </header>
+
+  <main>
+    <div class="portada">
+      <h1 class="display">Navaja</h1>
+      <div class="lado">
+        <div class="poste" aria-hidden="true"></div>
+        <p>Barbería en García Ginerés. Escoge tu servicio, te decimos cuánto es y apartas tu silla por WhatsApp.</p>
+        <div><a class="boton" href="#tabla">Escoger mi servicio</a></div>
+      </div>
+    </div>
+
+    <section id="tabla" aria-labelledby="t-tabla">
+      <h2 class="display" id="t-tabla">La tabla</h2>
+      <p class="entrada">Todo incluye lavado y toalla caliente. Marca lo que quieres y sale tu cuenta.</p>
+      <div class="tablero">
+        <fieldset class="precios" style="border:0;margin:0;padding:0">
+          <legend class="visualmente-oculto" style="position:absolute;left:-9999px">Servicios</legend>
+          <label class="servicio"><input type="checkbox" value="Corte clásico" data-precio="180" data-min="40"><span class="nombre">Corte clásico</span><span class="desc">Tijera y máquina, 40 min</span><span class="precio">$180</span></label>
+          <label class="servicio"><input type="checkbox" value="Fade" data-precio="200" data-min="45"><span class="nombre">Fade</span><span class="desc">Bajo, medio o alto, 45 min</span><span class="precio">$200</span></label>
+          <label class="servicio"><input type="checkbox" value="Barba" data-precio="150" data-min="30"><span class="nombre">Barba</span><span class="desc">Perfilado con navaja y aceite, 30 min</span><span class="precio">$150</span></label>
+          <label class="servicio"><input type="checkbox" value="Mascarilla" data-precio="90" data-min="15"><span class="nombre">Mascarilla</span><span class="desc">Limpieza de cara, 15 min</span><span class="precio">$90</span></label>
+          <label class="servicio"><input type="checkbox" value="Corte de niño" data-precio="150" data-min="30"><span class="nombre">Corte de niño</span><span class="desc">Hasta 12 años, 30 min</span><span class="precio">$150</span></label>
+          <label class="servicio"><input type="checkbox" value="Ceja" data-precio="60" data-min="10"><span class="nombre">Ceja</span><span class="desc">Para salir impecable, 10 min</span><span class="precio">$60</span></label>
+        </fieldset>
+        <aside class="cuenta" aria-live="polite">
+          <h3>Tu cuenta</h3>
+          <p class="total" id="total">$0</p>
+          <p id="detalle">Marca uno o más servicios.</p>
+          <a class="boton" id="mandar" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg>
+            Apartar mi silla
+          </a>
+        </aside>
+      </div>
+      <p class="nota">Servicios y precios de ejemplo: en tu página van los tuyos, y el botón manda el mensaje a tu WhatsApp.</p>
+    </section>
+
+    <section id="lugar" aria-labelledby="t-lugar">
+      <div class="lugar">
+        <div>
+          <h2 class="display" id="t-lugar">El lugar</h2>
+          <address>Calle 27 por 20, García Ginerés, Mérida. Hay lugar para estacionarse enfrente.</address>
+          <ul class="horario">
+            <li><span>Martes a viernes</span><span>10 a. m. a 8 p. m.</span></li>
+            <li><span>Sábado</span><span>9 a. m. a 6 p. m.</span></li>
+            <li><span>Domingo y lunes</span><span>Cerrado</span></li>
+          </ul>
+          <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Garc%C3%ADa+Gin%C3%A9res+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+        <svg class="plano" viewBox="0 0 520 380" role="img" aria-label="Plano del cruce de la calle 27 con la 20, en García Ginerés">
+          <rect width="520" height="380" fill="#1b1a18"/>
+          <g fill="#262420">
+            <rect x="24" y="24" width="150" height="100"/><rect x="214" y="24" width="120" height="100"/><rect x="374" y="24" width="122" height="100"/>
+            <rect x="24" y="164" width="150" height="70"/><rect x="374" y="164" width="122" height="70"/>
+            <rect x="24" y="274" width="150" height="82"/><rect x="214" y="274" width="120" height="82"/><rect x="374" y="274" width="122" height="82"/>
+          </g>
+          <rect x="214" y="164" width="120" height="70" fill="#d9a441"/>
+          <g fill="#f4f4f4" font-family="Inter, sans-serif" font-size="15" font-weight="600">
+            <text x="196" y="360" transform="rotate(-90 196 360)">Calle 20</text>
+            <text x="34" y="154">Calle 27</text>
+            <text x="384" y="264">Calle 29</text>
+          </g>
+          <text x="274" y="204" fill="#0f0f0e" font-family="Anton, sans-serif" font-size="22" text-anchor="middle" dominant-baseline="middle">NAVAJA</text>
+        </svg>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="display" aria-hidden="true">Navaja</p>
+    <p>Barbería Navaja es un negocio de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</p>
+  </footer>
+</div>
+
+<a class="flota" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 8.8c.2 2.6 2.4 5 5.2 5.4l1-1.2-1.6-.9-.7.6a4 4 0 0 1-2-2l.6-.7-.9-1.6z"/></svg>
+</a>
+
+<script>
+  (function(){
+    // La cuenta: suma precio y minutos, y arma el mensaje de WhatsApp.
+    // En el modelo real, wa.me lleva el número del negocio: https://wa.me/52XXXXXXXXXX?text=...
+    var marcas = document.querySelectorAll('.servicio input');
+    var total = document.getElementById('total'), detalle = document.getElementById('detalle'), mandar = document.getElementById('mandar');
+    function cuenta(){
+      var elegidos = [].filter.call(marcas, function(m){ return m.checked; });
+      var pesos = 0, minutos = 0;
+      elegidos.forEach(function(m){ pesos += +m.dataset.precio; minutos += +m.dataset.min; });
+      total.textContent = '$' + pesos;
+      if (!elegidos.length){ detalle.textContent = 'Marca uno o más servicios.'; mandar.setAttribute('aria-disabled', 'true'); mandar.href = 'https://wa.link/eut47p'; return; }
+      var h = Math.floor(minutos / 60), m = minutos % 60;
+      var tiempo = (h ? h + ' h ' : '') + (m ? m + ' min' : '');
+      var nombres = elegidos.map(function(e){ return e.value.toLowerCase(); });
+      var lista = nombres.length > 1 ? nombres.slice(0, -1).join(', ') + ' y ' + nombres[nombres.length - 1] : nombres[0];
+      detalle.textContent = 'Son ' + tiempo.trim() + ' en la silla: ' + lista + '.';
+      mandar.removeAttribute('aria-disabled');
+      mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero apartar silla en Navaja para ' + lista + ' ($' + pesos + '). ¿Qué hora tienen?');
+    }
+    marcas.forEach(function(m){ m.addEventListener('change', cuenta); });
+    var flota = document.querySelector('.flota'), tabla = document.getElementById('tabla');
+    if ('IntersectionObserver' in window && flota && tabla){
+      new IntersectionObserver(function(es){ flota.style.display = es[0].isIntersecting ? 'none' : ''; }).observe(tabla);
+    }
+    cuenta();
+
+    // Entradas pieza por pieza.
+    var piezas = [];
+    document.querySelectorAll('.portada h1, .portada .lado > *, section h2, section .entrada, .servicio, .cuenta, .lugar address, .horario, .lugar .boton, .plano, footer > *').forEach(function(el){
+      var grupo = el.closest('section, .portada, footer');
+      var i = grupo.__n = (grupo.__n || 0) + 1;
+      el.style.setProperty('--retraso', Math.min(i - 1, 8) * 0.07 + 's');
+      el.classList.add('entra'); piezas.push(el);
+    });
+    if (!('IntersectionObserver' in window)){ piezas.forEach(function(p){ p.classList.add('visto'); }); return; }
+    var ojo = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } }); }, {threshold:.1});
+    piezas.forEach(function(p){ ojo.observe(p); });
+  })();
+</script>
+</body>
+</html>

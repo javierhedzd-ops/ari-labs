@@ -1,0 +1,1774 @@
+{
+ "url": "modelos/consultorio/index.html",
+ "at": "2026-10-31T03:39:15.753Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.87,
+    0.23,
+    0.43,
+    0.51
+   ],
+   "motion": {
+    "elements": 29,
+    "css": 3,
+    "transitions": 26,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 3460,
+     "screens": 3.8,
+     "words": 248,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Sin miedo al dentista",
+     "words": 4,
+     "chars": 21,
+     "lines": 2,
+     "size": 105.6,
+     "vw": 7.3,
+     "font": "Manrope",
+     "weight": 800,
+     "tracking": -0.04,
+     "leading": 0.95,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.54,
+     "top": 202,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Sin miedo al dentista",
+     "words": 4,
+     "lines": 2,
+     "size": 105.6,
+     "font": "Manrope"
+    },
+    "headings": [
+     {
+      "text": "Sin miedo al dentista",
+      "words": 4,
+      "chars": 21,
+      "lines": 2,
+      "size": 105.6,
+      "vw": 7.3,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.54,
+      "top": 202,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Aparta tu cita",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.48,
+      "top": 897,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Tratamientos y precios",
+      "words": 3,
+      "chars": 22,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.48,
+      "top": 1556,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Lo que más nos preguntan",
+      "words": 5,
+      "chars": 24,
+      "lines": 2,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.48,
+      "top": 2218,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Dónde estamos",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 64,
+      "vw": 4.4,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.37,
+      "top": 2789,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Flamboyán",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 136,
+      "vw": 9.4,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.045,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.76,
+      "top": 3185,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 6,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Manrope",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      14,
+      17,
+      18,
+      19,
+      26,
+      64,
+      106,
+      136
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": {
+      "font": "Manrope",
+      "size": 19,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.9
+     },
+     "measureChars": 56,
+     "max": {
+      "size": 136,
+      "vw": 9.4,
+      "font": "Manrope",
+      "text": "Flamboyán"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#cf2233",
+       "top": 42,
+       "hsl": {
+        "h": 354,
+        "s": 0.72,
+        "l": 0.47
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#3f5650",
+       "share": 0.43
+      },
+      {
+       "color": "#13312b",
+       "share": 0.26
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.24
+      },
+      {
+       "color": "#a51826",
+       "share": 0.05
+      },
+      {
+       "color": "#ffb4a3",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 54,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Apartar mi cita"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 7,
+     "boxRadius": 18,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1730
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "svg",
+      "ratio": 0.24
+     }
+    ],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 727,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "manrope"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 3460,
+    "margins": {
+     "left": 176,
+     "right": 197
+    },
+    "sections": [
+     {
+      "sel": "header.portada",
+      "tag": "header",
+      "top": 42,
+      "height": 727,
+      "words": 34,
+      "media": 1,
+      "middle": 181,
+      "heading": {
+       "text": "Sin miedo al dentista",
+       "size": 106,
+       "tag": "h1"
+      },
+      "left": 176,
+      "right": 0,
+      "textLeft": 176,
+      "textRight": 176,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#cita",
+      "tag": "section",
+      "top": 769,
+      "height": 659,
+      "words": 50,
+      "media": 0,
+      "middle": 124,
+      "heading": {
+       "text": "Aparta tu cita",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 176,
+      "right": 246,
+      "textLeft": 176,
+      "textRight": 246,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#tratamientos",
+      "tag": "section",
+      "top": 1428,
+      "height": 662,
+      "words": 90,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Tratamientos y precios",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 176,
+      "right": 197,
+      "textLeft": 176,
+      "textRight": 197,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 2090,
+      "height": 530,
+      "words": 46,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Lo que más nos preguntan",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 176,
+      "right": 590,
+      "textLeft": 176,
+      "textRight": 590,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#donde",
+      "tag": "section",
+      "top": 2620,
+      "height": 341,
+      "words": 33,
+      "media": 0,
+      "middle": 145,
+      "heading": {
+       "text": "Dónde estamos",
+       "size": 64,
+       "tag": "h2"
+      },
+      "left": 176,
+      "right": 288,
+      "textLeft": 176,
+      "textRight": 288,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 3089,
+      "height": 371,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Flamboyán",
+       "size": 136,
+       "tag": "p"
+      },
+      "left": 176,
+      "right": 595,
+      "textLeft": 176,
+      "textRight": 595,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Sin miedo al dentista",
+      "size": 106,
+      "top": 202,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 176,
+      "n": 9
+     },
+     {
+      "x": 197,
+      "n": 2
+     },
+     {
+      "x": 861,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 12,
+    "bodySize": 19,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.13,
+    "voidBox": {
+     "x": 0,
+     "y": 720,
+     "w": 1440,
+     "h": 120
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.65,
+    0.61,
+    0.39,
+    0.54
+   ],
+   "motion": {
+    "elements": 29,
+    "css": 3,
+    "transitions": 26,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 3361,
+     "screens": 3.3,
+     "words": 248,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Sin miedo al dentista",
+     "words": 4,
+     "chars": 21,
+     "lines": 2,
+     "size": 71.7,
+     "vw": 9.3,
+     "font": "Manrope",
+     "weight": 800,
+     "tracking": -0.04,
+     "leading": 0.95,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.69,
+     "top": 159,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Sin miedo al dentista",
+     "words": 4,
+     "lines": 2,
+     "size": 71.7,
+     "font": "Manrope"
+    },
+    "headings": [
+     {
+      "text": "Sin miedo al dentista",
+      "words": 4,
+      "chars": 21,
+      "lines": 2,
+      "size": 71.7,
+      "vw": 9.3,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.69,
+      "top": 159,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Aparta tu cita",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.68,
+      "top": 682,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Tratamientos y precios",
+      "words": 3,
+      "chars": 22,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.68,
+      "top": 1490,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Lo que más nos preguntan",
+      "words": 5,
+      "chars": 24,
+      "lines": 2,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.68,
+      "top": 2157,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Dónde estamos",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 48.5,
+      "vw": 6.3,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.68,
+      "top": 2605,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Flamboyán",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 85.1,
+      "vw": 11.1,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.045,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3132,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 6,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Manrope",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      14,
+      17,
+      18,
+      23,
+      26,
+      49,
+      72,
+      85
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": {
+      "font": "Manrope",
+      "size": 17.9,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.9
+     },
+     "measureChars": 39,
+     "max": {
+      "size": 85.1,
+      "vw": 11.1,
+      "font": "Manrope",
+      "text": "Flamboyán"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [
+     {
+      "text": "Sí. Pídela al pagar con tus datos fiscales.",
+      "above": "Dónde estamos",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 17.9,
+      "top": 2528
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#cf2233",
+       "top": 42,
+       "hsl": {
+        "h": 354,
+        "s": 0.72,
+        "l": 0.47
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#3f5650",
+       "share": 0.43
+      },
+      {
+       "color": "#13312b",
+       "share": 0.26
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.24
+      },
+      {
+       "color": "#a51826",
+       "share": 0.05
+      },
+      {
+       "color": "#ffb4a3",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 54,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Apartar mi cita"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 7,
+     "boxRadius": 18,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": false,
+       "rounded": true,
+       "top": 1645
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "svg",
+      "ratio": 0.25
+     }
+    ],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 562,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "manrope"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 3361,
+    "margins": {
+     "left": 31,
+     "right": 52
+    },
+    "sections": [
+     {
+      "sel": "header.portada",
+      "tag": "header",
+      "top": 42,
+      "height": 562,
+      "words": 34,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Sin miedo al dentista",
+       "size": 72,
+       "tag": "h1"
+      },
+      "left": 31,
+      "right": 0,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#cita",
+      "tag": "section",
+      "top": 605,
+      "height": 808,
+      "words": 50,
+      "media": 0,
+      "middle": 14,
+      "heading": {
+       "text": "Aparta tu cita",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 199,
+      "textLeft": 31,
+      "textRight": 199,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#tratamientos",
+      "tag": "section",
+      "top": 1413,
+      "height": 667,
+      "words": 90,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Tratamientos y precios",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 52,
+      "textLeft": 31,
+      "textRight": 52,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 2080,
+      "height": 448,
+      "words": 46,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Lo que más nos preguntan",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 101,
+      "textLeft": 31,
+      "textRight": 101,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#donde",
+      "tag": "section",
+      "top": 2528,
+      "height": 465,
+      "words": 33,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Dónde estamos",
+       "size": 49,
+       "tag": "h2"
+      },
+      "left": 31,
+      "right": 321,
+      "textLeft": 31,
+      "textRight": 321,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 3070,
+      "height": 291,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Flamboyán",
+       "size": 85,
+       "tag": "p"
+      },
+      "left": 31,
+      "right": 240,
+      "textLeft": 31,
+      "textRight": 240,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Sin miedo al dentista",
+      "size": 72,
+      "top": 159,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 31,
+      "n": 9
+     },
+     {
+      "x": 52,
+      "n": 3
+     }
+    ],
+    "leftBlocks": 12,
+    "bodySize": 18,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.79,
+    0.43,
+    0.8,
+    0.58,
+    0.66
+   ],
+   "motion": {
+    "elements": 29,
+    "css": 3,
+    "transitions": 26,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 3652,
+     "screens": 4.3,
+     "words": 248,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 3,
+     "sections": 4,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Sin miedo al dentista",
+     "words": 4,
+     "chars": 21,
+     "lines": 2,
+     "size": 49,
+     "vw": 12.6,
+     "font": "Manrope",
+     "weight": 800,
+     "tracking": -0.04,
+     "leading": 0.95,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.92,
+     "top": 167,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Sin miedo al dentista",
+     "words": 4,
+     "lines": 2,
+     "size": 49,
+     "font": "Manrope"
+    },
+    "headings": [
+     {
+      "text": "Sin miedo al dentista",
+      "words": 4,
+      "chars": 21,
+      "lines": 2,
+      "size": 49,
+      "vw": 12.6,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 167,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Aparta tu cita",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 35.7,
+      "vw": 9.2,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 606,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Tu cita",
+      "words": 2,
+      "chars": 7,
+      "lines": 1,
+      "size": 25.6,
+      "vw": 6.6,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.02,
+      "leading": 1.55,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.81,
+      "top": 1268,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Tratamientos y precios",
+      "words": 3,
+      "chars": 22,
+      "lines": 2,
+      "size": 35.7,
+      "vw": 9.2,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1507,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Lo que más nos preguntan",
+      "words": 5,
+      "chars": 24,
+      "lines": 2,
+      "size": 35.7,
+      "vw": 9.2,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2546,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Dónde estamos",
+      "words": 2,
+      "chars": 13,
+      "lines": 1,
+      "size": 35.7,
+      "vw": 9.2,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2955,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Flamboyán",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 51.1,
+      "vw": 13.1,
+      "font": "Manrope",
+      "weight": 800,
+      "tracking": -0.045,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3431,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 7,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 1,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Manrope",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      14,
+      17,
+      18,
+      20,
+      26,
+      36,
+      49,
+      51
+     ],
+     "sizeCount": 8,
+     "notLoaded": [],
+     "body": {
+      "font": "Manrope",
+      "size": 17,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.9
+     },
+     "measureChars": 35,
+     "max": {
+      "size": 51.1,
+      "vw": 13.1,
+      "font": "Manrope",
+      "text": "Flamboyán"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.04,
+     "smallText": 0
+    },
+    "eyebrows": [
+     {
+      "text": "Sí. Pídela al pagar con tus datos fiscales.",
+      "above": "Dónde estamos",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 17,
+      "top": 2891
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#cf2233",
+       "top": 64,
+       "hsl": {
+        "h": 354,
+        "s": 0.72,
+        "l": 0.47
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#3f5650",
+       "share": 0.43
+      },
+      {
+       "color": "#13312b",
+       "share": 0.26
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.24
+      },
+      {
+       "color": "#a51826",
+       "share": 0.05
+      },
+      {
+       "color": "#ffb4a3",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 3,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 54,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Apartar mi cita"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 7,
+     "boxRadius": 18,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "svg",
+      "ratio": 0.19
+     }
+    ],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 478,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "manrope"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 3652,
+    "margins": {
+     "left": 16,
+     "right": 16
+    },
+    "sections": [
+     {
+      "sel": "header.portada",
+      "tag": "header",
+      "top": 64,
+      "height": 478,
+      "words": 34,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Sin miedo al dentista",
+       "size": 49,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#cita",
+      "tag": "section",
+      "top": 542,
+      "height": 901,
+      "words": 50,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Aparta tu cita",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 41,
+      "textLeft": 16,
+      "textRight": 41,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#tratamientos",
+      "tag": "section",
+      "top": 1443,
+      "height": 1038,
+      "words": 90,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Tratamientos y precios",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 20,
+      "textLeft": 16,
+      "textRight": 20,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section",
+      "tag": "section",
+      "top": 2482,
+      "height": 409,
+      "words": 46,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Lo que más nos preguntan",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 38,
+      "textLeft": 16,
+      "textRight": 38,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#donde",
+      "tag": "section",
+      "top": 2891,
+      "height": 428,
+      "words": 33,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Dónde estamos",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer",
+      "tag": "footer",
+      "top": 3383,
+      "height": 269,
+      "words": 14,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Flamboyán",
+       "size": 51,
+       "tag": "p"
+      },
+      "left": 16,
+      "right": 44,
+      "textLeft": 16,
+      "textRight": 44,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Sin miedo al dentista",
+      "size": 49,
+      "top": 167,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 16,
+      "n": 9
+     },
+     {
+      "x": 37,
+      "n": 3
+     }
+    ],
+    "leftBlocks": 12,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The margins differ: 176px on the left, 197px on the right, at 1440px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 768,
+   "message": "1 eyebrow/kicker label(s) above headings: \"Sí. Pídela al pagar con tus datos fiscales.\" above \"Dónde estamos\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence.",
+   "alsoAt": [
+    390
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-consultorio/desktop-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-consultorio/desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-consultorio/tablet-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-consultorio/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/home/user/ari-labs/.taste-skill/insp-consultorio/mobile-fold.jpg",
+   "pages": [
+    "/home/user/ari-labs/.taste-skill/insp-consultorio/mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}
