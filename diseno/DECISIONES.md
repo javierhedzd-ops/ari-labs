@@ -59,7 +59,8 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Revisado: 320/390/768/1440 px sin desborde ni errores; sin WebGL y con "reducir movimiento" todo se ve; toques ≥ 44 px.
 - Vista previa privada de la web completa: https://claude.ai/artifact/B286gFT5qrumLSTfqKDmo7 (los enlaces "Ver modelo"
   y Privacidad/Términos solo funcionan en la web real, no en la vista previa).
-- Pendiente: estilo claro en privacidad.html, terminos.html y 404.html (siguen oscuros); fotos reales en los modelos.
+- Privacidad, Términos y 404 ya usan el acabado claro (`legal.css`). Imagen para compartir (og.jpg) nueva, sacada de la portada.
+- Pendiente: fotos reales en los modelos; la web mide ~7 pantallas en teléfono (el encargo decía ~6).
 
 ## Lo que Javi enseñó (31/10, después de ver la web completa)
 - **Regla de oro: no son mis colores, es mi acabado.** Todo lo que salga de Ari Labs (web, modelos, apps) debe verse

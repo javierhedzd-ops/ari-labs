@@ -1,0 +1,32 @@
+/* Privacidad, Términos y la página de error: el mismo acabado claro (Frostline) que la web de Ari Labs. */
+:root{ --noche:#2e2e3e; --tinta:#1f2633; --suave:#4b5868; --artico:#64b6ff; --azul-texto:#2563a8; --margen:clamp(18px,5vw,64px); --curva:cubic-bezier(.2,.9,.2,1); color-scheme:light }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:#e9eff4}
+body{margin:0;color:var(--tinta);font:400 1.0625rem/1.65 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background:radial-gradient(70% 40% at 90% 0%,rgba(100,182,255,.18),transparent 70%),radial-gradient(60% 40% at 0% 60%,rgba(178,228,219,.3),transparent 70%),linear-gradient(180deg,#f8fafc,#e7eef3);background-attachment:fixed}
+::selection{background:#cfe7ff;color:var(--noche)}
+a{color:var(--azul-texto);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--artico);outline-offset:4px;border-radius:8px}
+main{max-width:760px;margin:0 auto;padding:clamp(28px,6vw,64px) var(--margen) 48px}
+.volver{display:inline-flex;align-items:center;gap:.6rem;min-height:48px;padding:0 1.1rem 0 .5rem;border-radius:999px;font-weight:600;color:var(--tinta);text-decoration:none;
+  background:rgba(255,255,255,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 10px 26px -18px rgba(46,46,62,.45);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  transition:transform .35s var(--curva)}
+.volver::before{content:"←";display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(100,182,255,.16);color:var(--azul-texto)}
+@media (hover:hover){ .volver:hover{transform:translateY(-2px)} }
+.rotulo{display:flex;align-items:center;gap:8px;margin:2.4rem 0 .6rem;font-size:.86rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--azul-texto)}
+.rotulo::before{content:"";width:8px;height:8px;rotate:45deg;background:linear-gradient(135deg,#fff,#9fd3ff);box-shadow:0 0 0 1px rgba(100,182,255,.6)}
+h1{font-weight:600;font-size:clamp(2.6rem,1.6rem + 4vw,4.4rem);line-height:.95;letter-spacing:-.055em;margin:0 0 .8rem;color:var(--noche);text-wrap:balance}
+h2{font-weight:600;font-size:1.45rem;letter-spacing:-.03em;line-height:1.15;margin:2.4rem 0 .6rem;color:var(--noche)}
+.fecha{color:var(--suave);font-size:.95rem;margin:0 0 1.8rem}
+p{margin:0 0 1rem}
+strong{font-weight:600;color:var(--noche)}
+ul{list-style:none;padding:0;margin:0 0 1rem;display:grid;gap:.55rem}
+li{position:relative;padding-left:1.4rem}
+li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;rotate:45deg;background:linear-gradient(135deg,#fff,#9fd3ff);box-shadow:0 0 0 1px rgba(100,182,255,.6)}
+.nota{margin-top:2.4rem;padding:22px 24px;border-radius:26px;color:var(--suave);
+  background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.2));box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 30px 60px -40px rgba(46,46,62,.35);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+footer{margin-top:3rem;padding-top:18px;border-top:1px solid rgba(255,255,255,.75);color:var(--suave);font-size:.95rem}
+/* página de error */
+.error{min-height:100vh;display:grid;align-content:center;max-width:none;padding-left:var(--margen);padding-right:var(--margen)}
+.error p{color:var(--suave);font-size:1.2rem;max-width:34ch;margin-bottom:1.8rem}
