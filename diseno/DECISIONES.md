@@ -73,3 +73,11 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - **Modelos (restaurante, barbería, consultorio):** "parecen trabajo de otra persona". Rehacerlos con el mismo acabado
   de Ari Labs y cada uno con su color de negocio. Luego sacar capturas nuevas para img/modelo-*.webp.
 - Siguiente sesión: hacer primero Mis citas en la web, después los 3 modelos; vista previa y video al final.
+
+## Hecho (31/10, tarde): Mis citas y modelos con el acabado de Ari Labs
+- Mis citas en la web: 3 pantallas nuevas dibujadas en `diseno/capturas/mis-citas.html` (color propio: esmeralda;
+  acabado Ari Labs: vidrio, píldoras con círculo, rombos). Se fotografían con `node diseno/capturas/sacar.js`
+  (servidor local en el puerto 8123) y quedan en img/citas-*.webp. La app real sigue igual por ahora.
+- Modelos rehechos con una base común `modelos/acabado.css` + `modelos/acabado.js` (la misma mano) y cada uno con su
+  color: La Cocina de Chela (achiote), Navaja (latón sobre grafito, oscura), Flamboyán (rojo flamboyán). Conservan
+  lo que hacían: guiso del día, cuenta de la barbería, cita armada para WhatsApp. Capturas nuevas en img/modelo-*.webp.

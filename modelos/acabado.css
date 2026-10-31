@@ -1,0 +1,113 @@
+/* El acabado de Ari Labs para los modelos: la misma mano en todos, cada negocio con su color.
+   Cada página define sus colores en :root (--acento, --acento-claro, --fondo, --fondo-2, --tinta, --suave,
+   --sobre-acento) y, si es oscura, agrega class="oscura" en <html>. */
+:root{
+  --margen:clamp(18px,5vw,64px); --entre:clamp(56px,9vw,120px); --curva:cubic-bezier(.2,.9,.2,1);
+  --vidrio-a:rgba(255,255,255,.62); --vidrio-b:rgba(255,255,255,.28); --filo:rgba(255,255,255,.85);
+  --sombra:0 30px 60px -40px rgba(30,30,40,.4); --linea:rgba(30,30,40,.08);
+}
+.oscura{ --vidrio-a:rgba(255,255,255,.08); --vidrio-b:rgba(255,255,255,.03); --filo:rgba(255,255,255,.13); --sombra:0 30px 60px -36px rgba(0,0,0,.8); --linea:rgba(255,255,255,.09); color-scheme:dark }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--fondo);scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;color:var(--tinta);font:400 1.0625rem/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:radial-gradient(60% 40% at 90% 0%,color-mix(in srgb,var(--acento) 26%,transparent),transparent 70%),
+             radial-gradient(50% 35% at 0% 45%,color-mix(in srgb,var(--acento-claro) 30%,transparent),transparent 70%),
+             radial-gradient(60% 40% at 100% 90%,color-mix(in srgb,var(--acento) 14%,transparent),transparent 70%),
+             linear-gradient(180deg,var(--fondo-2),var(--fondo));background-attachment:fixed}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--acento);outline-offset:4px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation:none!important;transition:none!important} }
+
+/* aviso de modelo */
+.aviso{position:relative;z-index:30;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 12px;padding:8px var(--margen);
+  font-size:.86rem;color:var(--suave);background:color-mix(in srgb,var(--fondo-2) 70%,transparent);border-bottom:1px solid var(--linea)}
+.aviso a{font-weight:600;color:var(--tinta);min-height:32px;display:inline-flex;align-items:center}
+
+/* barra */
+.barra{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px var(--margen);
+  transition:background .35s ease,box-shadow .35s ease}
+.barra.vidrio-b{background:color-mix(in srgb,var(--fondo-2) 70%,transparent);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);box-shadow:0 1px 0 var(--filo),0 8px 24px -18px rgba(0,0,0,.35)}
+.marca{font-weight:600;letter-spacing:-.02em;text-decoration:none;font-size:1.1rem;min-height:44px;display:inline-flex;align-items:center;gap:10px}
+.marca i{width:12px;height:12px;rotate:45deg;border-radius:2px;background:linear-gradient(135deg,var(--acento-claro),var(--acento));box-shadow:0 0 0 1px var(--filo)}
+.barra nav{display:flex;align-items:center;gap:4px}
+.barra nav a.liga{min-height:44px;display:none;align-items:center;padding:0 12px;text-decoration:none;font-weight:500;color:var(--suave)}
+@media (min-width:720px){ .barra nav a.liga{display:inline-flex} }
+
+/* botones: píldora con círculo e ícono */
+.boton{position:relative;isolation:isolate;overflow:hidden;min-height:54px;display:inline-flex;align-items:center;justify-content:space-between;gap:.75rem;
+  padding:0 .55rem 0 1.35rem;border-radius:999px;font:600 1rem/1 "Inter Tight",system-ui,sans-serif;letter-spacing:-.01em;text-decoration:none;border:0;cursor:pointer;
+  transition:transform .35s var(--curva),box-shadow .35s ease,opacity .3s;-webkit-tap-highlight-color:transparent}
+.boton .icono{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;flex:none;transition:transform .45s var(--curva)}
+.boton .icono svg{width:18px;height:18px}
+.boton.principal{background:var(--acento);color:var(--sobre-acento);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 14px 30px -14px color-mix(in srgb,var(--acento) 80%,black)}
+.boton.principal .icono{background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.boton.secundario{background:linear-gradient(135deg,var(--vidrio-a),var(--vidrio-b));color:var(--tinta);box-shadow:inset 0 0 0 1px var(--filo),0 10px 26px -18px rgba(0,0,0,.4);
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%)}
+.boton.secundario .icono{background:color-mix(in srgb,var(--acento) 16%,transparent);color:var(--acento-texto,var(--acento))}
+.boton::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.35) 48%,transparent 66%);transform:translateX(-120%)}
+@media (hover:hover){
+  .boton:hover{transform:translateY(-2px)}
+  .boton:hover::after{transform:translateX(120%);transition:transform .9s var(--curva)}
+  .boton:hover .icono{transform:translateX(3px) rotate(-8deg)}
+}
+.boton:active{transform:scale(.97);transition-duration:.12s}
+.boton[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.barra .boton{min-height:44px;font-size:.95rem;padding:0 .4rem 0 1rem}
+.barra .boton .icono{width:32px;height:32px}
+.botones{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:420px){ .botones .boton{flex:1 1 100%} }
+
+/* portada */
+.portada{padding:clamp(48px,10vh,120px) var(--margen) var(--entre);display:grid;gap:clamp(28px,4vw,56px);align-items:end}
+@media (min-width:900px){ .portada{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)} }
+.ceja{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--acento-texto,var(--acento));margin-bottom:1rem}
+.ceja::before{content:"";width:8px;height:8px;rotate:45deg;background:linear-gradient(135deg,#fff,var(--acento-claro));box-shadow:0 0 0 1px color-mix(in srgb,var(--acento) 60%,transparent)}
+h1{font-weight:600;font-size:clamp(3.2rem,1.4rem + 8vw,7.6rem);line-height:.9;letter-spacing:-.06em;margin:0 0 1.2rem;text-wrap:balance}
+.lema{font-size:clamp(1.15rem,1rem + .6vw,1.5rem);line-height:1.4;color:var(--suave);max-width:34ch;margin:0 0 1.8rem}
+
+/* secciones y tarjetas de vidrio */
+.seccion{padding:calc(var(--entre) / 2) var(--margen)}
+h2{font-weight:600;font-size:clamp(2.3rem,1.3rem + 4vw,4.6rem);line-height:.95;letter-spacing:-.05em;margin:0 0 .9rem;text-wrap:balance}
+.entrada{font-size:clamp(1.08rem,1rem + .35vw,1.25rem);line-height:1.5;color:var(--suave);max-width:46ch;margin:0 0 2rem}
+.vidrio{position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,var(--vidrio-a),var(--vidrio-b));
+  box-shadow:inset 0 0 0 1px var(--filo),inset 0 1px 0 rgba(255,255,255,.5),var(--sombra);
+  -webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%)}
+.oscura .vidrio{box-shadow:inset 0 0 0 1px var(--filo),inset 0 1px 0 rgba(255,255,255,.08),var(--sombra)}
+.vidrio::after{content:"";position:absolute;inset:-40% auto -40% -40%;width:40%;rotate:18deg;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);opacity:0}
+@media (hover:hover){ .vidrio.brilla:hover::after{animation:destello 1.4s ease} }
+@keyframes destello{0%{opacity:1;left:-40%}100%{opacity:1;left:130%}}
+.relleno{padding:clamp(22px,3vw,36px)}
+.rombos{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.rombos li{display:flex;gap:.75rem;align-items:baseline;line-height:1.45}
+.rombos li::before{content:"";width:9px;height:9px;rotate:45deg;flex:none;translate:0 -1px;background:linear-gradient(135deg,#fff,var(--acento-claro));box-shadow:0 0 0 1px color-mix(in srgb,var(--acento) 60%,transparent)}
+.chip{display:inline-flex;align-items:center;padding:4px 11px;border-radius:999px;font-size:.82rem;font-weight:600;background:color-mix(in srgb,var(--acento) 14%,transparent);color:var(--acento-texto,var(--acento))}
+.nota{font-size:.9rem;color:var(--suave);margin:1rem 0 0}
+.precio{font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+
+/* lista de renglones (menú, servicios, tratamientos) */
+.renglones{list-style:none;margin:0;padding:6px;display:grid}
+.renglones li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 16px;border-radius:20px}
+.renglones li+li{box-shadow:0 -1px 0 var(--linea)}
+.renglones b{display:block;font-weight:600;letter-spacing:-.015em;font-size:1.08rem}
+.renglones small{display:block;color:var(--suave);font-size:.94rem}
+
+/* horario y lugar */
+.lugar{display:grid;gap:14px}
+@media (min-width:860px){ .lugar{grid-template-columns:1.2fr 1fr} }
+address{font-style:normal;font-size:1.15rem;line-height:1.5;margin:0 0 1.4rem;max-width:30ch}
+.horario{margin:0;display:grid}
+.horario div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;font-variant-numeric:tabular-nums}
+.horario div+div{border-top:1px solid var(--linea)}
+.horario dt{font-weight:500}.horario dd{margin:0;color:var(--suave)}
+
+/* pie */
+.pie{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 20px;margin-top:var(--entre);padding:22px var(--margen) max(22px,env(safe-area-inset-bottom));color:var(--suave);font-size:.94rem;border-top:1px solid var(--linea)}
+.pie .nombre{font-weight:600;color:var(--tinta);letter-spacing:-.02em;font-size:1.2rem}
+
+/* entrada al aparecer */
+.js .sube{opacity:0;translate:0 28px;transition:opacity .8s ease,translate .8s var(--curva);transition-delay:var(--retraso,0s)}
+.js .sube.visto{opacity:1;translate:0 0}
+@media (prefers-reduced-motion:reduce){ .js .sube{opacity:1;translate:none} }

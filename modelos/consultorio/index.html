@@ -6,282 +6,162 @@
 <title>Clínica Dental Flamboyán · Modelo de consultorio · Ari Labs</title>
 <meta name="description" content="Modelo de página web para consultorio o clínica, de Ari Labs. Negocio de ejemplo.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#cf2233">
+<meta name="theme-color" content="#fbf5f5">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../acabado.css">
 <style>
-  /* El flamboyán de las calles de Mérida en mayo: su rojo es el campo de la portada y de la cita. */
-  :root{
-    --papel:#ffffff; --papel-2:#eef2f0; --hoja:#13312b; --tenue:#3f5650;
-    --flor:#cf2233; --flor-oscura:#a51826; --margen:clamp(16px,4vw,32px);
-    --s-chica:0.875rem; --s-texto:clamp(1.0625rem,1rem + .25vw,1.1875rem); --s-lead:clamp(1.25rem,1.1rem + .7vw,1.6rem);
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--papel);color:var(--hoja);font:400 var(--s-texto)/1.55 "Manrope",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .envoltura{max-width:72rem;margin:0 auto;padding:0 var(--margen)}
-  :focus-visible{outline:3px solid var(--hoja);outline-offset:3px}
-  .boton{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:54px;padding:0 1.6rem;border-radius:999px;
-    background:var(--hoja);color:#fff;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:700;
-    transition:transform .15s ease, background .2s ease}
-  .boton:hover{background:#1d463d}
-  .boton:active{transform:scale(.97)}
-  .boton svg{width:20px;height:20px}
-
-  .aviso-modelo{background:var(--hoja);color:#fff;font-size:var(--s-chica);text-align:center;padding:.65rem var(--margen)}
-  .aviso-modelo a{color:#ffb4a3;font-weight:700}
-
-  /* portada roja con las flores dibujadas */
-  .portada{background:var(--flor);color:#fff;position:relative;overflow:hidden}
-  .portada .envoltura{position:relative;padding-top:1.2rem;padding-bottom:clamp(56px,9vw,112px)}
-  .barra{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-bottom:clamp(40px,7vw,96px)}
-  .barra .marca{font-weight:800;text-decoration:none;font-size:1.05rem}
-  .barra a.cita{font-weight:700;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
-  h1{font-weight:800;font-size:clamp(3rem,1.6rem + 6vw,6.6rem);line-height:.95;letter-spacing:-.04em;margin:0 0 1.4rem;max-width:11ch;position:relative}
-  .portada p{font-size:var(--s-lead);line-height:1.4;margin:0 0 2.2rem;max-width:32ch;position:relative}
-  .portada .boton{background:#fff;color:var(--flor-oscura)}
-  .portada .boton:hover{background:var(--papel-2)}
-  .flores{position:absolute;right:-8%;top:8%;width:min(62vw,620px);height:auto;opacity:.95;pointer-events:none}
-  @media (max-width:700px){ .flores{display:none} }
-  .flores .gira{transform-origin:center;transform-box:fill-box;animation:mece 14s ease-in-out infinite alternate}
-  @keyframes mece{to{transform:rotate(14deg)}}
-
-  section{padding:clamp(64px,10vw,128px) 0 0}
-  h2{font-weight:800;font-size:clamp(2.2rem,1.4rem + 3.4vw,4rem);line-height:1;letter-spacing:-.035em;margin:0 0 1rem;max-width:16ch}
-  .entrada{color:var(--tenue);margin:0 0 2.2rem;max-width:46ch}
-
-  /* aparta tu cita: el día, la hora y el tratamiento arman el mensaje */
-  .citas{display:grid;gap:clamp(20px,3vw,40px);align-items:start}
-  .escoge{display:grid;gap:1.6rem}
-  .escoge fieldset{border:0;margin:0;padding:0}
-  .escoge legend{font-weight:700;margin-bottom:.8rem;padding:0}
+  /* Clínica Dental Flamboyán: rojo flamboyán sobre blanco limpio. */
+  :root{ --acento:#d0393f; --acento-claro:#ffb4a8; --acento-texto:#b02a31; --sobre-acento:#fff;
+    --fondo:#f4ecec; --fondo-2:#fdf9f8; --tinta:#2a1c1e; --suave:#6a585a }
+  .cita{display:grid;gap:14px;align-items:start}
+  @media (min-width:900px){ .cita{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)} .resumen{position:sticky;top:96px} }
+  fieldset{border:0;margin:0;padding:0 0 18px}
+  fieldset+fieldset{padding-top:18px;border-top:1px solid var(--linea)}
+  legend{font-weight:600;font-size:1.05rem;letter-spacing:-.015em;padding:0;margin-bottom:12px}
   .opciones{display:flex;flex-wrap:wrap;gap:8px}
-  .opciones label{position:relative}
-  .opciones input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-  .opciones span{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-width:64px;min-height:56px;padding:.5rem .9rem;
-    background:var(--papel-2);font-weight:700;border-radius:16px;transition:background .2s ease, color .2s ease, transform .15s ease}
-  .opciones span small{font-weight:500;font-size:var(--s-chica);color:var(--tenue)}
-  .opciones input:checked + span{background:var(--flor);color:#fff}
-  .opciones input:checked + span small{color:#ffe1d9}
-  .opciones input:focus-visible + span{outline:3px solid var(--hoja);outline-offset:2px}
-  .opciones label:hover span{background:#e1e8e5}
-  .opciones label:hover input:checked + span{background:var(--flor-oscura)}
-  .resumen{background:var(--hoja);color:#fff;padding:clamp(22px,3vw,34px);display:grid;gap:1rem;border-radius:24px}
-  .resumen h3{margin:0;font-weight:800;font-size:1.6rem;letter-spacing:-.02em}
-  .resumen p{margin:0;font-size:var(--s-lead);line-height:1.35}
-  .resumen .boton{background:var(--flor);justify-self:start}
-  .resumen .boton:hover{background:var(--flor-oscura)}
-  @media (min-width:900px){ .citas{grid-template-columns:1.4fr 1fr} .resumen{position:sticky;top:24px} }
-
-  /* tratamientos: la lista de precios, sin cajas con iconos */
-  .tarifa{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-  .tarifa li{display:grid;grid-template-columns:1fr auto;gap:.3rem 1.5rem;padding:1.2rem 1.3rem;background:var(--papel-2);border-radius:18px}
-  .tarifa b{font-weight:800;font-size:1.15rem}
-  .tarifa span.precio{font-weight:800;white-space:nowrap;color:var(--flor-oscura)}
-  .tarifa p{grid-column:1/-1;margin:0;color:var(--tenue)}
-  @media (min-width:760px){ .tarifa{grid-template-columns:1fr 1fr;gap:8px} }
-  .nota{color:var(--tenue);font-size:var(--s-chica);margin:1rem 0 0}
-
-  .preguntas{display:grid;gap:6px;max-width:48rem}
-  details{background:var(--papel-2);border-radius:18px;padding:0 1.3rem}
-  summary{cursor:pointer;list-style:none;min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-weight:700}
+  .opciones label{position:relative;cursor:pointer}
+  .opciones input{position:absolute;opacity:0;pointer-events:none}
+  .opciones span{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 18px;border-radius:999px;font-weight:600;font-size:.98rem;
+    background:linear-gradient(135deg,var(--vidrio-a),var(--vidrio-b));box-shadow:inset 0 0 0 1px var(--filo),0 8px 18px -14px rgba(0,0,0,.35);transition:background .3s,color .3s,box-shadow .3s}
+  .opciones span small{font-weight:500;color:var(--suave)}
+  .opciones input:checked + span{background:var(--acento);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -12px var(--acento)}
+  .opciones input:checked + span small{color:rgba(255,255,255,.8)}
+  .opciones input:focus-visible + span{outline:2px solid var(--acento);outline-offset:3px}
+  .resumen{padding:clamp(24px,3vw,34px)}
+  .resumen p{font-weight:600;font-size:clamp(1.5rem,1.2rem + 1vw,2rem);line-height:1.15;letter-spacing:-.03em;margin:.9rem 0 1.4rem}
+  .resumen .boton{width:100%}
+  .tratamientos{display:grid;gap:14px}
+  @media (min-width:640px){ .tratamientos{grid-template-columns:1fr 1fr} }
+  @media (min-width:1000px){ .tratamientos{grid-template-columns:1fr 1fr 1fr} }
+  .tratamiento{padding:24px}
+  .tratamiento .arriba{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:.4rem}
+  .tratamiento b{font-weight:600;font-size:1.2rem;letter-spacing:-.02em}
+  .tratamiento p{margin:0;color:var(--suave)}
+  .preguntas{display:grid;gap:10px;max-width:860px}
+  details{border-radius:24px}
+  summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:64px;padding:10px 12px 10px 22px;cursor:pointer;font-weight:600;font-size:1.08rem;letter-spacing:-.015em}
   summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";font-size:1.5rem;font-weight:500;color:var(--flor);transition:transform .2s ease}
-  details[open] summary::after{transform:rotate(45deg)}
-  details p{margin:0 0 1.3rem;color:var(--tenue)}
-
-  .donde{display:grid;gap:2rem}
-  .donde address{font-style:normal;font-size:var(--s-lead);line-height:1.35;margin:0 0 1.4rem;max-width:28ch}
-  .horario{list-style:none;padding:0;margin:0 0 2rem;max-width:26rem}
-  .horario li{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0}
-  .horario li span:last-child{white-space:nowrap;font-weight:700}
-  @media (min-width:860px){ .donde{grid-template-columns:1fr 1fr;align-items:end} }
-
-  footer{background:var(--flor);color:#fff;margin-top:clamp(64px,10vw,128px);padding:clamp(48px,8vw,96px) 0 7rem}
-  footer .nombre{font-weight:800;font-size:clamp(3rem,1rem + 9vw,8.5rem);line-height:.9;letter-spacing:-.045em;margin:0 0 1.2rem}
-  footer p{margin:0;font-size:var(--s-chica)}
-
-  .flota{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:10;
-    width:58px;height:58px;border-radius:50%;background:var(--hoja);color:#fff;display:grid;place-items:center}
-  .flota svg{width:28px;height:28px}
-
-  .js .entra{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.2,1);transition-delay:var(--retraso,0s)}
-  .js .entra.visto{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    .js .entra{opacity:1;transform:none;transition:none}
-    .flores .gira{animation:none}
-    .boton,.opciones span,summary::after{transition:none}
-  }
+  summary .circ{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;flex:none;background:color-mix(in srgb,var(--acento) 14%,transparent);color:var(--acento-texto)}
+  summary .circ svg{width:16px;height:16px;transition:rotate .4s var(--curva)}
+  details[open] summary .circ svg{rotate:45deg}
+  details p{margin:0;padding:0 22px 20px;color:var(--suave)}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-<div class="aviso-modelo">Modelo de <a href="../../">Ari Labs</a> con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así</a></div>
-
-<header class="portada">
-  <!-- flores de flamboyán dibujadas: cinco pétalos rojos, uno con manchas blancas -->
-  <svg class="flores" viewBox="0 0 600 600" aria-hidden="true">
-    <defs>
-      <g id="flor">
-        <ellipse cx="0" cy="-58" rx="34" ry="52" fill="#e8394a"/>
-        <ellipse cx="0" cy="-58" rx="34" ry="52" fill="#e8394a" transform="rotate(72)"/>
-        <ellipse cx="0" cy="-58" rx="34" ry="52" fill="#e8394a" transform="rotate(144)"/>
-        <ellipse cx="0" cy="-58" rx="34" ry="52" fill="#e8394a" transform="rotate(216)"/>
-        <ellipse cx="0" cy="-58" rx="34" ry="52" fill="#ffffff" transform="rotate(288)"/>
-        <g fill="#cf2233" transform="rotate(288)"><circle cx="-8" cy="-70" r="5"/><circle cx="10" cy="-58" r="4"/><circle cx="-4" cy="-48" r="3.5"/></g>
-        <g stroke="#f6c64d" stroke-width="4" stroke-linecap="round"><path d="M0 0 L-22 -40"/><path d="M0 0 L-6 -46"/><path d="M0 0 L10 -44"/><path d="M0 0 L24 -38"/></g>
-        <circle r="10" fill="#a51826"/>
-      </g>
-    </defs>
-    <g class="gira"><use href="#flor" transform="translate(330 250) scale(1.6)"/></g>
-    <g class="gira"><use href="#flor" transform="translate(140 430) scale(.9) rotate(30)"/></g>
-    <g class="gira"><use href="#flor" transform="translate(500 470) scale(1.1) rotate(-20)"/></g>
-  </svg>
-  <div class="envoltura">
-    <div class="barra">
-      <a class="marca" href="#">Clínica Dental Flamboyán</a>
-      <a class="cita" href="#cita">Apartar cita</a>
-    </div>
-    <h1>Sin miedo al dentista</h1>
-    <p>Odontología general y para niños en Paseo de Montejo. Te explicamos todo antes de empezar y sabes el precio desde el principio.</p>
-    <a class="boton" href="#cita">Apartar mi cita</a>
-  </div>
+<div class="aviso">Modelo de Ari Labs con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así →</a></div>
+<header class="barra">
+  <a class="marca" href="#"><i></i>Flamboyán</a>
+  <nav><a class="liga" href="#precios">Tratamientos</a><a class="liga" href="#donde">Dónde</a>
+    <a class="boton principal" href="#cita">Apartar cita<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></nav>
 </header>
 
-<main class="envoltura">
-  <section id="cita" aria-labelledby="t-cita">
-    <h2 id="t-cita">Aparta tu cita</h2>
-    <p class="entrada">Escoge el tratamiento, el día y la hora. Te confirmamos por WhatsApp el mismo día.</p>
-    <div class="citas">
-      <form class="escoge" id="escoge" onsubmit="return false">
-        <fieldset>
-          <legend>Tratamiento</legend>
-          <div class="opciones">
-            <label><input type="radio" name="trat" value="limpieza" checked><span>Limpieza</span></label>
-            <label><input type="radio" name="trat" value="revisión"><span>Revisión</span></label>
-            <label><input type="radio" name="trat" value="dolor de muela"><span>Me duele</span></label>
-            <label><input type="radio" name="trat" value="ortodoncia"><span>Ortodoncia</span></label>
-            <label><input type="radio" name="trat" value="consulta para niño"><span>Niños</span></label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Día</legend>
-          <div class="opciones">
-            <label><input type="radio" name="dia" value="el lunes" checked><span>Lun</span></label>
-            <label><input type="radio" name="dia" value="el martes"><span>Mar</span></label>
-            <label><input type="radio" name="dia" value="el miércoles"><span>Mié</span></label>
-            <label><input type="radio" name="dia" value="el jueves"><span>Jue</span></label>
-            <label><input type="radio" name="dia" value="el viernes"><span>Vie</span></label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Hora</legend>
-          <div class="opciones">
-            <label><input type="radio" name="hora" value="9:00"><span>9:00</span></label>
-            <label><input type="radio" name="hora" value="10:30"><span>10:30</span></label>
-            <label><input type="radio" name="hora" value="12:00" checked><span>12:00</span></label>
-            <label><input type="radio" name="hora" value="16:00"><span>4:00<small>tarde</small></span></label>
-            <label><input type="radio" name="hora" value="17:30"><span>5:30<small>tarde</small></span></label>
-          </div>
-        </fieldset>
+<main>
+  <div class="portada">
+    <div>
+      <span class="ceja sube">Clínica Dental Flamboyán</span>
+      <h1 class="sube">Sin miedo al dentista</h1>
+      <p class="lema sube">Odontología general y para niños en Paseo de Montejo. Te explicamos todo antes de empezar y sabes el precio desde el principio.</p>
+      <div class="botones sube">
+        <a class="boton principal" href="#cita">Apartar mi cita<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+        <a class="boton secundario" href="#precios">Ver tratamientos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+      </div>
+    </div>
+    <div class="vidrio relleno sube">
+      <span class="chip">Urgencias el mismo día</span>
+      <ul class="rombos" style="margin-top:1.1rem">
+        <li>Primera consulta de unos 40 minutos</li>
+        <li>Tarjeta, transferencia y factura</li>
+        <li>Estacionamiento para pacientes</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="seccion" id="cita" aria-labelledby="t-cita">
+    <h2 class="sube" id="t-cita">Aparta tu cita</h2>
+    <p class="entrada sube">Escoge el tratamiento, el día y la hora. Te confirmamos por WhatsApp el mismo día.</p>
+    <div class="cita">
+      <form class="vidrio relleno sube" id="escoge" onsubmit="return false">
+        <fieldset><legend>Tratamiento</legend><div class="opciones">
+          <label><input type="radio" name="trat" value="limpieza" checked><span>Limpieza</span></label>
+          <label><input type="radio" name="trat" value="revisión"><span>Revisión</span></label>
+          <label><input type="radio" name="trat" value="me duele una muela"><span>Me duele</span></label>
+          <label><input type="radio" name="trat" value="ortodoncia"><span>Ortodoncia</span></label>
+          <label><input type="radio" name="trat" value="consulta para niños"><span>Niños</span></label></div></fieldset>
+        <fieldset><legend>Día</legend><div class="opciones">
+          <label><input type="radio" name="dia" value="el lunes" checked><span>Lun</span></label>
+          <label><input type="radio" name="dia" value="el martes"><span>Mar</span></label>
+          <label><input type="radio" name="dia" value="el miércoles"><span>Mié</span></label>
+          <label><input type="radio" name="dia" value="el jueves"><span>Jue</span></label>
+          <label><input type="radio" name="dia" value="el viernes"><span>Vie</span></label></div></fieldset>
+        <fieldset><legend>Hora</legend><div class="opciones">
+          <label><input type="radio" name="hora" value="9:00"><span>9:00</span></label>
+          <label><input type="radio" name="hora" value="10:30"><span>10:30</span></label>
+          <label><input type="radio" name="hora" value="12:00" checked><span>12:00</span></label>
+          <label><input type="radio" name="hora" value="4:00 de la tarde"><span>4:00 <small>tarde</small></span></label>
+          <label><input type="radio" name="hora" value="5:30 de la tarde"><span>5:30 <small>tarde</small></span></label></div></fieldset>
       </form>
-      <aside class="resumen" aria-live="polite">
-        <h3>Tu cita</h3>
+      <aside class="vidrio resumen sube" aria-live="polite">
+        <span class="chip">Tu cita</span>
         <p id="resumen">Limpieza el lunes a las 12:00.</p>
-        <a class="boton" id="mandar" href="https://wa.link/eut47p" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg>
-          Mandar por WhatsApp
-        </a>
+        <a class="boton principal" id="mandar" href="https://wa.link/eut47p" target="_blank" rel="noopener">Mandar por WhatsApp<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
       </aside>
     </div>
   </section>
 
-  <section id="tratamientos" aria-labelledby="t-trat">
-    <h2 id="t-trat">Tratamientos y precios</h2>
-    <p class="entrada">El precio final lo sabes en la primera consulta, antes de empezar.</p>
-    <ul class="tarifa">
-      <li><b>Limpieza dental</b><span class="precio">desde $600</span><p>Con ultrasonido y pulido. Cada seis meses.</p></li>
-      <li><b>Resinas</b><span class="precio">desde $700</span><p>Del color de tu diente, para caries pequeñas.</p></li>
-      <li><b>Ortodoncia</b><span class="precio">valoración $400</span><p>Brackets o alineadores, con plan de pagos.</p></li>
-      <li><b>Blanqueamiento</b><span class="precio">desde $3,500</span><p>En consultorio, en una sola sesión.</p></li>
-      <li><b>Endodoncia</b><span class="precio">desde $3,000</span><p>Para salvar el diente cuando hay dolor fuerte.</p></li>
-      <li><b>Para niños</b><span class="precio">desde $450</span><p>Una primera visita tranquila y con paciencia.</p></li>
-    </ul>
-    <p class="nota">Tratamientos y precios de ejemplo: en tu página van los tuyos.</p>
+  <section class="seccion" id="precios" aria-labelledby="t-precios">
+    <h2 class="sube" id="t-precios">Tratamientos y precios</h2>
+    <p class="entrada sube">El precio final lo sabes en la primera consulta, antes de empezar.</p>
+    <div class="tratamientos">
+      <div class="vidrio brilla tratamiento sube"><div class="arriba"><b>Limpieza dental</b><span class="precio">desde $600</span></div><p>Con ultrasonido y pulido. Cada seis meses.</p></div>
+      <div class="vidrio brilla tratamiento sube"><div class="arriba"><b>Resinas</b><span class="precio">desde $700</span></div><p>Del color de tu diente, para caries pequeñas.</p></div>
+      <div class="vidrio brilla tratamiento sube"><div class="arriba"><b>Ortodoncia</b><span class="precio">valoración $400</span></div><p>Brackets o alineadores, con plan de pagos.</p></div>
+      <div class="vidrio brilla tratamiento sube"><div class="arriba"><b>Blanqueamiento</b><span class="precio">desde $3,500</span></div><p>En consultorio, en una sola sesión.</p></div>
+      <div class="vidrio brilla tratamiento sube"><div class="arriba"><b>Endodoncia</b><span class="precio">desde $3,000</span></div><p>Para salvar el diente cuando hay dolor fuerte.</p></div>
+      <div class="vidrio brilla tratamiento sube"><div class="arriba"><b>Para niños</b><span class="precio">desde $450</span></div><p>Una primera visita tranquila y con paciencia.</p></div>
+    </div>
+    <p class="nota sube">Tratamientos y precios de ejemplo: en tu página van los tuyos.</p>
   </section>
 
-  <section aria-labelledby="t-preg">
-    <h2 id="t-preg">Lo que más nos preguntan</h2>
+  <section class="seccion" aria-labelledby="t-preguntas">
+    <h2 class="sube" id="t-preguntas">Lo que más nos preguntan</h2>
     <div class="preguntas">
-      <details><summary>¿Atienden urgencias?</summary><p>Sí. Si tienes dolor, escríbenos y te damos lugar ese mismo día.</p></details>
-      <details><summary>¿Cuánto dura la primera consulta?</summary><p>Unos 40 minutos: revisamos, te explicamos qué hace falta y cuánto cuesta.</p></details>
-      <details><summary>¿Aceptan tarjeta?</summary><p>Sí, débito y crédito. También transferencia.</p></details>
-      <details><summary>¿Dan factura?</summary><p>Sí. Pídela al pagar con tus datos fiscales.</p></details>
+      <details class="vidrio sube"><summary>¿Atienden urgencias?<span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Sí. Si tienes dolor, escríbenos y te damos lugar ese mismo día.</p></details>
+      <details class="vidrio sube"><summary>¿Cuánto dura la primera consulta?<span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Unos 40 minutos: revisamos, te explicamos qué hace falta y cuánto cuesta.</p></details>
+      <details class="vidrio sube"><summary>¿Aceptan tarjeta?<span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Sí, débito y crédito. También transferencia.</p></details>
+      <details class="vidrio sube"><summary>¿Dan factura?<span class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><p>Sí. Pídela al pagar con tus datos fiscales.</p></details>
     </div>
   </section>
 
-  <section id="donde" aria-labelledby="t-donde">
-    <div class="donde">
-      <div>
-        <h2 id="t-donde">Dónde estamos</h2>
-        <address>Paseo de Montejo, Mérida. Con estacionamiento para pacientes.</address>
-      </div>
-      <div>
-        <ul class="horario">
-          <li><span>Lunes a viernes</span><span>9 a. m. a 7 p. m.</span></li>
-          <li><span>Sábado</span><span>9 a. m. a 1 p. m.</span></li>
-          <li><span>Domingo</span><span>Cerrado</span></li>
-        </ul>
-        <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Paseo+de+Montejo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a>
-      </div>
+  <section class="seccion" id="donde" aria-labelledby="t-donde">
+    <h2 class="sube" id="t-donde">Dónde estamos</h2>
+    <div class="lugar">
+      <div class="vidrio relleno sube"><address>Paseo de Montejo, Mérida. Con estacionamiento para pacientes.</address>
+        <a class="boton secundario" href="https://maps.google.com/?q=Paseo+de+Montejo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span></a></div>
+      <dl class="vidrio relleno horario sube"><div><dt>Lunes a viernes</dt><dd>9 a. m. a 7 p. m.</dd></div><div><dt>Sábado</dt><dd>9 a. m. a 1 p. m.</dd></div><div><dt>Domingo</dt><dd>Cerrado</dd></div></dl>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="envoltura">
-    <p class="nombre">Flamboyán</p>
-    <p>Clínica Dental Flamboyán es un negocio de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</p>
-  </div>
-</footer>
-
-<a class="flota" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 8.8c.2 2.6 2.4 5 5.2 5.4l1-1.2-1.6-.9-.7.6a4 4 0 0 1-2-2l.6-.7-.9-1.6z"/></svg>
-</a>
+<footer class="pie"><span class="nombre">Flamboyán</span><span>Negocio de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</span></footer>
 
 <script>
-  (function(){
-    // La cita: tratamiento + día + hora arman el mensaje.
-    // En el modelo real, wa.me lleva el número del consultorio: https://wa.me/52XXXXXXXXXX?text=...
+  // La cita: tratamiento + día + hora arman el mensaje.
+  // En el modelo real, wa.me lleva el número del consultorio: https://wa.me/52XXXXXXXXXX?text=...
+  (function () {
     var forma = document.getElementById('escoge'), resumen = document.getElementById('resumen'), mandar = document.getElementById('mandar');
-    function valor(n){ var e = forma.querySelector('input[name="' + n + '"]:checked'); return e ? e.value : ''; }
-    function arma(){
+    function valor(n) { var e = forma.querySelector('input[name="' + n + '"]:checked'); return e ? e.value : ''; }
+    function arma() {
       var t = valor('trat'), d = valor('dia'), h = valor('hora');
       resumen.textContent = t.charAt(0).toUpperCase() + t.slice(1) + ' ' + d + ' a las ' + h + '.';
       mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero una cita en Flamboyán: ' + t + ' ' + d + ' a las ' + h + '. ¿Tienen lugar?');
     }
-    forma.addEventListener('change', arma);
-    var flota = document.querySelector('.flota'), cita = document.getElementById('cita');
-    if ('IntersectionObserver' in window && flota && cita){
-      new IntersectionObserver(function(es){ flota.style.display = es[0].isIntersecting ? 'none' : ''; }).observe(cita);
-    }
-    arma();
-
-    var piezas = [];
-    document.querySelectorAll('.portada h1, .portada p, .portada .boton, section h2, section .entrada, .escoge fieldset, .resumen, .tarifa li, details, .donde address, .horario, footer .nombre').forEach(function(el){
-      var grupo = el.closest('section, .portada, footer');
-      var i = grupo.__n = (grupo.__n || 0) + 1;
-      el.style.setProperty('--retraso', Math.min(i - 1, 8) * 0.07 + 's');
-      el.classList.add('entra'); piezas.push(el);
-    });
-    if (!('IntersectionObserver' in window)){ piezas.forEach(function(p){ p.classList.add('visto'); }); return; }
-    var ojo = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } }); }, {threshold:.1});
-    piezas.forEach(function(p){ ojo.observe(p); });
+    forma.addEventListener('change', arma); arma();
   })();
 </script>
+<script src="../acabado.js"></script>
 </body>
 </html>

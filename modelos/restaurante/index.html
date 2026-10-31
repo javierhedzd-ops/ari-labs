@@ -6,246 +6,116 @@
 <title>La Cocina de Chela · Modelo de restaurante · Ari Labs</title>
 <meta name="description" content="Modelo de página web para restaurante o cocina económica, de Ari Labs. Negocio de ejemplo.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#1f2b4d">
+<meta name="theme-color" content="#f7efe8">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,400&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../acabado.css">
 <style>
-  /* La página es el menú de la semana: una hoja de papel sobre el azul de la puerta. */
-  :root{
-    --papel:#ffffff; --hoja-2:#f4f4f2; --tinta:#1f2b4d; --tenue:#4d556b;
-    --mandarina:#f7941d; --noche:#05070a; --gris:#e3e1dc;
-    --margen:clamp(16px,4vw,32px);
-    --s-chica:0.875rem; --s-texto:clamp(1.0625rem,1rem + .25vw,1.1875rem);
-    --s-lead:clamp(1.25rem,1.1rem + .7vw,1.625rem); --s-titulo:clamp(2.4rem,1.3rem + 4.6vw,5rem);
-  }
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--tinta);color:var(--tinta);font:400 var(--s-texto)/1.55 "Albert Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .display{font-family:"Imbue",Georgia,serif;font-weight:400;text-transform:uppercase;letter-spacing:-.01em;line-height:.9}
-  .boton{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:52px;padding:0 1.5rem;
-    background:var(--tinta);color:var(--papel);font-weight:600;text-decoration:none;border:0;cursor:pointer;
-    transition:transform .15s ease, background .2s ease}
-  .boton:hover{background:#2a3a66}
-  .boton:active{transform:scale(.97)}
-  .boton:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--mandarina);outline-offset:3px}
-  .boton svg{width:20px;height:20px}
-
-  .aviso-modelo{background:var(--noche);color:#fff;font-size:var(--s-chica);text-align:center;padding:.65rem var(--margen)}
-  .aviso-modelo a{color:var(--mandarina);font-weight:600}
-
-  /* ---------- la hoja ---------- */
-  .mesa{padding:clamp(20px,5vw,64px) var(--margen) 0}
-  .hoja{max-width:62rem;margin:0 auto;background:var(--papel);padding:clamp(24px,5vw,56px)}
-  .cabeza{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 2rem;padding-bottom:1.6rem}
-  .cabeza p{margin:0;font-size:var(--s-chica);color:var(--tenue)}
-  h1{font-size:var(--s-titulo);margin:0 0 1.4rem;max-width:12ch}
-  .lema{font-size:var(--s-lead);line-height:1.35;margin:0 0 2rem;max-width:30ch}
-
-  /* el guiso de hoy: el día de la semana decide (sin JavaScript queda el de la semana entera abajo) */
-  .hoy{display:grid;gap:1.2rem;background:var(--hoja-2);padding:clamp(20px,3vw,32px);margin:0 0 2rem}
-  .hoy .dia{font-weight:600;font-size:var(--s-chica);color:var(--tenue);margin:0}
-  .hoy .guiso{font-family:"Imbue",serif;text-transform:uppercase;font-size:clamp(2rem,1.2rem + 3.4vw,3.6rem);line-height:.92;margin:0}
-  .hoy .detalle{margin:0;color:var(--tenue)}
-  .hoy .precio{font-family:"Imbue",serif;font-size:clamp(2rem,1.2rem + 3vw,3.2rem);line-height:1;margin:0}
-  @media (min-width:720px){ .hoy{grid-template-columns:1fr auto;align-items:end} }
-
-  .pie-hoja{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center}
-  .pie-hoja a.texto{font-weight:500;text-underline-offset:4px}
-
-  /* mosaico de pasta: el piso de las casas del Centro, dibujado (no es foto) */
-  .mosaico{height:clamp(56px,8vw,88px);margin-top:clamp(28px,4vw,48px);
-    background-color:var(--tinta);
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='20' r='7' fill='%23f7941d'/%3E%3Ccircle cx='0' cy='0' r='5' fill='%23f7941d'/%3E%3Ccircle cx='40' cy='0' r='5' fill='%23f7941d'/%3E%3Ccircle cx='0' cy='40' r='5' fill='%23f7941d'/%3E%3Ccircle cx='40' cy='40' r='5' fill='%23f7941d'/%3E%3C/svg%3E");
-    background-size:clamp(28px,4vw,44px) clamp(28px,4vw,44px)}
-
-  /* ---------- la semana ---------- */
-  section{max-width:62rem;margin:0 auto}
-  .semana{background:var(--papel);padding:clamp(28px,5vw,56px);margin-top:clamp(20px,3vw,32px)}
-  h2{font-family:"Imbue",serif;font-weight:400;text-transform:uppercase;font-size:clamp(2.6rem,1.4rem + 4vw,4.4rem);line-height:.9;letter-spacing:-.01em;margin:0 0 1rem}
-  .entrada{margin:0 0 2rem;max-width:44ch;color:var(--tenue)}
-  .dias{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-  .dias li{display:grid;grid-template-columns:7.5rem 1fr auto;gap:1rem;align-items:baseline;padding:1rem 1.1rem;background:var(--hoja-2)}
-  .dias .d{font-weight:600}
-  .dias .p{font-variant-numeric:tabular-nums;font-weight:600}
-  .dias .g small{display:block;color:var(--tenue);font-size:var(--s-chica);margin-top:.15rem}
-  .dias li.es-hoy{background:var(--mandarina)}
-  .dias li.es-hoy .g small{color:var(--tinta)}
-  @media (max-width:520px){ .dias li{grid-template-columns:1fr auto} .dias .d{grid-column:1/-1} }
-
-  /* ---------- el reverso: todos los días ---------- */
-  .reverso{background:var(--gris);padding:clamp(28px,5vw,56px);display:grid;gap:2.4rem}
-  .reverso h3{font-family:"Imbue",serif;font-weight:400;text-transform:uppercase;font-size:clamp(1.8rem,1.2rem + 2vw,2.6rem);line-height:.95;margin:0 0 1rem}
-  .carta{list-style:none;margin:0;padding:0}
-  .carta li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0}
-  .carta li span:last-child{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
-  .carta li small{display:block;color:var(--tenue);font-size:var(--s-chica)}
-  .reverso h2{grid-column:1/-1;margin:0}
-  .nota{grid-column:1/-1;margin:0;color:var(--tenue);font-size:var(--s-chica)}
-  @media (min-width:760px){ .reverso{grid-template-columns:repeat(2,1fr);gap:2.4rem 4rem} }
-
-  /* ---------- dónde: el cruce de calles de Mérida ---------- */
-  .donde{background:var(--papel);padding:clamp(28px,5vw,56px);margin-top:clamp(20px,3vw,32px);display:grid;gap:2rem;align-items:center}
-  .donde address{font-style:normal;font-size:var(--s-lead);line-height:1.35;margin:0 0 1.4rem}
-  .horario{list-style:none;margin:0 0 1.8rem;padding:0}
-  .horario li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;max-width:24rem}
-  .horario li span:last-child{font-weight:600;white-space:nowrap}
-  .cruce{width:100%;height:auto;display:block;background:var(--hoja-2)}
-  @media (min-width:820px){ .donde{grid-template-columns:1fr 1fr} }
-
-  footer{max-width:62rem;margin:0 auto;padding:clamp(48px,8vw,96px) var(--margen) 7rem;color:#fff}
-  footer .nombre{font-family:"Imbue",serif;text-transform:uppercase;font-size:clamp(3rem,1rem + 9vw,8rem);line-height:.85;margin:0 0 1.4rem}
-  footer p{margin:0;color:#c9cfdf;font-size:var(--s-chica)}
-  footer a{color:#fff}
-
-  .flota{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:10;
-    width:58px;height:58px;border-radius:50%;background:var(--mandarina);color:var(--tinta);display:grid;place-items:center}
-  .flota svg{width:28px;height:28px}
-
-  /* entradas suaves, pieza por pieza; sin JavaScript todo se ve */
-  .js .entra{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.2,1);transition-delay:var(--retraso,0s)}
-  .js .entra.visto{opacity:1;transform:none}
-  @keyframes corre{to{background-position:calc(clamp(28px,4vw,44px) * 4) 0}}
-  .mosaico{animation:corre 18s linear infinite}
-  .dias li, .carta li{transition:background .2s ease, transform .2s ease}
-  @media (hover:hover){ .dias li:hover{transform:translateX(4px)} }
-  @media (prefers-reduced-motion: reduce){ .js .entra{opacity:1;transform:none;transition:none} .boton,.dias li{transition:none} .mosaico{animation:none} }
+  /* La Cocina de Chela: color achiote sobre un blanco cálido. */
+  :root{ --acento:#c4502a; --acento-claro:#f4b48e; --acento-texto:#a2401d; --sobre-acento:#fff;
+    --fondo:#f3ebe4; --fondo-2:#fbf7f3; --tinta:#2b1e19; --suave:#68564e }
+  .hoy{padding:clamp(24px,3vw,36px)}
+  .hoy .guiso{font-weight:600;font-size:clamp(2.2rem,1.6rem + 2.4vw,3.4rem);line-height:.95;letter-spacing:-.05em;margin:.8rem 0 .7rem}
+  .hoy p{margin:0 0 1.4rem;color:var(--suave)}
+  .hoy .pie-hoy{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .hoy .precio{font-size:2rem;letter-spacing:-.04em}
+  .dia{min-width:104px;flex:none}
+  .renglones li.es-hoy{background:color-mix(in srgb,var(--acento) 10%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--acento) 35%,transparent)}
+  .renglones li.es-hoy .dia .chip{background:var(--acento);color:#fff}
+  .renglones .g{flex:1;min-width:0}
+  .dos{display:grid;gap:14px}
+  @media (min-width:860px){ .dos{grid-template-columns:1fr 1fr} }
+  .dos h3{margin:0;padding:22px 22px 4px;font-size:1.4rem;letter-spacing:-.03em;font-weight:600}
+  @media (max-width:520px){ #dias li{flex-wrap:wrap} #dias .dia{min-width:0;width:100%} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-<div class="aviso-modelo">Modelo de <a href="../../">Ari Labs</a> con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así</a></div>
+<div class="aviso">Modelo de Ari Labs con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así →</a></div>
+<header class="barra">
+  <a class="marca" href="#"><i></i>La Cocina de Chela</a>
+  <nav><a class="liga" href="#semana">La semana</a><a class="liga" href="#donde">Dónde</a>
+    <a class="boton principal" href="https://wa.me/?text=Hola%2C%20quiero%20apartar%20un%20plato" target="_blank" rel="noopener">Apartar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a></nav>
+</header>
 
 <main>
-  <div class="mesa">
-    <article class="hoja">
-      <h1 class="display">La Cocina de Chela</h1>
-      <p class="lema">Cocina yucateca de casa en la calle 60 por 55, Centro. Cada día de la semana tiene su guiso.</p>
-
-      <div class="hoy" id="hoy">
-        <div>
-          <p class="guiso" id="hoy-guiso">Relleno negro</p>
-          <p class="detalle" id="hoy-detalle">Hoy es jueves. Con arroz, tortillas a mano y agua del día.</p>
-        </div>
-        <p class="precio" id="hoy-precio">$120</p>
+  <div class="portada">
+    <div>
+      <span class="ceja sube">Cocina yucateca de casa</span>
+      <h1 class="sube">La Cocina de Chela</h1>
+      <p class="lema sube">En la calle 60 por 55, Centro. Cada día de la semana tiene su guiso.</p>
+      <div class="botones sube">
+        <a class="boton principal" id="apartar" href="https://wa.me/?text=Hola%2C%20quiero%20apartar%20un%20plato" target="_blank" rel="noopener">Apartar mi plato por WhatsApp<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
+        <a class="boton secundario" href="#semana">Ver el guiso de cada día<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
       </div>
-
-      <div class="pie-hoja">
-        <a class="boton" href="https://wa.link/eut47p" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg>
-          Apartar mi plato por WhatsApp
-        </a>
-        <a class="texto" href="#semana">Ver el guiso de cada día</a>
-      </div>
-      <div class="mosaico" aria-hidden="true"></div>
+    </div>
+    <article class="vidrio brilla hoy sube" aria-live="polite">
+      <span class="chip" id="hoy-dia">Hoy</span>
+      <div class="guiso" id="hoy-guiso">Relleno negro</div>
+      <p id="hoy-detalle">Con arroz y tortillas a mano. Se sirve desde la una, hasta que se acabe.</p>
+      <div class="pie-hoy"><span class="precio" id="hoy-precio">$120</span><span class="chip">Con agua del día</span></div>
     </article>
   </div>
 
-  <section class="semana" id="semana" aria-labelledby="t-semana">
-    <h2 id="t-semana">La semana</h2>
-    <p class="entrada">Como en las casas de Mérida: el lunes es de frijol con puerco y el sábado de chocolomo. Se sirve desde la una, hasta que se acabe.</p>
-    <ol class="dias" id="dias">
-      <li data-dia="1"><span class="d">Lunes</span><span class="g">Frijol con puerco<small>Con arroz, rábano y cilantro</small></span><span class="p">$120</span></li>
-      <li data-dia="2"><span class="d">Martes</span><span class="g">Puchero de tres carnes<small>Con verduras y su caldo aparte</small></span><span class="p">$130</span></li>
-      <li data-dia="3"><span class="d">Miércoles</span><span class="g">Pollo en escabeche<small>Con cebolla morada y chile xcatik</small></span><span class="p">$120</span></li>
-      <li data-dia="4"><span class="d">Jueves</span><span class="g">Relleno negro<small>Con arroz y tortillas a mano</small></span><span class="p">$120</span></li>
-      <li data-dia="5"><span class="d">Viernes</span><span class="g">Pan de cazón<small>Con frijol colado y salsa de tomate</small></span><span class="p">$140</span></li>
-      <li data-dia="6"><span class="d">Sábado</span><span class="g">Chocolomo<small>Con tortillas y cebolla curtida</small></span><span class="p">$130</span></li>
-    </ol>
+  <section class="seccion" id="semana" aria-labelledby="t-semana">
+    <h2 class="sube" id="t-semana">La semana</h2>
+    <p class="entrada sube">Como en las casas de Mérida: el lunes es de frijol con puerco y el sábado de chocolomo. Se sirve desde la una, hasta que se acabe.</p>
+    <ul class="renglones vidrio sube" id="dias">
+      <li data-dia="1"><span class="dia"><span class="chip">Lunes</span></span><span class="g"><b>Frijol con puerco</b><small>Con arroz, rábano y cilantro</small></span><span class="precio">$120</span></li>
+      <li data-dia="2"><span class="dia"><span class="chip">Martes</span></span><span class="g"><b>Puchero de tres carnes</b><small>Con verduras y su caldo aparte</small></span><span class="precio">$130</span></li>
+      <li data-dia="3"><span class="dia"><span class="chip">Miércoles</span></span><span class="g"><b>Pollo en escabeche</b><small>Con cebolla morada y chile xcatik</small></span><span class="precio">$120</span></li>
+      <li data-dia="4"><span class="dia"><span class="chip">Jueves</span></span><span class="g"><b>Relleno negro</b><small>Con arroz y tortillas a mano</small></span><span class="precio">$120</span></li>
+      <li data-dia="5"><span class="dia"><span class="chip">Viernes</span></span><span class="g"><b>Pan de cazón</b><small>Con frijol colado y salsa de tomate</small></span><span class="precio">$140</span></li>
+      <li data-dia="6"><span class="dia"><span class="chip">Sábado</span></span><span class="g"><b>Chocolomo</b><small>Con tortillas y cebolla curtida</small></span><span class="precio">$130</span></li>
+    </ul>
   </section>
 
-  <section class="reverso" aria-labelledby="t-siempre">
-    <h2 id="t-siempre">Todos los días</h2>
-    <div>
-      <h3>Desayunos</h3>
-      <ul class="carta">
-        <li><span>Huevos motuleños<small>Con frijol, chícharos y plátano frito</small></span><span>$95</span></li>
-        <li><span>Chilaquiles rojos o verdes<small>Con pollo o huevo</small></span><span>$85</span></li>
-        <li><span>Café de olla</span><span>$30</span></li>
-      </ul>
+  <section class="seccion" aria-labelledby="t-diario">
+    <h2 class="sube" id="t-diario">Todos los días</h2>
+    <p class="entrada sube">Desayunos desde las ocho y antojitos a cualquier hora.</p>
+    <div class="dos">
+      <div class="vidrio sube"><h3>Desayunos</h3><ul class="renglones">
+        <li><span class="g"><b>Huevos motuleños</b><small>Con frijol, chícharos y plátano frito</small></span><span class="precio">$95</span></li>
+        <li><span class="g"><b>Chilaquiles rojos o verdes</b><small>Con pollo o huevo</small></span><span class="precio">$85</span></li>
+        <li><span class="g"><b>Café de olla</b><small>Con canela y piloncillo</small></span><span class="precio">$30</span></li></ul></div>
+      <div class="vidrio sube"><h3>Antojitos</h3><ul class="renglones">
+        <li><span class="g"><b>Panuchos, tres</b><small>De pollo, cochinita o pavo</small></span><span class="precio">$60</span></li>
+        <li><span class="g"><b>Salbutes, tres</b><small>Con lechuga, tomate y cebolla morada</small></span><span class="precio">$60</span></li>
+        <li><span class="g"><b>Tacos de cochinita, cuatro</b><small>Con habanero aparte</small></span><span class="precio">$80</span></li>
+        <li><span class="g"><b>Sopa de lima</b><small>Con tiras de tortilla dorada</small></span><span class="precio">$75</span></li></ul></div>
     </div>
-    <div>
-      <h3>Antojitos</h3>
-      <ul class="carta">
-        <li><span>Panuchos, tres<small>De pollo, cochinita o pavo</small></span><span>$60</span></li>
-        <li><span>Salbutes, tres<small>Con lechuga, tomate y cebolla morada</small></span><span>$60</span></li>
-        <li><span>Tacos de cochinita, cuatro<small>Con habanero aparte</small></span><span>$80</span></li>
-        <li><span>Sopa de lima</span><span>$75</span></li>
-      </ul>
-    </div>
-    <p class="nota">Platillos y precios de ejemplo: en tu página van los tuyos.</p>
+    <p class="nota sube">Platillos y precios de ejemplo: en tu página van los tuyos.</p>
   </section>
 
-  <section class="donde" id="visitanos" aria-labelledby="t-donde">
-    <div>
-      <h2 id="t-donde">Dónde estamos</h2>
-      <address>Calle 60 por 55, a media cuadra del parque de Santa Lucía.</address>
-      <ul class="horario">
-        <li><span>Lunes a viernes</span><span>8 a. m. a 5 p. m.</span></li>
-        <li><span>Sábado</span><span>8 a. m. a 3 p. m.</span></li>
-        <li><span>Domingo</span><span>Cerrado</span></li>
-      </ul>
-      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Calle+60+por+55+Centro+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a>
+  <section class="seccion" id="donde" aria-labelledby="t-donde">
+    <h2 class="sube" id="t-donde">Dónde estamos</h2>
+    <div class="lugar">
+      <div class="vidrio relleno sube"><address>Calle 60 por 55, a media cuadra del parque de Santa Lucía, Centro.</address>
+        <a class="boton secundario" href="https://maps.google.com/?q=Parque+de+Santa+Luc%C3%ADa+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span></a></div>
+      <dl class="vidrio relleno horario sube"><div><dt>Lunes a viernes</dt><dd>8 a. m. a 5 p. m.</dd></div><div><dt>Sábado</dt><dd>8 a. m. a 3 p. m.</dd></div><div><dt>Domingo</dt><dd>Cerrado</dd></div></dl>
     </div>
-    <!-- el cruce dibujado: las calles pares van de norte a sur, las nones de oriente a poniente -->
-    <svg class="cruce" viewBox="0 0 480 360" role="img" aria-label="Plano del cruce de la calle 60 con la 55, en el Centro de Mérida">
-      <rect width="480" height="360" fill="#f4f4f2"/>
-      <g fill="#e3e1dc">
-        <rect x="20" y="20" width="130" height="90"/><rect x="190" y="20" width="110" height="90"/><rect x="340" y="20" width="120" height="90"/>
-        <rect x="20" y="150" width="130" height="70"/><rect x="340" y="150" width="120" height="70"/>
-        <rect x="20" y="260" width="130" height="80"/><rect x="190" y="260" width="110" height="80"/><rect x="340" y="260" width="120" height="80"/>
-      </g>
-      <rect x="190" y="150" width="110" height="70" fill="#1f2b4d"/>
-      <circle cx="245" cy="185" r="12" fill="#f7941d"/>
-      <g fill="#1f2b4d" font-family="Albert Sans, sans-serif" font-size="15" font-weight="600">
-        <text x="166" y="352" transform="rotate(-90 166 352)">Calle 60</text>
-        <text x="318" y="100" transform="rotate(-90 318 100)">Calle 58</text>
-        <text x="30" y="141">Calle 55</text>
-        <text x="350" y="251">Calle 57</text>
-      </g>
-      <text x="245" y="240" fill="#1f2b4d" font-family="Albert Sans, sans-serif" font-size="14" text-anchor="middle">Aquí estamos</text>
-    </svg>
   </section>
 </main>
 
-<footer>
-  <p class="nombre">Chela</p>
-  <p>La Cocina de Chela es un negocio de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</p>
-</footer>
-
-<a class="flota" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-label="Apartar mi plato por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 8.8c.2 2.6 2.4 5 5.2 5.4l1-1.2-1.6-.9-.7.6a4 4 0 0 1-2-2l.6-.7-.9-1.6z"/></svg>
-</a>
+<footer class="pie"><span class="nombre">La Cocina de Chela</span><span>Negocio de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</span></footer>
 
 <script>
   // El guiso de hoy sale de la lista de la semana; el domingo enseña el del lunes.
-  (function(){
-    var nombres = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
-    var hoy = new Date().getDay();
-    var fila = document.querySelector('#dias li[data-dia="' + hoy + '"]');
-    var etiqueta = 'Hoy es ' + nombres[hoy];
-    if (!fila){ fila = document.querySelector('#dias li[data-dia="1"]'); etiqueta = 'Hoy domingo descansamos; esto hay el lunes'; }
+  (function () {
+    var nombres = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    var hoy = new Date().getDay(), fila = document.querySelector('#dias li[data-dia="' + hoy + '"]'), etiqueta = 'Hoy es ' + nombres[hoy];
+    if (!fila) { fila = document.querySelector('#dias li[data-dia="1"]'); etiqueta = 'Domingo descansamos · el lunes hay'; }
     fila.classList.add('es-hoy');
-    var g = fila.querySelector('.g');
-    document.getElementById('hoy-guiso').textContent = g.firstChild.textContent.trim();
-    document.getElementById('hoy-detalle').textContent = etiqueta + '. ' + g.querySelector('small').textContent + '.';
-    document.getElementById('hoy-precio').textContent = fila.querySelector('.p').textContent;
-
-    // cada pieza (título, texto, renglones, plano) entra con 70 ms de diferencia
-    var piezas = [];
-    document.querySelectorAll('.hoja > *, section h2, section h3, section .entrada, section li, section address, section .boton, .cruce, footer > *').forEach(function(el){
-      var grupo = el.closest('section, .hoja, footer');
-      var i = grupo.__n = (grupo.__n || 0) + 1;
-      el.style.setProperty('--retraso', Math.min(i - 1, 8) * 0.07 + 's');
-      el.classList.add('entra'); piezas.push(el);
-    });
-    if (!('IntersectionObserver' in window)){ piezas.forEach(function(p){ p.classList.add('visto'); }); return; }
-    var ojo = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } }); }, {threshold:.1});
-    piezas.forEach(function(p){ ojo.observe(p); });
+    var guiso = fila.querySelector('b').textContent;
+    document.getElementById('hoy-dia').textContent = etiqueta;
+    document.getElementById('hoy-guiso').textContent = guiso;
+    document.getElementById('hoy-detalle').textContent = fila.querySelector('small').textContent + '. Se sirve desde la una, hasta que se acabe.';
+    document.getElementById('hoy-precio').textContent = fila.querySelector('.precio').textContent;
+    document.getElementById('apartar').href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero apartar un plato de ' + guiso.toLowerCase() + ' para hoy.');
   })();
 </script>
+<script src="../acabado.js"></script>
 </body>
 </html>
