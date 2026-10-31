@@ -88,3 +88,10 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   entregar, revisar con lupa: íconos reales (barra de estado con señal, wifi, batería con nivel y cámara), colores
   solo de la paleta escogida, y que los datos cuadren entre sí (la hora del reloj con "tu próxima cita en...", lo que
   falta cobrar en la lista y en el detalle, saludo según la hora).
+- **Regla (31/10): los modelos no llevan nombres de negocio ni direcciones**, salvo que sean encargos reales de Ari
+  Labs. Se usa "Tu restaurante / Tu barbería / Tu consultorio" y "Aquí va tu dirección...". Títulos de portada
+  genéricos: "Cocina de casa", "Corte y barba", "Sin miedo al dentista". (Mis citas sí es un encargo real.)
+- Hielo pulido (31/10): cada pedazo tiene su propio desfase (rotura escalonada, armado uno tras otro); el hielo grande
+  se encoge al romperse y crece al armarse (ya no desaparece de golpe); los pedazos nacen pequeñitos y crecen;
+  destello chico al romperse y grande al formarse; movimientos iguales a 30/60/120 cuadros por segundo; calidad
+  automática si el teléfono va lento.

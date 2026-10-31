@@ -176,7 +176,7 @@ function arrancar() {
     a.userData = {
       radio: a.geometry.boundingSphere.radius, carril: carriles[i],
       v: (0.16 + azar() * 0.12) * (i % 2 ? 1 : -1), f: (i / 7) * Math.PI * 2 + azar() * 0.4,
-      inclina: new THREE.Euler((azar() - 0.5) * 1.1, 0, (azar() - 0.5) * 0.9), giro: (azar() - 0.5) * 2,
+      inclina: new THREE.Euler((azar() - 0.5) * 1.1, 0, (azar() - 0.5) * 0.9), giro: (azar() - 0.5) * 2, ret: azar(),
       sx: [0.82, -0.85, 0.15, -0.3, 0.6, -0.6, 0.95][i], sy: [-0.75, 0.7, -0.2, -0.85, 0.35, 0.05, 0.6][i],
     };
     a.position.set(99, 99, 0);
@@ -192,7 +192,7 @@ function arrancar() {
     const col = i % cols, fila = Math.floor(i / cols), filas = Math.ceil(nPedazos / cols);
     pz.userData = {
       radio: pz.geometry.boundingSphere.radius,
-      dentro: new THREE.Vector3(Math.sqrt(1 - u * u) * Math.cos(th), u, Math.sqrt(1 - u * u) * Math.sin(th)).multiplyScalar(rr),
+      ret: azar(), dentro: new THREE.Vector3(Math.sqrt(1 - u * u) * Math.cos(th), u, Math.sqrt(1 - u * u) * Math.sin(th)).multiplyScalar(rr),
       sx: ((col + 0.5) / cols) * 2 - 1 + (azar() - 0.5) * 0.25, sy: ((fila + 0.5) / filas) * 2 - 1 + (azar() - 0.5) * 0.25,
       z: -3.2 + azar() * 3.6, deriva: 0.5 + azar() * 0.9, giro: new THREE.Vector3(azar() - 0.5, azar() - 0.5, azar() - 0.5).multiplyScalar(2),
       rot: new THREE.Euler(azar() * 6, azar() * 6, azar() * 6),
@@ -216,6 +216,7 @@ function arrancar() {
     }
   }
   const esq = new THREE.Vector3();
+  let kEsq = 0.12;   // cuánto se acerca cada cuadro a su salida (se ajusta a los cuadros por segundo)
   function esquivarTexto(pz, prof) {
     esq.copy(pz.position).project(camara);
     const px = (esq.x + 1) / 2 * innerWidth, py = (1 - esq.y) / 2 * innerHeight;
@@ -236,8 +237,8 @@ function arrancar() {
       }
     }
     if (mx2 === 0 && my2 === 0) u.salida = null;
-    u.esqX = (u.esqX || 0) + (mx2 / pxPorUnidad - (u.esqX || 0)) * 0.12;
-    u.esqY = (u.esqY || 0) + (-my2 / pxPorUnidad - (u.esqY || 0)) * 0.12;
+    u.esqX = (u.esqX || 0) + (mx2 / pxPorUnidad - (u.esqX || 0)) * kEsq;
+    u.esqY = (u.esqY || 0) + (-my2 / pxPorUnidad - (u.esqY || 0)) * kEsq;
     pz.position.x += u.esqX; pz.position.y += u.esqY;
   }
 
@@ -271,32 +272,60 @@ function arrancar() {
   const reloj = new THREE.Clock();
   const suave = k => k * k * (3 - 2 * k);
 
-  // estado del hielo (va por tiempo, no por la velocidad del scroll)
-  // bienvenida: los pedacitos vuelan al centro y forman el hielo (1 s), salvo que la página abra ya abajo
-  let estado = 'armando', t0 = 0, desde = 1, durArmar = 1.0, rupturaPrev = 1, cuadro = 0, tFormado = -9;
-  if (quieto || scrollY / innerHeight > 0.08) { estado = scrollY / innerHeight > 0.08 ? 'roto' : 'entero'; rupturaPrev = estado === 'roto' ? 1 : 0; }
+  // Estado del hielo (va por tiempo, no por la velocidad del scroll). Cada pedazo lleva su propio avance (e, de 0 =
+  // dentro del hielo a 1 = repartido) con un desfase propio (ret): la rotura y el armado no se mueven como un bloque.
+  // El hielo grande no desaparece de golpe: se encoge mientras salen los pedazos y crece cuando llegan.
+  let estado = 'armando', t0 = 0, durArmar = 1.1, cuadro = 0, tFormado = -9, tRompe = -9, tPrev = 0, escalaDiam = 0;
+  todos.forEach(o => { o.userData.e = 1; o.userData.desde = 1; });
+  if (quieto || scrollY / innerHeight > 0.08) {
+    estado = scrollY / innerHeight > 0.08 ? 'roto' : 'entero';
+    todos.forEach(o => { o.userData.e = estado === 'roto' ? 1 : 0; });
+    escalaDiam = estado === 'entero' ? 1 : 0;
+  }
+  const lim = k => Math.min(1, Math.max(0, k)), salida4 = k => 1 - Math.pow(1 - k, 4);
+  // calidad automática: si el teléfono no llega a ~42 cuadros por segundo, baja la resolución un poco (sin tirones)
+  let pr = render.getPixelRatio(), sumaDt = 0, nDt = 0;
 
   render.setAnimationLoop(() => {
     const t = reloj.getElapsedTime(), tv = quieto ? 8 : t;   // tv: tiempo visual (quieto con "reducir movimiento")
-    mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+    const dt = Math.min(0.05, Math.max(0.001, t - tPrev)); tPrev = t;
+    const f = dt * 60, k = a => 1 - Math.pow(1 - a, f);     // suavizados iguales a 30, 60 o 120 cuadros por segundo
+    kEsq = k(0.12);
+    if (cuadro > 60 && !document.hidden) {
+      sumaDt += dt;
+      if (++nDt === 90) { const prom = sumaDt / nDt; sumaDt = 0; nDt = 0; if (prom > 0.024 && pr > 1) { pr = Math.max(1, pr - 0.25); render.setPixelRatio(pr); medir(); } }
+    }
+    mx += (tx - mx) * k(0.05); my += (ty - my) * k(0.05);
     fondoMat.uniforms.t.value = tv; fondoMat.uniforms.m.value.set(mx, my);
-    vel.x += ((my - 0.5) * -0.9 - incl.x) * 0.02; vel.y += ((mx - 0.5) * 1.3 - incl.y) * 0.02;
-    vel.multiplyScalar(0.9); incl.add(vel);
+    // el hielo sigue el dedo con un resorte suave (se pasa un poquito y regresa)
+    vel.x += ((my - 0.5) * -0.9 - incl.x) * 0.02 * f; vel.y += ((mx - 0.5) * 1.3 - incl.y) * 0.02 * f;
+    vel.multiplyScalar(Math.pow(0.9, f)); incl.addScaledVector(vel, f);
     grupo.rotation.set(0.18 + Math.sin(tv * 0.33) * 0.12 + incl.x, tv * 0.22 + incl.y, Math.sin(tv * 0.21) * 0.1);
     const movil = innerWidth < 760;
     if (cuadro % 30 === 0) medirBordes();
     const escala = (movil ? 0.56 : 0.74) * (1 + Math.sin(tv * 1.1) * 0.015);
 
     const yr = scrollY / innerHeight;
-    if ((estado === 'entero' || estado === 'armando') && yr > 0.08) { estado = 'rompiendo'; t0 = t; desde = rupturaPrev; }
-    if ((estado === 'rompiendo' || estado === 'roto') && yr < 0.03) { estado = 'armando'; t0 = t; desde = rupturaPrev; durArmar = 2.6; }
-    let ruptura;
-    if (quieto) ruptura = yr > 0.08 ? 1 : 0;
-    else if (estado === 'rompiendo') { const k = Math.min(1, (t - t0) / 4.5); ruptura = desde + (1 - desde) * (1 - Math.pow(1 - k, 4)); if (k >= 1) estado = 'roto'; }
-    else if (estado === 'roto') ruptura = 1;
-    else if (estado === 'armando') { const k = Math.min(1, (t - t0) / durArmar); ruptura = desde * (1 - suave(k)); if (k >= 1) { estado = 'entero'; tFormado = t; } }
-    else ruptura = 0;
-    rupturaPrev = ruptura;
+    if ((estado === 'entero' || estado === 'armando') && yr > 0.08) { estado = 'rompiendo'; t0 = t; tRompe = t; todos.forEach(o => { o.userData.desde = o.userData.e; }); }
+    if ((estado === 'rompiendo' || estado === 'roto') && yr < 0.03) { estado = 'armando'; t0 = t; durArmar = 2.6; todos.forEach(o => { o.userData.desde = o.userData.e; }); }
+    const kr = lim((t - t0) / (estado === 'rompiendo' ? 4.5 : durArmar));
+    let eMax = 0;
+    todos.forEach(o => {
+      const d = o.userData;
+      if (quieto) d.e = yr > 0.08 ? 1 : 0;
+      // rotura: salen rápido y se frenan en cámara lenta; cada uno arranca con hasta 0.3 s de diferencia
+      else if (estado === 'rompiendo') d.e = d.desde + (1 - d.desde) * salida4(lim((kr - d.ret * 0.06) / (1 - d.ret * 0.06)));
+      // armado: todos salen juntos y llegan escalonados, uno tras otro
+      else if (estado === 'armando') d.e = d.desde * (1 - suave(lim(kr * (1 + d.ret * 0.3))));
+      else d.e = estado === 'roto' ? 1 : 0;
+      eMax = Math.max(eMax, d.e);
+    });
+    if (quieto) escalaDiam = yr > 0.08 ? 0 : 1;
+    else if (estado === 'rompiendo') escalaDiam = Math.min(escalaDiam, 1 - suave(lim((t - t0) / 0.55)));
+    else if (estado === 'armando') escalaDiam = suave(lim((kr - 0.74) / 0.26));
+    else escalaDiam = estado === 'entero' ? 1 : 0;
+    if (estado === 'rompiendo' && kr >= 1) estado = 'roto';
+    if (estado === 'armando' && kr >= 1) { estado = 'entero'; tFormado = t; }
 
     const rG = radioGrande * escala, hueco = movil ? 0.7 : 1.15;
     let x, y;
@@ -306,22 +335,24 @@ function arrancar() {
     // la portada se va hacia arriba al bajar: el hielo entero también (antes de romperse)
     grupo.position.set(x, y + Math.sin(tv * 0.8) * 0.06 + yr * borde.medioAlto * 2, 0);
     grupo.scale.setScalar(escala);
-    if (!quieto) diamante.rotation.y += 0.0015;
-    diamante.visible = ruptura <= 0.001;
+    if (!quieto) diamante.rotation.y += 0.09 * dt;
+    diamante.scale.setScalar(Math.max(0.0001, escalaDiam));
+    diamante.visible = escalaDiam > 0.002;
     grupo.updateMatrixWorld();
     dest.forEach(d => { const u = d.userData, b = Math.max(0, Math.sin(tv * u.v + u.f)); d.material.opacity = Math.pow(b, 6); d.scale.setScalar(u.s * (0.4 + Math.pow(b, 3))); });
-    // destello suave al formarse
-    const kh = (t - tFormado) / 0.9;
-    halo.material.opacity = kh >= 0 && kh < 1 ? Math.sin(kh * Math.PI) * 0.75 : 0;
-    halo.scale.setScalar(2.2 + Math.max(0, Math.min(1, kh)) * 1.6);
+    // destellos suaves: uno grande al formarse y uno chico al romperse
+    const kh = (t - tFormado) / 0.9, kb = (t - tRompe) / 0.7;
+    const oh = kh >= 0 && kh < 1 ? Math.sin(kh * Math.PI) * 0.75 : 0, ob = kb >= 0 && kb < 1 ? Math.sin(kb * Math.PI) * 0.4 : 0;
+    halo.material.opacity = Math.max(oh, ob);
+    halo.scale.setScalar(oh >= ob ? 2.2 + lim(kh) * 1.6 : 1.6 + lim(kb) * 2.4);
 
     // astillas en órbita alrededor del hielo entero
-    const centro = grupo.position;
+    const centro = grupo.position, kOrb = k(0.08);
     astillas.forEach(a => {
       const d = a.userData, ang = d.f + tv * d.v, orbita = rG + d.radio + 0.24 + d.carril * 0.11;
       meta.set(Math.cos(ang) * orbita, 0, Math.sin(ang) * orbita).applyEuler(d.inclina);
       meta.x *= 0.78; meta.add(centro);
-      if (a.position.x > 50) a.position.copy(meta); else a.position.lerp(meta, 0.08);
+      if (a.position.x > 50) a.position.copy(meta); else a.position.lerp(meta, kOrb);
       a.rotation.set(tv * 0.5 * d.giro + d.f, tv * 0.4, tv * 0.2 * d.giro);
     });
     for (let paso = 0; paso < 3; paso++) {
@@ -347,11 +378,11 @@ function arrancar() {
     });
 
     // los pedazos: salen del hielo, se reparten por la pantalla, flotan y suben despacio al bajar
-    const e = ruptura, despues = Math.max(0, scrollY - innerHeight * 0.6);
-    if (e > 0.001 && cuadro % 4 === 0) medirTextos();
+    const despues = Math.max(0, scrollY - innerHeight * 0.6);
+    if (eMax > 0.001 && cuadro % 4 === 0) medirTextos();
     pedazos.forEach(pz => {
-      const d = pz.userData;
-      pz.visible = e > 0.001;
+      const d = pz.userData, e = d.e;
+      pz.visible = e > 0.002;
       if (!pz.visible) return;
       tmp.copy(d.dentro).applyMatrix4(grupo.matrixWorld);
       const prof = (camara.position.z - d.z) / camara.position.z, altoTotal = borde.medioAlto * prof * 2 + 1.2;
@@ -359,17 +390,18 @@ function arrancar() {
       yd = ((yd + altoTotal / 2) % altoTotal + altoTotal) % altoTotal - altoTotal / 2;   // al salir por arriba, entra por abajo
       meta.set(d.sx * borde.medioAncho * prof * 0.84 + Math.cos(tv * 0.4 + d.sy * 3) * 0.08, yd, d.z);
       pz.position.lerpVectors(tmp, meta, e);
-      pz.scale.setScalar((0.6 + 0.4 * e) * (movil ? 0.72 : 1));
+      // nacen pequeñitos desde dentro del hielo y crecen al salir (y al revés cuando se juntan)
+      pz.scale.setScalar(suave(lim(e / 0.14)) * (0.6 + 0.4 * e) * (movil ? 0.72 : 1));
       d.prof = prof;
       pz.rotation.set(d.rot.x + tv * d.giro.x * (0.3 + (1 - e) * 2), d.rot.y + tv * d.giro.y * (0.3 + (1 - e) * 2), d.rot.z + tv * d.giro.z * 0.3);
     });
-    if (e > 0.001) {
+    if (eMax > 0.001) {
       astillas.forEach(a => {
         const d = a.userData, prof = (camara.position.z - a.position.z) / camara.position.z, altoTotal = borde.medioAlto * prof * 2 + 1.2;
         let yd = d.sy * borde.medioAlto * prof * 0.85 + despues * 0.0012;
         yd = ((yd + altoTotal / 2) % altoTotal + altoTotal) % altoTotal - altoTotal / 2;
         meta.set(d.sx * borde.medioAncho * prof * 0.86, yd, a.position.z);
-        a.position.lerp(meta, e); d.prof = prof;
+        a.position.lerp(meta, d.e); d.prof = prof;
       });
       // ningún hielo choca con otro
       for (let paso = 0; paso < 3; paso++) for (let i = 0; i < todos.length; i++) for (let j = i + 1; j < todos.length; j++) {
@@ -377,7 +409,8 @@ function arrancar() {
         dif.subVectors(a.position, b.position); const dist = dif.length();
         if (dist < minimo && dist > 1e-4) { dif.multiplyScalar((minimo - dist) / dist * 0.5); a.position.add(dif); b.position.sub(dif); }
       }
-      if (e > 0.05) todos.forEach(o => {
+      todos.forEach(o => {
+        if (o.userData.e <= 0.05) return;
         esquivarTexto(o, o.userData.prof || 1);
         // nada cortado por la orilla de la pantalla
         const prof = o.userData.prof || 1, m = o.userData.radio * o.scale.x * 1.2 + 0.06, ancho = borde.medioAncho * prof;

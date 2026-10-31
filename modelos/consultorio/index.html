@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Clínica Dental Flamboyán · Modelo de consultorio · Ari Labs</title>
+<title>Modelo de consultorio · Ari Labs</title>
 <meta name="description" content="Modelo de página web para consultorio o clínica, de Ari Labs. Negocio de ejemplo.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#f7f6fe">
@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../acabado.css">
 <style>
-  /* Clínica Dental Flamboyán: lavanda sobre blanco (paleta escogida por Javi). */
+  /* Modelo de consultorio: lavanda sobre blanco (paleta escogida por Javi). */
   :root{ --acento:#6d5bd0; --acento-claro:#cdc4fb; --acento-texto:#5a48bb; --sobre-acento:#fff;
     --fondo:#efedfa; --fondo-2:#fbfaff; --tinta:#1f1b38; --suave:#5f5b78 }
   .cita{display:grid;gap:14px;align-items:start}
@@ -54,7 +54,7 @@
 <body>
 <div class="aviso">Modelo de Ari Labs con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así →</a></div>
 <header class="barra">
-  <a class="marca" href="#"><i></i>Flamboyán</a>
+  <a class="marca" href="#"><i></i>Tu consultorio</a>
   <nav><a class="liga" href="#precios">Tratamientos</a><a class="liga" href="#donde">Dónde</a>
     <a class="boton principal" href="#cita">Apartar cita<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></nav>
 </header>
@@ -62,9 +62,9 @@
 <main>
   <div class="portada">
     <div>
-      <span class="ceja sube">Clínica Dental Flamboyán</span>
+      <span class="ceja sube">Clínica dental</span>
       <h1 class="sube">Sin miedo al dentista</h1>
-      <p class="lema sube">Odontología general y para niños en Paseo de Montejo. Te explicamos todo antes de empezar y sabes el precio desde el principio.</p>
+      <p class="lema sube">Odontología general y para niños. Te explicamos todo antes de empezar y sabes el precio desde el principio.</p>
       <div class="botones sube">
         <a class="boton principal" href="#cita">Apartar mi cita<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
         <a class="boton secundario" href="#precios">Ver tratamientos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
@@ -139,14 +139,14 @@
   <section class="seccion" id="donde" aria-labelledby="t-donde">
     <h2 class="sube" id="t-donde">Dónde estamos</h2>
     <div class="lugar">
-      <div class="vidrio relleno sube"><address>Paseo de Montejo, Mérida. Con estacionamiento para pacientes.</address>
-        <a class="boton secundario" href="https://maps.google.com/?q=Paseo+de+Montejo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span></a></div>
+      <div class="vidrio relleno sube"><address>Aquí va tu dirección, con una referencia para que te encuentren fácil.</address>
+        <a class="boton secundario" href="https://maps.google.com/" target="_blank" rel="noopener">Cómo llegar<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span></a></div>
       <dl class="vidrio relleno horario sube"><div><dt>Lunes a viernes</dt><dd>9 a. m. a 7 p. m.</dd></div><div><dt>Sábado</dt><dd>9 a. m. a 1 p. m.</dd></div><div><dt>Domingo</dt><dd>Cerrado</dd></div></dl>
     </div>
   </section>
 </main>
 
-<footer class="pie"><span class="nombre">Flamboyán</span><span>Negocio de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</span></footer>
+<footer class="pie"><span class="nombre">Tu consultorio</span><span>Modelo de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</span></footer>
 
 <script>
   // La cita: tratamiento + día + hora arman el mensaje.
@@ -157,7 +157,7 @@
     function arma() {
       var t = valor('trat'), d = valor('dia'), h = valor('hora');
       resumen.textContent = t.charAt(0).toUpperCase() + t.slice(1) + ' ' + d + ' a las ' + h + '.';
-      mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero una cita en Flamboyán: ' + t + ' ' + d + ' a las ' + h + '. ¿Tienen lugar?');
+      mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero una cita: ' + t + ' ' + d + ' a las ' + h + '. ¿Tienen lugar?');
     }
     forma.addEventListener('change', arma); arma();
   })();
