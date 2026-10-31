@@ -150,23 +150,20 @@
   .puntos button{width:44px;height:44px;border:0;background:none;padding:0;display:grid;place-items:center;cursor:pointer}
   .puntos button::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(91,105,120,.4);transition:width .4s var(--curva),background .3s}
   .puntos button[aria-current="true"]::before{width:22px;border-radius:5px;background:var(--artico)}
-  /* teléfono: las pantallas se pasan con el dedo */
-  .pantallas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
-  .pantallas::-webkit-scrollbar{display:none}
-  .pantallas img{flex:0 0 100%;scroll-snap-align:center}
+  /* las pantallas se apilan y se cambian con un deslizamiento a los lados (JS); subir y bajar siempre mueve la página */
+  .cuerpo{touch-action:pan-y}
+  .pantallas img{position:absolute;inset:0;opacity:0;transform:translateX(var(--entra,14%)) scale(.98);transition:opacity .55s ease,transform .6s var(--curva)}
+  .pantallas img.activa{opacity:1;transform:none}
+  .pantallas img.antes{--entra:-14%}
   @media (min-width:860px){
     .obra{grid-template-columns:minmax(0,1fr) auto}
     .telefono{--alto:min(72svh,640px);padding-right:clamp(0px,4vw,60px)}
-    /* compu: las pantallas cambian solas mientras gira (se apilan y se funden) */
-    .pantallas{display:block;overflow:hidden}
-    .pantallas img{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
-    .pantallas img.activa{opacity:1}
     .seccion.trabajos{min-height:100svh;display:grid;align-content:center}
   }
 
   /* ---------- 4. modelos: placas de hielo que pasan de lado ---------- */
   .carril{margin:0 calc(var(--margen) * -1);overflow:hidden}
-  .pista{display:flex;gap:14px;padding:6px var(--margen) 18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--margen);scrollbar-width:none}
+  .pista{display:flex;gap:14px;padding:6px var(--margen) 18px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-snap-type:x mandatory;scroll-padding-left:var(--margen);scrollbar-width:none}
   .pista::-webkit-scrollbar{display:none}
   .fijo .pista{overflow:visible;width:max-content;will-change:transform}
   .placa{flex:0 0 min(80vw,360px);scroll-snap-align:start;padding:14px 14px 22px;display:flex;flex-direction:column}

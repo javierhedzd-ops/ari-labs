@@ -62,19 +62,21 @@
   var pantallas = $('.pantallas'), imgs = $$('img', pantallas), puntos = $$('.puntos button'), actual = 0;
   function marcar(i) {
     actual = i;
-    imgs.forEach(function (im, k) { im.classList.toggle('activa', k === i); });
+    imgs.forEach(function (im, k) { im.classList.toggle('activa', k === i); im.classList.toggle('antes', k < i); });
     puntos.forEach(function (p, k) { p.setAttribute('aria-current', k === i ? 'true' : 'false'); });
   }
-  function mostrar(i) {
-    if (esCompu.matches) marcar(i);
-    else pantallas.scrollTo({ left: i * pantallas.clientWidth, behavior: quieto ? 'auto' : 'smooth' });
-  }
+  function mostrar(i) { marcar(Math.max(0, Math.min(imgs.length - 1, i))); }
   puntos.forEach(function (p, k) { p.addEventListener('click', function () { mostrar(k); }); });
-  pantallas.addEventListener('scroll', function () {
-    if (esCompu.matches) return;
-    var i = Math.round(pantallas.scrollLeft / Math.max(1, pantallas.clientWidth));
-    if (i !== actual) marcar(i);
+  // deslizar a los lados sobre el teléfono cambia de pantalla; hacia arriba o abajo, la página baja normal
+  var x0 = null, y0 = 0;
+  var tel = $('.cuerpo');
+  tel.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') { x0 = e.clientX; y0 = e.clientY; } }, { passive: true });
+  tel.addEventListener('pointerup', function (e) {
+    if (x0 === null) return;
+    var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) mostrar(actual + (dx < 0 ? 1 : -1));
   }, { passive: true });
+  tel.addEventListener('pointercancel', function () { x0 = null; }, { passive: true });
   pantallas.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight') { mostrar(Math.min(2, actual + 1)); e.preventDefault(); }
     if (e.key === 'ArrowLeft') { mostrar(Math.max(0, actual - 1)); e.preventDefault(); }
