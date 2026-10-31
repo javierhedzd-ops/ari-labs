@@ -81,3 +81,5 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Modelos rehechos con una base común `modelos/acabado.css` + `modelos/acabado.js` (la misma mano) y cada uno con su
   color: La Cocina de Chela (achiote), Navaja (latón sobre grafito, oscura), Flamboyán (rojo flamboyán). Conservan
   lo que hacían: guiso del día, cuenta de la barbería, cita armada para WhatsApp. Capturas nuevas en img/modelo-*.webp.
+- **Regla (31/10): la paleta de colores siempre la escoge Javi.** Antes de usar colores nuevos, enseñarle varias
+  opciones (página de muestras) y preguntarle con botones. Muestras de esta vuelta: https://claude.ai/artifact/CSyFZQUVWcjZgxcTtbbyDD
