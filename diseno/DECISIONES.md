@@ -76,7 +76,7 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Siguiente sesión: hacer primero Mis citas en la web, después los 3 modelos; vista previa y video al final.
 
 ## Hecho (31/10, tarde): Mis citas y modelos con el acabado de Ari Labs
-- Mis citas en la web: 3 pantallas nuevas dibujadas en `diseno/capturas/mis-citas.html` (color propio: ciruela, escogido por Javi;
+- Mis citas en la web: 3 pantallas nuevas dibujadas en `diseno/capturas/mis-citas.html` (color propio: olivo profundo, escogido por Javi el 31/10 tras ver muestras de olivo;
   acabado Ari Labs: vidrio, píldoras con círculo, rombos). Se fotografían con `node diseno/capturas/sacar.js`
   (servidor local en el puerto 8123) y quedan en img/citas-*.webp. La app real sigue igual por ahora.
 - Modelos rehechos con una base común `modelos/acabado.css` + `modelos/acabado.js` (la misma mano) y cada uno con su
