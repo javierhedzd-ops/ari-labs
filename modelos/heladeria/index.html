@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modelo de heladería · Ari Labs</title>
+<meta name="description" content="Modelo de página web para heladería o nevería, de Ari Labs. Negocio de ejemplo.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#d6336c">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Heladería · estilo alegre: color plano, ondas, sellos redondos, burbujas y botones gorditos que se hunden.
+     Rosa mexicano (paleta escogida por Javi) y el cono color galleta. Títulos en Caprasimo. */
+  :root{ --rosa:#d6336c; --rosa-osc:#9c1f4c; --rosa-claro:#ffb3cc; --rosa-palido:#ffe1ec; --crema:#fdf3f6; --tinta:#2c1820; --suave:#6c5560;
+    --galleta:#e9b872; --margen:clamp(18px,5vw,64px); --rebote:cubic-bezier(.34,1.56,.64,1); color-scheme:light }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px;background:var(--crema)}
+  body{margin:0;background:var(--crema);color:var(--tinta);font:400 1.0625rem/1.55 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit} img{max-width:100%}
+  :focus-visible{outline:3px solid var(--tinta);outline-offset:3px;border-radius:12px}
+  h1,h2,h3{font-family:Caprasimo,serif;font-weight:400;margin:0;line-height:.95}
+  .aviso{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 12px;padding:8px var(--margen);background:var(--tinta);color:#fbe6ee;font-size:.85rem}
+  .aviso a{font-weight:600;color:#fff;min-height:44px;display:inline-flex;align-items:center}
+  /* botones gorditos: se hunden al tocarlos */
+  .gordo{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:999px;cursor:pointer;
+    font:600 1rem/1 "Inter Tight",sans-serif;text-decoration:none;background:#fff;color:var(--rosa);box-shadow:0 5px 0 rgba(44,24,32,.25);
+    transition:transform .15s ease,box-shadow .15s ease;-webkit-tap-highlight-color:transparent}
+  .gordo:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(44,24,32,.25)}
+  .gordo.oscuro{background:var(--tinta);color:#fff;box-shadow:0 5px 0 #000}
+  .gordo.oscuro:active{box-shadow:0 1px 0 #000}
+  .gordo.rosa{background:var(--rosa);color:#fff;box-shadow:0 5px 0 var(--rosa-osc)}
+  .gordo.rosa:active{box-shadow:0 1px 0 var(--rosa-osc)}
+  .gordo svg{width:18px;height:18px}
+  @media (hover:hover){ .gordo:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(44,24,32,.25)} .gordo.oscuro:hover{box-shadow:0 7px 0 #000} .gordo.rosa:hover{box-shadow:0 7px 0 var(--rosa-osc)} }
+  /* barra */
+  .barra{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px var(--margen);background:var(--rosa);color:#fff;transition:box-shadow .3s}
+  .barra.vidrio-b{box-shadow:0 6px 0 var(--rosa-osc)}
+  .marca{font-family:Caprasimo,serif;font-size:1.25rem;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+  .barra .gordo{min-height:44px;padding:0 18px;font-size:.92rem}
+  /* portada */
+  .portada{position:relative;background:var(--rosa);color:#fff;padding:clamp(28px,6vw,72px) var(--margen) clamp(110px,14vw,170px)}
+  .portada::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:clamp(50px,7vw,90px);
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 46' preserveAspectRatio='none'%3E%3Cpath d='M0 20 C50 46 100 0 150 20 S250 46 300 20 S370 0 400 18 V46 H0Z' fill='%23fdf3f6'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+  .portada .dentro{position:relative;max-width:1100px;margin:0 auto;display:grid;gap:24px;align-items:center}
+  @media (min-width:820px){ .portada .dentro{grid-template-columns:1.3fr 1fr} }
+  .etiq{display:inline-block;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.2);font-weight:600;font-size:.9rem;rotate:-3deg}
+  .portada h1{font-size:clamp(3.4rem,2rem + 7vw,7.5rem);margin:16px 0 14px}
+  .portada p{margin:0 0 26px;font-size:clamp(1.05rem,1rem + .4vw,1.3rem);max-width:30ch;opacity:.95}
+  .botones{display:flex;gap:12px;flex-wrap:wrap}
+  /* el cono dibujado */
+  .cono{position:relative;width:min(240px,52vw);aspect-ratio:240/360;margin:0 auto;animation:flota 4s ease-in-out infinite}
+  @keyframes flota{50%{transform:translateY(-10px) rotate(-2deg)}}
+  .bola{position:absolute;border-radius:50%;box-shadow:inset -12px -14px 0 rgba(0,0,0,.08);animation:cae .8s var(--rebote) both}
+  .b1{left:6%;top:24%;width:88%;height:36%;background:var(--rosa-claro);animation-delay:.25s}
+  .b2{left:16%;top:0;width:68%;height:30%;background:#fff;animation-delay:.45s}
+  .b2 i{position:absolute;width:9%;aspect-ratio:1;border-radius:50%;background:var(--rosa)}
+  @keyframes cae{from{opacity:0;transform:translateY(-60px) scale(.8)}}
+  .galleta{position:absolute;left:18%;top:52%;width:64%;height:48%;background:var(--galleta);clip-path:polygon(0 0,100% 0,50% 100%);
+    background-image:repeating-linear-gradient(45deg,rgba(140,85,30,.38) 0 3px,transparent 3px 16px),repeating-linear-gradient(-45deg,rgba(140,85,30,.38) 0 3px,transparent 3px 16px)}
+  .sello{position:absolute;right:var(--margen);bottom:-28px;z-index:3;width:clamp(96px,14vw,128px);aspect-ratio:1;border-radius:50%;background:var(--rosa-claro);color:var(--tinta);
+    display:grid;place-items:center;text-align:center;font-family:Caprasimo,serif;font-size:clamp(1.6rem,1.2rem + 1vw,2.2rem);line-height:.9;rotate:12deg;box-shadow:0 5px 0 rgba(44,24,32,.2)}
+  .sello small{display:block;font-family:"Inter Tight";font-weight:600;font-size:.65rem;letter-spacing:.08em}
+  /* secciones */
+  .seccion{max-width:1100px;margin:0 auto;padding:clamp(56px,9vw,110px) var(--margen) 0}
+  .seccion h2{font-size:clamp(2.4rem,1.6rem + 3.4vw,4.2rem);margin-bottom:12px}
+  .seccion>p{color:var(--suave);font-size:1.12rem;max-width:44ch;margin:0 0 28px}
+  .sabores{display:flex;flex-wrap:wrap;gap:10px}
+  .sabor{position:relative;cursor:pointer}
+  .sabor input{position:absolute;opacity:0;pointer-events:none}
+  .sabor span{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:6px 18px 6px 7px;border-radius:999px;background:#fff;font-weight:600;
+    box-shadow:0 4px 0 rgba(44,24,32,.1);transition:transform .25s var(--rebote),background .2s,color .2s,box-shadow .2s}
+  .sabor i{width:36px;height:36px;border-radius:50%;flex:none;box-shadow:inset -4px -5px 0 rgba(0,0,0,.08)}
+  .sabor input:checked+span{background:var(--rosa);color:#fff;box-shadow:0 4px 0 var(--rosa-osc);transform:scale(1.04)}
+  .sabor input:focus-visible+span{outline:3px solid var(--tinta);outline-offset:3px}
+  .sabor input:disabled+span{opacity:.45;cursor:not-allowed}
+  .tamanos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:34px;max-width:620px}
+  .tam{position:relative;cursor:pointer}
+  .tam input{position:absolute;opacity:0;pointer-events:none}
+  .tam span{display:grid;justify-items:center;gap:2px;padding:18px 8px;border-radius:28px;background:#fff;box-shadow:0 5px 0 rgba(44,24,32,.08);transition:transform .25s var(--rebote),box-shadow .2s,background .2s}
+  .tam b{font-size:1.02rem}
+  .tam small{color:var(--suave);font-size:.82rem}
+  .tam em{font-style:normal;font-family:Caprasimo,serif;color:var(--rosa);font-size:1.5rem}
+  .tam input:checked+span{background:var(--rosa-palido);box-shadow:0 0 0 3px var(--rosa),0 5px 0 var(--rosa-osc);transform:translateY(-3px)}
+  .tam input:focus-visible+span{outline:3px solid var(--tinta);outline-offset:3px}
+  .cuantos{font-family:Caprasimo,serif;font-size:1.6rem;margin:0 0 14px}
+  /* el pedido fijo abajo */
+  .pedido{position:sticky;bottom:max(14px,env(safe-area-inset-bottom));z-index:15;max-width:720px;margin:34px auto 0;display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:10px 10px 10px 22px;border-radius:999px;background:var(--tinta);color:#fff;box-shadow:0 6px 0 #000}
+  .pedido small{display:block;opacity:.75;font-size:.82rem;max-width:32ch}
+  .pedido b{font-family:Caprasimo,serif;font-weight:400;font-size:1.6rem}
+  .pedido .gordo{min-height:48px;white-space:nowrap}
+  .pedido .gordo[aria-disabled="true"]{opacity:.5;pointer-events:none}
+  .mas{display:grid;gap:14px}
+  @media (min-width:720px){ .mas{grid-template-columns:repeat(3,1fr)} }
+  .postre{padding:22px;border-radius:30px;background:#fff;box-shadow:0 5px 0 rgba(44,24,32,.08)}
+  .postre .forma{width:56px;height:56px;margin-bottom:14px;background:var(--rosa-claro);border-radius:20px 20px 20px 6px}
+  .postre h3{font-size:1.5rem;margin-bottom:6px}
+  .postre p{margin:0 0 10px;color:var(--suave)}
+  .postre em{font-style:normal;font-family:Caprasimo,serif;color:var(--rosa);font-size:1.3rem}
+  .lugar{display:grid;gap:14px}
+  @media (min-width:820px){ .lugar{grid-template-columns:1fr 1fr} }
+  .caja{padding:26px;border-radius:30px;background:var(--rosa-palido)}
+  .caja.blanca{background:#fff;box-shadow:0 5px 0 rgba(44,24,32,.08)}
+  .caja p{margin:0 0 18px;font-size:1.12rem}
+  dl{margin:0;display:grid}
+  dl div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;font-variant-numeric:tabular-nums}
+  dl div+div{border-top:2px dotted rgba(44,24,32,.15)}
+  dd{margin:0;color:var(--suave)}
+  .pie{position:relative;margin-top:clamp(70px,10vw,120px);padding:80px var(--margen) max(28px,env(safe-area-inset-bottom));background:var(--rosa);color:#fff;text-align:center}
+  .pie::before{content:"";position:absolute;left:0;right:0;top:-1px;height:clamp(40px,6vw,70px);rotate:180deg;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 46' preserveAspectRatio='none'%3E%3Cpath d='M0 20 C50 46 100 0 150 20 S250 46 300 20 S370 0 400 18 V46 H0Z' fill='%23fdf3f6'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+  .pie b{display:block;font-family:Caprasimo,serif;font-weight:400;font-size:2rem;margin-bottom:6px}
+  .js .sube{opacity:0;translate:0 26px;transition:opacity .7s ease,translate .7s var(--rebote);transition-delay:var(--retraso,0s)}
+  .js .sube.visto{opacity:1;translate:0 0}
+  @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} html{scroll-behavior:auto} .js .sube{opacity:1;translate:none} }
+  .pie a{display:inline-block;padding:12px 4px;margin:-12px -4px}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<div class="aviso">Modelo de Ari Labs con un negocio de ejemplo. <a href="https://wa.link/eut47p" target="_blank" rel="noopener">Quiero una página así →</a></div>
+<header class="barra">
+  <a class="marca" href="#">Tu heladería</a>
+  <a class="gordo" href="#pedido">Pedir</a>
+</header>
+
+<main>
+  <div class="portada">
+    <div class="dentro">
+      <div>
+        <span class="etiq" id="dia">Sabor del día</span>
+        <h1 id="sabor-dia">Mamey con nata</h1>
+        <p id="sabor-txt">Hecho hoy en la mañana, con fruta de temporada.</p>
+        <div class="botones">
+          <a class="gordo oscuro" href="#pedido">Armar mi pedido <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          <a class="gordo" href="#mas">Ver paletas y más</a>
+        </div>
+      </div>
+      <div class="cono" aria-hidden="true">
+        <span class="bola b1"></span>
+        <span class="bola b2"><i style="left:24%;top:30%"></i><i style="left:58%;top:22%"></i><i style="left:44%;top:56%"></i><i style="left:72%;top:52%"></i></span>
+        <span class="galleta"></span>
+      </div>
+    </div>
+    <div class="sello" aria-label="Cono a 45 pesos"><div>$45<small>EL CONO</small></div></div>
+  </div>
+
+  <section class="seccion" id="pedido" aria-labelledby="t-pedido">
+    <h2 class="sube" id="t-pedido">Arma tu pedido</h2>
+    <p class="sube">Escoge el tamaño y tus sabores. Te lo tenemos listo cuando llegues.</p>
+    <div class="armar">
+    <form id="forma" onsubmit="return false">
+      <fieldset style="border:0;margin:0;padding:0"><legend class="cuantos sube">¿De qué tamaño?</legend>
+        <div class="tamanos sube">
+          <label class="tam"><input type="radio" name="tam" value="vasito" data-precio="35" data-sabores="1"><span><b>Vasito</b><small>1 sabor</small><em>$35</em></span></label>
+          <label class="tam"><input type="radio" name="tam" value="cono" data-precio="45" data-sabores="2" checked><span><b>Cono</b><small>2 sabores</small><em>$45</em></span></label>
+          <label class="tam"><input type="radio" name="tam" value="litro" data-precio="150" data-sabores="3"><span><b>Litro</b><small>3 sabores</small><em>$150</em></span></label>
+        </div>
+      </fieldset>
+      <fieldset style="border:0;margin:0;padding:0"><legend class="cuantos sube" id="cuantos">Escoge 2 sabores</legend>
+        <div class="sabores sube">
+          <label class="sabor"><input type="checkbox" name="sabor" value="mamey"><span><i style="background:#f4a08a"></i>Mamey</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="coco"><span><i style="background:#fff;box-shadow:inset 0 0 0 2px var(--rosa-claro)"></i>Coco</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="guanábana"><span><i style="background:#f3efe3"></i>Guanábana</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="fresa"><span><i style="background:var(--rosa)"></i>Fresa</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="chocolate"><span><i style="background:#5a3426"></i>Chocolate</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="elote"><span><i style="background:#f3d27a"></i>Elote</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="maracuyá"><span><i style="background:#f2b84b"></i>Maracuyá</span></label>
+          <label class="sabor"><input type="checkbox" name="sabor" value="queso de bola"><span><i style="background:#f6c96b"></i>Queso de bola</span></label>
+        </div>
+      </fieldset>
+    </form>
+    <div class="pedido" aria-live="polite">
+      <span><small id="resumen">Cono · escoge 2 sabores</small><b id="total">$45</b></span>
+      <a class="gordo rosa" id="mandar" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-disabled="true">Pedir por WhatsApp</a>
+    </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="mas" aria-labelledby="t-mas">
+    <h2 class="sube" id="t-mas">Paletas y más</h2>
+    <p class="sube">Para el calor de la tarde o para compartir.</p>
+    <div class="mas">
+      <article class="postre sube"><div class="forma"></div><h3>Paleta de agua</h3><p>De limón, tamarindo o fruta del día.</p><em>$25</em></article>
+      <article class="postre sube"><div class="forma" style="border-radius:50% 50% 20px 20px"></div><h3>Malteada</h3><p>Del sabor que quieras, con crema batida.</p><em>$65</em></article>
+      <article class="postre sube"><div class="forma" style="border-radius:50%"></div><h3>Banana split</h3><p>Tres bolas, plátano, nuez y jarabe.</p><em>$90</em></article>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-lugar">
+    <h2 class="sube" id="t-lugar">Ven por tu helado</h2>
+    <div class="lugar">
+      <div class="caja sube"><p>Aquí va tu dirección, con una referencia para que te encuentren fácil.</p>
+        <a class="gordo oscuro" href="https://maps.google.com/" target="_blank" rel="noopener">Cómo llegar</a></div>
+      <dl class="caja blanca sube"><div><dt>Lunes a jueves</dt><dd>12 p. m. a 9 p. m.</dd></div><div><dt>Viernes y sábado</dt><dd>12 p. m. a 10 p. m.</dd></div><div><dt>Domingo</dt><dd>1 p. m. a 9 p. m.</dd></div></dl>
+    </div>
+    <p class="sube" style="color:var(--suave);font-size:.95rem;margin-top:22px">Sabores y precios de ejemplo: en tu página van los tuyos, y el botón manda el pedido a tu WhatsApp.</p>
+  </section>
+</main>
+
+<footer class="pie"><b>Tu heladería</b><span>Modelo de ejemplo. Página hecha por <a href="../../">Ari Labs</a>.</span></footer>
+
+<script>
+  (function () {
+    // el sabor del día cambia según el día de la semana
+    var dias = [['domingo', 'Coco con cajeta', 'Para el domingo en familia.'], ['lunes', 'Guanábana', 'Fresca y suave, para empezar la semana.'], ['martes', 'Elote', 'Como el de la feria, con su canela.'],
+      ['miércoles', 'Maracuyá', 'Ácido y dulce a la vez.'], ['jueves', 'Queso de bola', 'El favorito de la casa.'], ['viernes', 'Fresa con crema', 'Para cerrar la semana.'], ['sábado', 'Mamey con nata', 'Hecho hoy en la mañana, con fruta de temporada.']];
+    var hoy = dias[new Date().getDay()];
+    document.getElementById('dia').textContent = 'Sabor del ' + hoy[0];
+    document.getElementById('sabor-dia').textContent = hoy[1];
+    document.getElementById('sabor-txt').textContent = hoy[2];
+
+    // el pedido: cada tamaño deja escoger cierto número de sabores, y arma el mensaje de WhatsApp
+    // En el modelo real, wa.me lleva el número del negocio: https://wa.me/52XXXXXXXXXX?text=...
+    var forma = document.getElementById('forma'), sabores = [].slice.call(forma.querySelectorAll('input[name="sabor"]'));
+    var cuantos = document.getElementById('cuantos'), resumen = document.getElementById('resumen'), total = document.getElementById('total'), mandar = document.getElementById('mandar');
+    function lista(a) { return a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : a[0]; }
+    function arma(e) {
+      var tam = forma.querySelector('input[name="tam"]:checked'), max = +tam.dataset.sabores;
+      var elegidos = sabores.filter(function (s) { return s.checked; });
+      // si cambió a un tamaño más chico, suelta los sabores de más (los últimos)
+      while (elegidos.length > max) { elegidos.pop().checked = false; }
+      sabores.forEach(function (s) { s.disabled = !s.checked && elegidos.length >= max; });
+      var nombres = elegidos.map(function (s) { return s.value; });
+      var falta = max - nombres.length;
+      cuantos.textContent = max === 1 ? 'Escoge 1 sabor' : 'Escoge ' + max + ' sabores';
+      total.textContent = '$' + tam.dataset.precio;
+      var nombreTam = tam.value.charAt(0).toUpperCase() + tam.value.slice(1);
+      resumen.textContent = nombres.length ? nombreTam + ' · ' + lista(nombres) + (falta ? ' (te falta' + (falta > 1 ? 'n ' + falta : ' 1') + ')' : '') : nombreTam + ' · ' + cuantos.textContent.toLowerCase();
+      if (!nombres.length) { mandar.setAttribute('aria-disabled', 'true'); return; }
+      mandar.removeAttribute('aria-disabled');
+      mandar.href = 'https://wa.me/?text=' + encodeURIComponent('Hola, quiero pedir un ' + tam.value + ' de ' + lista(nombres) + ' ($' + tam.dataset.precio + '). ¿Me lo tienen listo?');
+    }
+    forma.addEventListener('change', arma); arma();
+  })();
+</script>
+<script src="../acabado.js"></script>
+</body>
+</html>
