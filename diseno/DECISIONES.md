@@ -60,3 +60,16 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Vista previa privada de la web completa: https://claude.ai/artifact/B286gFT5qrumLSTfqKDmo7 (los enlaces "Ver modelo"
   y Privacidad/Términos solo funcionan en la web real, no en la vista previa).
 - Pendiente: estilo claro en privacidad.html, terminos.html y 404.html (siguen oscuros); fotos reales en los modelos.
+
+## Lo que Javi enseñó (31/10, después de ver la web completa)
+- **Regla de oro: no son mis colores, es mi acabado.** Todo lo que salga de Ari Labs (web, modelos, apps) debe verse
+  de la misma mano: Inter Tight, tarjetas de vidrio esmerilado con borde de luz, botones de píldora con círculo e
+  ícono, viñetas de rombo, esquinas grandes, mucho aire, movimiento suave y detalles perfectos. El color puede ser
+  el del negocio. Aprender de lo que pide: no esperar a que lo repita.
+- **Mis citas:** las capturas verde y negro no pegan. Por ahora se cambia SOLO en la web (no la app real, para no
+  gastar tanto): dibujar 3 pantallas nuevas de Mis citas (agenda clara, agenda oscura, detalle de una cita) con el
+  acabado de Ari Labs, en HTML o imagen, y ponerlas en el teléfono 3D en lugar de img/citas-*.webp. Más adelante,
+  rediseñar la app real igual.
+- **Modelos (restaurante, barbería, consultorio):** "parecen trabajo de otra persona". Rehacerlos con el mismo acabado
+  de Ari Labs y cada uno con su color de negocio. Luego sacar capturas nuevas para img/modelo-*.webp.
+- Siguiente sesión: hacer primero Mis citas en la web, después los 3 modelos; vista previa y video al final.
