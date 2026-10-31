@@ -2,1734 +2,218 @@
 <html lang="es-MX">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ari Labs · Páginas web y apps para negocios pequeños en Mérida</title>
-<meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios pequeños: un modelo adaptado a tu negocio o a la medida desde cero.">
-<meta name="theme-color" content="#0b1a21">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ari Labs · Páginas web y apps para negocios de Mérida</title>
+<meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios: de un modelo o desde cero, sin cuotas caras cada mes.">
+<meta name="theme-color" content="#081116">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://javierhedzd-ops.github.io/ari-labs/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="vendor/lenis.css">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Ari Labs">
-<meta property="og:title" content="Ari Labs · Páginas web y apps para negocios pequeños">
-<meta property="og:description" content="Estudio pequeño en Mérida, Yucatán. Páginas web y apps para negocios pequeños: modelo adaptado o a la medida.">
-<meta property="og:url" content="https://javierhedzd-ops.github.io/ari-labs/">
+<meta property="og:title" content="Ari Labs · Páginas web y apps para negocios">
+<meta property="og:description" content="Estudio pequeño en Mérida, Yucatán. Páginas web y apps de un modelo o desde cero.">
 <meta property="og:image" content="https://javierhedzd-ops.github.io/ari-labs/og.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="Ari Labs · Páginas web y apps para negocios pequeños en Mérida">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_MX">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Ari Labs",
- "url":"https://javierhedzd-ops.github.io/ari-labs/","image":"https://javierhedzd-ops.github.io/ari-labs/og.jpg",
- "description":"Estudio pequeño en Mérida, Yucatán. Páginas web y apps para negocios pequeños: modelo adaptado o a la medida.",
- "email":"Ari.ice.signal@gmail.com",
- "address":{"@type":"PostalAddress","addressLocality":"Mérida","addressRegion":"Yucatán","addressCountry":"MX"},
- "areaServed":"Mérida, Yucatán"}
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/lenis.css">
 <style>
   :root{
-    --hielo-100:#f2fbfe;
-    --hielo-200:#def6fd;
-    --hielo-300:#c3eaf7;
-    --hielo-400:#9ed8ee;
-    --hielo-500:#6fb9d4;
-    --hielo-700:#1f4a5c;
-    --hielo-900:#0e0f11;
-    --noche:#0b1a21;
-    --tinta:#12181b;
-    --papel:#fbfcfd;
-    --gris:#5c6b72;
-    --margen:clamp(20px,5vw,56px);
+    --noche:#081116; --tinta:#eef6f9; --suave:#c4d6dd; --hielo:#9ed8ee; --hielo-2:#def6fd;
+    --vidrio:rgba(10,22,30,.42); --vidrio-borde:rgba(222,246,253,.14);
+    --margen:clamp(18px,5vw,64px);
   }
   *{box-sizing:border-box}
-  /* sin scroll suave del navegador: la introducción mueve la página cuadro a
-     cuadro y el navegador, si no, la persigue y se ve a tirones */
-  html{scroll-behavior:auto}
-  body{
-    margin:0;background:var(--noche);color:var(--papel);
-    font-family:"Inter Tight",system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .chico{font-family:"Inter Tight",system-ui,sans-serif}
+  html{-webkit-text-size-adjust:100%;background:var(--noche);overflow-x:hidden}
+  body{margin:0;color:var(--tinta);font:400 1.0625rem/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  ::selection{background:var(--hielo);color:var(--noche)}
+  :focus-visible{outline:2px solid var(--hielo-2);outline-offset:4px}
 
-  /* ---------- galaxia de fondo ---------- */
-  #galaxia{
-    position:fixed;inset:0;width:100%;height:100%;
-    z-index:0;pointer-events:none;
-    opacity:1;
-    background:
-      radial-gradient(120% 80% at 50% 45%, #0b1526 0%, #070d18 45%, #03060c 100%); /* taste-skill-ignore: cielo de la galaxia */
-  }
-  /* la lona del nombre condensado: encima de la galaxia, debajo del texto */
-  #nombre-galaxia{
-    position:fixed;inset:0;width:100%;height:100%;
-    z-index:0;pointer-events:none;opacity:0;
-    transition:opacity .25s ease;
-  }
-  /* todo lo demás va por encima: la galaxia es solo fondo */
-  body > *:not(#galaxia):not(#nombre-galaxia){position:relative;z-index:1}
-  .viaje, .escena, .final{background:transparent}
-  /* el cierre va en la paleta ice: fondo noche, letra clara (antes era papel) */
-  footer{background:#081116}
-  /* el texto se lee siempre: un velo suave sobre la red, solo donde hay letras */
-  /* el texto se lee siempre: sombra suave en las letras, sin cajas ni velos */
-  .escena .interior, .final .interior{
-    text-shadow:0 1px 3px rgba(5,9,11,.9), 0 0 10px rgba(5,9,11,.7);
-  }
+  /* el fondo vivo: WebGL detrás de todo. Sin WebGL queda el color de la noche con un brillo fijo */
+  #fondo{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;
+    background:radial-gradient(80% 60% at 70% 30%, #1d3a4a 0%, #0c1b24 45%, var(--noche) 100%)}
+  main, header, footer{position:relative;z-index:1}
 
-  .barra{z-index:50}
+  .barra{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;
+    padding:max(14px,env(safe-area-inset-top)) var(--margen) 14px}
+  .barra .marca{font-weight:600;font-size:1.05rem;text-decoration:none;letter-spacing:-.01em}
+  .barra nav{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--vidrio);border:1px solid var(--vidrio-borde);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
+  .barra nav a{text-decoration:none;font-size:.92rem;font-weight:500;padding:.55rem .95rem;border-radius:999px;min-height:40px;display:inline-flex;align-items:center;transition:background .2s ease}
+  .barra nav a:hover{background:rgba(222,246,253,.1)}
+  .barra nav a.accion{background:var(--hielo);color:var(--noche)}
+  @media (max-width:560px){ .barra nav a:not(.accion){display:none} }
 
-  /* ---------- barra de arriba ---------- */
-  .barra{
-    position:fixed;top:0;left:0;right:0;z-index:50;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:1.1rem var(--margen);
-    font-family:"Inter Tight",sans-serif;font-size:.95rem;letter-spacing:0;
-    color:var(--hielo-300);
-    mix-blend-mode:difference;
-    transition:background .4s ease;
-  }
-  .barra.pegada{
-    mix-blend-mode:normal;
-    background:#081116;
-  }
-  .barra b{font-weight:500;color:var(--papel)}
+  /* ---------- portada ---------- */
+  .portada{position:relative;min-height:100svh;display:grid;align-content:end;padding:0 var(--margen) clamp(36px,9vh,96px)}
+  h1{font-weight:600;font-size:clamp(4.4rem,1.6rem + 15vw,15rem);line-height:.86;letter-spacing:-.065em;margin:0 0 .25em -0.04em}
+  .portada .lema{font-size:clamp(1.25rem,1rem + 1.2vw,2rem);line-height:1.25;letter-spacing:-.02em;max-width:22ch;margin:0 0 2rem;color:var(--tinta)}
+  .acciones{display:flex;flex-wrap:wrap;gap:10px}
+  .boton{display:inline-flex;align-items:center;gap:.6rem;min-height:54px;padding:0 1.5rem;border-radius:999px;font-weight:600;text-decoration:none;
+    background:var(--hielo);color:var(--noche);transition:background .2s ease}
+  .boton:hover{background:var(--hielo-2)}
+  .boton.vidrio{background:var(--vidrio);color:var(--tinta);border:1px solid var(--vidrio-borde);
+    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+  .boton svg{width:20px;height:20px}
+  .bajar{position:absolute;right:var(--margen);bottom:clamp(36px,9vh,96px);font-size:.9rem;color:var(--suave);writing-mode:vertical-rl;letter-spacing:.02em}
+  @media (max-width:700px){ .bajar{display:none} }
 
-  /* ---------- el viaje: el scroll te mete en la galaxia ---------- */
-  .viaje{
-    position:relative;
-    height:380vh;              /* el largo del viaje */
-  }
-  .viaje-fijo{
-    position:sticky;top:0;height:100svh;
-    display:flex;align-items:flex-end;
-    padding:0 var(--margen) 14vh;
-    pointer-events:none;
-  }
-  /* el nombre se ve desde la primera pantalla: antes esperaba a bajar 1,75
-     pantallas y quien entraba no sabía de qué iba la web */
-  .llegada{
-    opacity:1;transform:none;
-    transition:opacity .8s ease, transform .8s ease;
-  }
-  .marca{
-    font-weight:300;font-size:clamp(3.4rem,17vw,7rem);
-    line-height:.9;letter-spacing:-.045em;margin:0;
-    font-optical-sizing:auto;
-  }
-  .lema{
-    font-family:"Inter Tight",sans-serif;font-size:.8rem;letter-spacing:.06em;
-    color:var(--hielo-400);margin:1.6rem 0 0;max-width:26ch;line-height:1.6;
-  }
+  /* ---------- la frase que se ilumina al leerla ---------- */
+  .frase{padding:clamp(80px,16vh,200px) var(--margen)}
+  .frase p{font-weight:400;font-size:clamp(1.8rem,1rem + 3.6vw,4.4rem);line-height:1.08;letter-spacing:-.035em;margin:0;max-width:20ch}
+  .frase .pal{display:inline-block}
 
-  /* ---------- escena del teléfono ---------- */
-  .escena{
-    position:relative;
-    height:420vh;              /* el largo del scroll que arma la app */
-  }
-  .fija{
-    position:sticky;top:0;height:100svh;
-    display:flex;align-items:center;justify-content:center;
-    overflow:hidden;
-    /* el teléfono se va desvaneciendo al final de la escena: sin corte seco */
-    opacity:var(--opFija,1);
-  }
-  .halo{
-    position:absolute;width:70vmin;height:70vmin;border-radius:50%;
-    display:none;
-    filter:blur(20px);pointer-events:none;
-  }
+  section{padding:clamp(64px,12vh,160px) var(--margen) 0}
+  h2{font-weight:500;font-size:clamp(2.6rem,1.4rem + 5vw,6rem);line-height:.95;letter-spacing:-.05em;margin:0 0 1.2rem}
+  .entrada{font-size:clamp(1.05rem,1rem + .3vw,1.25rem);color:var(--suave);max-width:40ch;margin:0 0 2.4rem}
 
-  /* el teléfono */
-  .telf{
-    position:relative;
-    width:min(64vw,270px);
-    aspect-ratio:9/19;
-    border-radius:2.6rem;
-    background:#0b1114;
-    border:1px solid rgba(158,216,238,.28);
-    box-shadow:0 40px 90px -30px rgba(0,0,0,.9), inset 0 0 0 6px #0b1114;
-    padding:.55rem;
-    transform:scale(.92);
-    will-change:transform,opacity;
-  }
-  .pantalla{
-    position:relative;height:100%;border-radius:2.1rem;overflow:hidden;
-    background:linear-gradient(180deg,#101a20,#0b1114 60%);
-    display:flex;flex-direction:column;
-  }
-  .muesca{
-    position:absolute;top:.5rem;left:50%;transform:translateX(-50%);
-    width:34%;height:.42rem;border-radius:99px;background:#05090b;z-index:5;
-  }
-  .estado{
-    display:flex;justify-content:space-between;
-    padding:.7rem 1rem .2rem;
-    font-family:"Inter Tight",sans-serif;font-size:.55rem;color:var(--hielo-400);
-    letter-spacing:.06em;
-  }
-  .cabecera{
-    display:flex;align-items:center;gap:.5rem;
-    padding:.5rem 1rem .7rem;
-    border-bottom:1px solid rgba(201,221,230,.10);
-  }
-  .punto{
-    width:.42rem;height:.42rem;border-radius:50%;background:var(--hielo-400);
-    box-shadow:0 0 0 0 rgba(157,192,208,.6);
-    animation:latir 2.4s ease-out infinite;
-  }
-  @keyframes latir{
-    0%{box-shadow:0 0 0 0 rgba(157,192,208,.55)}
-    70%{box-shadow:0 0 0 .5rem rgba(157,192,208,0)}
-    100%{box-shadow:0 0 0 0 rgba(157,192,208,0)}
-  }
-  .cabecera span{font-family:"Inter Tight",sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--hielo-300)}
+  .vidrio-caja{background:var(--vidrio);border:1px solid var(--vidrio-borde);border-radius:28px;
+    -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%)}
 
-  .chat{
-    flex:1;display:flex;flex-direction:column;gap:.55rem;
-    padding:.9rem .8rem 1rem;overflow:hidden;
-  }
-  .msg{
-    max-width:88%;padding:.55rem .7rem;border-radius:.9rem;
-    font-family:"Inter Tight",sans-serif;font-size:.68rem;line-height:1.45;
-    opacity:0;transform:translateY(10px);
-    will-change:transform,opacity;
-  }
-  .msg.yo{
-    align-self:flex-end;background:var(--hielo-200);color:var(--hielo-900);
-    border-bottom-right-radius:.25rem;
-  }
-  .msg.ella{
-    align-self:flex-start;background:rgba(201,221,230,.10);color:var(--hielo-100);
-    border:1px solid rgba(201,221,230,.14);
-    border-bottom-left-radius:.25rem;
-  }
-  .msg.ella b{color:var(--hielo-300);font-weight:500}
-  .msg.visible{opacity:1;transform:none}
+  /* ---------- trabajo: Mis citas ---------- */
+  .obra{display:grid;gap:clamp(20px,3vw,32px);align-items:center}
+  .obra .ficha{padding:clamp(24px,3vw,40px)}
+  .obra .ficha h3{font-weight:500;font-size:clamp(1.8rem,1.2rem + 2vw,2.8rem);letter-spacing:-.035em;line-height:1;margin:0 0 1rem}
+  .obra .ficha p{margin:0 0 1rem;color:var(--suave)}
+  .obra .ficha ul{list-style:none;padding:0;margin:1.4rem 0 0;display:grid;gap:.5rem}
+  .obra .ficha li{display:flex;gap:.7rem;align-items:baseline}
+  .obra .ficha li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--hielo);flex:none;transform:translateY(-2px)}
+  .telefonos{display:flex;gap:clamp(10px,2vw,20px);justify-content:center;align-items:flex-start}
+  .telefonos img{display:block;width:100%;height:auto;border-radius:28px}
+  .telefonos figure{margin:0;flex:1 1 0;min-width:0;max-width:250px;padding:8px;border-radius:36px}
+  .telefonos figure:nth-child(2){margin-top:48px}
+  .telefonos figure:nth-child(3){margin-top:16px}
+  @media (max-width:520px){ .telefonos figure:nth-child(3){display:none} }
+  @media (min-width:960px){ .obra{grid-template-columns:.9fr 1.1fr} }
 
-  .lista{
-    align-self:flex-start;width:88%;
-    display:flex;flex-direction:column;gap:.3rem;margin-top:.1rem;
-  }
-  .fila{
-    display:flex;align-items:center;gap:.45rem;
-    padding:.42rem .55rem;border-radius:.55rem;
-    background:rgba(201,221,230,.07);
-    border:1px solid rgba(201,221,230,.12);
-    font-family:"Inter Tight",sans-serif;font-size:.6rem;color:var(--hielo-200);
-    opacity:0;transform:translateX(-8px);
-    will-change:transform,opacity;
-  }
-  .fila.visible{opacity:1;transform:none}
-  .fila i{
-    width:.3rem;height:.3rem;border-radius:50%;background:var(--hielo-400);
-    flex:none;font-style:normal;
-  }
-  .fila.hecha{color:var(--hielo-500)}
-  .fila.hecha i{background:var(--hielo-500)}
+  /* ---------- modelos: tarjetas de vidrio que se pasan de lado ---------- */
+  .carrusel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--margen) 18px;margin:0 calc(-1 * var(--margen));
+    scrollbar-width:none}
+  .carrusel::-webkit-scrollbar{display:none}
+  .modelo{flex:0 0 min(78vw,420px);scroll-snap-align:start;text-decoration:none;display:grid;gap:14px;padding:14px 14px 22px;transition:transform .3s ease, border-color .3s ease}
+  .modelo .ventana{border-radius:18px;overflow:hidden;aspect-ratio:4/5}
+  .modelo img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.9,.2,1)}
+  .modelo b{font-weight:600;font-size:1.25rem;letter-spacing:-.02em;padding:0 6px}
+  .modelo span{color:var(--suave);font-size:1rem;line-height:1.45;padding:0 6px}
+  @media (hover:hover){ .modelo:hover{border-color:rgba(158,216,238,.45)} .modelo:hover img{transform:scale(1.04)} }
+  @media (min-width:1100px){ .carrusel{overflow:visible;margin:0;padding:4px 0 0} .modelo{flex:1 1 0} }
 
-  .escribiendo{
-    align-self:flex-start;display:flex;gap:.22rem;padding:.55rem .7rem;
-    border-radius:.9rem;background:rgba(201,221,230,.10);
-    opacity:0;will-change:opacity;
-  }
-  .escribiendo.visible{opacity:1}
-  .escribiendo s{
-    width:.28rem;height:.28rem;border-radius:50%;background:var(--hielo-400);
-    animation:sube 1.1s infinite ease-in-out;
-  }
-  .escribiendo s:nth-child(2){animation-delay:.15s}
-  .escribiendo s:nth-child(3){animation-delay:.3s}
-  @keyframes sube{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-3px);opacity:1}}
+  /* ---------- cómo trabajamos ---------- */
+  .pasos{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+  .pasos li{padding:clamp(22px,3vw,34px)}
+  .pasos b{display:block;font-weight:500;font-size:clamp(1.4rem,1rem + 1.4vw,2.1rem);letter-spacing:-.03em;line-height:1.05;margin-bottom:.6rem}
+  .pasos span{color:var(--suave)}
+  @media (min-width:860px){ .pasos{grid-template-columns:1.2fr 1fr 1fr} .pasos li:first-child{grid-row:span 1} }
 
+  /* ---------- contacto ---------- */
+  .contacto{padding-bottom:clamp(64px,12vh,140px)}
+  .contacto .grande{font-weight:600;font-size:clamp(3.4rem,1rem + 11vw,11rem);line-height:.86;letter-spacing:-.06em;margin:0 0 2rem;text-decoration:none;display:inline-block}
+  .contacto .grande:hover{color:var(--hielo-2)}
+  .contacto p{color:var(--suave);max-width:38ch;margin:0 0 2rem}
 
-  /* ---------- cierre ---------- */
-  /* Paleta ice: fondo noche, letra clara, azul hielo en lo que importa.
-     Nace de la galaxia: el fondo se aclara desde arriba, sin corte seco. */
-  .cierre{
-    position:relative;
-    /* el cierre no tiene fondo propio: la galaxia se ve igual que arriba,
-       sin velo ni degradado que la tape. El pie ya tiene su propio fondo. */
-    background:transparent;
-    color:var(--hielo-100);
-    padding:22vh var(--margen) 16vh;
-    overflow:hidden;
-  }
-  /* el resplandor que sube desde la galaxia: fuera, porque aclaraba la mitad
-     de abajo y se notaba como un velo encima de la galaxia */
-  .cierre::before{display:none}
-  .cierre > *{position:relative}
-  .cierre .rotulo{
-    font-family:"Inter Tight",sans-serif;font-size:.68rem;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--hielo-400);margin:0 0 2.4rem;
-  }
-  .cierre h2{
-    font-weight:300;font-size:clamp(2.7rem,11vw,4.6rem);
-    line-height:1.04;letter-spacing:-.03em;margin:0;max-width:13ch;
-    /* como "Ari Labs": la letra no es blanca maciza, deja pasar la galaxia.
-       Se recorta el fondo de detrás dentro de las letras y se aclara un poco
-       para que se lean sin perder la transparencia. */
-    color:rgba(255,255,255,.94);
-    text-shadow:none;
-    filter:drop-shadow(0 1px 6px rgba(5,9,11,.55));
-  }
-  .cierre h2 em{
-    font-style:italic;
-    font-style:normal;color:inherit;
-  }
-  .cierre h2 span{display:block}
-  .cierre h2 .l1, .cierre h2 .l2{
-    opacity:0;transform:translateY(18px);
-    transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
-  }
-  .cierre.visto h2 .l1{opacity:1;transform:none;transition-delay:.16s}
-  .cierre.visto h2 .l2{opacity:1;transform:none;transition-delay:.30s}
-  .cierre .rotulo, .cierre p.sub, .cierre .contacto{
-    opacity:0;transform:translateY(14px);
-    transition:opacity .7s cubic-bezier(.2,.9,.2,1),transform .7s cubic-bezier(.2,.9,.2,1);
-  }
-  .cierre.visto .rotulo{opacity:1;transform:none;transition-delay:.05s}
-  .cierre.visto p.sub{opacity:1;transform:none;transition-delay:.34s}
-  .cierre.visto .contacto{opacity:1;transform:none;transition-delay:.5s}
-  /* los dos caminos para escribir: salen al tocar "Escríbenos" */
-  .contacto{
-    display:flex;flex-direction:column;align-items:center;
-    margin-top:2.8rem;
-  }
-  .opciones{
-    display:flex;flex-direction:column;gap:.6rem;width:100%;max-width:20rem;
-    margin-top:.9rem;
-    /* cerradas: no ocupan sitio ni se pueden tocar */
-    max-height:0;opacity:0;overflow:hidden;pointer-events:none;visibility:hidden;
-    transition:max-height .45s cubic-bezier(.2,.9,.2,1),opacity .3s ease,margin-top .3s ease,visibility 0s linear .45s;
-  }
-  .contacto.abierto .opciones{
-    max-height:20rem;opacity:1;pointer-events:auto;visibility:visible;
-    transition-delay:0s;
-  }
-  .opcion{
-    display:flex;flex-direction:column;gap:.15rem;
-    padding:.85rem 1.1rem;border-radius:14px;text-decoration:none;
-    background:rgba(158,216,238,.06);
-    box-shadow:inset 0 0 0 1px rgba(158,216,238,.22);
-    transition:background .2s ease,box-shadow .2s ease,transform .12s ease-out;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .opcion b{
-    font-family:"Inter Tight",sans-serif;font-size:.82rem;font-weight:500;
-    letter-spacing:.06em;color:var(--hielo-200);
-  }
-  .opcion span{
-    font-family:"Inter Tight",sans-serif;font-size:.72rem;
-    color:rgba(222,246,253,.5);overflow-wrap:anywhere;
-  }
-  .boton:focus-visible, .opcion:focus-visible, footer .legal a:focus-visible{
-    outline:2px solid var(--hielo-300);outline-offset:4px;
-  }
-  .opcion:active{transform:scale(.98);background:rgba(158,216,238,.14)}
-  @media (hover:hover){
-    .opcion:hover{background:rgba(158,216,238,.12);box-shadow:inset 0 0 0 1px rgba(158,216,238,.4)}
-  }
-  .cierre p.sub{
-    font-family:"Inter Tight",sans-serif;font-size:1.05rem;line-height:1.7;
-    /* encima de las estrellas: más claro y con sombra para que se lea */
-    color:rgba(222,246,253,.88);margin:2.4rem 0 0;max-width:30ch;
-    text-shadow:0 1px 2px rgba(3,6,12,.9), 0 0 18px rgba(3,6,12,.85);
-  }
-  .boton{
-    position:relative;display:inline-block;margin-top:0;padding:1.05rem 2rem;
-    background:var(--hielo-400);color:var(--hielo-900);text-decoration:none;
-    font-family:"Inter Tight",sans-serif;font-size:.82rem;letter-spacing:.08em;
-    font-weight:500;border-radius:99px;border:0;cursor:pointer;
-    transition:transform .12s ease-out, background .2s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
-  /* el halo que respira mientras espera */
-  .boton::after{display:none}
-  @keyframes late{
-    0%,100%{opacity:.15;transform:scale(1)}
-    50%{opacity:.7;transform:scale(1.06)}
-  }
-  .boton:active{transform:scale(.96);background:var(--hielo-300)}
-  .boton{will-change:transform}
-  .final{
-    /* la galaxia se apaga poco a poco hasta el negro: el cambio de color
-       entra desde arriba, sin borde ni salto */
-    background:linear-gradient(180deg,
-      rgba(8,17,22,0) 0%,
-      rgba(8,17,22,.35) 22%,
-      rgba(8,17,22,.72) 45%,
-      rgba(8,17,22,.93) 68%,
-      #081116 88%);
-    color:var(--hielo-100);
-    padding:20vh var(--margen);text-align:center;
-  }
-  .final p{
-    opacity:0;transform:translateY(24px);
-    transition:opacity .9s cubic-bezier(.2,.9,.2,1),transform .9s cubic-bezier(.22,1.15,.36,1);
-    font-weight:300;font-size:clamp(2.8rem,12vw,5rem);
-    line-height:1.02;letter-spacing:-.035em;margin:0 auto;max-width:11ch;
-    /* que resalte: letra más blanca y un resplandor de hielo detrás,
-       como si la galaxia todavía la iluminara desde abajo */
-    color:#ffffff;
-    text-shadow:0 0 28px rgba(158,216,238,.45), 0 0 70px rgba(158,216,238,.22);
-  }
-  .final p em{
-    font-style:italic;
-    /* el "menos ruido" en azul hielo encendido, no apagado */
-    color:var(--hielo-300);
-    text-shadow:0 0 26px rgba(158,216,238,.55), 0 0 64px rgba(158,216,238,.28);
-  }
-  .final.visto p{opacity:1;transform:none}
+  footer{padding:28px var(--margen) max(28px,env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;color:var(--suave);font-size:.92rem}
+  footer nav{display:flex;gap:20px}
+  footer a{text-underline-offset:4px}
 
-  /* ---------- nosotros ---------- */
-  /* Va después del remate, ya sobre el negro del pie: letra clara, aire
-     de sobra y el azul hielo solo en lo que importa. */
-  .nosotros{
-    background:#081116;
-    color:var(--hielo-100);
-    padding:14vh var(--margen) 10vh;
-    /* el fondo va de lado a lado; solo el texto se queda en 34rem
-       (antes la caja era de 34rem y en compu se veía la galaxia cortada a los lados) */
-    padding-inline:max(var(--margen), calc((100% - 68rem) / 2));
-  }
-  /* mismo borde izquierdo que las demás secciones; el texto, angosto para leerse bien */
-  .nosotros > *{max-width:34rem}
-  .nosotros .rotulo{
-    font-family:"Inter Tight",sans-serif;font-size:.68rem;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--hielo-400);margin:0 0 2rem;
-  }
-  .nosotros h2{
-    font-weight:300;font-size:clamp(1.7rem,6.4vw,2.4rem);
-    line-height:1.22;letter-spacing:-.02em;margin:0 0 2rem;
-    color:rgba(255,255,255,.94);
-  }
-  .nosotros h2 em{
-    font-style:italic;color:var(--hielo-300);
-  }
-  .nosotros .texto{
-    font-family:"Inter Tight",sans-serif;font-size:1rem;line-height:1.75;
-    color:rgba(222,246,253,.62);margin:0 0 1.2rem;max-width:32ch;
-  }
-  .nosotros .texto b{font-weight:500;color:var(--hielo-200)}
-  .nosotros .contacto{align-items:flex-start;margin-top:2.4rem}
-  .nosotros .opciones{max-width:22rem}
-  .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
-    opacity:0;transform:translateY(16px);
-    transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
-  }
-  .nosotros.visto .rotulo{opacity:1;transform:none;transition-delay:.05s}
-  .nosotros.visto h2{opacity:1;transform:none;transition-delay:.14s}
-  /* ojo: nth-of-type cuenta TODOS los <p> (el rótulo es el 1), así que los
-     textos son el 2 y el 3. Con (1) y (2) el primer párrafo no aparecía. */
-  .nosotros.visto .texto:nth-of-type(2){opacity:1;transform:none;transition-delay:.26s}
-  .nosotros.visto .texto:nth-of-type(3){opacity:1;transform:none;transition-delay:.36s}
-  .nosotros.visto .contacto{opacity:1;transform:none;transition-delay:.46s}
-  /* teléfonos de 320 px: el chat no cabía en la pantalla del teléfono y se
-     cortaba el último mensaje */
-  @media (max-width:340px){
-    .chat{gap:.4rem;padding:.7rem .7rem .8rem}
-    .msg{font-size:.6rem;padding:.45rem .6rem}
-    .lista{gap:.25rem}
-    .fila{font-size:.54rem;padding:.35rem .5rem}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
-      opacity:1 !important;transform:none !important;transition:none;
-    }
-  }
-  footer{
-    background:#081116;padding:0 var(--margen) 8vh;text-align:center;
-    font-family:"Inter Tight",sans-serif;font-size:.72rem;color:rgba(222,246,253,.6);
-  }
-  footer .legal{
-    display:flex;gap:1.4rem;justify-content:center;margin-top:.9rem;
-  }
-  footer .legal a{
-    color:rgba(222,246,253,.7);text-decoration:none;
-    text-decoration:underline;text-decoration-color:rgba(158,216,238,.4);text-underline-offset:4px;
-    transition:color .2s ease,border-color .2s ease;
-  }
-  footer .legal a:hover{color:var(--hielo-300);border-color:rgba(158,216,238,.5)}
-  @media (prefers-reduced-motion: reduce){
-    .punto, .escribiendo s{animation:none}
-    .msg, .fila{transform:none !important}
-    .boton{transition:none}
-    .cierre .rotulo, .cierre h2 span, .cierre p.sub, .cierre .boton,
-    .final p, .boton::after{opacity:1 !important;transform:none !important;transition:none;animation:none}
-  }
-
-  /* ---------- secciones con contenido (31/10): sin rótulos, sin letra mono, sin cajas iguales ---------- */
-  /* los títulos del cierre y de Nosotros: un solo color, sin palabra en cursiva ni degradado */
-  .cierre h2, .cierre h2 em, .nosotros h2 em{
-    color:rgba(255,255,255,.94) !important;background:none !important;
-    -webkit-text-fill-color:currentColor !important;font-style:normal !important;filter:none !important;
-  }
-  footer{font-family:"Inter Tight",sans-serif}
-
-  .oferta, .modelos, .trabajo, .proceso{
-    background:#081116;color:var(--hielo-100);
-    padding:clamp(96px,14vh,180px) var(--margen) 0;
-    padding-inline:max(var(--margen), calc((100% - 72rem) / 2));
-  }
-  .oferta h2, .modelos h2, .trabajo h2, .proceso h2{
-    font-weight:300;font-size:clamp(2.2rem,1.2rem + 4.4vw,4.4rem);line-height:1.02;
-    letter-spacing:-.035em;margin:0 0 1.6rem;max-width:16ch;color:#fff;
-  }
-  .entrada{font-size:clamp(1.0625rem,1rem + .3vw,1.25rem);line-height:1.6;color:var(--hielo-100);margin:0 0 2.6rem;max-width:44ch}
-
-  /* qué hacemos: dos campos de color, uno grande y uno chico, y una frase */
-  .dos{display:grid;gap:12px}
-  .campo{padding:clamp(28px,4vw,48px);display:grid;gap:1rem;align-content:start}
-  .campo h3{font-weight:400;font-size:clamp(1.8rem,1.2rem + 2.2vw,3rem);line-height:1.02;letter-spacing:-.03em;margin:0;color:#fff}
-  .campo p{margin:0;font-size:1.0625rem;line-height:1.6;max-width:38ch}
-  .campo.web{background:#0f2630}
-  .campo.app{background:var(--hielo-400);color:#0b1a21}
-  .campo.app h3{color:#0b1a21}
-  .campo a{color:inherit;font-weight:500;text-underline-offset:4px}
-  @media (min-width:860px){ .dos{grid-template-columns:1.25fr 1fr} .campo{min-height:340px} }
-  .formas{font-size:clamp(1.2rem,1rem + .8vw,1.6rem);line-height:1.45;margin:2.4rem 0 0;max-width:40ch;color:#fff}
-
-  /* modelos: uno grande y dos chicos, como hojas sobre la mesa */
-  .vitrina{display:grid;gap:clamp(24px,3vw,40px)}
-  .modelo{display:grid;gap:1rem;text-decoration:none;color:inherit}
-  .modelo .marco{background:#0f2630;padding:clamp(14px,2vw,24px);overflow:hidden}
-  .modelo img{display:block;width:100%;height:auto;transition:transform .5s cubic-bezier(.2,.9,.2,1)}
-  .modelo b{display:block;font-weight:500;font-size:1.3rem;color:#fff;letter-spacing:-.01em}
-  .modelo span.desc{display:block;font-size:1rem;line-height:1.5;color:var(--hielo-100);margin-top:.2rem}
-  .modelo:focus-visible{outline:2px solid var(--hielo-400);outline-offset:4px}
-  @media (hover:hover){ .modelo:hover img{transform:translateY(-6px) scale(1.01)} .modelo:hover b{color:var(--hielo-300)} }
-  @media (min-width:860px){
-    .vitrina{grid-template-columns:1.2fr 1fr;grid-template-rows:auto auto}
-    .modelo.grande{grid-row:span 2}
-    .modelo:not(.grande) .marco{max-height:360px}
-    .modelo:not(.grande) img{object-fit:cover;object-position:top;aspect-ratio:16/11}
-  }
-
-  /* trabajo: el texto y las pantallas de la app de verdad */
-  .trabajo .obra{display:grid;gap:2.4rem;align-items:center}
-  .trabajo .texto{font-size:1.0625rem;line-height:1.7;color:var(--hielo-100);margin:0 0 1rem;max-width:42ch}
-  .pantallas{display:flex;gap:12px;justify-content:center;padding-top:18px}
-  .pantallas figure{margin:0;flex:1 1 0;min-width:0;max-width:240px}
-  .pantallas img{display:block;width:100%;height:auto;border-radius:26px;background:#0d0f12}
-  .pantallas figure:nth-child(2){transform:translateY(-18px)}
-  @media (max-width:420px){ .pantallas figure:nth-child(3){display:none} }
-  @media (min-width:900px){ .trabajo .obra{grid-template-columns:1fr 1.15fr} }
-
-  /* cómo trabajamos: tres frases grandes, en orden, sin números */
-  .proceso .frases{display:grid;gap:clamp(20px,3vw,32px);margin:0;padding:0;list-style:none;max-width:52rem}
-  .proceso .frases li{font-weight:300;font-size:clamp(1.4rem,1rem + 1.8vw,2.4rem);line-height:1.2;letter-spacing:-.02em;color:var(--hielo-100)}
-  .proceso .frases li b{font-weight:500;color:#fff}
-
-  /* entradas suaves al llegar, pieza por pieza (sin JavaScript se ve todo: ver <noscript>) */
-  .revela > *{opacity:0;transform:translateY(20px);
-    transition:opacity .7s cubic-bezier(.2,.9,.2,1),transform .7s cubic-bezier(.2,.9,.2,1)}
-  .revela.visto > *{opacity:1;transform:none}
-  .revela.visto > *:nth-child(2){transition-delay:.08s}
-  .revela.visto > *:nth-child(3){transition-delay:.16s}
-  .revela.visto > *:nth-child(4){transition-delay:.24s}
-  .pantallas.revela.visto figure:nth-child(2){transform:translateY(-18px)}
-  /* ---------- teléfono: la introducción y el chat más cortos (antes ~8 pantallas solo de galaxia) ---------- */
-  @media (max-width:760px){
-    .viaje{height:140vh}
-    .escena{height:200vh}
-    .cierre{padding:12vh var(--margen) 8vh}
-    .final{padding:10vh var(--margen)}
-    .oferta, .modelos, .trabajo, .proceso{padding-top:72px}
-    .nosotros{padding-top:80px;padding-bottom:56px}
-    /* modelos: se pasan con el dedo, de lado, en vez de tres capturas largas una debajo de otra */
-    .vitrina{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * var(--margen));
-      padding:0 var(--margen) 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-    .vitrina::-webkit-scrollbar{display:none}
-    .modelo{flex:0 0 78%;scroll-snap-align:start}
-    .modelo .marco{padding:10px}
-    .modelo img{aspect-ratio:4/5;object-fit:cover;object-position:top}
-  }
-
-  /* ---------- con GSAP: el movimiento lo lleva movimiento.js ---------- */
-  .con-gsap .revela > *{opacity:1;transform:none;transition:none}
-  .final p em{font-style:normal}
-  .pal{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
-  .pal > span{display:inline-block;will-change:transform}
-
-  /* ---------- WhatsApp siempre a la mano ---------- */
-  .wa-flota{
-    position:fixed !important;z-index:60 !important;
-    right:max(16px, env(safe-area-inset-right));bottom:max(16px, env(safe-area-inset-bottom));
-    display:inline-flex;align-items:center;gap:.55rem;min-height:48px;padding:0 1.15rem 0 .95rem;
-    background:var(--hielo-400);color:var(--hielo-900);text-decoration:none;border-radius:99px;
-    font-family:"Inter Tight",sans-serif;font-weight:600;font-size:.92rem;
-    opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;visibility:hidden;
-    transition:opacity .25s ease, transform .25s cubic-bezier(.2,.9,.2,1), visibility 0s linear .25s;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .wa-flota.ver{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:0s}
-  .wa-flota:active{transform:scale(.96)}
-  .wa-flota:focus-visible{outline:2px solid #fff;outline-offset:3px}
-  .wa-flota svg{width:20px;height:20px;flex:none}
-  /* en el teléfono, solo el icono: tapa menos texto mientras se lee */
-  @media (max-width:600px){
-    .wa-flota{width:56px;height:56px;padding:0;justify-content:center;font-size:0;gap:0}
-    .wa-flota svg{width:26px;height:26px}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .revela > *, .wa-flota{transition:none;transform:none}
-  }
+  /* sin JavaScript o con "reducir movimiento": todo quieto y visible */
+  .js .aparece{opacity:0}
+  .pal-h{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+  .pal-h > span{display:inline-block}
+  @media (prefers-reduced-motion: reduce){ .js .aparece{opacity:1} .boton,.modelo,.modelo img{transition:none} }
 </style>
-<noscript><style>
-  /* sin JavaScript no hay animaciones: que todo se vea */
-  .msg, .fila, .escribiendo, .telf, .cierre .rotulo, .cierre h2 span, .cierre p.sub,
-  .final p, .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto, .revela > *{
-    opacity:1 !important;transform:none !important;
-  }
-  .opciones{max-height:none;opacity:1;visibility:visible;pointer-events:auto}
-  .boton{display:none}
-</style></noscript>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<canvas id="galaxia" aria-hidden="true"></canvas>
-<canvas id="nombre-galaxia" aria-hidden="true"></canvas>
+<canvas id="fondo" aria-hidden="true"></canvas>
 
-<header class="barra chico"><b>Ari Labs</b><span>Mérida</span></header>
+<header class="barra">
+  <a class="marca" href="#">Ari Labs</a>
+  <nav aria-label="Secciones">
+    <a href="#trabajo">Trabajo</a>
+    <a href="#modelos">Modelos</a>
+    <a class="accion" href="https://wa.link/eut47p" target="_blank" rel="noopener">Escríbenos</a>
+  </nav>
+</header>
 
 <main>
-
-<!-- el aviso "Baja" ya no va: la introducción se lleva sola hasta el cierre -->
-
-<!-- ============ VIAJE: entras al centro de la galaxia y pasas entre los mundos ============ -->
-<section class="viaje" id="viaje">
-  <div class="viaje-fijo">
-    <div class="llegada" id="llegada">
-      <h1 class="marca">Ari Labs</h1>
-      <p class="lema">Software para negocios pequeños. Mérida, Yucatán.</p>
+  <div class="portada">
+    <h1 class="titulo-portada">Ari Labs</h1>
+    <p class="lema aparece">Páginas web y apps para negocios de Mérida.</p>
+    <div class="acciones aparece">
+      <a class="boton" href="https://wa.link/eut47p" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg>
+        Cuéntanos tu idea
+      </a>
+      <a class="boton vidrio" href="#trabajo">Ver lo que hacemos</a>
     </div>
+    <span class="bajar" aria-hidden="true">Baja despacio</span>
   </div>
-</section>
 
-<section class="escena" id="escena">
-  <div class="fija">
-    <div class="halo" aria-hidden="true"></div>
+  <div class="frase">
+    <p id="frase">Hacemos páginas y apps que se sienten tuyas: rápidas, bonitas y sin cuotas caras cada mes.</p>
+  </div>
 
-    <div class="telf" id="telf" data-ui>
-      <div class="pantalla">
-        <div class="muesca"></div>
-        <div class="estado chico" aria-hidden="true"><span>8:14</span><span>▮▮▮</span></div>
-        <div class="cabecera">
-          <span class="punto"></span>
-          <span>Ari · en línea</span>
-        </div>
-
-        <div class="chat" id="chat">
-          <div class="msg yo" data-paso="1">Ari, buenos días. ¿Qué tenemos para hoy?</div>
-          <div class="msg ella" data-paso="2">Buenos días, Javi. Tres cosas. Y una te va a doler.</div>
-          <div class="msg yo" data-paso="3">¿Qué fue?</div>
-          <div class="msg ella" data-paso="4">Ahí te van:</div>
-
-          <div class="lista" id="lista">
-            <div class="fila" data-paso="5"><i></i>Terminar la web de Ari Labs</div>
-            <div class="fila" data-paso="6"><i></i>Probar la app de citas</div>
-            <div class="fila" data-paso="7"><i></i>Revisar el respaldo del domingo</div>
-          </div>
-
-          <div class="msg yo" data-paso="8">Oye, ¿y tú qué quieres hacer?</div>
-          <div class="escribiendo" data-paso="9" aria-hidden="true"><s></s><s></s><s></s></div>
-        </div>
+  <section id="trabajo" aria-labelledby="t-trabajo">
+    <h2 id="t-trabajo" class="titulo">Trabajo reciente</h2>
+    <div class="obra">
+      <div class="ficha vidrio-caja aparece">
+        <h3>Mis citas</h3>
+        <p>La agenda de un músico de eventos en Mérida: rezos, misas, bodas y XV años. Su cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada.</p>
+        <ul>
+          <li>Aviso una hora antes de cada evento</li>
+          <li>Cobros, canciones y cómo llegar</li>
+          <li>Funciona sin internet, en claro y oscuro</li>
+        </ul>
+      </div>
+      <div class="telefonos">
+        <figure class="vidrio-caja"><img src="img/citas-agenda-claro.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Agenda del día en Mis citas, en modo claro."></figure>
+        <figure class="vidrio-caja"><img src="img/citas-agenda.webp" width="540" height="1140" loading="lazy" decoding="async" alt="La agenda en modo oscuro, con los días de la semana."></figure>
+        <figure class="vidrio-caja"><img src="img/citas-detalle.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Detalle de una cita con botones para llamar, WhatsApp y llegar."></figure>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- ============ CIERRE ============ -->
-<section class="cierre">
-  <h2><span class="l1">Tu trabajo sigue igual.</span> <span class="l2">La forma de hacerlo, <em>no</em>.</span></h2>
-  <p class="sub">Apps y webs para negocios pequeños de Mérida. Sin nube, sin mensualidades caras.</p>
-</section>
-
-<section class="final">
-  <p>Mismo trabajo. <em>Menos ruido.</em></p>
-</section>
-
-<!-- ============ QUÉ HACEMOS ============ -->
-<section class="oferta" id="oferta">
-  <div class="revela">
-    <h2>Páginas web y apps para tu negocio</h2>
-  </div>
-  <div class="dos revela">
-    <article class="campo web">
-      <h3>Una página para que te encuentren</h3>
-      <p>Tus horarios, tu ubicación, tu menú o tus precios, y un botón para que te escriban por WhatsApp. Se ve bien en cualquier teléfono y vive en un hosting gratuito.</p>
-    </article>
-    <article class="campo app">
-      <h3>Una app para tu forma de trabajar</h3>
-      <p>Citas, cobros o clientes, en tu teléfono y sin internet. Tus datos se quedan contigo. <a href="#trabajo">Mira una que ya hicimos</a>.</p>
-    </article>
-  </div>
-  <p class="formas revela"><span>Puedes escoger uno de nuestros modelos y lo adaptamos a tu negocio, o lo hacemos desde cero. En los dos casos, sin cuotas caras cada mes.</span></p>
-</section>
-
-<!-- ============ MODELOS ============ -->
-<section class="modelos" id="modelos">
-  <div class="revela">
-    <h2>Modelos para empezar</h2>
-    <p class="entrada">Cada uno con su idea, sus colores y sus letras. Con los tuyos queda como si lo hubiéramos hecho desde cero.</p>
-  </div>
-  <div class="vitrina revela">
-    <a class="modelo grande" href="modelos/restaurante/">
-      <div class="marco"><img src="img/modelo-restaurante.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de restaurante: el menú de la semana impreso en papel sobre azul, con el guiso del día."></div>
-      <span><b>Restaurante o cocina económica</b><span class="desc">El menú de la semana, con el guiso de hoy que cambia solo cada día.</span></span>
-    </a>
-    <a class="modelo" href="modelos/barberia/">
-      <div class="marco"><img src="img/modelo-barberia.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de barbería: el nombre en letras enormes y la tabla de precios."></div>
-      <span><b>Barbería o estética</b><span class="desc">La tabla de precios: marcas tus servicios y sale la cuenta.</span></span>
-    </a>
-    <a class="modelo" href="modelos/consultorio/">
-      <div class="marco"><img src="img/modelo-consultorio.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de consultorio dental: portada roja con flores de flamboyán."></div>
-      <span><b>Consultorio o clínica</b><span class="desc">Escoges tratamiento, día y hora, y la cita llega por WhatsApp.</span></span>
-    </a>
-  </div>
-</section>
-
-<!-- ============ TRABAJO ============ -->
-<section class="trabajo" id="trabajo">
-  <div class="obra">
-    <div class="revela">
-      <h2>Mis citas</h2>
-      <p class="texto">La agenda de un músico de eventos: rezos, misas, bodas y XV años. Su cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada: fecha, lugar, cobro, canciones y un aviso una hora antes.</p>
-      <p class="texto">Funciona sin internet, tiene modo claro y oscuro, y la hicimos a la medida de cómo trabaja él.</p>
+  <section id="modelos" aria-labelledby="t-modelos">
+    <h2 id="t-modelos" class="titulo">Modelos para empezar</h2>
+    <p class="entrada aparece">Escoges uno y lo hacemos tuyo con tus colores, tus fotos y tus precios. O empezamos desde cero.</p>
+    <div class="carrusel">
+      <a class="modelo vidrio-caja" href="modelos/restaurante/"><div class="ventana"><img src="img/modelo-restaurante.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de restaurante: el menú de la semana impreso sobre azul."></div><b>Restaurante</b><span>El menú de la semana; el guiso de hoy cambia solo.</span></a>
+      <a class="modelo vidrio-caja" href="modelos/barberia/"><div class="ventana"><img src="img/modelo-barberia.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de barbería: el nombre en letras enormes sobre negro."></div><b>Barbería o estética</b><span>Marcas tus servicios y sale la cuenta.</span></a>
+      <a class="modelo vidrio-caja" href="modelos/consultorio/"><div class="ventana"><img src="img/modelo-consultorio.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de consultorio dental: portada roja con flores de flamboyán."></div><b>Consultorio</b><span>Escoges día y hora; la cita llega por WhatsApp.</span></a>
     </div>
-    <div class="pantallas revela">
-      <figure><img src="img/citas-agenda-claro.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Agenda del día en Mis citas, en modo claro: la próxima cita y la lista de hoy."></figure>
-      <figure><img src="img/citas-agenda.webp" width="540" height="1140" loading="lazy" decoding="async" alt="La misma agenda en modo oscuro, con los días de la semana y las citas de hoy."></figure>
-      <figure><img src="img/citas-detalle.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Detalle de una cita: novena con doña Rosa y botones para llamar, mandar WhatsApp y llegar."></figure>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CÓMO TRABAJAMOS ============ -->
-<section class="proceso" id="proceso">
-  <div class="revela">
-    <h2>Cómo trabajamos</h2>
-  </div>
-  <ol class="frases revela">
-    <li><b>Nos escribes por WhatsApp</b> y nos cuentas qué haces y qué te gustaría resolver.</li>
-    <li><b>Te mandamos una vista previa</b> para que la veas en tu teléfono y nos digas qué cambiar.</li>
-    <li><b>Cuando te gusta, queda funcionando:</b> publicamos tu página o instalamos tu app, y te enseñamos a usarla.</li>
-  </ol>
-</section>
+  <section id="como" aria-labelledby="t-como">
+    <h2 id="t-como" class="titulo">Así trabajamos</h2>
+    <ol class="pasos">
+      <li class="vidrio-caja aparece"><b>Nos escribes</b><span>Por WhatsApp nos cuentas qué haces y qué quieres resolver.</span></li>
+      <li class="vidrio-caja aparece"><b>Ves una vista previa</b><span>En tu teléfono, antes de terminar, y nos dices qué cambiar.</span></li>
+      <li class="vidrio-caja aparece"><b>Queda funcionando</b><span>La publicamos o instalamos tu app, y te enseñamos a usarla.</span></li>
+    </ol>
+  </section>
 
-<!-- ============ NOSOTROS ============ -->
-<!-- ============ NOSOTROS ============ -->
-<section class="nosotros" id="nosotros">
-  <h2>Ari Labs es un estudio pequeño en Mérida. Hacemos dos cosas: <em>páginas web</em> y <em>apps</em>.</h2>
-  <p class="texto">Puedes escoger un <b>modelo</b> de Ari Labs y lo adaptamos a tu negocio, o pedirlo <b>a la medida</b> desde cero. En los dos casos se piensa para ti: no se copia de otro.</p>
-  <p class="texto">Si quieres una web o una app que se sienta tuya, escríbenos.</p>
-  <div class="contacto">
-    <button class="boton" id="boton2" type="button" aria-expanded="false" aria-controls="opciones2">Escríbenos</button>
-    <div class="opciones" id="opciones2">
-      <a class="opcion" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">
-        <b>Correo</b><span>Ari.ice.signal@gmail.com</span>
-      </a>
-      <a class="opcion" href="https://wa.link/eut47p" target="_blank" rel="noopener">
-        <b>WhatsApp</b><span>Te contesto el mismo día</span>
-      </a>
+  <section class="contacto" id="contacto" aria-labelledby="t-contacto">
+    <h2 id="t-contacto" class="titulo">¿Hacemos la tuya?</h2>
+    <p class="aparece">Te contestamos el mismo día. Estudio pequeño en Mérida, Yucatán.</p>
+    <a class="grande aparece" href="https://wa.link/eut47p" target="_blank" rel="noopener">WhatsApp ↗</a>
+    <div class="acciones aparece">
+      <a class="boton vidrio" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">Ari.ice.signal@gmail.com</a>
     </div>
-  </div>
-</section>
+  </section>
 </main>
-
-<a class="wa-flota" id="wa-flota" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 8.8c.2 2.6 2.4 5 5.2 5.4l1-1.2-1.6-.9-.7.6a4 4 0 0 1-2-2l.6-.7-.9-1.6z"/></svg>
-  WhatsApp
-</a>
 
 <footer>
   <span>Ari Labs · Mérida, Yucatán · 2026</span>
-  <nav class="legal">
-    <a href="privacidad.html">Privacidad</a>
-    <a href="terminos.html">Términos</a>
-  </nav>
+  <nav aria-label="Legal"><a href="privacidad.html">Privacidad</a><a href="terminos.html">Términos</a></nav>
 </footer>
 
-<script>
-(function(){
-  var escena = document.getElementById('escena');
-  var telf   = document.getElementById('telf');
-  var fija   = escena.querySelector('.fija');
-  var pasos  = Array.prototype.slice.call(document.querySelectorAll('[data-paso]'));
-  var ultimo = 0;
-
-
-  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ---- muelle: cada valor persigue su destino, sin duración fija ----
-  function Muelle(v, rigidez, amortiguado){
-    this.v = v; this.destino = v; this.vel = 0;
-    this.k = rigidez || 170; this.c = amortiguado || 26;
-  }
-  Muelle.prototype.ir = function(d){ this.destino = d; };
-  Muelle.prototype.paso = function(dt){
-    var f = (this.destino - this.v) * this.k - this.vel * this.c;
-    this.vel += f * dt;
-    this.v   += this.vel * dt;
-    if (Math.abs(this.destino - this.v) < 0.0005 && Math.abs(this.vel) < 0.0005){
-      this.v = this.destino; this.vel = 0; return false;
-    }
-    return true;
-  };
-
-  var mTelf   = new Muelle(0, 90, 30);    // 0 = chico, 1 = grande (sin rebote)
-
-  // ---- los mensajes: cada uno con su propio muelle ----
-  var items = pasos.map(function(el){
-    return { el:el, y:new Muelle(10, 210, 26), o:new Muelle(0, 210, 26), dentro:false,
-             tyUltimo:null, opUltimo:null };
-  });
-
-  // ---- el chat va pegado al scroll, no al reloj ----
-  // Cada mensaje tiene su tramo: aparece cuando el dedo llega a él y, si
-  // subes, se va. Así el que baja manda: si se para, el chat se para.
-  var REPARTO = 0.58;   // el chat se arma en el 58% del recorrido: más rápido
-
-  function repartir(avance){
-    var n = pasos.length;
-    var dentro = Math.min(1, avance / REPARTO) * n;   // 0 a n, con decimales
-    items.forEach(function(it, i){
-      // cada mensaje entra en su tramo y tarda un poco en asentarse
-      var p = Math.min(1, Math.max(0, dentro - i));
-      var suave = p * p * (3 - 2 * p);
-      it.y.ir(10 * (1 - suave));
-      it.o.ir(suave);
-      it.dentro = p > 0;
-    });
-  }
-
-  // ---- un solo bucle de dibujo para todo ----
-  var corriendo = false, ultimoT = 0;
-  function bucle(t){
-    var dt = Math.min(0.05, (t - ultimoT) / 1000 || 0.016);
-    ultimoT = t;
-    var sigue = false;
-
-    if (mTelf.paso(dt)){
-      // sale del centro de la galaxia: chiquito y arriba, y crece hasta su sitio
-      var e = Math.min(1, Math.max(0, mTelf.v));
-      var suave = e * e * (3 - 2 * e);
-      var escala = 0.10 + suave * 0.90;
-      if (escala > 1) escala = 1;          // nunca más grande de su tamaño
-      if (escala < 0.10) escala = 0.10;
-      // el centro de la galaxia está en el medio de la pantalla; el teléfono
-      // también, así que solo hay que encogerlo desde ahí y dejarlo crecer
-      telf.style.transform = 'scale(' + escala + ')';
-      telf.style.opacity = suave > 0.01 ? 1 : 0;
-      sigue = true;
-    }
-    items.forEach(function(it){
-      var a = it.y.paso(dt), b = it.o.paso(dt);
-      if (a || b){
-        // solo se escribe en el estilo si el número cambió de verdad: escribir
-        // el mismo valor en cada cuadro obliga al navegador a rehacer la capa
-        var ty = Math.round(it.y.v * 10) / 10;
-        var op = Math.round(it.o.v * 100) / 100;
-        if (ty !== it.tyUltimo){
-          it.tyUltimo = ty;
-          it.el.style.transform = 'translateY(' + ty + 'px)';
-        }
-        if (op !== it.opUltimo){
-          it.opUltimo = op;
-          it.el.style.opacity = op;
-        }
-        sigue = true;
-      }
-    });
-
-    if (sigue){
-      requestAnimationFrame(bucle);
-    } else {
-      corriendo = false;
-    }
-  }
-
-  function despertar(){
-    if (!corriendo){ corriendo = true; ultimoT = 0; requestAnimationFrame(bucle); }
-  }
-
-  function pintar(){
-    var r = escena.getBoundingClientRect();
-    var total = escena.offsetHeight - window.innerHeight;
-    var avance = Math.min(1, Math.max(0, -r.top / total));
-
-    // el teléfono ya está puesto: no crece ni se mueve, solo se arma el chat
-    mTelf.ir(1);
-
-    // ---- la salida: el teléfono se va y el cierre entra encima ----
-    // Antes el cambio era un corte seco: el teléfono desaparecía y de golpe
-    // aparecía el fondo del cierre. Ahora, en el último 22% de la escena, el
-    // teléfono se desvanece y se aleja un poco mientras el cierre sube.
-    // (Javi, 28/10: el teléfono se quedaba transparente y se veía feo. Ahora
-    //  no se desvanece: se va entero, subiendo y encogiéndose un poco, y el
-    //  cierre entra por debajo. Se ve sólido hasta que sale de la pantalla.)
-    var salida = Math.min(1, Math.max(0, (avance - 0.78) / 0.22));
-    var suaveSal = salida * salida * (3 - 2 * salida);
-    fija.style.setProperty('--opFija', '1');
-    fija.style.transform = 'translateY(' + (-suaveSal * 18) + 'vh) scale(' + (1 - suaveSal * 0.10) + ')';
-    fija.style.pointerEvents = suaveSal > 0.5 ? 'none' : '';
-
-    // ya contada la introducción, el chat se queda completo: al subir no se
-    // desarma (la página ya es una página normal, no una animación)
-    if (document.documentElement.classList.contains('contada')){
-      repartir(1);
-    } else {
-      repartir(avance);
-    }
-    despertar();
-  }
-
-  // ---- lo que entra al llegar: cierre, final y nosotros ----
-  var cierre = document.querySelector('.cierre');
-  var final  = document.querySelector('.final');
-  var nosotros = document.querySelector('.nosotros');
-  var barra  = document.querySelector('.barra');
-
-  if ('IntersectionObserver' in window){
-    var ojo = new IntersectionObserver(function(entradas){
-      entradas.forEach(function(en){
-        if (en.isIntersecting) en.target.classList.add('visto');
-      });
-    }, {threshold:0.25});
-    ojo.observe(cierre);
-    ojo.observe(final);
-    if (nosotros) ojo.observe(nosotros);
-    document.querySelectorAll('.revela').forEach(function(el){ ojo.observe(el); });
-  } else {
-    cierre.classList.add('visto'); final.classList.add('visto');
-    if (nosotros) nosotros.classList.add('visto');
-    document.querySelectorAll('.revela').forEach(function(el){ el.classList.add('visto'); });
-  }
-
-  // ---- WhatsApp flotante: sale en las secciones con contenido (no tapa la galaxia ni
-  //      el titular grande) y se esconde junto al contacto ----
-  var flota = document.getElementById('wa-flota');
-  var oferta = document.getElementById('oferta');
-  var contacto = nosotros && nosotros.querySelector('.contacto');
-  function mirarFlota(){
-    if (!flota) return;
-    var alto = window.innerHeight || 1;
-    var pasoPortada = oferta ? oferta.getBoundingClientRect().top < alto * 0.6 : true;
-    var r = contacto ? contacto.getBoundingClientRect() : null;
-    var contactoVisible = r ? (r.top < alto && r.bottom > 0) : false;
-    flota.classList.toggle('ver', pasoPortada && !contactoVisible);
-  }
-  var pedidoFlota = false;
-  window.addEventListener('scroll', function(){
-    if (!pedidoFlota){ pedidoFlota = true; requestAnimationFrame(function(){ pedidoFlota = false; mirarFlota(); }); }
-  }, {passive:true});
-  window.addEventListener('resize', mirarFlota);
-  mirarFlota();
-
-  // ---- "Escríbenos" abre los dos caminos: correo o WhatsApp ----
-  // Solo hay uno, el de Nosotros: el del cierre se quitó por repetido.
-  var contactos = Array.prototype.slice.call(document.querySelectorAll('.contacto'));
-  contactos.forEach(function(caja){
-    var b = caja.querySelector('.boton');
-    if (!b) return;
-    var cerrar = function(){
-      caja.classList.remove('abierto');
-      b.setAttribute('aria-expanded','false');
-      b.textContent = 'Escríbenos';
-    };
-    b.addEventListener('click', function(){
-      var abierto = caja.classList.toggle('abierto');
-      b.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      b.textContent = abierto ? 'Elige cómo' : 'Escríbenos';
-    });
-    // si toca fuera, se cierran
-    document.addEventListener('pointerdown', function(e){
-      if (!caja.classList.contains('abierto')) return;
-      if (caja.contains(e.target)) return;
-      cerrar();
-    });
-    // Escape las cierra y devuelve el foco al botón
-    document.addEventListener('keydown', function(e){
-      if (e.key !== 'Escape') return;
-      if (!caja.classList.contains('abierto')) return;
-      cerrar();
-      b.focus();
-    });
-  });
-
-  // ---- la galaxia de fondo: espiral que gira y respira como si hablara ----
-  // Sale de ~/ari-imagen/galaxia-01.html (la del modo voz), recortada a lo
-  // que hace falta aquí: sin botones, sin micrófono y con la voz inventada.
-  (function(){
-    var lona = document.getElementById('galaxia');
-    if (!lona) return;
-    var ctx = lona.getContext('2d');
-    // lona aparte para el nombre condensado: va encima de la galaxia
-    var lonaNombre = document.getElementById('nombre-galaxia');
-    var ctxNombre = lonaNombre ? lonaNombre.getContext('2d') : null;
-
-    var HIELO = [127, 212, 255];
-    var CLARO = [214, 242, 255];
-    var HONDO = [27, 111, 158];
-    // La inclinación es la de la foto: el disco en diagonal, no plano.
-    // Van aquí y no dentro de dibujar(): condensar() también las usa y, sin
-    // verlas, fallaba y el nombre de estrellas no salía nunca.
-    var INCLINA = 0.46;          // cuánto se aplasta el disco (0 = de canto)
-    var GIRO_DISCO = -0.42;      // el disco va torcido, en diagonal
-    var CANTIDAD = 1500;   // antes 2600: se pintaban una por una y pesaba
-
-    // ---- colores de la galaxia de verdad (como la foto de referencia) ----
-    var NUCLEO_CALIDO = [255, 236, 190];   // el centro: blanco dorado
-    var NUCLEO_ORO    = [255, 190, 110];   // el resplandor anaranjado
-    var BRAZO_AZUL    = [120, 170, 255];   // brazos: azul intenso
-    var BRAZO_ROSADO  = [235, 150, 200];   // zonas rosadas y violáceas
-    var BRAZO_VIOLETA = [150, 130, 235];
-    var POLVO         = [70, 45, 35];      // vetas de polvo oscuro
-    var ESTRELLA_FRIA = [200, 225, 255];
-    var ESTRELLA_CALIDA = [255, 245, 225];
-
-    function rgba(c, a){ return 'rgba(' + (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + a + ')'; }
-    // ---- colores ya escritos, guardados ----
-    // Cada estrella pedía su texto 'rgba(...)' en cada cuadro (miles de textos
-    // nuevos por segundo) y el recolector de basura hacía micro-pausas: eso se
-    // sentía como trabones. Ahora el texto se escribe una vez por color y
-    // nivel de brillo (0 a 1 en pasos de 1/32) y se reutiliza.
-    var cacheColor = {};
-    function color(c, a){
-      if (a <= 0) return 'rgba(0,0,0,0)';
-      if (a > 1) a = 1;
-      var clave = (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + ((a * 32) | 0);
-      var s = cacheColor[clave];
-      if (!s){
-        s = 'rgba(' + (c[0]|0) + ',' + (c[1]|0) + ',' + (c[2]|0) + ',' + (((a * 32) | 0) / 32) + ')';
-        cacheColor[clave] = s;
-      }
-      return s;
-    }
-    function mezclar(a, b, t){
-      return [a[0] + (b[0]-a[0])*t, a[1] + (b[1]-a[1])*t, a[2] + (b[2]-a[2])*t];
-    }
-
-    // ---- las estrellas de la espiral ----
-    // Dos brazos que salen del centro y se enrollan. Cada estrella lleva su
-    // color: dorado cerca del núcleo, azul y rosado en los brazos.
-    function crearEspiral(n){
-      var estrellas = [];
-      for (var i = 0; i < n; i++){
-        var brazo = i % 2;
-        var u = Math.pow(Math.random(), 0.62);      // más densidad hacia el centro
-        // el brazo se abre en espiral: cuanto más lejos, más vueltas
-        var angulo = u * 5.6 + brazo * Math.PI + (Math.random() - 0.5) * 0.42;
-        var radio = 0.05 + u * 0.95;
-        // dispersión: más ancha en el medio del brazo, apretada en el centro
-        var dispersion = (Math.random() - 0.5) * 0.13 * Math.sin(u * Math.PI) + (Math.random() - 0.5) * 0.03;
-        var r = Math.max(0.01, radio + dispersion);
-
-        // color según dónde esté: núcleo dorado, brazos azules con rosado
-        var tono;
-        if (r < 0.16){
-          tono = mezclar(NUCLEO_CALIDO, NUCLEO_ORO, Math.random() * 0.7);
-        } else if (r < 0.34){
-          tono = mezclar(NUCLEO_ORO, BRAZO_AZUL, (r - 0.16) / 0.18);
-        } else {
-          var suerte = Math.random();
-          if (suerte < 0.18) tono = BRAZO_ROSADO;
-          else if (suerte < 0.34) tono = BRAZO_VIOLETA;
-          else tono = mezclar(BRAZO_AZUL, ESTRELLA_FRIA, Math.random() * 0.5);
-        }
-
-        estrellas.push({
-          angulo: angulo,
-          angulo0: angulo,          // de dónde salió: al rebobinar vuelve ahí
-          radio: r,
-          tam: 0.6 + Math.random() * 1.7,
-          brillo: 0.45 + Math.random() * 0.55,
-          color: tono,
-          fase: Math.random() * Math.PI * 2,
-          velocidad: 0.9 + Math.random() * 0.3,
-          entra: Math.random() * 1.05      // cuándo sale disparada al bajar
-        });
-      }
-      return estrellas;
-    }
-
-    // ---- la nebulosa: se pinta una vez y luego solo se gira ----
-    // Manchas de color a lo largo de los brazos (azul, rosado, violeta) y
-    // vetas de polvo oscuro encima, que es lo que le da cuerpo de galaxia.
-    function crearNebulosa(tam){
-      var c = document.createElement('canvas');
-      c.width = tam; c.height = tam;
-      var g = c.getContext('2d');
-      var centro = tam / 2;
-
-      // 1) el resplandor del núcleo, ancho y dorado
-      var haloNucleo = g.createRadialGradient(centro, centro, 0, centro, centro, centro * 0.42);
-      haloNucleo.addColorStop(0, rgba(NUCLEO_CALIDO, 0.55));
-      haloNucleo.addColorStop(0.35, rgba(NUCLEO_ORO, 0.28));
-      haloNucleo.addColorStop(1, rgba(NUCLEO_ORO, 0));
-      g.fillStyle = haloNucleo;
-      g.beginPath(); g.arc(centro, centro, centro * 0.42, 0, Math.PI * 2); g.fill();
-
-      // 2) las manchas de los brazos
-      for (var i = 0; i < 420; i++){
-        var brazo = i % 2;
-        var u = Math.pow(Math.random(), 0.7);
-        var ang = u * 5.6 + brazo * Math.PI + (Math.random() - 0.5) * 0.55;
-        var rad = (0.05 + u * 0.95) * centro * 0.94;
-        var x = centro + Math.cos(ang) * rad;
-        var y = centro + Math.sin(ang) * rad;
-        var t2 = (5 + Math.random() * 24) * (1 - u * 0.3);
-        var suerte = Math.random();
-        var color = suerte < 0.22 ? BRAZO_ROSADO : (suerte < 0.42 ? BRAZO_VIOLETA : BRAZO_AZUL);
-        var mancha = g.createRadialGradient(x, y, 0, x, y, t2);
-        mancha.addColorStop(0, rgba(color, 0.10 + Math.random() * 0.13));
-        mancha.addColorStop(1, rgba(color, 0));
-        g.fillStyle = mancha;
-        g.beginPath(); g.arc(x, y, t2, 0, Math.PI * 2); g.fill();
-      }
-
-      // 3) las vetas de polvo oscuro: van por dentro del brazo, un poco
-      //    desfasadas, y cortan la luz. Sin esto parece una espiral de puntos.
-      g.globalCompositeOperation = 'source-over';
-      for (var j = 0; j < 190; j++){
-        var brazo2 = j % 2;
-        var u2 = 0.12 + Math.pow(Math.random(), 0.8) * 0.88;
-        var ang2 = u2 * 5.6 + brazo2 * Math.PI - 0.16 + (Math.random() - 0.5) * 0.22;
-        var rad2 = (0.05 + u2 * 0.95) * centro * 0.94;
-        var x2 = centro + Math.cos(ang2) * rad2;
-        var y2 = centro + Math.sin(ang2) * rad2;
-        var t3 = (3 + Math.random() * 13) * (1 - u2 * 0.25);
-        var polvo = g.createRadialGradient(x2, y2, 0, x2, y2, t3);
-        polvo.addColorStop(0, rgba(POLVO, 0.16 + Math.random() * 0.16));
-        polvo.addColorStop(1, rgba(POLVO, 0));
-        g.fillStyle = polvo;
-        g.beginPath(); g.arc(x2, y2, t3, 0, Math.PI * 2); g.fill();
-      }
-
-      return c;
-    }
-
-    // ---- el cielo de fondo: miles de estrellas lejanas, quietas ----
-    // Es lo que hace que la primera vista parezca espacio de verdad.
-    function crearCielo(n){
-      var lista = [];
-      for (var i = 0; i < n; i++){
-        lista.push({
-          x: Math.random(),
-          y: Math.random(),
-          tam: 0.25 + Math.pow(Math.random(), 2.2) * 1.5,
-          brillo: 0.15 + Math.random() * 0.75,
-          // algunas son más azules, otras más blancas
-          frio: Math.random() < 0.5
-        });
-      }
-      return lista;
-    }
-
-    var cielo = crearCielo(340);
-
-    // ---- el cielo, pintado una sola vez ----
-    // Antes se recorrían 340 estrellas por cuadro y cada una pedía su color:
-    // eso, sumado a las 1500 de la espiral, era lo que hacía que la animación
-    // fuera a tirones. El cielo no se mueve casi nada (solo se aleja al bajar),
-    // así que se pinta en una lona y por cuadro solo se estira.
-    var cieloLona = document.createElement('canvas');
-    var cieloListo = false;
-    function pintarCielo(){
-      if (cieloListo) return;
-      cieloListo = true;
-      var w = Math.max(1, Math.floor(ancho)), h = Math.max(1, Math.floor(alto));
-      cieloLona.width = w; cieloLona.height = h;
-      var g = cieloLona.getContext('2d');
-      for (var c = 0; c < cielo.length; c++){
-        var es = cielo[c];
-        g.fillStyle = es.frio
-          ? color(ESTRELLA_FRIA, es.brillo * 0.85)
-          : color(ESTRELLA_CALIDA, es.brillo * 0.7);
-        g.beginPath(); g.arc(es.x * w, es.y * h, es.tam, 0, Math.PI * 2); g.fill();
-      }
-    }
-
-    var estrellas = crearEspiral(CANTIDAD);
-    // la nebulosa se pinta en un momento libre, no en el primer cuadro:
-    // si no, el primer segundo de la página va a tirones
-    var nebulosa = document.createElement('canvas');
-    nebulosa.width = 384; nebulosa.height = 384;
-    var nebulosaLista = false;
-
-    // el halo del centro, pintado una sola vez
-    var halo = (function(){
-      var c = document.createElement('canvas');
-      c.width = 256; c.height = 256;
-      var g = c.getContext('2d');
-      var grad = g.createRadialGradient(128, 128, 0, 128, 128, 128);
-      grad.addColorStop(0, rgba(NUCLEO_ORO, 0.26));
-      grad.addColorStop(0.35, rgba(HIELO, 0.12));
-      grad.addColorStop(1, rgba(HIELO, 0));
-      g.fillStyle = grad;
-      g.beginPath(); g.arc(128, 128, 128, 0, Math.PI * 2); g.fill();
-      return c;
-    })();
-    function pintarNebulosa(){
-      if (nebulosaLista) return;
-      nebulosaLista = true;
-      var hecha = crearNebulosa(384);
-      nebulosa.getContext('2d').drawImage(hecha, 0, 0);
-    }
-    var fugaces = [];
-    var proximaFugaz = 2 + Math.random() * 4;
-
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    // en pantallas de más de 2x (o si el teléfono va justo) se pinta a 1.5x:
-    // la galaxia es suave y no se nota, y cuesta casi la mitad por cuadro
-    if (dpr > 2) dpr = 2;
-    if ((window.innerWidth * window.innerHeight) > 700000 && dpr > 1.5) dpr = 1.5;
-    var ancho = 0, alto = 0, cx = 0, cy = 0, R = 0;
-    var t = 0, ultimo = 0, visible = true;
-
-    // ---- el viaje: 0 = mirando el centro desde fuera, 1 = dentro, entre los mundos ----
-    var viaje = 0;
-    var viajeObj = 0;
-    var empuje = 0;         // cuánto la está agarrando (0 a 1)
-    var empujeObj = 0;
-    var agarrada = false, ultimoX = 0, ultimoY = 0;
-
-    function leerScroll(){
-      // ¿ya está tapada? El remate (.final) se funde a negro opaco hacia su
-      // final y debajo solo hay "Nosotros" y el pie, con fondo opaco: en
-      // cuanto el 85% del remate sale por arriba, la galaxia ya no se ve.
-      var fin = document.querySelector('.final');
-      if (fin){
-        var rf = fin.getBoundingClientRect();
-        tapada = rf.top + rf.height * 0.85 <= 0;
-      }
-      var alto1 = window.innerHeight || 1;
-      // el viaje dura lo que mide la sección del viaje
-      // (antes 2.2 pantallas: se sentía eterno; luego 1.1: se abría de golpe.
-      //  Ahora 2.4: el cambio es fluido, se ve la galaxia abrirse y da
-      //  tiempo a apreciarla antes de llegar al nombre)
-      var largo = alto1 * 3.2;
-      viajeObj = Math.min(1, Math.max(0, window.scrollY / largo));
-      // (el nombre hecho de estrellas se quitó: Javi, 30/10. condensar() se
-      //  deja por si vuelve, pero ya no se llama)
-      // el nombre de "Ari Labs" entra al llegar a su tramo. Antes solo se
-      // miraba al hacer scroll: si la página se abría ya bajada (o la
-      // introducción lo dejaba ahí), el nombre se quedaba invisible.
-      // (se llama por su nombre de ventana: aquí abajo todavía no existe)
-      if (typeof window.mirarLlegada === 'function') window.mirarLlegada();
-      despertarGalaxia();
-    }
-    var tapada = false;
-    function despertarGalaxia(){
-      if (quieto || document.hidden || tapada || !visible || corriendoGalaxia) return;
-      corriendoGalaxia = true;
-      requestAnimationFrame(dibujar);
-    }
-
-    // ---- la voz: frases con sílabas, como si estuviera hablando ----
-    var voz = 0, vozObj = 0, hablando = 0, vozT = 0;
-    var proximaFrase = 0.8, frase = 0, fraseLargo = 0, silaba = 0, silabaLargo = 0.2;
-    function pasoVoz(dt){
-      vozT += dt;
-      if (hablando < 0.02 && vozT >= proximaFrase){
-        hablando = 1; frase = 0; fraseLargo = 1.2 + Math.random() * 2.3;
-        silaba = 0; silabaLargo = 0.12 + Math.random() * 0.14;
-      }
-      if (hablando > 0.02){
-        frase += dt; silaba += dt;
-        if (silaba >= silabaLargo){
-          silaba = 0; silabaLargo = 0.10 + Math.random() * 0.16;
-          vozObj = Math.random() < 0.12 ? 0.05 : 0.35 + Math.random() * 0.65;
-        }
-        if (frase >= fraseLargo){
-          hablando = 0; vozObj = 0;
-          proximaFrase = vozT + 0.5 + Math.random() * 1.6;
-        }
-      }
-      voz += (vozObj - voz) * Math.min(1, dt * 14);
-      return voz;
-    }
-
-    function medir(){
-      ancho = window.innerWidth; alto = window.innerHeight;
-      lona.width = Math.floor(ancho * dpr);
-      lona.height = Math.floor(alto * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (lonaNombre && ctxNombre){
-        lonaNombre.width = Math.floor(ancho * dpr);
-        lonaNombre.height = Math.floor(alto * dpr);
-        ctxNombre.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-      cx = ancho / 2;
-      // el centro de la galaxia va en el centro de la pantalla
-      cy = alto * 0.5;
-      R = Math.min(ancho * 0.52, alto * 0.30);
-      // el cielo cambió de tamaño: se vuelve a pintar
-      cieloListo = false;
-      pintarCielo();
-      leerScroll();
-      // cambiar el tamaño de la lona la borra: si la galaxia está quieta
-      // ("reducir movimiento") nadie la volvía a pintar y se quedaba negra
-      if (quieto && nebulosaLista) dibujar(performance.now());
-    }
-
-    function dibujar(ahora){
-      // si no se ve (tapada por "Nosotros" y el pie, o fuera de pantalla), no
-      // se pinta: antes seguía a 60 cuadros por segundo detrás de un fondo
-      // opaco, gastando batería. leerScroll() la despierta al volver.
-      if (!visible || tapada){ ultimo = 0; corriendoGalaxia = false; return; }
-      var dt = ultimo ? Math.min((ahora - ultimo) / 1000, 0.05) : 0.016;
-      ultimo = ahora;
-      t += dt;
-
-      var v = 0;   // sin voz: la galaxia no late ni parpadea sola
-
-      // lo de Javi entra suave, no de golpe
-      // (antes dt*3.2: la galaxia iba con freno detrás del dedo y se sentía
-      //  trabada. Ahora sigue el scroll casi al instante.)
-      // el viaje va EXACTO con el scroll, sin freno ni suavizado: con
-      // cualquier retraso, al deslizar rápido hacia arriba la galaxia se
-      // quedaba atrás y se veía descuadrada respecto a la página.
-      viaje = viajeObj;
-      empuje += (empujeObj - empuje) * Math.min(1, dt * 10);
-
-      // al hablar: más brillo, más pulso y giro más vivo
-      var brillo = 0.62;
-      var pulso = 0.45;
-      var giro = 1;
-
-      // ---- el apretón: al empezar a bajar, la galaxia se concentra ----
-      // Primero se aprieta hacia dentro (como cuando Ari pasa de escuchar a
-      // pensar) y de ahí se abre y te metes dentro. Así el viaje no arranca
-      // de golpe: tiene un gesto.
-      // Suave: el apretón es leve y no tuerce nada. Si se nota el tirón,
-      // se siente forzado.
-      var aprieta = 0;
-      if (viaje > 0.001 && viaje < 0.55){
-        // sube y se suelta muy despacio a lo largo del 55% del recorrido
-        aprieta = Math.sin((viaje / 0.55) * Math.PI);
-      }
-      var concentra = aprieta * 0.05;   // cuánto se recoge (muy leve)
-      var tuerce = 0;                   // sin giro: girar se veía forzado
-
-      var latido = 0;
-      // al entrar se ve el centro desde fuera; al bajar te metes dentro
-      var tiempo = viaje;
-      var radio = R * (1 + tiempo * 2.2);
-      var centroX = cx;
-      var centroY = cy;
-      // se guardan para saber dónde está cada estrella cuando se condensa
-      radioActual = radio; centroActualX = centroX; centroActualY = centroY;
-
-      ctx.clearRect(0, 0, ancho, alto);
-
-      // ---- el cielo: estrellas lejanas que se quedan quietas ----
-      // Al bajar se alejan un poco (paralaje), como si te metieras de verdad.
-      // Ya está pintado en su lona: aquí solo se estira desde el centro.
-      if (cieloListo){
-        var fuga = 1 + tiempo * 0.35;
-        var wC = ancho * fuga, hC = alto * fuga;
-        // el cielo se estira desde el centro: al subir, el borde de la lona
-        // entra en pantalla y se veía una franja oscura abajo. Se pinta la
-        // lona repetida alrededor (solo cuando hace falta) y no hay borde.
-        var x0 = centroX - wC / 2, y0 = centroY - hC / 2;
-        var izq = Math.ceil(Math.max(0, -x0) / wC), der = Math.ceil(Math.max(0, x0 + wC - ancho) / wC);
-        var arr = Math.ceil(Math.max(0, -y0) / hC), aba = Math.ceil(Math.max(0, y0 + hC - alto) / hC);
-        for (var fy = -arr; fy <= aba; fy++){
-          for (var fx = -izq; fx <= der; fx++){
-            ctx.drawImage(cieloLona, x0 + fx * wC, y0 + fy * hC, wC, hC);
-          }
-        }
-      }
-
-      // nebulosa: gira más despacio y se aplasta como el disco
-      ctx.save();
-      ctx.translate(centroX, centroY);
-      ctx.rotate(GIRO_DISCO);
-      ctx.scale(1, INCLINA);
-      ctx.globalAlpha = 0.9 * (1 - tiempo * 0.5);
-      var lado = radio * 2.1;
-      if (nebulosaLista) ctx.drawImage(nebulosa, -lado / 2, -lado / 2, lado, lado);
-      ctx.restore();
-      ctx.globalAlpha = 1;
-
-      // halo general: dorado en el centro, azul hielo hacia fuera
-      // (se pinta en una lona aparte y se estira: un degradado enorme por
-      //  cuadro era de lo más caro de todo)
-      if (nebulosaLista){
-        var ladoHalo = radio * 3.8;
-        ctx.globalAlpha = 1 - tiempo * 0.5;
-        ctx.drawImage(halo, centroX - ladoHalo / 2, centroY - ladoHalo / 2, ladoHalo, ladoHalo);
-        ctx.globalAlpha = 1;
-      }
-
-      // estrellas
-      ctx.globalCompositeOperation = 'lighter';
-      for (var i = 0; i < estrellas.length; i++){
-        var e = estrellas[i];
-        // gira siempre; al reventar, cada una sale en línea recta por su lado
-        var ang = e.angulo + tuerce;
-        var rad = e.radio * radio * (1 - concentra);
-        // el disco va en diagonal: se gira el punto y luego se aplasta
-        var px = Math.cos(ang) * rad, py = Math.sin(ang) * rad * INCLINA;
-        var x = centroX + px * Math.cos(GIRO_DISCO) - py * Math.sin(GIRO_DISCO);
-        var y = centroY + px * Math.sin(GIRO_DISCO) + py * Math.cos(GIRO_DISCO);
-        var parpadeo = 1;
-        var alfa = e.brillo * parpadeo * brillo;
-
-        // ---- al bajar, sus propias estrellas se acercan y pasan de largo ----
-        // Cada una tiene su momento: cuando el viaje llega a él, se lanza
-        // hacia ti y sale por el borde, dejando estela como una fugaz.
-        var cerca = Math.min(1, Math.max(0, (tiempo - e.entra) / 0.75));
-        if (cerca > 0){
-          var s2 = cerca * cerca * (3 - 2 * cerca);     // arranca suave y acelera
-          var dx = x - centroX, dy = y - centroY;
-          var largo = Math.sqrt(dx * dx + dy * dy) || 1;
-          var ux = dx / largo, uy = dy / largo;
-          // se aleja del centro hacia el borde, cada vez más rápido
-          var salto = s2 * Math.max(ancho, alto) * 0.85;
-          var x2 = x + ux * salto;
-          var y2 = y + uy * salto;
-          var tam2 = e.tam * (1 + s2 * 2.2);
-          var alfa2 = alfa * (1 - s2 * 0.35);
-
-          // la estela: de dónde viene hasta dónde está
-          var cola = 0.06 + s2 * 0.30;
-          // si hasta la punta de la estela ya está fuera de la pantalla, toda
-          // la fugaz lo está (va en línea recta desde el centro hacia fuera):
-          // no se pinta. Al final del viaje eran cientos por cuadro.
-          var colaX = x2 - ux * salto * cola, colaY = y2 - uy * salto * cola;
-          var borde = tam2 + 2;
-          if (colaX < -borde || colaX > ancho + borde || colaY < -borde || colaY > alto + borde) continue;
-          // el degradado de la estela se rehace solo si cambió de verdad
-          // (antes se creaba uno nuevo por estrella y por cuadro)
-          var claveEstela = Math.round(x2) + ',' + Math.round(y2) + ',' + Math.round(ux * 100) + ',' + Math.round(uy * 100) + ',' + Math.round(salto * cola) + ',' + Math.round(alfa2 * 20);
-          if (e.claveEstela !== claveEstela){
-            e.claveEstela = claveEstela;
-            var estela = ctx.createLinearGradient(x2, y2, x2 - ux * salto * cola, y2 - uy * salto * cola);
-            estela.addColorStop(0, rgba(CLARO, Math.min(1, alfa2 * 1.1)));
-            estela.addColorStop(0.35, rgba(HIELO, alfa2 * 0.45));
-            estela.addColorStop(1, rgba(HIELO, 0));
-            e.estela = estela;
-          }
-          ctx.strokeStyle = e.estela;
-          ctx.lineWidth = Math.max(0.7, tam2 * 0.7);
-          ctx.lineCap = 'round';
-          ctx.beginPath();
-          ctx.moveTo(x2, y2);
-          ctx.lineTo(x2 - ux * salto * cola, y2 - uy * salto * cola);
-          ctx.stroke();
-
-          // la cabeza de la fugaz
-          ctx.fillStyle = rgba(CLARO, Math.min(1, alfa2));
-          ctx.beginPath(); ctx.arc(x2, y2, tam2, 0, Math.PI * 2); ctx.fill();
-          continue;   // ya está pintada como fugaz
-        }
-        if (alfa > 1) alfa = 1;
-        ctx.fillStyle = color(e.color, alfa);
-        ctx.beginPath(); ctx.arc(x, y, e.tam, 0, Math.PI * 2); ctx.fill();
-
-        // destello de cuatro puntas en las estrellas grandes
-        if (e.tam > 1.55){
-          var largo = e.tam * (3.2 + Math.sin(t * 1.3 + e.fase) * 0.8);
-          ctx.strokeStyle = color(e.color, alfa * 0.55);
-          ctx.lineWidth = 0.7;
-          ctx.beginPath();
-          ctx.moveTo(x - largo, y); ctx.lineTo(x + largo, y);
-          ctx.moveTo(x, y - largo); ctx.lineTo(x, y + largo);
-          ctx.stroke();
-        }
-      }
-
-      // ---- el nombre condensado: las estrellas que se fueron a las letras ----
-      // Va en su propia lona, encima de todo: si se pintara aquí, el núcleo
-      // dorado y el halo de la galaxia se la comían y no se veía nada.
-      if (condensando){
-        condT += dt;
-        var total = COND_ENTRA + COND_QUEDA + COND_SUELTA;
-        if (condT >= total){
-          condensando = false;
-          lonaNombre.style.opacity = '0';
-        } else {
-          // 0 → 1 al formarse, 1 quieto, 1 → 0 al soltarse
-          var f;
-          if (condT < COND_ENTRA){
-            var k1 = condT / COND_ENTRA;
-            f = k1 * k1 * (3 - 2 * k1);
-          } else if (condT < COND_ENTRA + COND_QUEDA){
-            f = 1;
-          } else {
-            var k2 = (condT - COND_ENTRA - COND_QUEDA) / COND_SUELTA;
-            f = 1 - k2 * k2 * (3 - 2 * k2);
-          }
-          var gN = ctxNombre;
-          gN.setTransform(1, 0, 0, 1, 0, 0);
-          gN.clearRect(0, 0, lonaNombre.width, lonaNombre.height);
-          gN.setTransform(dpr, 0, 0, dpr, 0, 0);
-          gN.globalCompositeOperation = 'lighter';
-          // un poco de temblor mientras está formado: no es una foto
-          var vivo = f > 0.98 ? 1 : 0;
-          for (var q = 0; q < condPuntos.length; q++){
-            var o = condOrigen[q], d = condPuntos[q];
-            var tx = o[0] + (d[0] - o[0]) * f;
-            var ty = o[1] + (d[1] - o[1]) * f;
-            if (vivo){
-              tx += Math.sin(t * 2.1 + q) * 0.7;
-              ty += Math.cos(t * 1.7 + q * 1.3) * 0.7;
-            }
-            var alfaN = 0.45 + f * 0.55;
-            var tamN = 1.1 + f * 1.1;
-            // el resplandor de cada punto: así las letras se leen de verdad
-            gN.fillStyle = rgba(HIELO, Math.min(1, alfaN * 0.35));
-            gN.beginPath(); gN.arc(tx, ty, tamN * 2.6, 0, Math.PI * 2); gN.fill();
-            gN.fillStyle = rgba(CLARO, Math.min(1, alfaN));
-            gN.beginPath(); gN.arc(tx, ty, tamN, 0, Math.PI * 2); gN.fill();
-          }
-          gN.globalCompositeOperation = 'source-over';
-          lonaNombre.style.opacity = '1';
-        }
-      }
-
-      ctx.globalCompositeOperation = 'source-over';
-
-      // núcleo: blanco dorado, como el de la foto. Al agarrarla se enciende.
-      // El degradado del núcleo se rehace solo cuando cambia de verdad: antes
-      // se creaba uno nuevo en cada cuadro y eso también daba tirones.
-      var nucleoR = R * (0.22 + empuje * 0.10) * (1 + tiempo * 0.9);
-      var claveNucleo = Math.round(nucleoR) + ',' + Math.round(empuje * 20) + ',' + Math.round(brillo * 20);
-      if (claveNucleo !== nucleoClave){
-        nucleoClave = claveNucleo;
-        nucleoGrad = ctx.createRadialGradient(centroX, centroY, 0, centroX, centroY, nucleoR);
-        nucleoGrad.addColorStop(0, rgba([255, 255, 255], Math.min(1, (0.95 + empuje * 0.05) * brillo)));
-        nucleoGrad.addColorStop(0.25, rgba(NUCLEO_CALIDO, Math.min(1, (0.7 + empuje * 0.2) * brillo)));
-        nucleoGrad.addColorStop(0.6, rgba(NUCLEO_ORO, Math.min(1, (0.3 + empuje * 0.2) * brillo)));
-        nucleoGrad.addColorStop(1, rgba(NUCLEO_ORO, 0));
-      }
-      ctx.fillStyle = nucleoGrad;
-      ctx.beginPath(); ctx.arc(centroX, centroY, nucleoR, 0, Math.PI * 2); ctx.fill();
-
-      // el anillo que se abre al agarrarla: se ve que responde al dedo
-      if (empuje > 0.02){
-        ctx.strokeStyle = rgba(HIELO, 0.35 * empuje);
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.ellipse(centroX, centroY, radio * (1.05 + empuje * 0.25), radio * INCLINA * (1.05 + empuje * 0.25), GIRO_DISCO, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      if (!quieto && !document.hidden){ requestAnimationFrame(dibujar); }
-      else { corriendoGalaxia = false; }
-    }
-
-    // ---- los dedos: mantener presionada y arrastrar a los lados ----
-    // La galaxia es fondo y no debe robar el scroll: solo se agarra si el dedo
-    // se queda quieto un momento (mantener presionada). Al moverse, se mueve ella.
-    var ESPERA = 140;          // ms quieto antes de agarrarla
-    var relojAgarre = null;
-    var xInicio = 0, yInicio = 0;
-
-    function soltar(){
-      agarrada = false;
-      empujeObj = 0;
-      if (relojAgarre){ clearTimeout(relojAgarre); relojAgarre = null; }
-    }
-
-    lona.addEventListener('pointerdown', function(ev){
-      if (quieto) return;
-      xInicio = ev.clientX; yInicio = ev.clientY;
-      ultimoX = ev.clientX; ultimoY = ev.clientY;
-      if (relojAgarre) clearTimeout(relojAgarre);
-      relojAgarre = setTimeout(function(){
-        agarrada = true;
-        empujeObj = 1;
-        if (navigator.vibrate) navigator.vibrate(8);
-      }, ESPERA);
-    });
-
-    lona.addEventListener('pointermove', function(ev){
-      if (!agarrada){
-        // si se mueve antes de tiempo, es scroll: no la agarramos
-        if (Math.abs(ev.clientX - xInicio) > 8 || Math.abs(ev.clientY - yInicio) > 8){
-          if (relojAgarre){ clearTimeout(relojAgarre); relojAgarre = null; }
-        }
-        return;
-      }
-      // agarrada: el dedo solo la mantiene encendida; no la mueve de sitio
-      ultimoX = ev.clientX; ultimoY = ev.clientY;
-    });
-
-    lona.addEventListener('pointerup', soltar);
-    lona.addEventListener('pointercancel', soltar);
-    lona.addEventListener('pointerleave', function(){ if (agarrada) soltar(); });
-
-    window.addEventListener('scroll', leerScroll, {passive:true});
-
-    // ---- el nombre se condensa ----
-    // Al llegar al nombre, las estrellas del centro dejan su sitio y se van a
-    // dibujar las letras de "Ari Labs". Se quedan un momento formadas y luego
-    // se sueltan y vuelven a la galaxia. No es texto que se escribe: es la
-    // galaxia la que se junta para decir su nombre.
-    var nombreHecho = false;
-    var condensando = false;
-    var corriendoGalaxia = false;
-    var radioActual = 1, centroActualX = 0, centroActualY = 0;
-    var nucleoGrad = null, nucleoClave = '';   // el degradado del núcleo, guardado
-    var condT = 0;            // segundos desde que empezó
-    var condPuntos = [];      // a dónde va cada estrella (x, y en pantalla)
-    var condOrigen = [];      // de dónde sale cada una
-    var COND_ENTRA = 1.1;     // s que tarda en formarse
-    var COND_QUEDA = 1.0;     // s que se queda formado (antes 1.5: el teléfono
-                              // subía y lo tapaba antes de soltarse)
-    var COND_SUELTA = 1.2;    // s que tarda en soltarse
-
-    function puntosDelNombre(){
-      var alto1 = window.innerHeight || 1;
-      var ancho1 = window.innerWidth || 1;
-      var c = document.createElement('canvas');
-      c.width = Math.floor(ancho1);
-      c.height = Math.floor(alto1);
-      var g = c.getContext('2d');
-      // el nombre se forma en el centro de la pantalla, sobre la galaxia
-      // (abajo ya está el titular de verdad y se pisaban)
-      var tam = Math.min(ancho1 * 0.20, alto1 * 0.13);
-      g.fillStyle = '#fff';
-      g.textAlign = 'center';
-      g.textBaseline = 'middle';
-      g.font = '300 ' + tam + 'px "Inter Tight", system-ui, sans-serif';
-      g.fillText('Ari Labs', ancho1 / 2, alto1 * 0.5);
-      var datos = g.getImageData(0, 0, c.width, c.height).data;
-      var pts = [];
-      var paso = Math.max(3, Math.round(tam / 26));
-      for (var y = 0; y < c.height; y += paso){
-        for (var x = 0; x < c.width; x += paso){
-          if (datos[(y * c.width + x) * 4 + 3] > 128) pts.push([x, y]);
-        }
-      }
-      // si la letra no cargó, se usa la del sistema: igual hay puntos
-      return pts;
-    }
-
-    function condensar(){
-      if (condensando || quieto) return;
-      var pts = puntosDelNombre();
-      if (!pts.length) return;
-      // se eligen las estrellas más cercanas al centro: son las que se ven
-      var orden = estrellas.map(function(e, i){ return i; });
-      orden.sort(function(a, b){ return estrellas[a].radio - estrellas[b].radio; });
-      var cuantas = Math.min(pts.length, Math.floor(estrellas.length * 0.55));
-      condPuntos = [];
-      condOrigen = [];
-      // el nombre se pinta en su propia lona, no en la de la galaxia: así no
-      // hay que borrar y repintar la pantalla entera en cada cuadro
-      var gN = ctxNombre;
-      gN.setTransform(1, 0, 0, 1, 0, 0);
-      gN.clearRect(0, 0, lonaNombre.width, lonaNombre.height);
-      gN.setTransform(dpr, 0, 0, dpr, 0, 0);
-      gN.globalCompositeOperation = 'lighter';
-      for (var k = 0; k < cuantas; k++){
-        var e = estrellas[orden[k]];
-        // dónde está ahora mismo en pantalla (misma cuenta que al dibujar)
-        var ang = e.angulo;
-        var rad = e.radio * radioActual;
-        var px = Math.cos(ang) * rad, py = Math.sin(ang) * rad * INCLINA;
-        var x = centroActualX + px * Math.cos(GIRO_DISCO) - py * Math.sin(GIRO_DISCO);
-        var y = centroActualY + px * Math.sin(GIRO_DISCO) + py * Math.cos(GIRO_DISCO);
-        condOrigen.push([x, y]);
-        var d = pts[Math.floor(k * pts.length / cuantas)];
-        condPuntos.push(d);
-        // el punto de partida se pinta ya: si no, el nombre aparecía de golpe
-        gN.fillStyle = rgba(HIELO, 0.16);
-        gN.beginPath(); gN.arc(x, y, 2.9, 0, Math.PI * 2); gN.fill();
-        gN.fillStyle = rgba(CLARO, 0.45);
-        gN.beginPath(); gN.arc(x, y, 1.1, 0, Math.PI * 2); gN.fill();
-      }
-      gN.globalCompositeOperation = 'source-over';
-      lonaNombre.style.opacity = '1';
-      condT = 0;
-      condensando = true;
-      if (!corriendoGalaxia){ corriendoGalaxia = true; requestAnimationFrame(dibujar); }
-    }
-    // el nombre ya no se esconde: se ve desde el principio (ver .llegada en el
-    // CSS). Se deja la función vacía porque leerScroll() la llama.
-    window.mirarLlegada = function(){};
-
-    // solo se anima cuando está en pantalla (ahorra batería)
-    if (typeof IntersectionObserver === 'function'){
-      new IntersectionObserver(function(e){ visible = e[0].isIntersecting; despertarGalaxia(); }, {threshold: 0.05}).observe(lona);
-    }
-    window.addEventListener('resize', medir);
-    document.addEventListener('visibilitychange', function(){
-      ultimo = 0;
-      despertarGalaxia();
-    });
-    medir();
-    if (quieto){
-      // con "reducir movimiento" se pinta una vez y se queda quieta
-      pintarNebulosa();
-      dibujar(performance.now());
-    } else {
-      // primero se ve la galaxia (estrellas y núcleo) y la nebulosa entra
-      // en cuanto el teléfono tiene un rato libre: así no hay tirón al abrir
-      corriendoGalaxia = true;
-      requestAnimationFrame(dibujar);
-      if (window.requestIdleCallback){
-        requestIdleCallback(pintarNebulosa, {timeout: 1200});
-      } else {
-        setTimeout(pintarNebulosa, 300);
-      }
-    }
-  })();
-
-  // el scroll llega decenas de veces por segundo: se pinta una vez por cuadro,
-  // no en cada aviso (pintar de más es lo que se siente como tirón)
-  var pedidoPintar = false;
-  function pintarPronto(){
-    if (pedidoPintar) return;
-    pedidoPintar = true;
-    requestAnimationFrame(function(){
-      // si pintar() fallara, la bandera se queda puesta y la página no vuelve
-      // a pintarse nunca: se suelta siempre, pase lo que pase
-      try { pintar(); } finally { pedidoPintar = false; }
-    });
-  }
-  window.addEventListener('scroll', pintarPronto, {passive:true});
-  window.addEventListener('resize', pintar);
-  // la barra se mira una vez por cuadro, no en cada evento de scroll
-  // (en un teléfono llegan decenas por segundo)
-  var pedidoBarra = false;
-  function mirarBarra(){
-    pedidoBarra = false;
-    barra.classList.toggle('pegada', window.scrollY > window.innerHeight * 0.6);
-  }
-  window.addEventListener('scroll', function(){
-    if (!pedidoBarra){ pedidoBarra = true; requestAnimationFrame(mirarBarra); }
-  }, {passive:true});
-  pintar();
-
-
-  // para las fotos de prueba: ?y=1234 abre la página a esa altura
-  (function(){
-    var y = new URLSearchParams(location.search).get('y');
-    if (y){ setTimeout(function(){ window.scrollTo(0, parseInt(y, 10) || 0); }, 300); }
-  })();
-
-  // (El recorrido obligatorio y la bajada sola se quitaron el 31/10: la página
-  //  baja cuando el visitante quiere; el chat sigue al scroll como antes.)
-
-})();
-</script>
-<script src="vendor/gsap.min.js" defer></script>
-<script src="vendor/ScrollTrigger.min.js" defer></script>
-<script src="vendor/lenis.min.js" defer></script>
-<script src="movimiento.js" defer></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="fondo.js"></script>
+<script src="movimiento.js"></script>
 </body>
 </html>
