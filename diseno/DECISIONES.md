@@ -75,11 +75,11 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Siguiente sesión: hacer primero Mis citas en la web, después los 3 modelos; vista previa y video al final.
 
 ## Hecho (31/10, tarde): Mis citas y modelos con el acabado de Ari Labs
-- Mis citas en la web: 3 pantallas nuevas dibujadas en `diseno/capturas/mis-citas.html` (color propio: esmeralda;
+- Mis citas en la web: 3 pantallas nuevas dibujadas en `diseno/capturas/mis-citas.html` (color propio: ciruela, escogido por Javi;
   acabado Ari Labs: vidrio, píldoras con círculo, rombos). Se fotografían con `node diseno/capturas/sacar.js`
   (servidor local en el puerto 8123) y quedan en img/citas-*.webp. La app real sigue igual por ahora.
 - Modelos rehechos con una base común `modelos/acabado.css` + `modelos/acabado.js` (la misma mano) y cada uno con su
-  color: La Cocina de Chela (achiote), Navaja (latón sobre grafito, oscura), Flamboyán (rojo flamboyán). Conservan
+  color: La Cocina de Chela (rosa mexicano), Navaja (negro y rojo de poste, oscura), Flamboyán (lavanda); paletas escogidas por Javi el 31/10. Conservan
   lo que hacían: guiso del día, cuenta de la barbería, cita armada para WhatsApp. Capturas nuevas en img/modelo-*.webp.
 - **Regla (31/10): la paleta de colores siempre la escoge Javi.** Antes de usar colores nuevos, enseñarle varias
   opciones (página de muestras) y preguntarle con botones. Muestras de esta vuelta: https://claude.ai/artifact/CSyFZQUVWcjZgxcTtbbyDD

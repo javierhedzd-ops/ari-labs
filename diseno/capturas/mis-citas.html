@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=360">
 <title>Mis citas · pantallas para la web</title>
-<!-- Pantallas de Mis citas dibujadas con el acabado de Ari Labs (su color: esmeralda).
+<!-- Pantallas de Mis citas dibujadas con el acabado de Ari Labs (su color: ciruela).
      Se abren con ?p=claro, ?p=oscuro o ?p=detalle y se fotografían a 360x760 con escala 1.5 (540x1140).
      Regenerar: node diseno/capturas/sacar.js (ver ese archivo). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,22 +12,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --fondo:#eef5f2; --fondo2:#f8fbfa; --tinta:#1d2a26; --suave:#56655f; --linea:rgba(255,255,255,.8);
+    --fondo:#f3ecf5; --fondo2:#fcf9fd; --tinta:#2a1b2f; --suave:#685a6d; --linea:rgba(255,255,255,.8);
     --vidrio:rgba(255,255,255,.55); --vidrio2:rgba(255,255,255,.3);
-    --esmeralda:#169a72; --esmeralda2:#5fd3ad; --noche:#25302d; --chip:rgba(22,154,114,.12); --chip-t:#0f7556;
-    --alerta:rgba(214,140,40,.14); --alerta-t:#8a5310; --sombra:0 18px 40px -26px rgba(29,42,38,.45);
+    --esmeralda:#8a3f9e; --esmeralda2:#c98bdc; --noche:#2f2433; --chip:rgba(138,63,158,.12); --chip-t:#7a3290;
+    --alerta:rgba(214,140,40,.14); --alerta-t:#8a5310; --sombra:0 18px 40px -26px rgba(42,27,47,.45);
   }
   .oscuro{
-    --fondo:#0d1513; --fondo2:#131e1b; --tinta:#eaf3ef; --suave:#9fb2aa; --linea:rgba(255,255,255,.12);
+    --fondo:#120d15; --fondo2:#1b141f; --tinta:#f3ecf5; --suave:#b3a6b8; --linea:rgba(255,255,255,.12);
     --vidrio:rgba(255,255,255,.07); --vidrio2:rgba(255,255,255,.03);
-    --noche:#eaf3ef; --chip:rgba(95,211,173,.14); --chip-t:#8ee6c6; --alerta:rgba(240,170,80,.14); --alerta-t:#f3c27c;
+    --noche:#f3ecf5; --chip:rgba(201,139,220,.14); --chip-t:#e3b6ef; --alerta:rgba(240,170,80,.14); --alerta-t:#f3c27c;
     --sombra:0 18px 40px -26px rgba(0,0,0,.8);
   }
   *{box-sizing:border-box;margin:0}
   html,body{width:360px;height:760px;overflow:hidden}
   body{font:400 14px/1.4 "Inter Tight",system-ui,sans-serif;color:var(--tinta);-webkit-font-smoothing:antialiased;
-    background:radial-gradient(90% 40% at 85% 0%,rgba(95,211,173,.32),transparent 70%),radial-gradient(70% 40% at 0% 60%,rgba(100,182,255,.16),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
-  .oscuro body,body.oscuro{background:radial-gradient(90% 40% at 85% 0%,rgba(22,154,114,.38),transparent 70%),radial-gradient(70% 40% at 0% 70%,rgba(100,182,255,.1),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
+    background:radial-gradient(90% 40% at 85% 0%,rgba(201,139,220,.32),transparent 70%),radial-gradient(70% 40% at 0% 60%,rgba(100,182,255,.16),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
+  .oscuro body,body.oscuro{background:radial-gradient(90% 40% at 85% 0%,rgba(138,63,158,.38),transparent 70%),radial-gradient(70% 40% at 0% 70%,rgba(100,182,255,.1),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
   .pantalla{position:relative;height:760px;padding:0 18px;display:flex;flex-direction:column;gap:14px}
   .estado{display:flex;justify-content:space-between;align-items:center;height:38px;padding:0 8px;font-weight:600;font-size:13px}
   .estado i{display:inline-flex;gap:5px;align-items:center}
@@ -42,17 +42,17 @@
   .circ{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;flex:none}
   .circ svg{width:15px;height:15px}
   .pildora{display:inline-flex;align-items:center;justify-content:space-between;gap:8px;height:40px;padding:0 5px 0 14px;border-radius:999px;font-weight:600;font-size:13px}
-  .pildora.principal{background:#1d2a26;color:#f4faf7;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 20px -12px rgba(0,0,0,.6)}
-  .pildora.principal .circ{background:linear-gradient(135deg,#9ff0d2,#5fd3ad);color:#0b3a2b}
+  .pildora.principal{background:#2a1b2f;color:#fbf6fd;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 20px -12px rgba(0,0,0,.6)}
+  .pildora.principal .circ{background:linear-gradient(135deg,#ecc8f5,#c98bdc);color:#3a1446}
   .pildora.cristal{background:rgba(255,255,255,.22);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
   .pildora.cristal .circ{background:rgba(255,255,255,.22);color:#fff}
   /* la próxima cita: placa de vidrio sobre esmeralda */
   .proxima{position:relative;overflow:hidden;border-radius:26px;padding:16px;color:#f2fbf7;
-    background:radial-gradient(120% 90% at 100% 0%,rgba(159,240,210,.55),transparent 55%),linear-gradient(140deg,#1aa77c,#0e7a5b);
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),inset 0 1px 0 rgba(255,255,255,.6),0 24px 40px -24px rgba(14,122,91,.8)}
+    background:radial-gradient(120% 90% at 100% 0%,rgba(236,200,245,.55),transparent 55%),linear-gradient(140deg,#9b4bb0,#6e2c82);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),inset 0 1px 0 rgba(255,255,255,.6),0 24px 40px -24px rgba(110,44,130,.8)}
   .proxima::after{content:"";position:absolute;inset:-30% auto -30% 55%;width:30%;rotate:18deg;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent)}
   .cuenta{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.18);font-size:11.5px;font-weight:600;box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
-  .cuenta::before{content:"";width:6px;height:6px;border-radius:50%;background:#c9ffe9;box-shadow:0 0 8px #c9ffe9}
+  .cuenta::before{content:"";width:6px;height:6px;border-radius:50%;background:#f6dcff;box-shadow:0 0 8px #f6dcff}
   .proxima .hora{font-size:28px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:12px 0 6px}
   .proxima .quien{font-weight:600;font-size:14px}
   .proxima .donde{opacity:.85;font-size:12.5px;margin:2px 0 14px}
@@ -61,9 +61,9 @@
   .dia{display:grid;justify-items:center;gap:3px;padding:8px 0 7px;border-radius:16px;font-size:11px;color:var(--suave)}
   .dia b{font-size:16px;font-weight:600;color:var(--tinta);letter-spacing:-.02em}
   .dia i{width:4px;height:4px;border-radius:50%;background:var(--esmeralda2)}
-  .dia.hoy{background:#1d2a26;color:#cfe9df;box-shadow:0 10px 20px -12px rgba(0,0,0,.6)}
+  .dia.hoy{background:#2a1b2f;color:#ead6f1;box-shadow:0 10px 20px -12px rgba(0,0,0,.6)}
   .dia.hoy b{color:#fff}
-  .oscuro .dia.hoy{background:linear-gradient(140deg,#1aa77c,#0e7a5b)}
+  .oscuro .dia.hoy{background:linear-gradient(140deg,#9b4bb0,#6e2c82)}
   .titulo-lista{display:flex;justify-content:space-between;align-items:center}
   .titulo-lista h2{font-size:19px;font-weight:600;letter-spacing:-.03em}
   .seg{display:flex;padding:3px;border-radius:999px;font-size:12px;font-weight:600}
@@ -79,8 +79,8 @@
   .chip{font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--chip);color:var(--chip-t)}
   .chip.debe{background:var(--alerta);color:var(--alerta-t)}
   .lugar{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--suave)}
-  .lugar::before{content:"";width:6px;height:6px;rotate:45deg;background:linear-gradient(135deg,#fff,var(--esmeralda2));box-shadow:0 0 0 1px rgba(22,154,114,.45)}
-  .oscuro .arriba .pildora.principal{background:#eaf3ef;color:#0d1513}
+  .lugar::before{content:"";width:6px;height:6px;rotate:45deg;background:linear-gradient(135deg,#fff,var(--esmeralda2));box-shadow:0 0 0 1px rgba(138,63,158,.45)}
+  .oscuro .arriba .pildora.principal{background:#f3ecf5;color:#120d15}
   .menu{position:absolute;left:14px;right:14px;bottom:18px;height:62px;border-radius:999px;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:0 6px}
   .menu span{display:grid;justify-items:center;gap:2px;font-size:10px;font-weight:600;color:var(--suave)}
   .menu svg{width:19px;height:19px}
@@ -95,12 +95,12 @@
   .accion{display:grid;justify-items:center;gap:6px;padding:12px 0 10px;font-size:11.5px;font-weight:600}
   .accion .circ{width:38px;height:38px;background:var(--chip);color:var(--esmeralda)}
   .accion .circ svg{width:17px;height:17px}
-  .accion.wa .circ{background:linear-gradient(135deg,#9ff0d2,#5fd3ad);color:#0b3a2b}
+  .accion.wa .circ{background:linear-gradient(135deg,#ecc8f5,#c98bdc);color:#3a1446}
   .interruptor{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-weight:500}
-  .interruptor+.interruptor{border-top:1px solid rgba(29,42,38,.07)}
-  .tog{width:42px;height:25px;border-radius:999px;background:rgba(29,42,38,.12);position:relative;box-shadow:inset 0 0 0 1px rgba(29,42,38,.06)}
+  .interruptor+.interruptor{border-top:1px solid rgba(42,27,47,.07)}
+  .tog{width:42px;height:25px;border-radius:999px;background:rgba(42,27,47,.12);position:relative;box-shadow:inset 0 0 0 1px rgba(42,27,47,.06)}
   .tog::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-  .tog.si{background:linear-gradient(135deg,#5fd3ad,#169a72)}
+  .tog.si{background:linear-gradient(135deg,#c98bdc,#8a3f9e)}
   .tog.si::after{left:20px}
   .datos{display:grid;grid-template-columns:1fr 1fr;gap:12px 10px;padding:14px 16px}
   .datos div{display:grid;gap:1px}
@@ -110,7 +110,7 @@
   .canciones h3{font-size:14px;font-weight:600;margin-bottom:8px}
   .canciones ul{list-style:none;padding:0;display:grid;gap:6px;font-size:13px}
   .canciones li{display:flex;gap:9px;align-items:center}
-  .canciones li::before{content:"";width:7px;height:7px;rotate:45deg;background:linear-gradient(135deg,#fff,#5fd3ad);box-shadow:0 0 0 1px rgba(22,154,114,.5);flex:none}
+  .canciones li::before{content:"";width:7px;height:7px;rotate:45deg;background:linear-gradient(135deg,#fff,#c98bdc);box-shadow:0 0 0 1px rgba(138,63,158,.5);flex:none}
 </style>
 </head>
 <body>
