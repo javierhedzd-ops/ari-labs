@@ -31,7 +31,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --hielo-100:#f2fbfe;
@@ -53,10 +53,10 @@
   html{scroll-behavior:auto}
   body{
     margin:0;background:var(--noche);color:var(--papel);
-    font-family:"Newsreader",Georgia,serif;
+    font-family:"Inter Tight",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .chico{font-family:"Inter",system-ui,sans-serif}
+  .chico{font-family:"Inter Tight",system-ui,sans-serif}
 
   /* ---------- galaxia de fondo ---------- */
   #galaxia{
@@ -90,7 +90,7 @@
     position:fixed;top:0;left:0;right:0;z-index:50;
     display:flex;justify-content:space-between;align-items:center;
     padding:1.1rem var(--margen);
-    font-family:"Inter",sans-serif;font-size:.72rem;letter-spacing:.14em;
+    font-family:"Inter Tight",sans-serif;font-size:.72rem;letter-spacing:.14em;
     text-transform:uppercase;color:var(--hielo-300);
     mix-blend-mode:difference;
     transition:background .4s ease,backdrop-filter .4s ease;
@@ -126,7 +126,7 @@
     font-optical-sizing:auto;
   }
   .lema{
-    font-family:"Inter",sans-serif;font-size:.8rem;letter-spacing:.06em;
+    font-family:"Inter Tight",sans-serif;font-size:.8rem;letter-spacing:.06em;
     color:var(--hielo-400);margin:1.6rem 0 0;max-width:26ch;line-height:1.6;
   }
 
@@ -173,7 +173,7 @@
   .estado{
     display:flex;justify-content:space-between;
     padding:.7rem 1rem .2rem;
-    font-family:"Inter",sans-serif;font-size:.55rem;color:var(--hielo-400);
+    font-family:"Inter Tight",sans-serif;font-size:.55rem;color:var(--hielo-400);
     letter-spacing:.06em;
   }
   .cabecera{
@@ -191,7 +191,7 @@
     70%{box-shadow:0 0 0 .5rem rgba(157,192,208,0)}
     100%{box-shadow:0 0 0 0 rgba(157,192,208,0)}
   }
-  .cabecera span{font-family:"Inter",sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--hielo-300)}
+  .cabecera span{font-family:"Inter Tight",sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--hielo-300)}
 
   .chat{
     flex:1;display:flex;flex-direction:column;gap:.55rem;
@@ -199,7 +199,7 @@
   }
   .msg{
     max-width:88%;padding:.55rem .7rem;border-radius:.9rem;
-    font-family:"Inter",sans-serif;font-size:.68rem;line-height:1.45;
+    font-family:"Inter Tight",sans-serif;font-size:.68rem;line-height:1.45;
     opacity:0;transform:translateY(10px);
     will-change:transform,opacity;
   }
@@ -224,7 +224,7 @@
     padding:.42rem .55rem;border-radius:.55rem;
     background:rgba(201,221,230,.07);
     border:1px solid rgba(201,221,230,.12);
-    font-family:"Inter",sans-serif;font-size:.6rem;color:var(--hielo-200);
+    font-family:"Inter Tight",sans-serif;font-size:.6rem;color:var(--hielo-200);
     opacity:0;transform:translateX(-8px);
     will-change:transform,opacity;
   }
@@ -268,7 +268,7 @@
   .cierre::before{display:none}
   .cierre > *{position:relative}
   .cierre .rotulo{
-    font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.24em;
+    font-family:"Inter Tight",sans-serif;font-size:.68rem;letter-spacing:.24em;
     text-transform:uppercase;color:var(--hielo-400);margin:0 0 2.4rem;
   }
   .cierre h2{
@@ -329,11 +329,11 @@
     -webkit-tap-highlight-color:transparent;
   }
   .opcion b{
-    font-family:"Inter",sans-serif;font-size:.82rem;font-weight:500;
+    font-family:"Inter Tight",sans-serif;font-size:.82rem;font-weight:500;
     letter-spacing:.06em;color:var(--hielo-200);
   }
   .opcion span{
-    font-family:"Inter",sans-serif;font-size:.72rem;
+    font-family:"Inter Tight",sans-serif;font-size:.72rem;
     color:rgba(222,246,253,.5);overflow-wrap:anywhere;
   }
   .boton:focus-visible, .opcion:focus-visible, footer .legal a:focus-visible{
@@ -344,7 +344,7 @@
     .opcion:hover{background:rgba(158,216,238,.12);box-shadow:inset 0 0 0 1px rgba(158,216,238,.4)}
   }
   .cierre p.sub{
-    font-family:"Inter",sans-serif;font-size:1.05rem;line-height:1.7;
+    font-family:"Inter Tight",sans-serif;font-size:1.05rem;line-height:1.7;
     /* encima de las estrellas: más claro y con sombra para que se lea */
     color:rgba(222,246,253,.88);margin:2.4rem 0 0;max-width:30ch;
     text-shadow:0 1px 2px rgba(3,6,12,.9), 0 0 18px rgba(3,6,12,.85);
@@ -352,7 +352,7 @@
   .boton{
     position:relative;display:inline-block;margin-top:0;padding:1.05rem 2rem;
     background:var(--hielo-400);color:var(--hielo-900);text-decoration:none;
-    font-family:"Inter",sans-serif;font-size:.82rem;letter-spacing:.08em;
+    font-family:"Inter Tight",sans-serif;font-size:.82rem;letter-spacing:.08em;
     font-weight:500;border-radius:99px;border:0;cursor:pointer;
     transition:transform .12s ease-out, background .2s ease;
     -webkit-tap-highlight-color:transparent;
@@ -408,10 +408,12 @@
     padding:14vh var(--margen) 10vh;
     /* el fondo va de lado a lado; solo el texto se queda en 34rem
        (antes la caja era de 34rem y en compu se veía la galaxia cortada a los lados) */
-    padding-inline:max(var(--margen), calc((100% - 34rem) / 2));
+    padding-inline:max(var(--margen), calc((100% - 68rem) / 2));
   }
+  /* mismo borde izquierdo que las demás secciones; el texto, angosto para leerse bien */
+  .nosotros > *{max-width:34rem}
   .nosotros .rotulo{
-    font-family:"Inter",sans-serif;font-size:.68rem;letter-spacing:.24em;
+    font-family:"Inter Tight",sans-serif;font-size:.68rem;letter-spacing:.24em;
     text-transform:uppercase;color:var(--hielo-400);margin:0 0 2rem;
   }
   .nosotros h2{
@@ -423,7 +425,7 @@
     font-style:italic;color:var(--hielo-300);
   }
   .nosotros .texto{
-    font-family:"Inter",sans-serif;font-size:1rem;line-height:1.75;
+    font-family:"Inter Tight",sans-serif;font-size:1rem;line-height:1.75;
     color:rgba(222,246,253,.62);margin:0 0 1.2rem;max-width:32ch;
   }
   .nosotros .texto b{font-weight:500;color:var(--hielo-200)}
@@ -455,7 +457,7 @@
   }
   footer{
     background:#081116;padding:0 var(--margen) 8vh;text-align:center;
-    font-family:"Inter",sans-serif;font-size:.72rem;color:rgba(222,246,253,.6);
+    font-family:"Inter Tight",sans-serif;font-size:.72rem;color:rgba(222,246,253,.6);
   }
   footer .legal{
     display:flex;gap:1.4rem;justify-content:center;margin-top:.9rem;
@@ -473,11 +475,104 @@
     .cierre .rotulo, .cierre h2 span, .cierre p.sub, .cierre .boton,
     .final p, .boton::after{opacity:1 !important;transform:none !important;transition:none;animation:none}
   }
+
+  /* ---------- letra de detalles: rótulos, barra, pie y teléfono en mono (ESTILO.md) ---------- */
+  .rotulo, .barra, .estado, .cabecera span, footer, .etiqueta, .datos li, .paso b{
+    font-family:"JetBrains Mono",ui-monospace,monospace !important;
+  }
+
+  /* ---------- secciones con contenido: qué hacemos, trabajo, cómo trabajamos ---------- */
+  .oferta, .trabajo, .proceso{
+    background:#081116;color:var(--hielo-100);
+    padding:12vh var(--margen) 4vh;
+    padding-inline:max(var(--margen), calc((100% - 68rem) / 2));
+  }
+  .oferta .rotulo, .trabajo .rotulo, .proceso .rotulo{
+    font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--hielo-400);margin:0 0 1.6rem;
+  }
+  .oferta h2, .trabajo h2, .proceso h2{
+    font-weight:300;font-size:clamp(1.9rem,6.4vw,3.2rem);line-height:1.1;
+    letter-spacing:-.03em;margin:0 0 2.4rem;max-width:20ch;color:rgba(255,255,255,.94);
+  }
+  .oferta h2 em, .trabajo h2 em, .proceso h2 em{font-style:italic;color:var(--hielo-300)}
+
+  .bento{display:grid;gap:12px;grid-template-columns:1fr}
+  .caja{
+    background:rgba(158,216,238,.045);border:1px solid rgba(158,216,238,.12);
+    border-radius:22px;padding:1.6rem 1.5rem 1.7rem;
+  }
+  .caja h3{font-weight:500;font-size:1.3rem;line-height:1.25;letter-spacing:-.015em;margin:.9rem 0 .6rem;color:#fff}
+  .caja p{font-size:1rem;line-height:1.65;color:rgba(222,246,253,.74);margin:0}
+  .etiqueta{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--hielo-400)}
+  @media (min-width:760px){
+    .bento{grid-template-columns:repeat(6,1fr)}
+    .caja{grid-column:span 2}
+    .caja.grande{grid-column:span 3;padding:2.2rem 2rem 2.4rem}
+    .caja.grande h3{font-size:1.7rem}
+  }
+
+  .trabajo .obra{display:grid;gap:2.4rem;align-items:center}
+  .trabajo .texto{font-size:1.05rem;line-height:1.75;color:rgba(222,246,253,.76);margin:0 0 1.4rem;max-width:42ch}
+  .datos{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+  .datos li{font-size:.72rem;letter-spacing:.06em;color:var(--hielo-200);
+    border:1px solid rgba(158,216,238,.2);border-radius:99px;padding:.45rem .8rem}
+  .pantallas{display:flex;gap:12px;justify-content:center;padding-top:18px}
+  .pantallas figure{margin:0;flex:1 1 0;min-width:0;max-width:220px}
+  .pantallas img{display:block;width:100%;height:auto;border-radius:24px;
+    border:1px solid rgba(158,216,238,.16);background:#0d0f12;
+    box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .pantallas figure:nth-child(2){transform:translateY(-18px)}
+  @media (max-width:420px){ .pantallas figure:nth-child(3){display:none} }
+  @media (min-width:900px){ .trabajo .obra{grid-template-columns:1fr 1.1fr} }
+
+  .pasos{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+  .paso{border-top:1px solid rgba(158,216,238,.14);padding:1.4rem 0 .4rem}
+  .paso b{display:block;font-weight:500;font-size:.72rem;letter-spacing:.16em;color:var(--hielo-400);margin-bottom:.7rem}
+  .paso h3{font-weight:500;font-size:1.25rem;margin:0 0 .5rem;color:#fff;letter-spacing:-.01em}
+  .paso p{font-size:1rem;line-height:1.65;color:rgba(222,246,253,.74);margin:0;max-width:36ch}
+  @media (min-width:760px){ .pasos{grid-template-columns:repeat(3,1fr);gap:28px} }
+
+  /* entradas suaves al llegar (sin JavaScript se ve todo: ver <noscript>) */
+  .revela > *{opacity:0;transform:translateY(16px);
+    transition:opacity .7s cubic-bezier(.2,.9,.2,1),transform .7s cubic-bezier(.2,.9,.2,1)}
+  .revela.visto > *{opacity:1;transform:none}
+  .revela.visto > *:nth-child(2){transition-delay:.08s}
+  .revela.visto > *:nth-child(3){transition-delay:.16s}
+  .revela.visto > *:nth-child(4){transition-delay:.24s}
+  .revela.visto > *:nth-child(5){transition-delay:.32s}
+  /* la pantalla del centro va un poco más arriba también al aparecer */
+  .pantallas.revela.visto figure:nth-child(2){transform:translateY(-18px)}
+
+  /* ---------- WhatsApp siempre a la mano ---------- */
+  .wa-flota{
+    position:fixed !important;z-index:60 !important;
+    right:max(16px, env(safe-area-inset-right));bottom:max(16px, env(safe-area-inset-bottom));
+    display:inline-flex;align-items:center;gap:.55rem;min-height:48px;padding:0 1.15rem 0 .95rem;
+    background:var(--hielo-400);color:var(--hielo-900);text-decoration:none;border-radius:99px;
+    font-family:"Inter Tight",sans-serif;font-weight:600;font-size:.92rem;
+    box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.15) inset;
+    opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;visibility:hidden;
+    transition:opacity .25s ease, transform .25s cubic-bezier(.2,.9,.2,1), visibility 0s linear .25s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wa-flota.ver{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:0s}
+  .wa-flota:active{transform:scale(.96)}
+  .wa-flota:focus-visible{outline:2px solid #fff;outline-offset:3px}
+  .wa-flota svg{width:20px;height:20px;flex:none}
+  /* en el teléfono, solo el icono: tapa menos texto mientras se lee */
+  @media (max-width:600px){
+    .wa-flota{width:56px;height:56px;padding:0;justify-content:center;font-size:0;gap:0}
+    .wa-flota svg{width:26px;height:26px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .revela > *, .wa-flota{transition:none;transform:none}
+  }
 </style>
 <noscript><style>
   /* sin JavaScript no hay animaciones: que todo se vea */
   .msg, .fila, .escribiendo, .telf, .cierre .rotulo, .cierre h2 span, .cierre p.sub,
-  .final p, .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto{
+  .final p, .nosotros .rotulo, .nosotros h2, .nosotros .texto, .nosotros .contacto, .revela > *{
     opacity:1 !important;transform:none !important;
   }
   .opciones{max-height:none;opacity:1;visibility:visible;pointer-events:auto}
@@ -550,6 +645,75 @@
   <p>Mismo trabajo. <em>Menos ruido.</em></p>
 </section>
 
+<!-- ============ QUÉ HACEMOS ============ -->
+<section class="oferta" id="oferta">
+  <div class="revela">
+    <p class="rotulo">Qué hacemos</p>
+    <h2>Lo que tu negocio necesita, <em>y nada de más</em>.</h2>
+  </div>
+  <div class="bento revela">
+    <article class="caja grande">
+      <span class="etiqueta">Páginas web</span>
+      <h3>Que te encuentren y te escriban.</h3>
+      <p>Tu negocio en internet con tus horarios, tu ubicación, tu menú o catálogo y un botón para que te escriban por WhatsApp. Rápida en cualquier teléfono.</p>
+    </article>
+    <article class="caja grande">
+      <span class="etiqueta">Apps</span>
+      <h3>Tu forma de trabajar, en el teléfono.</h3>
+      <p>Citas, cobros, clientes o inventario, hechos a tu medida. Funcionan sin internet y tus datos se quedan contigo.</p>
+    </article>
+    <article class="caja">
+      <span class="etiqueta">Modelo</span>
+      <h3>Escoges uno y lo adaptamos.</h3>
+      <p>Más rápido, con tus colores, tus textos y tus fotos.</p>
+    </article>
+    <article class="caja">
+      <span class="etiqueta">A la medida</span>
+      <h3>Desde cero, solo para ti.</h3>
+      <p>Para cuando tu negocio hace las cosas a su manera.</p>
+    </article>
+    <article class="caja">
+      <span class="etiqueta">Sin mensualidades caras</span>
+      <h3>Sin cuotas cada mes.</h3>
+      <p>Tu página vive en un hosting gratuito y tu app guarda todo en tu teléfono.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TRABAJO ============ -->
+<section class="trabajo" id="trabajo">
+  <div class="obra">
+    <div class="revela">
+      <p class="rotulo">Trabajo reciente</p>
+      <h2>Mis citas: <em>la agenda de un músico de eventos</em>.</h2>
+      <p class="texto">Rezos, misas, bodas y XV años. El cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada: fecha, lugar, cobro, canciones y un aviso una hora antes.</p>
+      <ul class="datos">
+        <li>Funciona sin internet</li>
+        <li>Modo claro y oscuro</li>
+        <li>Hecha a la medida</li>
+      </ul>
+    </div>
+    <div class="pantallas revela">
+      <figure><img src="img/citas-agenda-claro.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Agenda del día en Mis citas, en modo claro: la próxima cita y la lista de hoy."></figure>
+      <figure><img src="img/citas-agenda.webp" width="540" height="1140" loading="lazy" decoding="async" alt="La misma agenda en modo oscuro, con los días de la semana y las citas de hoy."></figure>
+      <figure><img src="img/citas-detalle.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Detalle de una cita: novena con doña Rosa y botones para llamar, mandar WhatsApp y llegar."></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO TRABAJAMOS ============ -->
+<section class="proceso" id="proceso">
+  <div class="revela">
+    <p class="rotulo">Cómo trabajamos</p>
+    <h2>Tres pasos, <em>sin enredos</em>.</h2>
+  </div>
+  <ol class="pasos revela">
+    <li class="paso"><b>01</b><h3>Nos cuentas</h3><p>Por WhatsApp: qué haces, cómo trabajas y qué te gustaría resolver.</p></li>
+    <li class="paso"><b>02</b><h3>Te enseñamos una vista previa</h3><p>La ves en tu teléfono y nos dices qué cambiar antes de terminar.</p></li>
+    <li class="paso"><b>03</b><h3>Queda funcionando</h3><p>Publicamos tu página o instalamos tu app, y te enseñamos a usarla.</p></li>
+  </ol>
+</section>
+
 <!-- ============ NOSOTROS ============ -->
 <section class="nosotros" id="nosotros">
   <p class="rotulo">Nosotros</p>
@@ -569,6 +733,11 @@
   </div>
 </section>
 </main>
+
+<a class="wa-flota" id="wa-flota" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 8.8c.2 2.6 2.4 5 5.2 5.4l1-1.2-1.6-.9-.7.6a4 4 0 0 1-2-2l.6-.7-.9-1.6z"/></svg>
+  WhatsApp
+</a>
 
 <footer>
   <span>Ari Labs · Mérida, Yucatán · 2026</span>
@@ -727,10 +896,31 @@
     ojo.observe(cierre);
     ojo.observe(final);
     if (nosotros) ojo.observe(nosotros);
+    document.querySelectorAll('.revela').forEach(function(el){ ojo.observe(el); });
   } else {
     cierre.classList.add('visto'); final.classList.add('visto');
     if (nosotros) nosotros.classList.add('visto');
+    document.querySelectorAll('.revela').forEach(function(el){ el.classList.add('visto'); });
   }
+
+  // ---- WhatsApp flotante: aparece después de la portada y se esconde junto al contacto ----
+  var flota = document.getElementById('wa-flota');
+  var portada = document.getElementById('viaje');
+  var contacto = nosotros && nosotros.querySelector('.contacto');
+  function mirarFlota(){
+    if (!flota) return;
+    var alto = window.innerHeight || 1;
+    var pasoPortada = portada ? portada.getBoundingClientRect().bottom < alto * 0.5 : true;
+    var r = contacto ? contacto.getBoundingClientRect() : null;
+    var contactoVisible = r ? (r.top < alto && r.bottom > 0) : false;
+    flota.classList.toggle('ver', pasoPortada && !contactoVisible);
+  }
+  var pedidoFlota = false;
+  window.addEventListener('scroll', function(){
+    if (!pedidoFlota){ pedidoFlota = true; requestAnimationFrame(function(){ pedidoFlota = false; mirarFlota(); }); }
+  }, {passive:true});
+  window.addEventListener('resize', mirarFlota);
+  mirarFlota();
 
   // ---- "Escríbenos" abre los dos caminos: correo o WhatsApp ----
   // Solo hay uno, el de Nosotros: el del cierre se quitó por repetido.
@@ -1401,7 +1591,7 @@
       g.fillStyle = '#fff';
       g.textAlign = 'center';
       g.textBaseline = 'middle';
-      g.font = '300 ' + tam + 'px "Inter", system-ui, sans-serif';
+      g.font = '300 ' + tam + 'px "Inter Tight", system-ui, sans-serif';
       g.fillText('Ari Labs', ancho1 / 2, alto1 * 0.5);
       var datos = g.getImageData(0, 0, c.width, c.height).data;
       var pts = [];
