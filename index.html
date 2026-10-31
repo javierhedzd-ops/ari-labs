@@ -23,7 +23,7 @@
   :root{
     --glaciar:#f8fafc; --plata:#ced6e0; --acero:#5b6978; --artico:#64b6ff; --menta:#b2e4db; --noche:#2e2e3e;
     --tinta:#1f2633; --suave:#4b5868; --azul-texto:#2563a8;
-    --margen:clamp(18px,5vw,64px); --entre:clamp(36px,6.5vw,90px);
+    --margen:clamp(18px,5vw,64px); --entre:clamp(56px,9vw,130px);
     --curva:cubic-bezier(.2,.9,.2,1);
   }
   *{box-sizing:border-box}
@@ -89,7 +89,7 @@
   /* ---------- secciones ---------- */
   .seccion{position:relative;padding:var(--entre) var(--margen)}
   .titulo{font-weight:600;font-size:clamp(2.6rem,1.4rem + 5vw,6.2rem);line-height:.94;letter-spacing:-.055em;margin:0 0 1rem;color:var(--noche);width:fit-content;max-width:100%}
-  .entrada{font-size:clamp(1.12rem,1rem + .45vw,1.35rem);line-height:1.5;color:var(--suave);max-width:40ch;margin:0 0 2.4rem;width:fit-content}
+  .entrada{font-size:clamp(1.12rem,1rem + .45vw,1.35rem);line-height:1.5;color:var(--suave);max-width:40ch;margin:0 0 clamp(2.4rem,4vw,3.6rem);width:fit-content}
   .pal-h{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
   .pal-h>span{display:inline-block}
   .titulo-portada .pal-h{padding:0 .06em .12em;margin:0 -.06em -.12em}
@@ -114,20 +114,20 @@
   .js .sube.visto{opacity:1;translate:0 0}
 
   /* ---------- 2. qué hacemos ---------- */
-  .dos{display:grid;gap:14px}
-  .dos .hielo{padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column}
+  .dos{display:grid;gap:clamp(16px,2vw,24px)}
+  .dos .hielo{padding:clamp(30px,4.4vw,60px);display:flex;flex-direction:column}
   .dos h3{font-weight:600;font-size:clamp(1.9rem,1.2rem + 2.2vw,3rem);line-height:1;letter-spacing:-.04em;margin:0 0 1rem;color:var(--noche)}
   .dos p{margin:0 0 1.4rem;color:var(--suave);font-size:1.08rem;line-height:1.55;max-width:36ch}
   .dos .boton{margin-top:1.8rem;align-self:flex-start}
-  .formas{display:grid;gap:14px;margin-top:14px}
-  .formas .hielo{padding:22px 24px;display:flex;gap:14px;align-items:center}
-  .formas b{display:block;font-weight:600;font-size:1.18rem;letter-spacing:-.02em;color:var(--noche);line-height:1.2}
-  .formas span{color:var(--suave)}
-  @media (min-width:860px){ .dos{grid-template-columns:1fr 1fr} .formas{grid-template-columns:1fr 1fr 1fr} }
+  .formas{list-style:none;margin:clamp(28px,3.6vw,44px) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:12px 36px;color:var(--suave);font-size:clamp(1.05rem,1rem + .3vw,1.2rem)}
+  .formas li{display:flex;align-items:center;gap:.75rem}
+  .formas li::before{content:"";width:9px;height:9px;rotate:45deg;background:linear-gradient(135deg,#fff,#9fd3ff);box-shadow:0 0 0 1px rgba(100,182,255,.6);flex:none}
+  .formas b{font-weight:600;color:var(--noche)}
+  @media (min-width:860px){ .dos{grid-template-columns:1fr 1fr} }
 
   /* ---------- 3. trabajos: el teléfono 3D de vidrio ---------- */
   .obra{display:grid;gap:clamp(28px,4vw,64px);align-items:center}
-  .ficha{padding:clamp(24px,3vw,38px);max-width:640px}
+  .ficha{padding:clamp(28px,3.6vw,46px);max-width:640px}
   .ficha h3{margin:0 0 .4rem;font-size:1.6rem;letter-spacing:-.03em;font-weight:600;color:var(--noche)}
   .ficha>p{margin:0 0 1.2rem;color:var(--suave)}
   .flujo{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-weight:600;color:var(--noche)!important}
@@ -193,7 +193,7 @@
   /* ---------- 5. cómo trabajamos: la línea de luz ---------- */
   .pasos-caja{position:relative}
   .pasos{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-  .paso{padding:24px 24px 26px 82px}
+  .paso{padding:28px 26px 30px 82px}
   .nodo{position:absolute;left:24px;top:22px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:.95rem;
     background:rgba(255,255,255,.7);color:var(--acero);box-shadow:inset 0 0 0 1px rgba(91,105,120,.28);transition:background .5s ease,color .5s ease,box-shadow .5s ease}
   .paso b{display:block;font-size:1.3rem;letter-spacing:-.03em;font-weight:600;color:var(--noche);margin:4px 0 .35rem;line-height:1.15}
@@ -206,14 +206,14 @@
   .js .linea i{--lleno:0}
   @media (min-width:860px){
     .pasos{grid-template-columns:repeat(3,1fr)}
-    .paso{padding:88px 30px 32px}
+    .paso{padding:96px 34px 40px}
     .nodo{left:30px;top:30px}
     .linea{height:2px}
     .linea i{background:linear-gradient(90deg,#9fd3ff,#64b6ff);transform-origin:left;transform:scaleX(var(--lleno,1))}
   }
 
   /* ---------- 5b. preguntas frecuentes ---------- */
-  .preguntas{display:grid;gap:10px;max-width:880px}
+  .preguntas{display:grid;gap:14px;max-width:880px}
   .pregunta{border-radius:24px}
   .pregunta h3{margin:0;font:inherit}
   .pregunta button{all:unset;box-sizing:border-box;width:100%;min-height:64px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 12px 12px 24px;
@@ -298,11 +298,10 @@
         <a class="boton secundario" href="#trabajos">Ver una app<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
       </article>
     </div>
-    <div class="formas">
-      <div class="hielo sube inclina"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M17 14v6M14 17h6"/></svg></span><div><b>De un modelo</b><span>Escoges uno y lo hacemos tuyo.</span></div></div>
-      <div class="hielo sube inclina"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div><b>Desde cero</b><span>Pensado solo para tu negocio.</span></div></div>
-      <div class="hielo sube inclina"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></span><div><b>Sin mensualidades caras</b><span>Pagas lo justo, sin sorpresas.</span></div></div>
-    </div>
+    <ul class="formas sube" aria-label="Cómo lo hacemos">
+      <li><span><b>De un modelo</b> o <b>desde cero</b></span></li>
+      <li><span><b>Sin mensualidades caras</b></span></li>
+    </ul>
   </section>
 
   <!-- 3. Trabajos -->
@@ -404,10 +403,6 @@
       <div class="pregunta hielo sube">
         <h3><button type="button" aria-expanded="false" aria-controls="r3" id="p3">¿Qué necesito darte (fotos, textos, logo)?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
         <div class="respuesta" id="r3" role="region" aria-labelledby="p3"><div><p>Tu logo si lo tienes, unas fotos de tu negocio y tus datos: horarios, precios y servicios. Si te falta algo, te ayudamos a resolverlo.</p></div></div>
-      </div>
-      <div class="pregunta hielo sube">
-        <h3><button type="button" aria-expanded="false" aria-controls="r4" id="p4">¿Puedo hacer cambios después?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
-        <div class="respuesta" id="r4" role="region" aria-labelledby="p4"><div><p>Sí. Antes de terminar ves una vista previa y nos dices qué cambiar. Después, los cambios chicos, como precios u horarios, nos los pides por WhatsApp.</p></div></div>
       </div>
       <div class="pregunta hielo sube">
         <h3><button type="button" aria-expanded="false" aria-controls="r5" id="p5">¿Hay que pagar cada mes?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
