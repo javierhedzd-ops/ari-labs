@@ -90,10 +90,9 @@
   .seccion{position:relative;padding:var(--entre) var(--margen)}
   .titulo{font-weight:600;font-size:clamp(2.6rem,1.4rem + 5vw,6.2rem);line-height:.94;letter-spacing:-.055em;margin:0 0 1rem;color:var(--noche);width:fit-content;max-width:100%}
   .entrada{font-size:clamp(1.12rem,1rem + .45vw,1.35rem);line-height:1.5;color:var(--suave);max-width:40ch;margin:0 0 clamp(2.4rem,4vw,3.6rem);width:fit-content}
-  .pal-h{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+  .pal-h{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .08em .12em;margin:0 -.08em -.12em}
   .pal-h>span{display:inline-block}
-  .titulo-portada .pal-h{padding:0 .06em .12em;margin:0 -.06em -.12em}
-
+  
   /* tarjetas de hielo esmerilado: transparentes, se ven los pedazos detrás */
   .hielo{position:relative;border-radius:30px;overflow:hidden;
     background:linear-gradient(135deg,rgba(255,255,255,.36),rgba(255,255,255,.1));
@@ -298,7 +297,7 @@
         <a class="boton secundario" href="#trabajos">Ver una app<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
       </article>
     </div>
-    <ul class="formas sube" aria-label="Cómo lo hacemos">
+    <ul class="formas sube" aria-label="Cómo lo hacemos" data-esquiva>
       <li><span><b>De un modelo</b> o <b>desde cero</b></span></li>
       <li><span><b>Sin mensualidades caras</b></span></li>
     </ul>

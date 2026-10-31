@@ -118,3 +118,4 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   parecerse a otro: ni en estilo, ni en botones, ni en forma de mostrar la información.
 - Restaurante "de autor": Javi no le cambiaría nada.
 - Idea de Javi: un helado 3D animado (como el hielo de Ari Labs) solo para la heladería. Pendiente de definir.
+- (31/10) Heladería: los sabores van con su color natural (decidido por Javi). Helado 3D: las bolas caen y rebotan al abrir.
