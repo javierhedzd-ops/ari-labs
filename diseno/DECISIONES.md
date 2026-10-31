@@ -111,3 +111,10 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   `modelos/acabado.js` (barra al bajar y piezas que aparecen). Se revisó cada uno en 320/390/1440: sin desborde, toques
   de 44 px, nada encimado, y datos que cuadran (horarios con días y horas, sumas, mensajes de WhatsApp).
 - Pendiente de confirmar con Javi: los puntitos de sabores de la heladería usan el color natural de cada sabor (como el cono).
+- **Regla (31/10): primero hojas de diseño en imagen, no webs.** Para enseñar un diseño a Javi se arma una hoja por
+  modelo (colores, letra, botones con sus estados, tarjetas y piezas propias) y se manda como imagen. Generador:
+  `python3 diseno/hojas/hacer.py` (usa los estilos de cada modelo). La web completa se construye cuando él aprueba.
+- **Regla (31/10): modelos variados.** Llevan el sello de Javi (el cuidado en los detalles), pero ninguno puede
+  parecerse a otro: ni en estilo, ni en botones, ni en forma de mostrar la información.
+- Restaurante "de autor": Javi no le cambiaría nada.
+- Idea de Javi: un helado 3D animado (como el hielo de Ari Labs) solo para la heladería. Pendiente de definir.
