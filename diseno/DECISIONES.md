@@ -57,4 +57,6 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   esconde al llegar a Contacto.
 - Respuestas de Preguntas frecuentes: borrador de Claude, Javi las corrige (sobre todo "¿Cómo se paga?" y tiempos).
 - Revisado: 320/390/768/1440 px sin desborde ni errores; sin WebGL y con "reducir movimiento" todo se ve; toques ≥ 44 px.
+- Vista previa privada de la web completa: https://claude.ai/artifact/B286gFT5qrumLSTfqKDmo7 (los enlaces "Ver modelo"
+  y Privacidad/Términos solo funcionan en la web real, no en la vista previa).
 - Pendiente: estilo claro en privacidad.html, terminos.html y 404.html (siguen oscuros); fotos reales en los modelos.
