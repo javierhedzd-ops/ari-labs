@@ -104,3 +104,5 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - (31/10) El estilo "cocina alegre" se ve de heladería y a Javi le gustó así: pasa a ser un **modelo nuevo de heladería**.
   Quedan 4 modelos: heladería (alegre, Caprasimo, rosa), restaurante (estilo nuevo por escoger), barbería clásica en
   **grafito y plata** (Big Shoulders) y consultorio cálido (Instrument Serif).
+- (31/10) Restaurante: estilo **cocina de autor** (Cormorant Garamond, noche cálida con barro). Heladería: el cono va
+  **color galleta** (excepción a la paleta, la pidió Javi). Los cuatro juntos: https://claude.ai/artifact/Lf8CGYgXXXPo2sr6TG6F2Q
