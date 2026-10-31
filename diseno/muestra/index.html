@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paso 1 portada cristalina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Paleta Frostline: blanco glaciar, gris acero, azul ártico, menta escarcha y noche para el texto. */
+  :root{
+    --glaciar:#f8fafc; --plata:#ced6e0; --acero:#5b6978; --artico:#64b6ff; --menta:#b2e4db; --noche:#2e2e3e;
+    --tinta:#1f2633; --suave:#4d5b6a; --vidrio:rgba(248,250,252,.38); --borde:rgba(255,255,255,.7);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#eef3f7;color:var(--tinta);font-family:"Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  #escena{position:fixed;inset:0;width:100%;height:100%;display:block}
+  .barra{position:fixed;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(18px,5vw,64px)}
+  .barra b{font-weight:600;letter-spacing:-.01em}
+  .barra a{background:var(--noche);color:var(--glaciar);text-decoration:none;font-weight:600;padding:.6rem 1.1rem;border-radius:999px;font-size:.95rem}
+  .portada{position:relative;z-index:2;min-height:100svh;display:grid;align-content:end;padding:0 clamp(18px,5vw,64px) clamp(36px,8vh,90px);pointer-events:none}
+  h1{width:fit-content;font-weight:600;font-size:clamp(4.4rem,1.6rem + 11vw,11.5rem);line-height:.86;letter-spacing:-.065em;margin:0 0 .2em -.04em;color:var(--noche)}
+  .portada p{font-size:clamp(1.25rem,1rem + 1.2vw,2rem);line-height:1.25;letter-spacing:-.02em;max-width:22ch;margin:0 0 1.6rem;color:var(--suave)}
+  .botones{display:flex;gap:10px;flex-wrap:wrap;pointer-events:auto}
+  .botones a{min-height:52px;display:inline-flex;align-items:center;padding:0 1.4rem;border-radius:999px;font-weight:600;text-decoration:none}
+  .botones .uno{background:var(--noche);color:var(--glaciar)}
+  /* vidrio esmerilado: como hielo frente a la luz */
+  .botones .dos{background:var(--vidrio);border:1px solid var(--borde);color:var(--tinta);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+  .nota{position:absolute;top:68px;right:clamp(18px,5vw,64px);z-index:3;font-size:.85rem;color:var(--suave)}
+
+  /* ---------- paso 2: qué hacemos ---------- */
+  .seccion{position:relative;z-index:2;padding:clamp(72px,14vh,160px) clamp(18px,5vw,64px) clamp(56px,10vh,120px)}
+  .seccion h2{font-weight:600;font-size:clamp(2.8rem,1.4rem + 5.4vw,6.4rem);line-height:.92;letter-spacing:-.055em;margin:0 0 1rem;color:var(--noche)}
+  .seccion .entrada{font-size:clamp(1.1rem,1rem + .4vw,1.35rem);line-height:1.5;color:var(--suave);max-width:38ch;margin:0 0 2.4rem}
+  .dos{display:grid;gap:14px}
+  @media (min-width:860px){ .dos{grid-template-columns:1fr 1fr} }
+  .hielo{position:relative;padding:clamp(26px,3.4vw,44px);border-radius:30px;overflow:hidden;
+    background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.22));
+    border:1px solid rgba(255,255,255,.75);
+    -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 30px 60px -40px rgba(46,46,62,.35);
+    transition:transform .5s cubic-bezier(.2,.9,.2,1)}
+  /* el destello que cruza la tarjeta, como luz en una placa de hielo */
+  .hielo::after{content:"";position:absolute;inset:-40% auto -40% -30%;width:40%;transform:rotate(18deg);
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);opacity:0;transition:opacity .4s ease}
+  .hielo:hover::after{opacity:1;animation:destello 1.4s ease}
+  @keyframes destello{from{left:-40%}to{left:120%}}
+  .hielo .tipo{display:inline-block;font-weight:600;font-size:.95rem;color:#2563a8;margin-bottom:1rem}
+  .hielo h3{font-weight:600;font-size:clamp(1.9rem,1.2rem + 2.2vw,3rem);line-height:1;letter-spacing:-.04em;margin:0 0 1rem;color:var(--noche)}
+  .hielo p{margin:0 0 1.4rem;color:var(--suave);font-size:1.05rem;line-height:1.55;max-width:36ch}
+  .hielo ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+  .hielo li{display:flex;gap:.7rem;align-items:center;color:var(--tinta)}
+  .hielo li::before{content:"";width:9px;height:9px;transform:rotate(45deg);background:linear-gradient(135deg,#ffffff,#9fd3ff);border:1px solid rgba(100,182,255,.6);flex:none}
+  .formas{display:grid;gap:14px;margin-top:14px}
+  @media (min-width:860px){ .formas{grid-template-columns:1fr 1fr 1fr} }
+  .formas .hielo{padding:22px 24px}
+  .formas b{display:block;font-weight:600;font-size:1.2rem;letter-spacing:-.02em;margin-bottom:.3rem;color:var(--noche)}
+  .formas span{color:var(--suave)}
+  .js .sube{opacity:0;transform:translateY(34px);transition:opacity .9s ease, transform .9s cubic-bezier(.2,.9,.2,1)}
+  .js .sube.visto{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){ .js .sube{opacity:1;transform:none} .hielo::after{display:none} }
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<canvas id="escena" aria-hidden="true"></canvas>
+<header class="barra"><b>Ari Labs</b><a href="#">Escríbenos</a></header>
+<div class="nota">Pasos 1 y 2 · diamante en bruto</div>
+<div class="portada">
+  <h1>Ari Labs</h1>
+  <p>Páginas web y apps para negocios de Mérida.</p>
+  <div class="botones"><a class="uno" href="#">Cuéntanos tu idea</a><a class="dos" href="#">Ver lo que hacemos</a></div>
+</div>
+
+<section class="seccion" id="que-hacemos">
+  <h2 class="sube">Qué hacemos</h2>
+  <p class="entrada sube">Dos cosas, bien hechas. Para negocios de Mérida que quieren verse y trabajar mejor.</p>
+  <div class="dos">
+    <article class="hielo sube">
+      <span class="tipo">Páginas web</span>
+      <h3>Que te encuentren y te escriban</h3>
+      <p>Tu negocio en internet, rápido en cualquier teléfono y con un botón directo a tu WhatsApp.</p>
+      <ul><li>Tus horarios, ubicación y precios</li><li>Menú, catálogo o servicios</li><li>Hosting gratuito, sin cuotas caras</li></ul>
+    </article>
+    <article class="hielo sube">
+      <span class="tipo">Apps</span>
+      <h3>Tu forma de trabajar, en el teléfono</h3>
+      <p>Citas, cobros o clientes, hechos a tu medida. Funcionan sin internet y tus datos se quedan contigo.</p>
+      <ul><li>Avisos antes de cada cita</li><li>Cobros y clientes en orden</li><li>Modo claro y oscuro</li></ul>
+    </article>
+  </div>
+  <div class="formas">
+    <div class="hielo sube"><b>De un modelo</b><span>Escoges uno y lo hacemos tuyo.</span></div>
+    <div class="hielo sube"><b>Desde cero</b><span>Pensado solo para tu negocio.</span></div>
+    <div class="hielo sube"><b>Sin mensualidades caras</b><span>Pagas lo justo, sin sorpresas.</span></div>
+  </div>
+</section>
+
+<script>
+  // las piezas entran al llegar, escalonadas
+  (function(){
+    var piezas = document.querySelectorAll('.sube');
+    piezas.forEach(function(p, i){ p.style.transitionDelay = (i % 3) * 0.08 + 's'; });
+    if (!('IntersectionObserver' in window)) { piezas.forEach(function(p){ p.classList.add('visto'); }); return; }
+    var ojo = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visto'); ojo.unobserve(e.target); } }); }, {threshold:.15});
+    piezas.forEach(function(p){ ojo.observe(p); });
+  })();
+</script>
+
+<script type="module">
+  // Una sola escena 3D: al fondo, la luz quebrada por el hielo (cáusticas); al frente, un cubo de
+  // hielo transparente que refracta ese fondo, con burbujas y un leve arcoíris en los bordes.
+  import * as THREE from './vendor/three.module.min.js';
+  import { RoomEnvironment } from './vendor/RoomEnvironment.js';
+  import { ConvexGeometry } from './vendor/ConvexGeometry.js';
+
+  const lienzo = document.getElementById('escena');
+  const render = new THREE.WebGLRenderer({ canvas: lienzo, antialias: true });
+  render.setPixelRatio(Math.min(devicePixelRatio, 2));
+  render.toneMapping = THREE.ACESFilmicToneMapping;
+  render.toneMappingExposure = 1.0;
+  const escena = new THREE.Scene();
+  // Entorno de joyería: bandas oscuras (noche) y claras (hielo) con tiras de luz blanca.
+  // El diamante lo refleja y lo refracta: el contraste entre caras oscuras y brillantes es lo que lo hace ver real.
+  const cielo = new THREE.Scene();
+  cielo.add(new THREE.Mesh(new THREE.SphereGeometry(10, 64, 32), new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    vertexShader: 'varying vec3 p;void main(){p=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader: `varying vec3 p; void main(){ vec3 d = normalize(p);
+      float a = atan(d.z, d.x);
+      vec3 noche = vec3(0.03,0.06,0.12), artico = vec3(0.20,0.55,0.98), menta = vec3(0.55,0.90,0.84), hielo = vec3(0.90,0.96,1.0);
+      vec3 c = mix(noche, artico, smoothstep(-0.6, 0.1, d.y));
+      c = mix(c, hielo, smoothstep(0.35, 0.9, d.y));
+      c = mix(c, menta, smoothstep(0.6, 1.0, sin(a * 3.0)) * 0.5 * (1.0 - abs(d.y)));
+      c = mix(c, noche, smoothstep(0.75, 1.0, sin(a * 5.0 + 1.3)) * 0.7);   // franjas oscuras
+      gl_FragColor = vec4(c, 1.0); }`
+  })));
+  // tiras de luz (como las de un estudio de joyería) y puntos muy brillantes para los destellos
+  [[0, 7, 0, 8, 1.2], [-7, 2, 2, 1, 6], [7, 1, -2, 1, 6], [2, -3, 7, 6, 0.8], [-3, 4, -6, 0.8, 0.8], [5, 5, 5, 0.6, 0.6]].forEach(([x, y, z, w, h]) => {
+    const tira = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(1, 1, 1).multiplyScalar(4), side: THREE.DoubleSide }));
+    tira.position.set(x, y, z); tira.lookAt(0, 0, 0); cielo.add(tira);
+  });
+  const cubo = new THREE.WebGLCubeRenderTarget(512, { type: THREE.HalfFloatType });
+  const camCubo = new THREE.CubeCamera(0.1, 50, cubo); cielo.add(camCubo);
+  camCubo.update(render, cielo);
+  escena.environment = new THREE.PMREMGenerator(render).fromScene(cielo, 0.02).texture;
+
+  // Material de diamante en bruto: casi incoloro, superficie esmerilada con vetas (las líneas de
+  // crecimiento del cristal), vetas blancas por dentro, un poco lechoso, refracción con poco "fuego"
+  // y reflejos de estudio. Basado en fotos reales de diamantes sin tallar.
+  function materialDiamante() {
+    return new THREE.ShaderMaterial({
+      uniforms: { env: { value: cubo.texture }, t: { value: 0 } },
+      vertexShader: `varying vec3 vN; varying vec3 vP; varying vec3 vO;
+        void main(){ vO = position; vec4 w = modelMatrix * vec4(position, 1.0); vP = w.xyz; vN = normalize(mat3(modelMatrix) * normal); gl_Position = projectionMatrix * viewMatrix * w; }`,
+      fragmentShader: `uniform samplerCube env; uniform float t; varying vec3 vN; varying vec3 vP; varying vec3 vO;
+        float h(vec3 p){ return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
+        float n3(vec3 p){ vec3 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
+          return mix(mix(mix(h(i), h(i+vec3(1,0,0)), f.x), mix(h(i+vec3(0,1,0)), h(i+vec3(1,1,0)), f.x), f.y),
+                     mix(mix(h(i+vec3(0,0,1)), h(i+vec3(1,0,1)), f.x), mix(h(i+vec3(0,1,1)), h(i+vec3(1,1,1)), f.x), f.y), f.z); }
+        float fbm(vec3 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 4; i++){ v += a * n3(p); p *= 2.07; a *= 0.5; } return v; }
+        // vetas: líneas paralelas en tres direcciones (como las de un octaedro), torcidas por ruido
+        float vetas(vec3 p){
+          float w = fbm(p * 2.5) * 2.0;
+          float a = abs(sin(dot(p, normalize(vec3(1.0, 1.0, 0.2))) * 34.0 + w * 6.0));
+          float b = abs(sin(dot(p, normalize(vec3(-1.0, 0.6, 0.5))) * 29.0 + w * 5.0));
+          float c = abs(sin(dot(p, normalize(vec3(0.2, -1.0, 1.0))) * 41.0 + w * 7.0));
+          return pow(1.0 - min(a, min(b, c)), 9.0) * smoothstep(0.35, 0.75, fbm(p * 1.3 + 4.0));
+        }
+        void main(){
+          vec3 n = normalize(gl_FrontFacing ? vN : -vN);
+          // superficie esmerilada: pequeños golpes y las vetas en relieve
+          vec3 e = vec3(0.02, 0.0, 0.0);
+          vec3 g = vec3(fbm(vO * 9.0 + e.xyy) - fbm(vO * 9.0 - e.xyy), fbm(vO * 9.0 + e.yxy) - fbm(vO * 9.0 - e.yxy), fbm(vO * 9.0 + e.yyx) - fbm(vO * 9.0 - e.yyx));
+          float vs = vetas(vO);
+          n = normalize(n + g * 2.2 + n * vs * 0.0 + (vec3(h(floor(vO * 40.0))) - 0.5) * 0.06);
+          vec3 v = normalize(vP - cameraPosition);
+          float cosv = clamp(dot(-v, n), 0.0, 1.0);
+          float fres = 0.10 + 0.90 * pow(1.0 - cosv, 3.0);
+          // por dentro: refracción con poco fuego y un rebote interno
+          vec3 dentro;
+          for (int k = 0; k < 3; k++){
+            float ior = 2.40 + float(k) * 0.02;
+            vec3 r = refract(v, n, 1.0 / ior);
+            vec3 r2 = reflect(r, normalize(-n + (vec3(n3(vO * 3.0 + float(k)), n3(vO * 3.0 + 7.0), n3(vO * 3.0 + 13.0)) - 0.5) * 1.4));
+            vec3 c = textureCube(env, r2).rgb;
+            dentro[k] = k == 0 ? c.r : (k == 1 ? c.g : c.b);
+          }
+          float gris = dot(dentro, vec3(0.333));
+          dentro = mix(vec3(gris), dentro, 0.35);                  // casi incoloro: el diamante en bruto es blanco plateado
+          // vetas blancas por dentro, vistas a través del cristal
+          vec3 rr = refract(v, n, 1.0 / 2.42);
+          float interior = vetas(vO * 0.9 + rr * 0.35) * 1.4 + smoothstep(0.62, 0.9, fbm(vO * 3.0 + rr)) * 0.35;
+          vec3 refl = textureCube(env, reflect(v, n)).rgb;
+          refl = mix(vec3(dot(refl, vec3(0.333))), refl, 0.55);   // reflejos un poco menos de color
+          vec3 c = mix(dentro, refl, fres);
+          c += vec3(0.95, 0.98, 1.0) * (interior + vs * 0.9);       // vetas y escarcha que se iluminan
+          c = mix(c, vec3(0.86, 0.9, 0.94), 0.12);                  // un poco lechoso
+          c = pow(c, vec3(1.18)) * 1.25;
+          gl_FragColor = vec4(c, 1.0);
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+        }`
+    });
+  }
+
+  const camara = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+  camara.position.set(0, 0, 9);
+
+  // ---- fondo: cáusticas claras en blanco glaciar, plata, menta y azul ártico ----
+  const fondoMat = new THREE.ShaderMaterial({
+    uniforms: { t: { value: 0 }, m: { value: new THREE.Vector2(0.5, 0.5) }, asp: { value: 1 } },
+    vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader: `
+      varying vec2 vUv; uniform float t; uniform vec2 m; uniform float asp;
+      float causticas(vec2 uv, float tt){
+        vec2 p = mod(uv * 6.2831 * 1.6, 6.2831) - 250.0; vec2 i = p; float c = 1.0; float fuerza = 0.0045;
+        for (int n = 0; n < 5; n++){
+          float k = tt * (1.0 - (3.5 / float(n + 1)));
+          i = p + vec2(cos(k - i.x) + sin(k + i.y), sin(k - i.y) + cos(k + i.x));
+          c += 1.0 / length(vec2(p.x / (sin(i.x + k) / fuerza), p.y / (cos(i.y + k) / fuerza)));
+        }
+        c /= 5.0; c = 1.17 - pow(c, 1.4); return pow(abs(c), 7.0);
+      }
+      void main(){
+        vec2 uv = vUv; uv.x *= asp; uv += (m - 0.5) * 0.05;
+        float tt = t * 0.32;
+        float r = causticas(uv + vec2(0.004, 0.0), tt);
+        float g = causticas(uv, tt);
+        float b = causticas(uv - vec2(0.004, 0.0), tt);
+        vec3 base = mix(vec3(0.85,0.90,0.94), vec3(0.94,0.96,0.98), vUv.y);
+        base = mix(base, vec3(0.70,0.89,0.86), smoothstep(0.55, 1.0, sin(vUv.x * 2.2 + t * 0.05) * 0.5 + 0.5) * 0.22);
+        vec3 luz = vec3(r * 0.95, g, b * 1.08);
+        vec3 col = base + luz * vec3(0.55, 0.62, 0.72);
+        col = mix(col, vec3(0.39,0.71,1.0), b * 0.12);
+        gl_FragColor = vec4(col, 1.0);
+      }`
+  });
+  const fondo = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), fondoMat);
+  fondo.position.z = -6; escena.add(fondo);
+
+  // ---- el diamante en bruto: un cristal irregular de caras grandes (envolvente de puntos al azar) ----
+  let semilla = 23; const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
+  function cristalBruto(n, alto, ancho, irregular) {
+    const puntos = [];
+    // dos puntas (arriba y abajo) y una cintura de puntos movidos: forma de diamante sin tallar
+    puntos.push(new THREE.Vector3((azar() - 0.5) * 0.2, alto, (azar() - 0.5) * 0.2));
+    puntos.push(new THREE.Vector3((azar() - 0.5) * 0.2, -alto * 0.95, (azar() - 0.5) * 0.2));
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + azar() * 0.6, y = (azar() - 0.5) * alto * 1.3;
+      const r = ancho * (1 - Math.pow(Math.abs(y) / alto, 1.6) * 0.75) * (1 - irregular / 2 + azar() * irregular);
+      puntos.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r));
+    }
+    return new ConvexGeometry(puntos);
+  }
+  const grupo = new THREE.Group(); escena.add(grupo);
+  const hielo = new THREE.MeshPhysicalMaterial({
+    color: 0xeef8ff, metalness: 0, roughness: 0.05, transmission: 0.96, thickness: 2.4, ior: 1.6,
+    attenuationColor: new THREE.Color(0x6fc3f7), attenuationDistance: 1.4,
+    clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.5, specularIntensity: 1,
+    sheen: 0.4, sheenColor: new THREE.Color(0xb2e4db), sheenRoughness: 0.3,
+    iridescence: 1, iridescenceIOR: 1.55, iridescenceThicknessRange: [150, 700], flatShading: true,
+  });
+  function octaedroBruto(tam, irregular) {
+    const g = new THREE.IcosahedronGeometry(1, 5), p = g.attributes.position, v = new THREE.Vector3();
+    const sesgo = new THREE.Vector3(azar() - 0.5, azar() - 0.5, azar() - 0.5).multiplyScalar(0.25);
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i).normalize();
+      const octa = v.clone().divideScalar(Math.abs(v.x) + Math.abs(v.y) + Math.abs(v.z));   // punto sobre un octaedro
+      const forma = octa.multiplyScalar(1.55).lerp(v, 0.42);                                 // esquinas redondeadas
+      const bulto = 1 + (Math.sin(v.x * 5.1 + 1.7) * Math.sin(v.y * 4.3 + 0.4) * Math.sin(v.z * 3.7 + 2.2)) * irregular;
+      forma.multiplyScalar(bulto).add(sesgo.clone().multiplyScalar(v.y));
+      forma.y *= 1.08;
+      p.setXYZ(i, forma.x * tam, forma.y * tam, forma.z * tam);
+    }
+    g.computeVertexNormals();
+    return g;
+  }
+  const matDiamante = materialDiamante();
+  const diamante = new THREE.Mesh(octaedroBruto(1.05, 0.08), matDiamante);
+  grupo.add(diamante);
+
+  // destellos: estrellitas que parpadean sobre las caras
+  const estrella = (() => {
+    const c = document.createElement('canvas'); c.width = c.height = 64; const x = c.getContext('2d');
+    const g = x.createRadialGradient(32, 32, 0, 32, 32, 32); g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.15, 'rgba(220,240,255,.9)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+    x.fillStyle = 'rgba(255,255,255,.95)'; x.fillRect(31, 2, 2, 60); x.fillRect(2, 31, 60, 2);
+    return new THREE.CanvasTexture(c);
+  })();
+  const pos = diamante.geometry.attributes.position, nDest = 14, dest = [];
+  for (let i = 0; i < nDest; i++) {
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: estrella, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+    const k = Math.floor(azar() * pos.count);
+    sp.position.fromBufferAttribute(pos, k).multiplyScalar(1.01);
+    sp.userData = { f: azar() * 6.28, v: 1.2 + azar() * 2.2, s: 0.12 + azar() * 0.16 };
+    diamante.add(sp); dest.push(sp);
+  }
+
+  // astillas en bruto orbitando
+  const astillas = [];
+  // Cada astilla tiene su carril (distancia propia), su inclinación y su velocidad. Además, en cada
+  // cuadro se separan si se acercan entre ellas o al diamante grande: nunca se tocan.
+  diamante.geometry.computeBoundingSphere();
+  const radioGrande = diamante.geometry.boundingSphere.radius;
+  const carriles = [0, 3, 1, 5, 2, 6, 4];
+  for (let i = 0; i < 7; i++) {
+    const a = new THREE.Mesh(octaedroBruto(0.17 + azar() * 0.07, 0.14), matDiamante);
+    a.geometry.computeBoundingSphere();
+    a.userData = {
+      radio: a.geometry.boundingSphere.radius, carril: carriles[i],
+      v: (0.16 + azar() * 0.12) * (i % 2 ? 1 : -1), f: (i / 7) * Math.PI * 2 + azar() * 0.4,
+      inclina: new THREE.Euler((azar() - 0.5) * 1.1, 0, (azar() - 0.5) * 0.9), giro: (azar() - 0.5) * 2,
+    };
+    a.position.set(99, 99, 0);
+    astillas.push(a); escena.add(a);
+  }
+  const meta = new THREE.Vector3(), dif = new THREE.Vector3();
+
+  // ---- la rotura: al bajar, el diamante grande se rompe en pedazos que se reparten por toda la web ----
+  const pedazos = [];
+  const nPedazos = innerWidth < 760 ? 10 : 20;
+  for (let i = 0; i < nPedazos; i++) {
+    const pz = new THREE.Mesh(octaedroBruto(0.16 + azar() * 0.2, 0.18), matDiamante);
+    pz.geometry.computeBoundingSphere();
+    // dónde estaba dentro del diamante (para que al romperse salgan del mismo lugar)
+    const u = azar() * 2 - 1, th = azar() * Math.PI * 2, rr = Math.cbrt(azar()) * radioGrande * 0.6;
+    const dentro = new THREE.Vector3(Math.sqrt(1 - u * u) * Math.cos(th), u, Math.sqrt(1 - u * u) * Math.sin(th)).multiplyScalar(rr);
+    // a dónde va: una rejilla movida al azar, para que queden repartidos y no amontonados
+    const cols = innerWidth < 760 ? 3 : 5;
+    const col = i % cols, fila = Math.floor(i / cols), filas = Math.ceil(nPedazos / cols);
+    pz.userData = {
+      radio: pz.geometry.boundingSphere.radius, dentro,
+      sx: ((col + 0.5) / cols) * 2 - 1 + (azar() - 0.5) * 0.25, sy: ((fila + 0.5) / filas) * 2 - 1 + (azar() - 0.5) * 0.25,
+      z: -3.2 + azar() * 3.6, deriva: 0.5 + azar() * 0.9, giro: new THREE.Vector3(azar() - 0.5, azar() - 0.5, azar() - 0.5).multiplyScalar(2),
+      rot: new THREE.Euler(azar() * 6, azar() * 6, azar() * 6),
+    };
+    pz.visible = false; pedazos.push(pz); escena.add(pz);
+  }
+  // destello de la rotura: chispas que salen del centro y se apagan
+  const chispas = [];
+  for (let i = 0; i < 18; i++) {
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: estrella, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 }));
+    sp.userData = { dir: new THREE.Vector3(azar() - 0.5, azar() - 0.5, azar() - 0.5).normalize(), v: 1.5 + azar() * 2.5 };
+    chispas.push(sp); escena.add(sp);
+  }
+  // textos que los pedazos deben esquivar (títulos y párrafos sueltos; las tarjetas de vidrio no, detrás se ven bonitos)
+  const textos = [...document.querySelectorAll('h1, h2, .portada p, .botones, .seccion .entrada')];
+  const cajas = [];
+  function medirTextos() {
+    cajas.length = 0;
+    textos.forEach(el => {
+      // el ancho real de las letras, no el de la caja
+      const rango = document.createRange(); rango.selectNodeContents(el);
+      const r = rango.getBoundingClientRect();
+      if (r.bottom > -50 && r.top < innerHeight + 50) cajas.push({ l: r.left - 14, r: r.right + 14, t: r.top - 12, b: r.bottom + 12 });
+    });
+  }
+  const esquiva = new THREE.Vector3();
+  function esquivarTexto(pz, prof) {
+    // posición en pantalla (px) y radio en px del pedazo
+    esquiva.copy(pz.position).project(camara);
+    const px = (esquiva.x + 1) / 2 * innerWidth, py = (1 - esquiva.y) / 2 * innerHeight;
+    const pxPorUnidad = innerWidth / (2 * borde.medioAncho * prof);
+    const rp = pz.userData.radio * pz.scale.x * pxPorUnidad * 1.1;
+    let mx2 = 0, my2 = 0;
+    for (const c of cajas) {
+      if (px + rp > c.l && px - rp < c.r && py + rp > c.t && py - rp < c.b) {
+        // la salida más corta que quepa en la pantalla: izquierda, derecha, arriba o abajo
+        const salidas = [];
+        if (c.l - rp * 2 > 0) salidas.push([(c.l - rp) - px, 0]);
+        if (c.r + rp * 2 < innerWidth) salidas.push([(c.r + rp) - px, 0]);
+        salidas.push([0, (c.t - rp) - py]); salidas.push([0, (c.b + rp) - py]);
+        salidas.sort((a, b) => Math.hypot(a[0], a[1]) - Math.hypot(b[0], b[1]));
+        [mx2, my2] = salidas[0];
+        break;
+      }
+    }
+    const u = pz.userData;
+    u.esqX = (u.esqX || 0) + (mx2 / pxPorUnidad - (u.esqX || 0)) * 0.12;
+    u.esqY = (u.esqY || 0) + (-my2 / pxPorUnidad - (u.esqY || 0)) * 0.12;
+    pz.position.x += u.esqX; pz.position.y += u.esqY;
+  }
+  const suave = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+  const tmp = new THREE.Vector3();
+  // dónde están el título y la barra, pasado a coordenadas 3D (plano z = 0)
+  const borde = { medioAncho: 4, medioAlto: 2.5, textoDer: 0, textoArriba: -1, techo: 2 };
+  const titulo = document.querySelector('h1'), barra = document.querySelector('.barra');
+  function medirBordes() {
+    borde.medioAlto = Math.tan(THREE.MathUtils.degToRad(camara.fov / 2)) * camara.position.z;
+    borde.medioAncho = borde.medioAlto * camara.aspect;
+    const t = titulo.getBoundingClientRect(), b = barra.getBoundingClientRect();
+    borde.textoDer = (t.right / innerWidth * 2 - 1) * borde.medioAncho;
+    borde.textoArriba = -(t.top / innerHeight * 2 - 1) * borde.medioAlto;
+    borde.techo = -((b.bottom + 34) / innerHeight * 2 - 1) * borde.medioAlto;
+  }
+  const luz1 = new THREE.DirectionalLight(0xffffff, 1.4); luz1.position.set(3, 4, 5); escena.add(luz1);
+
+  function medir() {
+    const w = innerWidth, h = innerHeight;
+    render.setSize(w, h, false); camara.aspect = w / h; camara.updateProjectionMatrix();
+    // el fondo llena justo la vista de la cámara
+    const alto = 2 * Math.tan(THREE.MathUtils.degToRad(camara.fov / 2)) * (camara.position.z - fondo.position.z);
+    fondo.scale.set(alto * camara.aspect, alto, 1);
+    fondoMat.uniforms.asp.value = camara.aspect;
+
+  }
+  medir(); addEventListener('resize', medir);
+
+  let mx = 0.5, my = 0.5, tx = 0.5, ty = 0.5;
+  const incl = new THREE.Vector2(), vel = new THREE.Vector2();
+  addEventListener('pointermove', e => { tx = e.clientX / innerWidth; ty = 1 - e.clientY / innerHeight; });
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reloj = new THREE.Clock();
+  render.setAnimationLoop(() => {
+    const t = quieto ? 8 : reloj.getElapsedTime();
+    mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+    fondoMat.uniforms.t.value = t; fondoMat.uniforms.m.value.set(mx, my);
+    // el diamante sigue el dedo con un resorte (se pasa un poco y regresa), respira y se bambolea
+    vel.x += ((my - 0.5) * -0.9 - incl.x) * 0.02; vel.y += ((mx - 0.5) * 1.3 - incl.y) * 0.02;
+    vel.multiplyScalar(0.9); incl.add(vel);
+    grupo.rotation.y = t * 0.22 + incl.y;
+    grupo.rotation.x = 0.18 + Math.sin(t * 0.33) * 0.12 + incl.x;
+    grupo.rotation.z = Math.sin(t * 0.21) * 0.1;
+    const avance = Math.min(1, scrollY / innerHeight);
+    const movil = innerWidth < 760;
+    medirBordes();
+    const escalaBase = movil ? 0.56 : 0.74;
+    const respira = 1 + Math.sin(t * 1.1) * 0.015;
+    const escala = escalaBase * respira;
+    const ruptura = suave(0.05, 0.6, scrollY / innerHeight);         // 0 entero, 1 todo repartido
+    const rG = radioGrande * escala, hueco = movil ? 0.7 : 1.15;   // hueco: lo que ocupan las astillas alrededor
+    let x, y;
+    // en compu: arriba a la derecha, donde no hay texto (el título va abajo a la izquierda)
+    if (!movil) { x = Math.min(borde.medioAncho - rG - hueco * 0.8, 2.5); y = Math.min(borde.techo - rG - 0.35, Math.max(1.0, borde.textoArriba + rG + 0.2)); }
+    else { x = 0; y = (borde.techo + borde.textoArriba) / 2; }
+    grupo.position.set(x, y + Math.sin(t * 0.8) * 0.06, 0);
+    grupo.scale.setScalar(escala);
+    diamante.rotation.y += 0.0015;
+    diamante.visible = ruptura <= 0.001;
+    grupo.updateMatrixWorld();
+    dest.forEach(d => { const u = d.userData, b = Math.max(0, Math.sin(t * u.v + u.f)); d.material.opacity = Math.pow(b, 6); d.scale.setScalar(u.s * (0.4 + Math.pow(b, 3))); });
+    const rGrande = radioGrande * grupo.scale.x;
+    const centro = grupo.position;
+    astillas.forEach(a => {
+      const d = a.userData, ang = d.f + t * d.v;
+      const orbita = rGrande + d.radio + 0.24 + d.carril * 0.11;
+      meta.set(Math.cos(ang) * orbita, 0, Math.sin(ang) * orbita).applyEuler(d.inclina);
+      meta.x *= 0.78;                                   // órbita un poco aplastada: no se va encima del texto
+      meta.add(centro);
+      if (a.position.x > 50) a.position.copy(meta); else a.position.lerp(meta, 0.08);
+      a.rotation.set(t * 0.5 * d.giro + d.f, t * 0.4, t * 0.2 * d.giro);
+    });
+    // límites: nada encima del título ni de la barra, y nada cortado por la orilla de la pantalla
+    astillas.forEach(a => {
+      const r = a.userData.radio;
+      if (!movil) { if (a.position.y - r < borde.textoArriba) a.position.x = Math.max(a.position.x, borde.textoDer + r + 0.15); }
+      else a.position.y = Math.max(a.position.y, borde.textoArriba + r + 0.25);
+      const m = r * 1.5 + 0.12;   // con margen: las que vienen hacia el frente se ven más grandes
+      a.position.x = Math.min(Math.max(a.position.x, -borde.medioAncho + m), borde.medioAncho - m);
+      a.position.y = Math.min(a.position.y, borde.techo - m);
+    });
+    // separación: tres pasadas para que nada se toque (y al final, que ninguna quede cortada)
+    for (let paso = 0; paso < 3; paso++) {
+      for (let i = 0; i < astillas.length; i++) {
+        const a = astillas[i], ra = a.userData.radio;
+        dif.subVectors(a.position, centro); let dist = dif.length(), minimo = rGrande + ra + 0.12;
+        if (dist < minimo) a.position.copy(centro).addScaledVector(dif.normalize(), minimo);
+        for (let j = i + 1; j < astillas.length; j++) {
+          const b = astillas[j], rb = b.userData.radio;
+          dif.subVectors(a.position, b.position); dist = dif.length(); minimo = ra + rb + 0.1;
+          if (dist < minimo && dist > 1e-4) { dif.multiplyScalar((minimo - dist) / dist * 0.5); a.position.add(dif); b.position.sub(dif); }
+        }
+      }
+    }
+    astillas.forEach(a => {
+      const prof = (camara.position.z - a.position.z) / camara.position.z;      // 1 en z=0; menos si está más cerca
+      const ancho = borde.medioAncho * prof, alto = borde.medioAlto * prof, m = a.userData.radio * 1.15 + 0.1;
+      a.position.x = Math.min(Math.max(a.position.x, -ancho + m), ancho - m);
+      a.position.y = Math.min(a.position.y, Math.min(borde.techo * prof, alto) - m);
+      if (!movil) { if (a.position.y - m < borde.textoArriba * prof) a.position.x = Math.max(a.position.x, borde.textoDer * prof + m); }
+      else a.position.y = Math.max(a.position.y, borde.textoArriba * prof + m);
+    });
+    // pedazos y astillas: salen del diamante y se reparten; después flotan y suben despacio al bajar
+    const e = ruptura * ruptura * (3 - 2 * ruptura);
+    const despues = Math.max(0, scrollY - innerHeight * 0.6);
+    if (ruptura > 0.001) medirTextos();
+    pedazos.forEach(pz => {
+      const d = pz.userData;
+      pz.visible = ruptura > 0.001;
+      if (!pz.visible) return;
+      tmp.copy(d.dentro).applyMatrix4(grupo.matrixWorld);           // dónde estaba
+      const prof = (camara.position.z - d.z) / camara.position.z;
+      const altoTotal = borde.medioAlto * prof * 2 + 1.2;
+      let yd = d.sy * borde.medioAlto * prof * 0.86 + despues * 0.0016 * d.deriva + Math.sin(t * 0.5 + d.sx * 4) * 0.08;
+      yd = ((yd + altoTotal / 2) % altoTotal + altoTotal) % altoTotal - altoTotal / 2;   // al salir por arriba, entra por abajo
+      meta.set(d.sx * borde.medioAncho * prof * 0.88 + Math.cos(t * 0.4 + d.sy * 3) * 0.08, yd, d.z);
+      pz.position.lerpVectors(tmp, meta, e);
+      pz.scale.setScalar((0.6 + 0.4 * e) * (movil ? 0.72 : 1));
+      pz.userData.prof = prof;
+      pz.rotation.set(d.rot.x + t * d.giro.x * (0.3 + (1 - e) * 2), d.rot.y + t * d.giro.y * (0.3 + (1 - e) * 2), d.rot.z + t * d.giro.z * 0.3);
+    });
+    // las astillas que orbitaban también se van a repartir
+    if (ruptura > 0.001) astillas.forEach((a, i) => {
+      const prof = (camara.position.z - a.position.z) / camara.position.z;
+      const sx = [0.82, -0.85, 0.15, -0.3, 0.6, -0.6, 0.95][i], sy = [-0.75, 0.7, -0.2, -0.85, 0.35, 0.05, 0.6][i];
+      meta.set(sx * borde.medioAncho * prof * 0.9, sy * borde.medioAlto * prof * 0.85 + despues * 0.0012, a.position.z);
+      a.position.lerp(meta, e);
+      a.userData.prof = prof;
+    });
+    if (ruptura > 0.001) {
+      const todos = pedazos.concat(astillas);
+      for (let paso = 0; paso < 3; paso++) for (let i = 0; i < todos.length; i++) for (let j = i + 1; j < todos.length; j++) {
+        const a = todos[i], b = todos[j];
+        const minimo = (a.userData.radio * a.scale.x + b.userData.radio * b.scale.x) + 0.08;
+        dif.subVectors(a.position, b.position); const dist = dif.length();
+        if (dist < minimo && dist > 1e-4) { dif.multiplyScalar((minimo - dist) / dist * 0.5); a.position.add(dif); b.position.sub(dif); }
+      }
+      if (e > 0.05) todos.forEach(x => esquivarTexto(x, x.userData.prof || 1));
+    }
+    // chispas de la rotura
+    chispas.forEach(c => {
+      const k = suave(0.0, 0.35, ruptura);
+      c.position.copy(grupo.position).addScaledVector(c.userData.dir, k * c.userData.v);
+      c.material.opacity = ruptura > 0.001 ? Math.sin(Math.min(1, k) * Math.PI) * 0.9 : 0;
+      c.scale.setScalar(0.25 + k * 0.4);
+    });
+    render.render(escena, camara);
+  });
+</script>
+</body>
+</html>
