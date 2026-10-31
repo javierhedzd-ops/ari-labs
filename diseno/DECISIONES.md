@@ -84,3 +84,7 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   lo que hacían: guiso del día, cuenta de la barbería, cita armada para WhatsApp. Capturas nuevas en img/modelo-*.webp.
 - **Regla (31/10): la paleta de colores siempre la escoge Javi.** Antes de usar colores nuevos, enseñarle varias
   opciones (página de muestras) y preguntarle con botones. Muestras de esta vuelta: https://claude.ai/artifact/CSyFZQUVWcjZgxcTtbbyDD
+- **Regla (31/10): perfeccionismo, todos los detalles cuentan.** Javi notó la batería falsa del teléfono. Antes de
+  entregar, revisar con lupa: íconos reales (barra de estado con señal, wifi, batería con nivel y cámara), colores
+  solo de la paleta escogida, y que los datos cuadren entre sí (la hora del reloj con "tu próxima cita en...", lo que
+  falta cobrar en la lista y en el detalle, saludo según la hora).

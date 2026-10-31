@@ -26,14 +26,15 @@
   *{box-sizing:border-box;margin:0}
   html,body{width:360px;height:760px;overflow:hidden}
   body{font:400 14px/1.4 "Inter Tight",system-ui,sans-serif;color:var(--tinta);-webkit-font-smoothing:antialiased;
-    background:radial-gradient(90% 40% at 85% 0%,rgba(201,139,220,.32),transparent 70%),radial-gradient(70% 40% at 0% 60%,rgba(100,182,255,.16),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
-  .oscuro body,body.oscuro{background:radial-gradient(90% 40% at 85% 0%,rgba(138,63,158,.38),transparent 70%),radial-gradient(70% 40% at 0% 70%,rgba(100,182,255,.1),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
+    background:radial-gradient(90% 40% at 85% 0%,rgba(201,139,220,.32),transparent 70%),radial-gradient(70% 40% at 0% 60%,rgba(236,172,206,.16),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
+  .oscuro body,body.oscuro{background:radial-gradient(90% 40% at 85% 0%,rgba(138,63,158,.38),transparent 70%),radial-gradient(70% 40% at 0% 70%,rgba(236,172,206,.1),transparent 70%),linear-gradient(180deg,var(--fondo2),var(--fondo))}
   .pantalla{position:relative;height:760px;padding:0 18px;display:flex;flex-direction:column;gap:14px}
-  .estado{display:flex;justify-content:space-between;align-items:center;height:38px;padding:0 8px;font-weight:600;font-size:13px}
-  .estado i{display:inline-flex;gap:5px;align-items:center}
-  .estado i b{display:block;width:15px;height:9px;border-radius:2px;background:currentColor;opacity:.85}
-  .estado i s{display:block;width:22px;height:11px;border-radius:3px;box-shadow:inset 0 0 0 1.5px currentColor;position:relative}
-  .estado i s::after{content:"";position:absolute;inset:2.5px 6px 2.5px 2.5px;border-radius:1.5px;background:currentColor}
+  /* barra de estado como la de un teléfono real: hora, cámara frontal al centro, señal, wifi y batería con su nivel */
+  .estado{position:relative;display:flex;justify-content:space-between;align-items:center;height:40px;padding:0 6px 0 10px;font-weight:600;font-size:13.5px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .estado .camara{position:absolute;left:50%;top:9px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#3a3f55 0,#0b0c10 55%);box-shadow:0 0 0 1.5px rgba(0,0,0,.85)}
+  .estado .iconos{display:inline-flex;align-items:center;gap:6px}
+  .estado svg{display:block;height:12px;width:auto}
+  .estado .pct{font-size:12px;font-weight:600;margin-right:-1px}
   .vidrio{background:linear-gradient(135deg,var(--vidrio),var(--vidrio2));border-radius:24px;
     box-shadow:inset 0 0 0 1px var(--linea),inset 0 1px 0 rgba(255,255,255,.6),var(--sombra);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
   .oscuro .vidrio{box-shadow:inset 0 0 0 1px var(--linea),inset 0 1px 0 rgba(255,255,255,.08),var(--sombra)}
@@ -73,7 +74,7 @@
   .cita .h{width:44px;flex:none;font-weight:600;font-size:15px;letter-spacing:-.02em;line-height:1.1}
   .cita .h small{display:block;font-weight:500;font-size:11px;color:var(--suave)}
   .cita .barra{width:3px;align-self:stretch;border-radius:3px;background:linear-gradient(180deg,var(--esmeralda2),var(--esmeralda))}
-  .cita .barra.az{background:linear-gradient(180deg,#9fd3ff,#64b6ff)}
+  .cita .barra.az{background:linear-gradient(180deg,#f1dcf8,#d4a3e4)}
   .cita b{display:block;font-weight:600;font-size:14.5px;letter-spacing:-.015em}
   .chips{display:flex;gap:5px;margin:5px 0 4px}
   .chip{font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--chip);color:var(--chip-t)}
@@ -132,7 +133,13 @@
     reloj:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>', flecha:'<path d="M5 12h14M13 6l6 6-6 6"/>'
   };
   const ic = (n, w = 1.9) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
-  const estado = `<div class="estado"><span>9:41</span><i><b></b><s></s></i></div>`;
+  const hora = p === 'oscuro' ? '5:10' : '9:41';   // la hora cuadra con "tu próxima cita en..."
+  const estado = `<div class="estado"><span>${hora}</span><span class="camara" aria-hidden="true"></span><span class="iconos">
+    <svg viewBox="0 0 17 12" aria-hidden="true"><rect x="0" y="8.5" width="3" height="3.5" rx=".8" fill="currentColor"/><rect x="4.6" y="6" width="3" height="6" rx=".8" fill="currentColor"/><rect x="9.2" y="3" width="3" height="9" rx=".8" fill="currentColor"/><rect x="13.8" y="0" width="3" height="12" rx=".8" fill="currentColor" opacity=".3"/></svg>
+    <svg viewBox="0 0 16 12" aria-hidden="true"><path d="M8 11.6 5.6 9.2a3.4 3.4 0 0 1 4.8 0z" fill="currentColor"/><path d="M3.7 7.3a6.1 6.1 0 0 1 8.6 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M1.2 4.6a9.6 9.6 0 0 1 13.6 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    <span class="pct">78%</span>
+    <svg viewBox="0 0 26 12" aria-hidden="true"><rect x=".75" y=".75" width="21.5" height="10.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".45"/><rect x="2.6" y="2.6" width="13.6" height="6.8" rx="1.6" fill="currentColor"/><path d="M23.8 4.2v3.6a1.9 1.9 0 0 0 0-3.6z" fill="currentColor" opacity=".45"/></svg>
+  </span></div>`;
   const menu = `<nav class="menu vidrio">${[['agenda','Agenda',1],['cal','Calendario'],['nota','Música'],['gente','Clientes'],['cobro','Cobros']].map(([i,t,s])=>`<span class="${s?'si':''}">${ic(i)}${t}</span>`).join('')}</nav>`;
   const semana = (hoy) => `<div class="semana vidrio">${[['D',25],['L',26],['M',27],['M',28],['J',29],['V',30],['S',31]].map(([d,n],k)=>`<div class="dia ${n===hoy?'hoy':''}">${d}<b>${n}</b>${[0,2,4,6].includes(k)?'<i></i>':'<i style="opacity:0"></i>'}</div>`).join('')}</div>`;
   const cita = (h, m, quien, chips, lugar, az) => `<div class="cita vidrio"><div class="h">${h}<small>${m}</small></div><div class="barra ${az?'az':''}"></div><div><b>${quien}</b><div class="chips">${chips}</div><div class="lugar">${lugar}</div></div></div>`;
@@ -151,7 +158,7 @@
     html = `${estado}
     <div class="arriba" style="align-items:flex-end"><div><div class="ceja">${oscuro ? 'Jueves 29 de octubre' : 'Sábado 31 de octubre'}</div><h1 style="margin-top:6px">${oscuro ? 'Buenas tardes,<br>Javier' : 'Buenos días,<br>Javier'}</h1></div>
       <span class="pildora principal" style="height:44px">Nueva<span class="circ" style="width:34px;height:34px">${ic('mas',2.2)}</span></span></div>
-    <div class="proxima"><span class="cuenta">${oscuro ? 'Tu próxima cita · en 1 h 20 min' : 'Tu próxima cita · en 2 h 15 min'}</span>
+    <div class="proxima"><span class="cuenta">${oscuro ? 'Tu próxima cita · en 1 h 20 min' : 'Tu próxima cita · en 19 min'}</span>
       <div class="hora">${oscuro ? '6:30 de la tarde' : '10:00 de la mañana'}</div>
       <div class="quien">${oscuro ? 'Boda · familia Pech Uc' : 'Rezo · don Pedro Canché'}</div><div class="donde">${oscuro ? 'Hacienda Xcanatún, carretera a Progreso' : 'Calle 60 por 45, Centro'}</div>
       <div class="fila"><span class="pildora principal">Cómo llegar<span class="circ">${ic('ruta')}</span></span><span class="pildora cristal">Avisar<span class="circ">${ic('campana')}</span></span></div></div>
@@ -159,7 +166,7 @@
     <div class="titulo-lista"><h2>${oscuro ? 'Jueves' : 'Hoy'}</h2><div class="seg vidrio"><span class="si">Por hora</span><span>Por zona</span></div></div>
     ${oscuro
       ? cita('6:30','p. m.','familia Pech Uc','<span class="chip">Boda</span><span class="chip debe">Falta $1,500</span>','Xcanatún') + cita('9:00','p. m.','Karla Euán','<span class="chip">XV años</span>','García Ginerés', true)
-      : cita('10:00','a. m.','don Pedro Canché','<span class="chip">Rezo</span><span class="chip debe">Falta $300</span>','Centro') + cita('3:00','p. m.','doña Mari Pech','<span class="chip">Novena</span>','Chuburná', true)}
+      : cita('10:00','a. m.','don Pedro Canché','<span class="chip">Rezo</span><span class="chip debe">Falta $300</span>','Centro') + cita('3:00','p. m.','doña Mari Pech','<span class="chip">Novena</span><span class="chip debe">Falta $400</span>','Chuburná', true)}
     ${menu}`;
   }
   document.body.innerHTML = `<div class="pantalla">${html}</div>`;
