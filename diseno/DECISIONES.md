@@ -106,3 +106,8 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   **grafito y plata** (Big Shoulders) y consultorio cálido (Instrument Serif).
 - (31/10) Restaurante: estilo **cocina de autor** (Cormorant Garamond, noche cálida con barro). Heladería: el cono va
   **color galleta** (excepción a la paleta, la pidió Javi). Los cuatro juntos: https://claude.ai/artifact/Lf8CGYgXXXPo2sr6TG6F2Q
+- (31/10) **Los 4 modelos construidos completos**, cada uno con su estilo propio: modelos/heladeria (alegre), modelos/restaurante
+  (cocina de autor), modelos/barberia (clásica, grafito y plata), modelos/consultorio (cuidado cálido). Comparten solo
+  `modelos/acabado.js` (barra al bajar y piezas que aparecen). Se revisó cada uno en 320/390/1440: sin desborde, toques
+  de 44 px, nada encimado, y datos que cuadran (horarios con días y horas, sumas, mensajes de WhatsApp).
+- Pendiente de confirmar con Javi: los puntitos de sabores de la heladería usan el color natural de cada sabor (como el cono).

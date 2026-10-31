@@ -10,6 +10,7 @@ const trabajos = [
   ['mis-citas.html?p=oscuro', 'img/citas-agenda'],
   ['mis-citas.html?p=detalle', 'img/citas-detalle'],
   // los modelos: su portada en un teléfono (360x701 a escala 1.5 = 540x1052)
+  ['../../modelos/heladeria/', 'img/modelo-heladeria', 701],
   ['../../modelos/restaurante/', 'img/modelo-restaurante', 701],
   ['../../modelos/barberia/', 'img/modelo-barberia', 701],
   ['../../modelos/consultorio/', 'img/modelo-consultorio', 701],
