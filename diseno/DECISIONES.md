@@ -41,3 +41,20 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
 - Respuestas de Javi: sin precios; en Contacto solo el botón de WhatsApp; el hielo NO se vuelve a armar al final;
   SÍ bienvenida al abrir (los pedacitos se juntan y forman el hielo, 1 s); se agrega Preguntas frecuentes.
 - Javi solo usa teléfono: preguntas con botones en el chat, nada de comentar documentos.
+
+## Web completa construida (31/10)
+- La web nueva está en la raíz: `index.html` (secciones y estilo), `hielo.js` (el hielo 3D, módulo) y `web.js`
+  (Lenis + GSAP: títulos palabra por palabra, Trabajos fija con el teléfono girando, Modelos de lado, línea de luz,
+  preguntas, botón flotante). three.js vive en `vendor/three/`. Se quitaron `fondo.js` y `movimiento.js` (la web oscura).
+- Orden: Portada · Qué hacemos · Trabajo reciente (Mis citas) · Modelos · Cómo trabajamos · Preguntas frecuentes · Contacto y pie.
+- Hielo: bienvenida al abrir (los pedazos vuelan al centro y lo forman en 1 s, con un destello suave), explota al bajar
+  (4.5 s), los pedazos flotan, no chocan, esquivan lo marcado con `data-esquiva` y no se cortan en la orilla; se vuelve
+  a armar al regresar arriba (2.6 s). En Contacto no se arma (Javi).
+- Teléfono 3D hecho con CSS (capas apiladas = canto de vidrio). En compu la sección se queda fija ~70% de pantalla y
+  cambian las 3 pantallas; en teléfono gira poco y las pantallas se pasan con el dedo (con puntos).
+- Modelos: 3 placas + una cuarta "¿Ninguno es lo tuyo?" (desde cero) para que el paso de lado tenga recorrido.
+- Botón flotante de WhatsApp: aparece después de la portada, se aparta mientras se baja (para no tapar texto) y se
+  esconde al llegar a Contacto.
+- Respuestas de Preguntas frecuentes: borrador de Claude, Javi las corrige (sobre todo "¿Cómo se paga?" y tiempos).
+- Revisado: 320/390/768/1440 px sin desborde ni errores; sin WebGL y con "reducir movimiento" todo se ve; toques ≥ 44 px.
+- Pendiente: estilo claro en privacidad.html, terminos.html y 404.html (siguen oscuros); fotos reales en los modelos.

@@ -1,3 +1,4 @@
 Librerías servidas desde la propia web (sin CDN):
 - GSAP 3.12.5 y ScrollTrigger (licencia GreenSock, uso gratuito): https://gsap.com/licensing
 - Lenis 1.1.13 (MIT): https://github.com/darkroomengineering/lenis
+- three.js (MIT), solo el módulo principal, en vendor/three/: https://threejs.org

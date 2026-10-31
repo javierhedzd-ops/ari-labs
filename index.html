@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ari Labs · Páginas web y apps para negocios de Mérida</title>
-<meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios: de un modelo o desde cero, sin cuotas caras cada mes.">
-<meta name="theme-color" content="#081116">
-<meta name="color-scheme" content="dark">
+<meta name="description" content="Ari Labs es un estudio pequeño en Mérida, Yucatán. Hacemos páginas web y apps para negocios: de un modelo o desde cero, sin mensualidades caras.">
+<meta name="theme-color" content="#f8fafc">
+<meta name="color-scheme" content="light">
 <link rel="canonical" href="https://javierhedzd-ops.github.io/ari-labs/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -16,204 +16,431 @@
 <meta property="og:locale" content="es_MX">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="vendor/lenis.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="modulepreload" href="vendor/three/three.module.min.js">
 <style>
+  /* Sistema visual Frostline: claro y cristalino, Inter Tight, hielo como único objeto. */
   :root{
-    --noche:#081116; --tinta:#eef6f9; --suave:#c4d6dd; --hielo:#9ed8ee; --hielo-2:#def6fd;
-    --vidrio:rgba(10,22,30,.42); --vidrio-borde:rgba(222,246,253,.14);
-    --margen:clamp(18px,5vw,64px);
+    --glaciar:#f8fafc; --plata:#ced6e0; --acero:#5b6978; --artico:#64b6ff; --menta:#b2e4db; --noche:#2e2e3e;
+    --tinta:#1f2633; --suave:#4b5868; --azul-texto:#2563a8;
+    --margen:clamp(18px,5vw,64px); --entre:clamp(36px,6.5vw,90px);
+    --curva:cubic-bezier(.2,.9,.2,1);
   }
   *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%;background:var(--noche);overflow-x:hidden}
-  body{margin:0;color:var(--tinta);font:400 1.0625rem/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html{-webkit-text-size-adjust:100%;background:#e9eff4;scroll-padding-top:80px}
+  html.lenis,html.lenis body{height:auto}
+  .lenis.lenis-smooth{scroll-behavior:auto!important}
+  body{margin:0;color:var(--tinta);font:400 1.0625rem/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    /* sin 3D, este fondo queda solo: el mismo blanco glaciar con un poco de menta y azul */
+    background:radial-gradient(70% 50% at 80% 10%,rgba(100,182,255,.16),transparent 70%),radial-gradient(60% 50% at 10% 60%,rgba(178,228,219,.28),transparent 70%),linear-gradient(180deg,#eef3f7,#e4ebf1)}
+  ::selection{background:#cfe7ff;color:var(--noche)}
   a{color:inherit}
-  ::selection{background:var(--hielo);color:var(--noche)}
-  :focus-visible{outline:2px solid var(--hielo-2);outline-offset:4px}
+  :focus-visible{outline:2px solid var(--artico);outline-offset:4px;border-radius:8px}
+  img{max-width:100%;display:block}
+  #escena{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+  .sin3d #escena{display:none}
+  main,footer{position:relative;z-index:2}
+  .saltar{position:fixed;left:12px;top:-60px;z-index:50;background:var(--noche);color:#fff;padding:10px 16px;border-radius:999px;text-decoration:none}
+  .saltar:focus{top:12px}
 
-  /* el fondo vivo: WebGL detrás de todo. Sin WebGL queda el color de la noche con un brillo fijo */
-  #fondo{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;
-    background:radial-gradient(80% 60% at 70% 30%, #1d3a4a 0%, #0c1b24 45%, var(--noche) 100%)}
-  main, header, footer{position:relative;z-index:1}
+  /* ---------- barra de arriba ---------- */
+  .barra{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:max(12px,env(safe-area-inset-top)) var(--margen) 12px;transition:background .35s ease,box-shadow .35s ease}
+  .barra.vidrio{background:rgba(248,250,252,.66);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+    box-shadow:0 1px 0 rgba(255,255,255,.8),0 8px 24px -18px rgba(46,46,62,.35)}
+  .marca{font-weight:600;letter-spacing:-.01em;text-decoration:none;color:var(--noche);font-size:1.08rem;min-height:44px;display:inline-flex;align-items:center}
 
-  .barra{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;
-    padding:max(14px,env(safe-area-inset-top)) var(--margen) 14px}
-  .barra .marca{font-weight:600;font-size:1.05rem;text-decoration:none;letter-spacing:-.01em}
-  .barra nav{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--vidrio);border:1px solid var(--vidrio-borde);
-    -webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
-  .barra nav a{text-decoration:none;font-size:.92rem;font-weight:500;padding:.55rem .95rem;border-radius:999px;min-height:40px;display:inline-flex;align-items:center;transition:background .2s ease}
-  .barra nav a:hover{background:rgba(222,246,253,.1)}
-  .barra nav a.accion{background:var(--hielo);color:var(--noche)}
-  @media (max-width:560px){ .barra nav a:not(.accion){display:none} }
+  /* ---------- botones ---------- */
+  .boton{position:relative;isolation:isolate;overflow:hidden;min-height:56px;display:inline-flex;align-items:center;justify-content:space-between;gap:.75rem;
+    padding:0 .6rem 0 1.4rem;border-radius:999px;font-weight:600;font-size:1.02rem;letter-spacing:-.01em;text-decoration:none;border:0;font-family:inherit;cursor:pointer;
+    transition:transform .35s var(--curva),box-shadow .35s ease,background .3s ease;-webkit-tap-highlight-color:transparent}
+  .boton .icono{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;flex:none;transition:transform .45s var(--curva)}
+  .boton .icono svg{width:18px;height:18px}
+  .boton.principal{background:var(--noche);color:#f8fafc;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(46,46,62,.25),0 14px 30px -14px rgba(46,46,62,.55)}
+  .boton.principal .icono{background:linear-gradient(135deg,#9fd3ff,#64b6ff);color:#10243a}
+  .boton.secundario{background:rgba(255,255,255,.42);color:var(--tinta);box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(100,182,255,.18),0 10px 26px -18px rgba(46,46,62,.45);
+    -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%)}
+  .boton.secundario .icono{background:rgba(100,182,255,.16);color:var(--azul-texto)}
+  .boton::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.38) 48%,transparent 66%);transform:translateX(-120%)}
+  @media (hover:hover){
+    .boton:hover{transform:translateY(-2px)}
+    .boton.principal:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 4px rgba(46,46,62,.25),0 22px 40px -16px rgba(46,46,62,.6)}
+    .boton:hover::after{transform:translateX(120%);transition:transform .9s var(--curva)}
+    .boton:hover .icono{transform:translateX(3px) rotate(-8deg)}
+  }
+  .boton:active{transform:translateY(0) scale(.97);transition-duration:.12s}
+  .barra .boton{min-height:46px;font-size:.95rem;padding:0 .4rem 0 1.05rem;gap:.5rem}
+  .barra .boton .icono{width:34px;height:34px}
+  .botones{display:flex;gap:10px;flex-wrap:wrap}
 
-  /* ---------- portada ---------- */
-  .portada{position:relative;min-height:100svh;display:grid;align-content:end;padding:0 var(--margen) clamp(36px,9vh,96px)}
-  h1{font-weight:600;font-size:clamp(4.4rem,1.6rem + 15vw,15rem);line-height:.86;letter-spacing:-.065em;margin:0 0 .25em -0.04em}
-  .portada .lema{font-size:clamp(1.25rem,1rem + 1.2vw,2rem);line-height:1.25;letter-spacing:-.02em;max-width:22ch;margin:0 0 2rem;color:var(--tinta)}
-  .acciones{display:flex;flex-wrap:wrap;gap:10px}
-  .boton{display:inline-flex;align-items:center;gap:.6rem;min-height:54px;padding:0 1.5rem;border-radius:999px;font-weight:600;text-decoration:none;
-    background:var(--hielo);color:var(--noche);transition:background .2s ease}
-  .boton:hover{background:var(--hielo-2)}
-  .boton.vidrio{background:var(--vidrio);color:var(--tinta);border:1px solid var(--vidrio-borde);
-    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-  .boton svg{width:20px;height:20px}
-  .bajar{position:absolute;right:var(--margen);bottom:clamp(36px,9vh,96px);font-size:.9rem;color:var(--suave);writing-mode:vertical-rl;letter-spacing:.02em}
-  @media (max-width:700px){ .bajar{display:none} }
+  /* ---------- 1. portada ---------- */
+  .portada{position:relative;min-height:100svh;display:grid;align-content:end;padding:110px var(--margen) clamp(96px,13vh,130px)}
+  h1{width:fit-content;font-weight:600;font-size:clamp(4.4rem,1.6rem + 11vw,11.5rem);line-height:.86;letter-spacing:-.065em;margin:0 0 .2em -.04em;color:var(--noche)}
+  .lema{font-size:clamp(1.25rem,1rem + 1.2vw,2rem);line-height:1.25;letter-spacing:-.02em;max-width:22ch;margin:0 0 1.6rem;color:var(--suave);width:fit-content}
+  .portada .botones{width:fit-content;max-width:100%}
+  .bajar{position:absolute;left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:6px;
+    font-size:.85rem;font-weight:500;color:var(--acero);transition:opacity .5s ease,translate .5s ease}
+  .bajar i{width:22px;height:34px;border-radius:12px;box-shadow:inset 0 0 0 1.5px rgba(91,105,120,.55);position:relative}
+  .bajar i::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--artico);animation:bajar 1.8s var(--curva) infinite}
+  @keyframes bajar{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}80%{opacity:0;transform:translateY(10px)}100%{opacity:0}}
+  .bajar.fuera{opacity:0;translate:-50% 10px}
 
-  /* ---------- la frase que se ilumina al leerla ---------- */
-  .frase{padding:clamp(80px,16vh,200px) var(--margen)}
-  .frase p{font-weight:400;font-size:clamp(1.8rem,1rem + 3.6vw,4.4rem);line-height:1.08;letter-spacing:-.035em;margin:0;max-width:20ch}
-  .frase .pal{display:inline-block}
+  /* ---------- secciones ---------- */
+  .seccion{position:relative;padding:var(--entre) var(--margen)}
+  .titulo{font-weight:600;font-size:clamp(2.6rem,1.4rem + 5vw,6.2rem);line-height:.94;letter-spacing:-.055em;margin:0 0 1rem;color:var(--noche);width:fit-content;max-width:100%}
+  .entrada{font-size:clamp(1.12rem,1rem + .45vw,1.35rem);line-height:1.5;color:var(--suave);max-width:40ch;margin:0 0 2.4rem;width:fit-content}
+  .pal-h{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+  .pal-h>span{display:inline-block}
+  .titulo-portada .pal-h{padding:0 .06em .12em;margin:0 -.06em -.12em}
 
-  section{padding:clamp(64px,12vh,160px) var(--margen) 0}
-  h2{font-weight:500;font-size:clamp(2.6rem,1.4rem + 5vw,6rem);line-height:.95;letter-spacing:-.05em;margin:0 0 1.2rem}
-  .entrada{font-size:clamp(1.05rem,1rem + .3vw,1.25rem);color:var(--suave);max-width:40ch;margin:0 0 2.4rem}
+  /* tarjetas de hielo esmerilado: transparentes, se ven los pedazos detrás */
+  .hielo{position:relative;border-radius:30px;overflow:hidden;
+    background:linear-gradient(135deg,rgba(255,255,255,.36),rgba(255,255,255,.1));
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.72),inset 0 1px 0 rgba(255,255,255,.95),0 30px 60px -40px rgba(46,46,62,.35);
+    -webkit-backdrop-filter:blur(9px) saturate(160%);backdrop-filter:blur(9px) saturate(160%);
+    transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .6s var(--curva),box-shadow .5s ease}
+  .hielo::after{content:"";position:absolute;inset:-40% auto -40% -40%;width:40%;rotate:18deg;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);opacity:0}
+  @media (hover:hover){ .hielo:hover::after{animation:destello 1.4s ease} }
+  @keyframes destello{0%{opacity:1;left:-40%}100%{opacity:1;left:130%}}
+  .tipo{display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.95rem;color:var(--azul-texto);margin-bottom:1rem}
+  .circulo{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(100,182,255,.15);color:var(--azul-texto);box-shadow:inset 0 0 0 1px rgba(100,182,255,.28);flex:none}
+  .circulo svg{width:18px;height:18px}
+  .rombos{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+  .rombos li{display:flex;gap:.75rem;align-items:baseline;color:var(--tinta);line-height:1.45}
+  .rombos li::before{content:"";width:9px;height:9px;rotate:45deg;background:linear-gradient(135deg,#fff,#9fd3ff);box-shadow:0 0 0 1px rgba(100,182,255,.6);flex:none;translate:0 -1px}
+  .js .sube{opacity:0;translate:0 34px;transition:opacity .9s ease,translate .9s var(--curva),transform .6s var(--curva),box-shadow .5s ease}
+  .js .sube.visto{opacity:1;translate:0 0}
 
-  .vidrio-caja{background:var(--vidrio);border:1px solid var(--vidrio-borde);border-radius:28px;
-    -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%)}
+  /* ---------- 2. qué hacemos ---------- */
+  .dos{display:grid;gap:14px}
+  .dos .hielo{padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column}
+  .dos h3{font-weight:600;font-size:clamp(1.9rem,1.2rem + 2.2vw,3rem);line-height:1;letter-spacing:-.04em;margin:0 0 1rem;color:var(--noche)}
+  .dos p{margin:0 0 1.4rem;color:var(--suave);font-size:1.08rem;line-height:1.55;max-width:36ch}
+  .dos .boton{margin-top:1.8rem;align-self:flex-start}
+  .formas{display:grid;gap:14px;margin-top:14px}
+  .formas .hielo{padding:22px 24px;display:flex;gap:14px;align-items:center}
+  .formas b{display:block;font-weight:600;font-size:1.18rem;letter-spacing:-.02em;color:var(--noche);line-height:1.2}
+  .formas span{color:var(--suave)}
+  @media (min-width:860px){ .dos{grid-template-columns:1fr 1fr} .formas{grid-template-columns:1fr 1fr 1fr} }
 
-  /* ---------- trabajo: Mis citas ---------- */
-  .obra{display:grid;gap:clamp(20px,3vw,32px);align-items:center}
-  .obra .ficha{padding:clamp(24px,3vw,40px)}
-  .obra .ficha h3{font-weight:500;font-size:clamp(1.8rem,1.2rem + 2vw,2.8rem);letter-spacing:-.035em;line-height:1;margin:0 0 1rem}
-  .obra .ficha p{margin:0 0 1rem;color:var(--suave)}
-  .obra .ficha ul{list-style:none;padding:0;margin:1.4rem 0 0;display:grid;gap:.5rem}
-  .obra .ficha li{display:flex;gap:.7rem;align-items:baseline}
-  .obra .ficha li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--hielo);flex:none;transform:translateY(-2px)}
-  .telefonos{display:flex;gap:clamp(10px,2vw,20px);justify-content:center;align-items:flex-start}
-  .telefonos img{display:block;width:100%;height:auto;border-radius:28px}
-  .telefonos figure{margin:0;flex:1 1 0;min-width:0;max-width:250px;padding:8px;border-radius:36px}
-  .telefonos figure:nth-child(2){margin-top:48px}
-  .telefonos figure:nth-child(3){margin-top:16px}
-  @media (max-width:520px){ .telefonos figure:nth-child(3){display:none} }
-  @media (min-width:960px){ .obra{grid-template-columns:.9fr 1.1fr} }
+  /* ---------- 3. trabajos: el teléfono 3D de vidrio ---------- */
+  .obra{display:grid;gap:clamp(28px,4vw,64px);align-items:center}
+  .ficha{padding:clamp(24px,3vw,38px);max-width:640px}
+  .ficha h3{margin:0 0 .4rem;font-size:1.6rem;letter-spacing:-.03em;font-weight:600;color:var(--noche)}
+  .ficha>p{margin:0 0 1.2rem;color:var(--suave)}
+  .flujo{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-weight:600;color:var(--noche)!important}
+  .flujo .flecha{color:var(--azul-texto)}
+  .telefono{--alto:min(68svh,600px);display:grid;justify-items:center;gap:14px;perspective:1600px}
+  .cuerpo{position:relative;height:var(--alto);aspect-ratio:540/1140;transform-style:preserve-3d;
+    transform:rotateX(var(--gx,4deg)) rotateY(var(--gy,-16deg))}
+  .capa{position:absolute;inset:0;border-radius:calc(var(--alto) * .085)}
+  /* el canto de vidrio: capas apiladas que dan grosor y brillan en la orilla */
+  .canto{background:linear-gradient(135deg,rgba(220,238,255,.5),rgba(160,200,235,.28));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75)}
+  .espalda{transform:translateZ(-9px) rotateY(180deg);background:linear-gradient(150deg,rgba(255,255,255,.75),rgba(206,214,224,.55) 55%,rgba(178,228,219,.55));
+    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.9)}
+  .frente{transform:translateZ(9px);background:#15161d;padding:calc(var(--alto) * .016);
+    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55),0 40px 80px -40px rgba(46,46,62,.6)}
+  .frente::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+    background:linear-gradient(115deg,rgba(255,255,255,.22),transparent 28%,transparent 70%,rgba(255,255,255,.08))}
+  .pantallas{position:relative;height:100%;border-radius:calc(var(--alto) * .07);overflow:hidden;background:#0f1116}
+  .pantallas img{width:100%;height:100%;object-fit:cover}
+  .puntos{display:flex;gap:4px}
+  .puntos button{width:44px;height:44px;border:0;background:none;padding:0;display:grid;place-items:center;cursor:pointer}
+  .puntos button::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(91,105,120,.4);transition:width .4s var(--curva),background .3s}
+  .puntos button[aria-current="true"]::before{width:22px;border-radius:5px;background:var(--artico)}
+  /* teléfono: las pantallas se pasan con el dedo */
+  .pantallas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+  .pantallas::-webkit-scrollbar{display:none}
+  .pantallas img{flex:0 0 100%;scroll-snap-align:center}
+  @media (min-width:860px){
+    .obra{grid-template-columns:minmax(0,1fr) auto}
+    .telefono{--alto:min(72svh,640px);padding-right:clamp(0px,4vw,60px)}
+    /* compu: las pantallas cambian solas mientras gira (se apilan y se funden) */
+    .pantallas{display:block;overflow:hidden}
+    .pantallas img{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
+    .pantallas img.activa{opacity:1}
+    .seccion.trabajos{min-height:100svh;display:grid;align-content:center}
+  }
 
-  /* ---------- modelos: tarjetas de vidrio que se pasan de lado ---------- */
-  .carrusel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--margen) 18px;margin:0 calc(-1 * var(--margen));
-    scrollbar-width:none}
-  .carrusel::-webkit-scrollbar{display:none}
-  .modelo{flex:0 0 min(78vw,420px);scroll-snap-align:start;text-decoration:none;display:grid;gap:14px;padding:14px 14px 22px;transition:transform .3s ease, border-color .3s ease}
-  .modelo .ventana{border-radius:18px;overflow:hidden;aspect-ratio:4/5}
-  .modelo img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.9,.2,1)}
-  .modelo b{font-weight:600;font-size:1.25rem;letter-spacing:-.02em;padding:0 6px}
-  .modelo span{color:var(--suave);font-size:1rem;line-height:1.45;padding:0 6px}
-  @media (hover:hover){ .modelo:hover{border-color:rgba(158,216,238,.45)} .modelo:hover img{transform:scale(1.04)} }
-  @media (min-width:1100px){ .carrusel{overflow:visible;margin:0;padding:4px 0 0} .modelo{flex:1 1 0} }
+  /* ---------- 4. modelos: placas de hielo que pasan de lado ---------- */
+  .carril{margin:0 calc(var(--margen) * -1);overflow:hidden}
+  .pista{display:flex;gap:14px;padding:6px var(--margen) 18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--margen);scrollbar-width:none}
+  .pista::-webkit-scrollbar{display:none}
+  .fijo .pista{overflow:visible;width:max-content;will-change:transform}
+  .placa{flex:0 0 min(80vw,360px);scroll-snap-align:start;padding:14px 14px 22px;display:flex;flex-direction:column}
+  .marco{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:#dfe7ee;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+  .marco img{width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:object-position 4.5s cubic-bezier(.45,0,.25,1)}
+  @media (hover:hover){ .placa:hover .marco img{object-position:50% 100%} }
+  .texto{display:flex;flex-direction:column;flex:1}
+  .placa b{display:block;margin:18px 8px 4px;font-size:1.35rem;font-weight:600;letter-spacing:-.03em;color:var(--noche);line-height:1.1}
+  .placa .texto>span{display:block;margin:0 8px 18px;color:var(--suave);line-height:1.45;flex:1}
+  .placa .boton{margin:0 8px;align-self:flex-start}
+  .placa.cero{justify-content:space-between;padding:clamp(24px,3vw,34px)}
+  .placa.cero b{margin:1.2rem 0 .6rem;font-size:clamp(1.7rem,1.2rem + 1.4vw,2.4rem);line-height:1.02;letter-spacing:-.04em}
+  .placa.cero p{margin:0 0 1.6rem;color:var(--suave)}
+  .placa.cero .boton{margin:0}
+  .nota-pista{margin:4px 0 0;color:var(--acero);font-size:.92rem}
+  @media (min-width:860px){
+    .placa{flex:0 0 auto;width:clamp(520px,44vw,640px);flex-direction:row;gap:22px;padding:16px}
+    .placa .marco{height:clamp(300px,46svh,440px);aspect-ratio:auto;width:calc(clamp(300px,46svh,440px) * .62);flex:none}
+    .placa .texto{padding:14px 10px 10px 0}
+    .placa b{margin:auto 0 8px;font-size:clamp(1.6rem,1.1rem + 1.2vw,2.2rem);line-height:1.02;letter-spacing:-.04em}
+    .placa .texto>span{margin:0 0 22px;flex:0}
+    .placa .boton{margin:0}
+    .placa.cero{width:clamp(360px,28vw,420px);flex-direction:column;padding:34px}
+    .nota-pista{display:none}
+  }
 
-  /* ---------- cómo trabajamos ---------- */
-  .pasos{display:grid;gap:12px;margin:0;padding:0;list-style:none}
-  .pasos li{padding:clamp(22px,3vw,34px)}
-  .pasos b{display:block;font-weight:500;font-size:clamp(1.4rem,1rem + 1.4vw,2.1rem);letter-spacing:-.03em;line-height:1.05;margin-bottom:.6rem}
-  .pasos span{color:var(--suave)}
-  @media (min-width:860px){ .pasos{grid-template-columns:1.2fr 1fr 1fr} .pasos li:first-child{grid-row:span 1} }
+  /* ---------- 5. cómo trabajamos: la línea de luz ---------- */
+  .pasos-caja{position:relative}
+  .pasos{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  .paso{padding:24px 24px 26px 82px}
+  .nodo{position:absolute;left:24px;top:22px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:.95rem;
+    background:rgba(255,255,255,.7);color:var(--acero);box-shadow:inset 0 0 0 1px rgba(91,105,120,.28);transition:background .5s ease,color .5s ease,box-shadow .5s ease}
+  .paso b{display:block;font-size:1.3rem;letter-spacing:-.03em;font-weight:600;color:var(--noche);margin:4px 0 .35rem;line-height:1.15}
+  .paso>span:last-child{color:var(--suave)}
+  .paso.encendida{box-shadow:inset 0 0 0 1px rgba(100,182,255,.6),inset 0 1px 0 rgba(255,255,255,.95),0 0 0 4px rgba(100,182,255,.08),0 30px 60px -36px rgba(37,99,168,.45)}
+  .paso.encendida .nodo{background:linear-gradient(135deg,#9fd3ff,#64b6ff);color:#10243a;box-shadow:0 0 0 6px rgba(100,182,255,.18),0 0 24px rgba(100,182,255,.55)}
+  /* la línea va por fuera de las tarjetas, entre ellas (JS la acomoda de nodo a nodo) */
+  .linea{position:absolute;z-index:0;pointer-events:none;left:43px;top:42px;width:2px;height:0;border-radius:2px;background:rgba(91,105,120,.2)}
+  .linea i{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,#9fd3ff,#64b6ff);box-shadow:0 0 12px rgba(100,182,255,.8);transform-origin:top;transform:scaleY(var(--lleno,1))}
+  .js .linea i{--lleno:0}
+  @media (min-width:860px){
+    .pasos{grid-template-columns:repeat(3,1fr)}
+    .paso{padding:88px 30px 32px}
+    .nodo{left:30px;top:30px}
+    .linea{height:2px}
+    .linea i{background:linear-gradient(90deg,#9fd3ff,#64b6ff);transform-origin:left;transform:scaleX(var(--lleno,1))}
+  }
 
-  /* ---------- contacto ---------- */
-  .contacto{padding-bottom:clamp(64px,12vh,140px)}
-  .contacto .grande{font-weight:600;font-size:clamp(3.4rem,1rem + 11vw,11rem);line-height:.86;letter-spacing:-.06em;margin:0 0 2rem;text-decoration:none;display:inline-block}
-  .contacto .grande:hover{color:var(--hielo-2)}
-  .contacto p{color:var(--suave);max-width:38ch;margin:0 0 2rem}
+  /* ---------- 5b. preguntas frecuentes ---------- */
+  .preguntas{display:grid;gap:10px;max-width:880px}
+  .pregunta{border-radius:24px}
+  .pregunta h3{margin:0;font:inherit}
+  .pregunta button{all:unset;box-sizing:border-box;width:100%;min-height:64px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 12px 12px 24px;
+    cursor:pointer;font-weight:600;font-size:clamp(1.06rem,1rem + .3vw,1.2rem);line-height:1.3;letter-spacing:-.015em;color:var(--noche);border-radius:24px}
+  .pregunta button:focus-visible{outline:2px solid var(--artico);outline-offset:-4px}
+  .pregunta .circulo svg{transition:rotate .45s var(--curva)}
+  .pregunta button[aria-expanded="true"] .circulo svg{rotate:45deg}
+  .respuesta{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--curva)}
+  .respuesta>div{overflow:hidden}
+  .respuesta p{margin:0;padding:0 24px 22px;color:var(--suave);max-width:62ch}
+  .abierta .respuesta{grid-template-rows:1fr}
 
-  footer{padding:28px var(--margen) max(28px,env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;color:var(--suave);font-size:.92rem}
-  footer nav{display:flex;gap:20px}
-  footer a{text-underline-offset:4px}
+  /* ---------- 6. contacto y pie ---------- */
+  .contacto{padding-bottom:calc(var(--entre) * 1.3)}
+  .contacto .botones{gap:12px}
+  .boton.grande{min-height:68px;font-size:clamp(1.08rem,1rem + .4vw,1.25rem);padding:0 .7rem 0 1.7rem;gap:1rem}
+  .boton.grande .icono{width:46px;height:46px}
+  .boton.grande .icono svg{width:20px;height:20px}
+  .pie{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px 20px;padding:18px var(--margen) max(18px,env(safe-area-inset-bottom));color:var(--suave);font-size:.95rem;
+    border-top:1px solid rgba(255,255,255,.65);background:rgba(248,250,252,.35)}
+  .pie nav{display:flex;gap:4px;margin-left:-8px}
+  .pie nav a{min-height:44px;display:inline-flex;align-items:center;padding:0 8px;text-decoration:none}
+  .pie nav a:hover{color:var(--noche);text-decoration:underline}
 
-  /* sin JavaScript o con "reducir movimiento": todo quieto y visible */
-  .js .aparece{opacity:0}
-  .pal-h{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
-  .pal-h > span{display:inline-block}
-  @media (prefers-reduced-motion: reduce){ .js .aparece{opacity:1} .boton,.modelo,.modelo img{transition:none} }
+  /* ---------- botón flotante de WhatsApp ---------- */
+  .flotante{position:fixed;z-index:15;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;
+    display:grid;place-items:center;background:var(--noche);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 16px 34px -14px rgba(46,46,62,.65);
+    opacity:0;translate:0 20px;scale:.9;pointer-events:none;transition:opacity .4s ease,translate .5s var(--curva),scale .5s var(--curva)}
+  .flotante span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#9fd3ff,#64b6ff);color:#10243a}
+  .flotante svg{width:20px;height:20px}
+  .flotante.ver{opacity:1;translate:0 0;scale:1;pointer-events:auto}
+  .flotante:active{scale:.94}
+
+  @media (max-width:420px){ .botones .boton{flex:1 1 100%} }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .js .sube{opacity:1;translate:none}
+    .js .linea i{--lleno:1}
+    .hielo{transform:none}
+  }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-
-<canvas id="fondo" aria-hidden="true"></canvas>
+<a class="saltar" href="#que-hacemos">Saltar al contenido</a>
+<canvas id="escena" aria-hidden="true"></canvas>
 
 <header class="barra">
-  <a class="marca" href="#">Ari Labs</a>
-  <nav aria-label="Secciones">
-    <a href="#trabajo">Trabajo</a>
-    <a href="#modelos">Modelos</a>
-    <a class="accion" href="https://wa.link/eut47p" target="_blank" rel="noopener">Escríbenos</a>
-  </nav>
+  <a class="marca" href="#arriba">Ari Labs</a>
+  <a class="boton principal" href="https://wa.link/eut47p" target="_blank" rel="noopener">Escríbenos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
 </header>
 
-<main>
+<main id="arriba">
+  <!-- 1. Portada -->
   <div class="portada">
-    <h1 class="titulo-portada">Ari Labs</h1>
-    <p class="lema aparece">Páginas web y apps para negocios de Mérida.</p>
-    <div class="acciones aparece">
-      <a class="boton" href="https://wa.link/eut47p" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg>
-        Cuéntanos tu idea
-      </a>
-      <a class="boton vidrio" href="#trabajo">Ver lo que hacemos</a>
+    <h1 class="titulo-portada" data-esquiva>Ari Labs</h1>
+    <p class="lema aparece" data-esquiva>Páginas web y apps para negocios de Mérida.</p>
+    <div class="botones aparece" data-esquiva>
+      <a class="boton principal" href="https://wa.link/eut47p" target="_blank" rel="noopener">Cuéntanos tu idea<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <a class="boton secundario" href="#que-hacemos">Ver lo que hacemos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
     </div>
-    <span class="bajar" aria-hidden="true">Baja despacio</span>
+    <span class="bajar" aria-hidden="true"><i></i>baja</span>
   </div>
 
-  <div class="frase">
-    <p id="frase">Hacemos páginas y apps que se sienten tuyas: rápidas, bonitas y sin cuotas caras cada mes.</p>
-  </div>
+  <!-- 2. Qué hacemos -->
+  <section class="seccion" id="que-hacemos" aria-labelledby="t-hacemos">
+    <h2 class="titulo" id="t-hacemos" data-esquiva>Qué hacemos</h2>
+    <p class="entrada sube" data-esquiva>Dos cosas, bien hechas. Para negocios de Mérida que quieren verse y trabajar mejor.</p>
+    <div class="dos">
+      <article class="hielo sube inclina">
+        <span class="tipo"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>Páginas web</span>
+        <h3>Que te encuentren y te escriban</h3>
+        <p>Tu negocio en internet, rápido en cualquier teléfono y con un botón directo a tu WhatsApp.</p>
+        <ul class="rombos"><li>Tus horarios, ubicación y precios</li><li>Menú, catálogo o servicios</li><li>Hosting gratuito, sin cuotas caras</li></ul>
+        <a class="boton secundario" href="#modelos">Ver modelos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+      </article>
+      <article class="hielo sube inclina">
+        <span class="tipo"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span>Apps</span>
+        <h3>Tu forma de trabajar, en el teléfono</h3>
+        <p>Citas, cobros o clientes, hechos a tu medida. Funcionan sin internet y tus datos se quedan contigo.</p>
+        <ul class="rombos"><li>Avisos antes de cada cita</li><li>Cobros y clientes en orden</li><li>Modo claro y oscuro</li></ul>
+        <a class="boton secundario" href="#trabajos">Ver una app<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+      </article>
+    </div>
+    <div class="formas">
+      <div class="hielo sube inclina"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M17 14v6M14 17h6"/></svg></span><div><b>De un modelo</b><span>Escoges uno y lo hacemos tuyo.</span></div></div>
+      <div class="hielo sube inclina"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div><b>Desde cero</b><span>Pensado solo para tu negocio.</span></div></div>
+      <div class="hielo sube inclina"><span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h15v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></span><div><b>Sin mensualidades caras</b><span>Pagas lo justo, sin sorpresas.</span></div></div>
+    </div>
+  </section>
 
-  <section id="trabajo" aria-labelledby="t-trabajo">
-    <h2 id="t-trabajo" class="titulo">Trabajo reciente</h2>
+  <!-- 3. Trabajos -->
+  <section class="seccion trabajos" id="trabajos" aria-labelledby="t-trabajos">
     <div class="obra">
-      <div class="ficha vidrio-caja aparece">
-        <h3>Mis citas</h3>
-        <p>La agenda de un músico de eventos en Mérida: rezos, misas, bodas y XV años. Su cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada.</p>
-        <ul>
-          <li>Aviso una hora antes de cada evento</li>
-          <li>Cobros, canciones y cómo llegar</li>
-          <li>Funciona sin internet, en claro y oscuro</li>
-        </ul>
+      <div>
+        <h2 class="titulo" id="t-trabajos" data-esquiva>Trabajo reciente</h2>
+        <p class="entrada sube" data-esquiva>Mis citas: la agenda de un músico de eventos en Mérida.</p>
+        <div class="ficha hielo sube inclina">
+          <h3>Mis citas</h3>
+          <p>Rezos, misas, bodas y XV años. Su cliente le escribe por WhatsApp, él comparte el mensaje a la app y la cita queda ordenada.</p>
+          <p class="flujo">WhatsApp <span class="flecha" aria-hidden="true">→</span> cita ordenada</p>
+          <ul class="rombos"><li>Aviso una hora antes de cada evento</li><li>Cobros, canciones y cómo llegar</li><li>Funciona sin internet, en claro y oscuro</li></ul>
+        </div>
       </div>
-      <div class="telefonos">
-        <figure class="vidrio-caja"><img src="img/citas-agenda-claro.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Agenda del día en Mis citas, en modo claro."></figure>
-        <figure class="vidrio-caja"><img src="img/citas-agenda.webp" width="540" height="1140" loading="lazy" decoding="async" alt="La agenda en modo oscuro, con los días de la semana."></figure>
-        <figure class="vidrio-caja"><img src="img/citas-detalle.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Detalle de una cita con botones para llamar, WhatsApp y llegar."></figure>
+      <div class="telefono sube">
+        <div class="cuerpo">
+          <div class="capa espalda"></div>
+          <div class="capa canto" style="transform:translateZ(-6px)"></div>
+          <div class="capa canto" style="transform:translateZ(-3px)"></div>
+          <div class="capa canto" style="transform:translateZ(0)"></div>
+          <div class="capa canto" style="transform:translateZ(3px)"></div>
+          <div class="capa canto" style="transform:translateZ(6px)"></div>
+          <div class="capa frente">
+            <div class="pantallas" tabindex="0" role="group" aria-label="Pantallas de Mis citas">
+              <img class="activa" src="img/citas-agenda-claro.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Agenda del día en Mis citas, en modo claro.">
+              <img src="img/citas-agenda.webp" width="540" height="1140" loading="lazy" decoding="async" alt="La agenda en modo oscuro, con los días de la semana.">
+              <img src="img/citas-detalle.webp" width="540" height="1140" loading="lazy" decoding="async" alt="Detalle de una cita con botones para llamar, WhatsApp y llegar.">
+            </div>
+          </div>
+        </div>
+        <div class="puntos" role="group" aria-label="Elegir pantalla">
+          <button type="button" aria-label="Agenda clara" aria-current="true"></button>
+          <button type="button" aria-label="Agenda oscura" aria-current="false"></button>
+          <button type="button" aria-label="Detalle de una cita" aria-current="false"></button>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="modelos" aria-labelledby="t-modelos">
-    <h2 id="t-modelos" class="titulo">Modelos para empezar</h2>
-    <p class="entrada aparece">Escoges uno y lo hacemos tuyo con tus colores, tus fotos y tus precios. O empezamos desde cero.</p>
-    <div class="carrusel">
-      <a class="modelo vidrio-caja" href="modelos/restaurante/"><div class="ventana"><img src="img/modelo-restaurante.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de restaurante: el menú de la semana impreso sobre azul."></div><b>Restaurante</b><span>El menú de la semana; el guiso de hoy cambia solo.</span></a>
-      <a class="modelo vidrio-caja" href="modelos/barberia/"><div class="ventana"><img src="img/modelo-barberia.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de barbería: el nombre en letras enormes sobre negro."></div><b>Barbería o estética</b><span>Marcas tus servicios y sale la cuenta.</span></a>
-      <a class="modelo vidrio-caja" href="modelos/consultorio/"><div class="ventana"><img src="img/modelo-consultorio.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de consultorio dental: portada roja con flores de flamboyán."></div><b>Consultorio</b><span>Escoges día y hora; la cita llega por WhatsApp.</span></a>
+  <!-- 4. Modelos -->
+  <section class="seccion modelos" id="modelos" aria-labelledby="t-modelos">
+    <h2 class="titulo" id="t-modelos" data-esquiva>Modelos para empezar</h2>
+    <p class="entrada sube" data-esquiva>Escoges uno y lo hacemos tuyo: tus colores, tus fotos y tus precios. O empezamos desde cero.</p>
+    <div class="carril">
+      <div class="pista">
+        <article class="placa hielo inclina">
+          <div class="marco"><img src="img/modelo-restaurante.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de restaurante: el menú de la semana impreso sobre azul."></div>
+          <div class="texto"><b>Restaurante</b><span>El menú de la semana; el guiso de hoy cambia solo.</span>
+          <a class="boton secundario" href="modelos/restaurante/">Ver modelo<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>
+        </article>
+        <article class="placa hielo inclina">
+          <div class="marco"><img src="img/modelo-barberia.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de barbería: el nombre en letras enormes sobre negro."></div>
+          <div class="texto"><b>Barbería o estética</b><span>La tabla de precios: marcas tus servicios y sale la cuenta.</span>
+          <a class="boton secundario" href="modelos/barberia/">Ver modelo<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>
+        </article>
+        <article class="placa hielo inclina">
+          <div class="marco"><img src="img/modelo-consultorio.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Modelo de consultorio dental: portada roja con flores de flamboyán."></div>
+          <div class="texto"><b>Consultorio</b><span>Escoges día y hora; la cita llega por WhatsApp.</span>
+          <a class="boton secundario" href="modelos/consultorio/">Ver modelo<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>
+        </article>
+        <article class="placa hielo cero inclina">
+          <span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+          <div><b>¿Ninguno es lo tuyo?</b><p>Empezamos desde cero, pensado solo para tu negocio.</p>
+          <a class="boton principal" href="https://wa.link/eut47p" target="_blank" rel="noopener">Cuéntanos tu idea<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></div>
+        </article>
+      </div>
+    </div>
+    <p class="nota-pista">Desliza para ver los tres modelos →</p>
+  </section>
+
+  <!-- 5. Cómo trabajamos -->
+  <section class="seccion como" id="como" aria-labelledby="t-como">
+    <h2 class="titulo" id="t-como" data-esquiva>Cómo trabajamos</h2>
+    <p class="entrada sube" data-esquiva>Tres pasos, sin enredos.</p>
+    <div class="pasos-caja">
+      <div class="linea" aria-hidden="true"><i></i></div>
+      <ol class="pasos">
+        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">1</span><b>Nos escribes</b><span>Por WhatsApp: qué haces y qué quieres resolver.</span></li>
+        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">2</span><b>Ves una vista previa</b><span>En tu teléfono, y nos dices qué cambiar antes de terminar.</span></li>
+        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">3</span><b>Queda funcionando</b><span>La publicamos o instalamos tu app, y te enseñamos a usarla.</span></li>
+      </ol>
     </div>
   </section>
 
-  <section id="como" aria-labelledby="t-como">
-    <h2 id="t-como" class="titulo">Así trabajamos</h2>
-    <ol class="pasos">
-      <li class="vidrio-caja aparece"><b>Nos escribes</b><span>Por WhatsApp nos cuentas qué haces y qué quieres resolver.</span></li>
-      <li class="vidrio-caja aparece"><b>Ves una vista previa</b><span>En tu teléfono, antes de terminar, y nos dices qué cambiar.</span></li>
-      <li class="vidrio-caja aparece"><b>Queda funcionando</b><span>La publicamos o instalamos tu app, y te enseñamos a usarla.</span></li>
-    </ol>
+  <!-- 5b. Preguntas frecuentes -->
+  <section class="seccion" id="preguntas" aria-labelledby="t-preguntas">
+    <h2 class="titulo" id="t-preguntas" data-esquiva>Preguntas frecuentes</h2>
+    <p class="entrada sube" data-esquiva>Lo que casi todos nos preguntan antes de escribir.</p>
+    <div class="preguntas">
+      <div class="pregunta hielo sube">
+        <h3><button type="button" aria-expanded="false" aria-controls="r1" id="p1">¿Cuánto tarda una página o una app?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
+        <div class="respuesta" id="r1" role="region" aria-labelledby="p1"><div><p>Una página hecha desde un modelo queda en pocos días. Una página desde cero o una app toma unas semanas, según lo que necesites. Antes de empezar te decimos la fecha.</p></div></div>
+      </div>
+      <div class="pregunta hielo sube">
+        <h3><button type="button" aria-expanded="false" aria-controls="r2" id="p2">¿Cómo se paga?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
+        <div class="respuesta" id="r2" role="region" aria-labelledby="p2"><div><p>Nos cuentas qué necesitas y te mandamos la cotización por WhatsApp, con el precio cerrado. Una parte al empezar y el resto cuando ya lo viste funcionando.</p></div></div>
+      </div>
+      <div class="pregunta hielo sube">
+        <h3><button type="button" aria-expanded="false" aria-controls="r3" id="p3">¿Qué necesito darte (fotos, textos, logo)?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
+        <div class="respuesta" id="r3" role="region" aria-labelledby="p3"><div><p>Tu logo si lo tienes, unas fotos de tu negocio y tus datos: horarios, precios y servicios. Si te falta algo, te ayudamos a resolverlo.</p></div></div>
+      </div>
+      <div class="pregunta hielo sube">
+        <h3><button type="button" aria-expanded="false" aria-controls="r4" id="p4">¿Puedo hacer cambios después?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
+        <div class="respuesta" id="r4" role="region" aria-labelledby="p4"><div><p>Sí. Antes de terminar ves una vista previa y nos dices qué cambiar. Después, los cambios chicos, como precios u horarios, nos los pides por WhatsApp.</p></div></div>
+      </div>
+      <div class="pregunta hielo sube">
+        <h3><button type="button" aria-expanded="false" aria-controls="r5" id="p5">¿Hay que pagar cada mes?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
+        <div class="respuesta" id="r5" role="region" aria-labelledby="p5"><div><p>No. Tu página va en hosting gratuito, así que no hay mensualidad por tenerla en internet. Solo pagarías aparte si quieres un dominio propio (tunegocio.com), que se renueva una vez al año.</p></div></div>
+      </div>
+    </div>
   </section>
 
-  <section class="contacto" id="contacto" aria-labelledby="t-contacto">
-    <h2 id="t-contacto" class="titulo">¿Hacemos la tuya?</h2>
-    <p class="aparece">Te contestamos el mismo día. Estudio pequeño en Mérida, Yucatán.</p>
-    <a class="grande aparece" href="https://wa.link/eut47p" target="_blank" rel="noopener">WhatsApp ↗</a>
-    <div class="acciones aparece">
-      <a class="boton vidrio" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">Ari.ice.signal@gmail.com</a>
+  <!-- 6. Contacto -->
+  <section class="seccion contacto" id="contacto" aria-labelledby="t-contacto">
+    <h2 class="titulo" id="t-contacto" data-esquiva>¿Hacemos la tuya?</h2>
+    <p class="entrada sube" data-esquiva>Te contestamos el mismo día. Estudio pequeño en Mérida, Yucatán.</p>
+    <div class="botones sube" data-esquiva>
+      <a class="boton principal grande" href="https://wa.link/eut47p" target="_blank" rel="noopener">Escríbenos por WhatsApp<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
+      <a class="boton secundario" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">Ari.ice.signal@gmail.com<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span></a>
     </div>
   </section>
 </main>
 
-<footer>
+<footer class="pie" data-esquiva>
   <span>Ari Labs · Mérida, Yucatán · 2026</span>
   <nav aria-label="Legal"><a href="privacidad.html">Privacidad</a><a href="terminos.html">Términos</a></nav>
 </footer>
 
+<a class="flotante" href="https://wa.link/eut47p" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" tabindex="-1"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
+
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script src="fondo.js"></script>
-<script src="movimiento.js"></script>
+<script src="web.js"></script>
+<script type="module" src="hielo.js"></script>
 </body>
 </html>
