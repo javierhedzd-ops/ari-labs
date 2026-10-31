@@ -95,3 +95,9 @@ Para verla en local: `cd diseno/muestra && python3 -m http.server` (usa módulos
   se encoge al romperse y crece al armarse (ya no desaparece de golpe); los pedazos nacen pequeñitos y crecen;
   destello chico al romperse y grande al formarse; movimientos iguales a 30/60/120 cuadros por segundo; calidad
   automática si el teléfono va lento.
+- **Aprendizaje (31/10): "el acabado" no es usar los mismos componentes.** Si todos los modelos comparten vidrio,
+  píldoras y fondo con brillos, se ven iguales aunque cambie la letra o el color. Cada trabajo lleva su propio estilo
+  completo (fondo, formas, bordes, decoración, forma de mostrar la información); lo que se repite de Ari Labs es el
+  cuidado en los detalles, el espacio, el movimiento y que todo cuadre.
+- Estilos escogidos por Javi: restaurante "cocina alegre" (Caprasimo), barbería "clásica" (Big Shoulders),
+  consultorio "cuidado cálido" (Instrument Serif). Bocetos: https://claude.ai/artifact/LiArhxpavjejj8eNYrKuH9
