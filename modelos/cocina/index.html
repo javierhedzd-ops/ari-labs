@@ -90,6 +90,8 @@
   @font-face{font-family:"Barlow Condensed";font-weight:500;src:url(fuentes/barlow-condensed-latin-500-normal.woff2) format("woff2");font-display:swap}
   @font-face{font-family:"Barlow Condensed";font-weight:700;src:url(fuentes/barlow-condensed-latin-700-normal.woff2) format("woff2");font-display:swap}
   .guia{display:none}
+  .ejemplo{margin:4px 0 14px;padding:10px 14px;border:1px dashed var(--suave);border-radius:10px;font-size:14px;color:var(--suave)}
+  .ejemplo[hidden]{display:none}
 
   /* ---- FONDA: menú pintado, tradicional, centrado, sin tarjetas ---- */
   [data-piel=fonda]{--fondo:#F6ECD9;--tarjeta:transparent;--tinta:#3A1F14;--suave:#7A5B45;--linea:#C9A97C;--acento:#9B2D1F;--crema:#EBD9B8;
@@ -192,6 +194,8 @@
     </div>
   </header>
 
+  <p class="ejemplo" id="ejemplo" hidden></p>
+
   <div class="hoy" id="hoy"></div>
 
   <div id="menu"></div>
@@ -263,26 +267,40 @@ const DATOS = {
   ],
   recomienda: ""                    // nombre del cliente que recomienda (para el enlace del pie)
 };
-/* Muestra para un prospecto: sus datos llegan en el enlace (#d=...), sin publicar nada nuevo.
-   Lo que llega por enlace SIEMPRE es muestra: nunca conecta WhatsApp, teléfono ni enlaces. */
-(function(){
-  try{
-    const d = new URLSearchParams(location.hash.slice(1)).get("d"); if (!d) return;
-    const bin = atob(d.replace(/-/g,"+").replace(/_/g,"/"));
-    const j = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0))));
-    const txt = v => typeof v === "string" && v.length <= 160;
-    const plato = p => p && txt(p.nombre) && Number.isFinite(p.precio) && (p.detalle == null || txt(p.detalle));
-    if (!txt(j.nombre) || !Array.isArray(j.menu) || !j.menu.length || !j.menu.every(s => s && txt(s.titulo) && Array.isArray(s.platos) && s.platos.every(plato))) return;
-    for (const k of ["tipo","nombre","lema","direccion","colonia","entrega","muestraHasta"]) if (txt(j[k])) DATOS[k] = j[k];
+/* Muestra para un prospecto: sus datos llegan por enlace, en un archivo de muestras/ (?m=nombre)
+   o dentro del propio enlace (#d=...). Lo que llega así SIEMPRE es muestra: nunca conecta WhatsApp,
+   teléfono ni enlaces. Con "ejemplo": true se conserva el menú de ejemplo y se avisa en la página. */
+function aplicarMuestra(j){
+  const txt = v => typeof v === "string" && v.length <= 160;
+  const plato = p => p && txt(p.nombre) && Number.isFinite(p.precio) && (p.detalle == null || txt(p.detalle));
+  const menuOk = Array.isArray(j.menu) && j.menu.length > 0 && j.menu.every(s => s && txt(s.titulo) && Array.isArray(s.platos) && s.platos.every(plato));
+  if (!j || !txt(j.nombre) || (!menuOk && j.ejemplo !== true)) return;
+  for (const k of ["tipo","nombre","lema","direccion","colonia","entrega","muestraHasta"]) if (txt(j[k])) DATOS[k] = j[k];
+  if (menuOk){
     DATOS.menu = j.menu;
     DATOS.delDia = {}; for (const [k,v] of Object.entries(j.delDia || {})) if (/^[0-6]$/.test(k) && plato(v)) DATOS.delDia[k] = v;
-    if (j.horario){ DATOS.horario = {}; for (let i = 0; i < 7; i++){ const h = j.horario[i]; DATOS.horario[i] = Array.isArray(h) && h.length === 2 && h.every(x => /^\d{1,2}:\d{2}$/.test(x)) ? h : null; } }
-    if (["casera","fonda","mercado","noche"].includes(j.piel)) DATOS.piel = j.piel;
-    DATOS.giro = ["comida","citas","servicio","tienda"].includes(j.giro) ? j.giro : "comida";
-    DATOS.colores = {}; for (const k of ["acento","fondo","tinta","tarjeta","suave","linea","crema"]) if (j.colores && /^#[0-9a-fA-F]{3,8}$/.test(j.colores[k])) DATOS.colores[k] = j.colores[k];
-    DATOS.muestra = true; DATOS.whatsapp = ""; DATOS.telefono = ""; DATOS.mapa = ""; DATOS.recomienda = "";
+  }
+  DATOS.ejemplo = j.ejemplo === true;
+  if (j.horario){ DATOS.horario = {}; for (let i = 0; i < 7; i++){ const h = j.horario[i]; DATOS.horario[i] = Array.isArray(h) && h.length === 2 && h.every(x => /^\d{1,2}:\d{2}$/.test(x)) ? h : null; } }
+  if (["casera","fonda","mercado","noche"].includes(j.piel)) DATOS.piel = j.piel;
+  DATOS.giro = ["comida","citas","servicio","tienda"].includes(j.giro) ? j.giro : "comida";
+  DATOS.colores = {}; for (const k of ["acento","fondo","tinta","tarjeta","suave","linea","crema"]) if (j.colores && /^#[0-9a-fA-F]{3,8}$/.test(j.colores[k])) DATOS.colores[k] = j.colores[k];
+  DATOS.muestra = true; DATOS.whatsapp = ""; DATOS.telefono = ""; DATOS.mapa = ""; DATOS.recomienda = "";
+}
+function datosDelEnlace(){
+  try{
+    const d = new URLSearchParams(location.hash.slice(1)).get("d");
+    if (d){
+      const bin = atob(d.replace(/-/g,"+").replace(/_/g,"/"));
+      aplicarMuestra(JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)))));
+      return Promise.resolve();
+    }
+    const m = new URLSearchParams(location.search).get("m");
+    if (m && /^[a-z0-9-]{1,60}$/.test(m))
+      return fetch("muestras/" + m + ".json").then(r => r.ok ? r.json() : null).then(j => { if (j) aplicarMuestra(j); }).catch(() => {});
   }catch(e){ /* enlace dañado: se queda la muestra de ejemplo */ }
-})();
+  return Promise.resolve();
+}
 const ARI_LABS = { whatsapp:"", web:"https://javierhedzd-ops.github.io/ari-labs/" };
 
 /* ============================ Página ============================ */
@@ -292,7 +310,7 @@ const GIROS = {
   servicio: { boton:"Pedir por WhatsApp",     uno:"servicio", varios:"servicios", saludo:"Hola, quiero pedir este servicio:",    vaciar:"Quitar todo" },
   tienda:   { boton:"Preguntar por WhatsApp", uno:"artículo", varios:"artículos", saludo:"Hola, quiero preguntar por:",          vaciar:"Quitar todo" }
 };
-const T = GIROS[DATOS.giro] || GIROS.comida;
+let T = GIROS.comida;
 const $ = id => document.getElementById(id);
 const DIAS = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const dinero = n => DATOS.moneda + n;
@@ -396,6 +414,8 @@ function pintarPie(){
   pie.append("Hecho por Ari Labs · ", a);
 }
 
+function arrancar(){
+T = GIROS[DATOS.giro] || GIROS.comida;
 const piel = new URLSearchParams(location.search).get("piel") || DATOS.piel;   // ?piel=fonda sirve para comparar
 if (piel && piel !== "casera") document.body.dataset.piel = piel;
 for (const [k,v] of Object.entries(DATOS.colores || {})) document.body.style.setProperty("--" + k, v);
@@ -407,7 +427,10 @@ if (DATOS.muestra){
   m.append(el("b",null,"Muestra"), " · Ari Labs" + (DATOS.muestraHasta ? " · en línea hasta el " + DATOS.muestraHasta : ""));
 }
 $("quitar").textContent = T.vaciar; if (DATOS.giro && DATOS.giro !== "comida") $("verMenu").textContent = "Ver precios";
+if (DATOS.ejemplo){ const e = $("ejemplo"); e.hidden = false; e.textContent = "Muestra con datos de ejemplo: " + (DATOS.giro === "comida" ? "el menú, los precios" : "los servicios, los precios") + " y el horario se cambian por los suyos."; }
 pintarEstado(); pintarHoy(); pintarMenu(); pintarDatos(); pintarPie(); conectar(); refrescar();
+}
+datosDelEnlace().then(arrancar);
 </script>
 </body>
 </html>
