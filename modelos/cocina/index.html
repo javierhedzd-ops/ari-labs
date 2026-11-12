@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cocina económica · Ari Labs</title>
+<meta name="theme-color" content="#FBF6EC">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --fondo:#FBF6EC; --tarjeta:#FFFFFF; --tinta:#2A1D12; --suave:#6F5E4E; --linea:#E9DDC8;
+    --acento:#C8431F; --acento-tinta:#FFFFFF; --crema:#F3E7CF; --bien:#1F7A4D; --mal:#9A3324;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--fondo);color:var(--tinta);
+    font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    padding-bottom:140px;-webkit-text-size-adjust:100%}
+  .ancho{max-width:560px;margin:0 auto;padding:0 16px}
+  h1,h2,h3,p{margin:0}
+  a{color:inherit}
+
+  .muestra{background:var(--tinta);color:#F6EAD6;font-size:13px;text-align:center;padding:8px 12px}
+  .muestra b{color:#FFD9A0}
+
+  header{padding:22px 0 14px}
+  .arriba{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .tipo{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--acento);font-weight:700}
+  .estado{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;white-space:nowrap;border:1px solid var(--linea);background:var(--tarjeta)}
+  .estado.si{color:var(--bien)} .estado.no{color:var(--mal)}
+  h1{font-size:34px;line-height:1.08;letter-spacing:-.02em;margin-top:10px;text-wrap:balance}
+  .lema{color:var(--suave);margin-top:8px;font-size:16px}
+  .atajos{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+  .atajo{flex:1 1 0;min-width:96px;min-height:46px;display:flex;align-items:center;justify-content:center;gap:6px;
+    border-radius:12px;border:1px solid var(--linea);background:var(--tarjeta);text-decoration:none;font-weight:600;font-size:15px}
+
+  .hoy{margin-top:8px;background:var(--acento);color:var(--acento-tinta);border-radius:20px;padding:20px 18px}
+  .hoy .dia{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.9;font-weight:700}
+  .hoy h2{font-size:26px;line-height:1.12;margin-top:6px;text-wrap:balance}
+  .hoy p{margin-top:8px;opacity:.95}
+  .hoy .precio{display:inline-block;margin-top:14px;background:#fff;color:var(--acento);font-weight:800;font-size:20px;padding:6px 14px;border-radius:999px}
+  .hoy button{margin-left:8px}
+
+  section{margin-top:30px}
+  .titulo{font-size:22px;letter-spacing:-.01em}
+  .nota{color:var(--suave);font-size:14px;margin-top:4px}
+  .lista{margin-top:12px;background:var(--tarjeta);border:1px solid var(--linea);border-radius:18px;overflow:hidden}
+  .plato{display:flex;align-items:center;gap:12px;padding:14px 14px 14px 16px;border-top:1px solid var(--linea)}
+  .plato:first-child{border-top:0}
+  .plato .txt{flex:1;min-width:0}
+  .plato .nom{font-weight:650;font-size:16.5px}
+  .plato .des{color:var(--suave);font-size:14px;margin-top:2px}
+  .plato .pre{font-weight:800;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .mas{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--crema);color:var(--tinta);
+    font-size:24px;line-height:1;font-weight:500;cursor:pointer}
+  .mas.puesto{background:var(--acento);color:#fff;font-size:16px;font-weight:800}
+  .hoy .mas{background:#fff;color:var(--acento);vertical-align:middle}
+
+  .dato{display:flex;gap:12px;padding:14px 16px;border-top:1px solid var(--linea)}
+  .dato:first-child{border-top:0}
+  .dato .eti{width:84px;flex:none;color:var(--suave);font-size:14px}
+  .dato .val{flex:1;font-weight:600}
+  .dato .val span{display:block;font-weight:400;color:var(--suave);font-size:14px}
+  .hor{display:flex;justify-content:space-between;gap:12px;font-weight:400;padding:2px 0}
+  .hor.hoyd{font-weight:800}
+
+  footer{margin:36px 0 0;text-align:center;color:var(--suave);font-size:13px}
+  footer a{font-weight:700;color:var(--tinta)}
+
+  .barra{position:fixed;left:0;right:0;bottom:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top,var(--fondo) 70%,transparent)}
+  .pedir{width:100%;max-width:528px;margin:0 auto;min-height:56px;display:flex;align-items:center;justify-content:center;gap:10px;
+    border:0;border-radius:16px;background:#1FA855;color:#fff;font:700 17px/1 inherit;font-family:inherit;cursor:pointer;
+    box-shadow:0 6px 18px rgba(31,168,85,.28)}
+  .pedir small{font-weight:600;opacity:.92;font-size:14px}
+  .quitar{display:none;margin:6px auto 0;border:0;background:none;color:var(--suave);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;min-height:32px}
+  .quitar.ver{display:block}
+
+  .aviso{position:fixed;left:16px;right:16px;bottom:110px;max-width:528px;margin:0 auto;background:var(--tinta);color:#fff;
+    padding:14px 16px;border-radius:14px;font-size:15px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.25s}
+  .aviso.ver{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* ============================================================
+     PIELES: mismo funcionamiento, distinto carácter.
+     Se elige con DATOS.piel: "casera" (la de arriba), "fonda", "mercado" o "noche".
+     ============================================================ */
+  @font-face{font-family:"DM Serif Display";src:url(fuentes/dm-serif-display-latin-400-normal.woff2) format("woff2");font-display:swap}
+  @font-face{font-family:"Archivo Black";src:url(fuentes/archivo-black-latin-400-normal.woff2) format("woff2");font-display:swap}
+  @font-face{font-family:"Barlow Condensed";font-weight:500;src:url(fuentes/barlow-condensed-latin-500-normal.woff2) format("woff2");font-display:swap}
+  @font-face{font-family:"Barlow Condensed";font-weight:700;src:url(fuentes/barlow-condensed-latin-700-normal.woff2) format("woff2");font-display:swap}
+  .guia{display:none}
+
+  /* ---- FONDA: menú pintado, tradicional, centrado, sin tarjetas ---- */
+  [data-piel=fonda]{--fondo:#F6ECD9;--tarjeta:transparent;--tinta:#3A1F14;--suave:#7A5B45;--linea:#C9A97C;--acento:#9B2D1F;--crema:#EBD9B8;
+    font-family:Georgia,"Noto Serif","Times New Roman",serif}
+  [data-piel=fonda] header{text-align:center;padding-top:26px}
+  [data-piel=fonda] .arriba{flex-direction:column;gap:12px}
+  [data-piel=fonda] .tipo{letter-spacing:.3em;color:var(--suave);font-weight:400}
+  [data-piel=fonda] .tipo::before,[data-piel=fonda] .tipo::after{content:"✦";margin:0 .7em;color:var(--acento);letter-spacing:0}
+  [data-piel=fonda] h1{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:46px;line-height:1;color:var(--acento);letter-spacing:0;margin-top:14px}
+  [data-piel=fonda] .lema{font-style:italic;font-size:17px}
+  [data-piel=fonda] .estado{background:none;border:0;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);border-radius:0;padding:5px 16px;font-style:italic;font-weight:400}
+  [data-piel=fonda] .atajo{border-radius:0;background:none;border:1px solid var(--tinta);font-weight:400;font-size:15px}
+  [data-piel=fonda] .hoy{background:none;color:var(--tinta);border:4px double var(--acento);border-radius:0;text-align:center;padding:22px 16px;margin-top:12px}
+  [data-piel=fonda] .hoy .dia{color:var(--acento);letter-spacing:.28em;font-weight:400}
+  [data-piel=fonda] .hoy h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:34px}
+  [data-piel=fonda] .hoy p{font-style:italic;color:var(--suave)}
+  [data-piel=fonda] .hoy .precio{background:var(--acento);color:#fff;border-radius:0;font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:24px;padding:4px 16px}
+  [data-piel=fonda] .titulo{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:30px;text-align:center;color:var(--acento)}
+  [data-piel=fonda] .titulo::after{content:"";display:block;width:64px;height:4px;border-top:1px solid;border-bottom:1px solid;margin:8px auto 0}
+  [data-piel=fonda] .nota{text-align:center;font-style:italic;margin-top:8px}
+  [data-piel=fonda] .lista{background:none;border:0;border-radius:0;overflow:visible}
+  [data-piel=fonda] .plato{border-top:0;padding:9px 0;gap:8px}
+  [data-piel=fonda] .plato .txt{flex:0 1 auto}
+  [data-piel=fonda] .guia{display:block;flex:1;min-width:18px;border-bottom:2px dotted var(--linea);align-self:flex-start;height:16px}
+  [data-piel=fonda] .plato .nom{font-weight:700;font-size:17.5px}
+  [data-piel=fonda] .plato .des{font-style:italic}
+  [data-piel=fonda] .plato .pre{font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:20px;color:var(--acento);align-self:flex-start}
+  [data-piel=fonda] .mas,[data-piel=fonda] .hoy .mas{border-radius:0;background:none;border:1px solid var(--tinta);color:var(--tinta);margin-left:6px}
+  [data-piel=fonda] .mas.puesto{background:var(--acento);border-color:var(--acento);color:#fff}
+  [data-piel=fonda] .dato{border-top:1px dotted var(--linea);padding:14px 0}
+  [data-piel=fonda] .pedir{border-radius:0;font-family:inherit}
+
+  /* ---- MERCADO: cartel de puesto, directo, precios como etiqueta ---- */
+  [data-piel=mercado]{--fondo:#FFD23F;--tarjeta:#FFFFFF;--tinta:#111111;--suave:#333333;--linea:#111111;--acento:#E4002B;--crema:#FFD23F}
+  [data-piel=mercado] .tipo{background:#111;color:#FFD23F;padding:5px 9px;letter-spacing:.08em}
+  [data-piel=mercado] .estado{border:2px solid #111;border-radius:0;font-weight:800;background:#fff}
+  [data-piel=mercado] h1{font-family:"Archivo Black",Impact,sans-serif;font-weight:400;font-size:42px;line-height:.95;text-transform:uppercase;margin-top:14px}
+  [data-piel=mercado] .lema{color:#111;font-weight:600}
+  [data-piel=mercado] .atajo{border:2px solid #111;border-radius:0;box-shadow:3px 3px 0 #111;font-weight:800;text-transform:uppercase;font-size:13px;margin-bottom:3px}
+  [data-piel=mercado] .hoy{border:3px solid #111;border-radius:0;box-shadow:6px 6px 0 #111;transform:rotate(-1.2deg);margin:16px 6px 0 2px}
+  [data-piel=mercado] .hoy h2{font-family:"Archivo Black",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:30px;line-height:1}
+  [data-piel=mercado] .hoy p{font-weight:600}
+  [data-piel=mercado] .hoy .precio{background:#FFD23F;color:#111;border:2px solid #111;border-radius:0;font-family:"Archivo Black",Impact,sans-serif;font-weight:400;font-size:26px;transform:rotate(2deg)}
+  [data-piel=mercado] .hoy .mas{background:#111;color:#fff}
+  [data-piel=mercado] .titulo{display:inline-block;font-family:"Archivo Black",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:22px;background:#111;color:#fff;padding:6px 12px}
+  [data-piel=mercado] .nota{color:#111;font-weight:600;margin-top:8px}
+  [data-piel=mercado] .lista{border:3px solid #111;border-radius:0;box-shadow:5px 5px 0 #111;margin-right:5px}
+  [data-piel=mercado] .plato{border-top:2px solid #111;padding:12px}
+  [data-piel=mercado] .plato .pre{order:-1;background:#FFD23F;border:2px solid #111;font-family:"Archivo Black",Impact,sans-serif;font-weight:400;font-size:18px;padding:8px 6px;min-width:62px;text-align:center}
+  [data-piel=mercado] .plato .nom{font-weight:800;text-transform:uppercase;font-size:15.5px;line-height:1.2}
+  [data-piel=mercado] .mas{border-radius:0;background:#111;color:#fff}
+  [data-piel=mercado] .mas.puesto{background:var(--acento)}
+  [data-piel=mercado] .dato{border-top:2px solid #111}
+  [data-piel=mercado] .dato .eti{color:#111;font-weight:800;text-transform:uppercase;font-size:12px}
+  [data-piel=mercado] .pedir{border-radius:0;border:3px solid #111;box-shadow:4px 4px 0 #111;font-family:"Archivo Black",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:13px;gap:8px;white-space:nowrap;width:calc(100% - 4px)}
+  [data-piel=mercado] .pedir small{font-size:12px}
+  [data-piel=mercado] .quitar{color:#111;font-weight:700}
+  [data-piel=mercado] footer{color:#111}
+
+  /* ---- NOCHE: taquería o bar, oscuro, letra alta, sin cajas ---- */
+  [data-piel=noche]{--fondo:#111315;--tarjeta:#181B1E;--tinta:#F2EFE9;--suave:#9A9FA5;--linea:#2B3035;--acento:#FF6A1A;--acento-tinta:#111315;--crema:#24282C;--bien:#7BE0A4;--mal:#FF8A7A}
+  [data-piel=noche] .muestra{background:#000;color:#CFCBC3}
+  [data-piel=noche] .estado{background:none}
+  [data-piel=noche] h1{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:60px;line-height:.9;text-transform:uppercase;letter-spacing:0;margin-top:16px}
+  [data-piel=noche] .atajo{background:none;border-radius:4px;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:17px}
+  [data-piel=noche] .hoy{background:none;color:var(--tinta);border-radius:0;border-left:4px solid var(--acento);padding:4px 0 4px 16px;margin-top:14px}
+  [data-piel=noche] .hoy .dia{color:var(--acento)}
+  [data-piel=noche] .hoy h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;text-transform:uppercase;font-size:46px;line-height:.95}
+  [data-piel=noche] .hoy p{color:var(--suave)}
+  [data-piel=noche] .hoy .precio{background:none;color:var(--acento);padding:0;border-radius:0;font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:44px;line-height:1;vertical-align:middle}
+  [data-piel=noche] .hoy .mas{background:var(--acento);color:#111315;margin-left:14px}
+  [data-piel=noche] .titulo{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;text-transform:uppercase;font-size:32px;letter-spacing:.02em;border-bottom:1px solid var(--linea);padding-bottom:8px}
+  [data-piel=noche] .nota{margin-top:10px}
+  [data-piel=noche] .lista{background:none;border:0;border-radius:0}
+  [data-piel=noche] .plato{padding:14px 0}
+  [data-piel=noche] .plato .nom{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:500;font-size:22px;text-transform:uppercase;letter-spacing:.02em;line-height:1.1}
+  [data-piel=noche] .plato .pre{color:var(--acento);font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:26px}
+  [data-piel=noche] .mas{border-radius:6px}
+  [data-piel=noche] .mas.puesto{color:#111315}
+  [data-piel=noche] .dato{padding:14px 0}
+  [data-piel=noche] .aviso{background:#F2EFE9;color:#111315}
+</style>
+</head>
+<body>
+
+<div id="muestra" class="muestra" hidden></div>
+
+<div class="ancho">
+  <header>
+    <div class="arriba">
+      <span class="tipo" id="tipo"></span>
+      <span class="estado" id="estado"></span>
+    </div>
+    <h1 id="nombre"></h1>
+    <p class="lema" id="lema"></p>
+    <div class="atajos">
+      <a class="atajo" href="#menu">Ver menú</a>
+      <a class="atajo" id="llamar">Llamar</a>
+      <a class="atajo" id="llegar" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+  </header>
+
+  <div class="hoy" id="hoy"></div>
+
+  <div id="menu"></div>
+
+  <section>
+    <h2 class="titulo">Dónde y cuándo</h2>
+    <div class="lista" id="datos"></div>
+  </section>
+
+  <footer>
+    <p id="pie"></p>
+  </footer>
+</div>
+
+<div class="barra">
+  <button class="pedir" id="pedir"></button>
+  <button class="quitar" id="quitar">Vaciar pedido</button>
+</div>
+<div class="aviso" id="aviso" role="status"></div>
+
+<script>
+/* ============================================================
+   DATOS DEL NEGOCIO: lo único que se cambia para cada cliente.
+   El diseño de abajo no se toca.
+   ============================================================ */
+const DATOS = {
+  muestra: true,                    // true = muestra (botones sin conectar). false = web entregada.
+  piel: "casera",                   // casera | fonda | mercado | noche
+  colores: {},                      // opcional, para usar los colores del negocio: { acento:"#B0281A", fondo:"#FFF8EE" }
+  muestraHasta: "",                 // ej. "viernes 14 de noviembre"
+  tipo: "Cocina económica",
+  nombre: "Cocina Doña Mary",
+  lema: "Comida casera recién hecha, de lunes a sábado.",
+  whatsapp: "",                     // con lada del país, sin espacios: 5219991234567
+  telefono: "",                     // 9991234567
+  direccion: "Calle 50 #123 x 61 y 63",
+  colonia: "Centro, Mérida",
+  mapa: "",                         // enlace de Google Maps; vacío = busca por nombre y dirección
+  moneda: "$",
+  entrega: "Para llevar y a domicilio en la colonia",
+  // 0 = domingo ... 6 = sábado. [abre, cierra] en hora de 24. null = cerrado.
+  horario: { 0:null, 1:["8:00","16:00"], 2:["8:00","16:00"], 3:["8:00","16:00"], 4:["8:00","16:00"], 5:["8:00","16:00"], 6:["8:00","14:00"] },
+  // Guiso del día por día de la semana. Si un día no tiene, no se muestra.
+  delDia: {
+    1:{ nombre:"Frijol con puerco", detalle:"Con arroz, rábano, cilantro y tortillas.", precio:85 },
+    2:{ nombre:"Pollo pibil", detalle:"Con arroz, frijol colado y tortillas.", precio:85 },
+    3:{ nombre:"Potaje de lentejas", detalle:"Con arroz y tortillas.", precio:80 },
+    4:{ nombre:"Bistec de cazuela", detalle:"Con arroz, frijol y tortillas.", precio:90 },
+    5:{ nombre:"Pescado empanizado", detalle:"Con ensalada, arroz y tortillas.", precio:95 },
+    6:{ nombre:"Cochinita pibil", detalle:"Por orden o en tacos y tortas.", precio:90 }
+  },
+  menu: [
+    { titulo:"Todos los días", nota:"Cada orden incluye arroz, frijol y tortillas.", platos:[
+      { nombre:"Pollo asado", detalle:"Pierna y muslo.", precio:80 },
+      { nombre:"Milanesa de pollo", detalle:"Con ensalada.", precio:85 },
+      { nombre:"Empanizado de cerdo", precio:85 },
+      { nombre:"Huevos al gusto", detalle:"Con jamón, chaya o a la mexicana.", precio:60 }
+    ]},
+    { titulo:"Antojitos", platos:[
+      { nombre:"Panuchos", detalle:"Orden de 3, de pollo o pavo.", precio:54 },
+      { nombre:"Salbutes", detalle:"Orden de 3, de pollo o pavo.", precio:54 },
+      { nombre:"Empanadas de queso", detalle:"Orden de 4.", precio:48 }
+    ]},
+    { titulo:"Bebidas", platos:[
+      { nombre:"Agua de horchata o jamaica", detalle:"Medio litro.", precio:20 },
+      { nombre:"Refresco", precio:22 }
+    ]}
+  ],
+  recomienda: ""                    // nombre del cliente que recomienda (para el enlace del pie)
+};
+/* Muestra para un prospecto: sus datos llegan en el enlace (#d=...), sin publicar nada nuevo.
+   Lo que llega por enlace SIEMPRE es muestra: nunca conecta WhatsApp, teléfono ni enlaces. */
+(function(){
+  try{
+    const d = new URLSearchParams(location.hash.slice(1)).get("d"); if (!d) return;
+    const bin = atob(d.replace(/-/g,"+").replace(/_/g,"/"));
+    const j = JSON.parse(new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0))));
+    const txt = v => typeof v === "string" && v.length <= 160;
+    const plato = p => p && txt(p.nombre) && Number.isFinite(p.precio) && (p.detalle == null || txt(p.detalle));
+    if (!txt(j.nombre) || !Array.isArray(j.menu) || !j.menu.length || !j.menu.every(s => s && txt(s.titulo) && Array.isArray(s.platos) && s.platos.every(plato))) return;
+    for (const k of ["tipo","nombre","lema","direccion","colonia","entrega","muestraHasta"]) if (txt(j[k])) DATOS[k] = j[k];
+    DATOS.menu = j.menu;
+    DATOS.delDia = {}; for (const [k,v] of Object.entries(j.delDia || {})) if (/^[0-6]$/.test(k) && plato(v)) DATOS.delDia[k] = v;
+    if (j.horario){ DATOS.horario = {}; for (let i = 0; i < 7; i++){ const h = j.horario[i]; DATOS.horario[i] = Array.isArray(h) && h.length === 2 && h.every(x => /^\d{1,2}:\d{2}$/.test(x)) ? h : null; } }
+    if (["casera","fonda","mercado","noche"].includes(j.piel)) DATOS.piel = j.piel;
+    DATOS.colores = {}; for (const k of ["acento","fondo","tinta","tarjeta","suave","linea","crema"]) if (j.colores && /^#[0-9a-fA-F]{3,8}$/.test(j.colores[k])) DATOS.colores[k] = j.colores[k];
+    DATOS.muestra = true; DATOS.whatsapp = ""; DATOS.telefono = ""; DATOS.mapa = ""; DATOS.recomienda = "";
+  }catch(e){ /* enlace dañado: se queda la muestra de ejemplo */ }
+})();
+const ARI_LABS = { whatsapp:"", web:"https://javierhedzd-ops.github.io/ari-labs/" };
+
+/* ============================ Página ============================ */
+const $ = id => document.getElementById(id);
+const DIAS = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+const dinero = n => DATOS.moneda + n;
+const ahora = new Date(), hoy = ahora.getDay();
+const pedido = new Map();   // nombre -> {precio, n}
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+function minutos(h){ const [a,b] = h.split(":").map(Number); return a*60 + b; }
+function hora12(h){ let [a,b] = h.split(":").map(Number); const t = a >= 12 ? "p. m." : "a. m."; a = a % 12 || 12; return a + (b ? ":" + String(b).padStart(2,"0") : "") + " " + t; }
+
+function pintarEstado(){
+  const h = DATOS.horario[hoy], m = ahora.getHours()*60 + ahora.getMinutes(), e = $("estado");
+  const abierto = h && m >= minutos(h[0]) && m < minutos(h[1]);
+  e.textContent = abierto ? "Abierto · cierra " + hora12(h[1]) : (h && m < minutos(h[0]) ? "Abre " + hora12(h[0]) : "Cerrado ahora");
+  e.classList.add(abierto ? "si" : "no");
+}
+
+function botonMas(plato){
+  const b = el("button","mas","+");
+  b.type = "button";
+  b.setAttribute("aria-label","Agregar " + plato.nombre + " al pedido");
+  b.dataset.plato = plato.nombre;
+  b.onclick = () => { const p = pedido.get(plato.nombre) || { precio:plato.precio, n:0 }; p.n++; pedido.set(plato.nombre,p); refrescar(); };
+  return b;
+}
+
+function pintarHoy(){
+  const d = DATOS.delDia[hoy], caja = $("hoy");
+  if (!d){ caja.hidden = true; return; }
+  caja.append(el("div","dia","Hoy, " + DIAS[hoy].toLowerCase()), el("h2",null,d.nombre));
+  if (d.detalle) caja.append(el("p",null,d.detalle));
+  const fila = el("div"); fila.append(el("span","precio",dinero(d.precio)), botonMas(d)); caja.append(fila);
+}
+
+function pintarMenu(){
+  for (const s of DATOS.menu){
+    const sec = el("section"); sec.append(el("h2","titulo",s.titulo));
+    if (s.nota) sec.append(el("p","nota",s.nota));
+    const lista = el("div","lista");
+    for (const p of s.platos){
+      const f = el("div","plato"), t = el("div","txt");
+      t.append(el("div","nom",p.nombre)); if (p.detalle) t.append(el("div","des",p.detalle));
+      f.append(t, el("span","guia"), el("div","pre",dinero(p.precio)), botonMas(p)); lista.append(f);
+    }
+    sec.append(lista); $("menu").append(sec);
+  }
+}
+
+function pintarDatos(){
+  const fila = (eti, nodo) => { const f = el("div","dato"); f.append(el("div","eti",eti), nodo); return f; };
+  const dir = el("div","val",DATOS.direccion); dir.append(el("span",null,DATOS.colonia));
+  const hor = el("div","val");
+  for (const i of [1,2,3,4,5,6,0]){
+    const h = DATOS.horario[i], r = el("div","hor" + (i === hoy ? " hoyd" : ""));
+    r.append(el("span",null,DIAS[i]), el("span",null,h ? hora12(h[0]) + " a " + hora12(h[1]) : "Cerrado")); hor.append(r);
+  }
+  $("datos").append(fila("Dirección",dir), fila("Horario",hor));
+  if (DATOS.entrega) $("datos").append(fila("Entrega", el("div","val",DATOS.entrega)));
+}
+
+function refrescar(){
+  let piezas = 0, total = 0;
+  for (const p of pedido.values()){ piezas += p.n; total += p.n * p.precio; }
+  document.querySelectorAll(".mas").forEach(b => { const p = pedido.get(b.dataset.plato); b.textContent = p ? p.n : "+"; b.classList.toggle("puesto", !!p); });
+  const b = $("pedir"); b.textContent = "";
+  b.append(piezas ? "Pedir por WhatsApp" : "Escribir por WhatsApp");
+  if (piezas) b.append(el("small",null, piezas + (piezas === 1 ? " platillo · " : " platillos · ") + dinero(total)));
+  $("quitar").classList.toggle("ver", piezas > 0);
+}
+
+function textoPedido(){
+  if (!pedido.size) return "Hola, vi su menú en la página. ¿Me puede atender?";
+  let total = 0; const l = ["Hola, quiero hacer un pedido:"];
+  for (const [nombre,p] of pedido){ l.push("• " + p.n + " x " + nombre + " (" + dinero(p.n * p.precio) + ")"); total += p.n * p.precio; }
+  l.push("Total: " + dinero(total)); return l.join("\n");
+}
+
+let reloj;
+function avisar(t){ const a = $("aviso"); a.textContent = t; a.classList.add("ver"); clearTimeout(reloj); reloj = setTimeout(() => a.classList.remove("ver"), 4200); }
+const sinConectar = que => avisar("Esta es una muestra: " + que + " se conecta a su número cuando la página se entrega.");
+
+function conectar(){
+  $("pedir").onclick = () => DATOS.muestra || !DATOS.whatsapp ? sinConectar("el botón de WhatsApp")
+    : window.open("https://wa.me/" + DATOS.whatsapp + "?text=" + encodeURIComponent(textoPedido()), "_blank", "noopener");
+  $("quitar").onclick = () => { pedido.clear(); refrescar(); };
+  const ll = $("llamar");
+  if (!DATOS.muestra && DATOS.telefono) ll.href = "tel:" + DATOS.telefono;
+  else { ll.href = "#"; ll.onclick = e => { e.preventDefault(); sinConectar("el botón de llamar"); }; }
+  $("llegar").href = DATOS.mapa || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(DATOS.nombre + " " + DATOS.direccion + " " + DATOS.colonia);
+}
+
+function pintarPie(){
+  const pie = $("pie"), a = el("a",null,"¿Quieres una página así?");
+  const msj = "Hola, quiero una página como la de " + DATOS.nombre + "." + (DATOS.recomienda ? " Vengo recomendado por " + DATOS.recomienda + "." : "");
+  a.href = ARI_LABS.whatsapp ? "https://wa.me/" + ARI_LABS.whatsapp + "?text=" + encodeURIComponent(msj) : ARI_LABS.web;
+  a.target = "_blank"; a.rel = "noopener";
+  pie.append("Hecho por Ari Labs · ", a);
+}
+
+const piel = new URLSearchParams(location.search).get("piel") || DATOS.piel;   // ?piel=fonda sirve para comparar
+if (piel && piel !== "casera") document.body.dataset.piel = piel;
+for (const [k,v] of Object.entries(DATOS.colores || {})) document.body.style.setProperty("--" + k, v);
+document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.body).getPropertyValue("--fondo").trim();
+document.title = DATOS.nombre + " · " + DATOS.tipo + " en " + DATOS.colonia;
+$("tipo").textContent = DATOS.tipo; $("nombre").textContent = DATOS.nombre; $("lema").textContent = DATOS.lema;
+if (DATOS.muestra){
+  const m = $("muestra"); m.hidden = false;
+  m.append(el("b",null,"Muestra"), " · Ari Labs" + (DATOS.muestraHasta ? " · en línea hasta el " + DATOS.muestraHasta : ""));
+}
+pintarEstado(); pintarHoy(); pintarMenu(); pintarDatos(); pintarPie(); conectar(); refrescar();
+</script>
+</body>
+</html>
