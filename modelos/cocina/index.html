@@ -295,9 +295,13 @@ function minutos(h){ const [a,b] = h.split(":").map(Number); return a*60 + b; }
 function hora12(h){ let [a,b] = h.split(":").map(Number); const t = a >= 12 ? "p. m." : "a. m."; a = a % 12 || 12; return a + (b ? ":" + String(b).padStart(2,"0") : "") + " " + t; }
 
 function pintarEstado(){
+  // Un cierre menor o igual que la apertura (11:00 a 0:30) significa que cierra pasada la medianoche.
+  const tramo = h => { if (!h) return null; const a = minutos(h[0]); let c = minutos(h[1]); if (c <= a) c += 1440; return [a, c]; };
   const h = DATOS.horario[hoy], m = ahora.getHours()*60 + ahora.getMinutes(), e = $("estado");
-  const abierto = h && m >= minutos(h[0]) && m < minutos(h[1]);
-  e.textContent = abierto ? "Abierto · cierra " + hora12(h[1]) : (h && m < minutos(h[0]) ? "Abre " + hora12(h[0]) : "Cerrado ahora");
+  const t = tramo(h), ayer = DATOS.horario[(hoy + 6) % 7], ta = tramo(ayer);
+  const sigueDeAyer = ta && ta[1] > 1440 && m < ta[1] - 1440;
+  const abierto = sigueDeAyer || (t && m >= t[0] && m < t[1]);
+  e.textContent = abierto ? "Abierto · cierra " + hora12(sigueDeAyer ? ayer[1] : h[1]) : (t && m < t[0] ? "Abre " + hora12(h[0]) : "Cerrado ahora");
   e.classList.add(abierto ? "si" : "no");
 }
 
