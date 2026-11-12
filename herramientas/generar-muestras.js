@@ -16,6 +16,8 @@ const EJEMPLOS = {
   estetica: [{ titulo: 'Cortes', platos: [pl('Corte de niño', 100), pl('Corte de niña', 120), pl('Primer corte', 150, 'Con diploma y mechón de recuerdo.')] }, { titulo: 'Peinados', platos: [pl('Peinado sencillo', 80), pl('Peinado para fiesta', 150)] }],
   lavanderia: [{ titulo: 'Por kilo', platos: [pl('Lavado y secado', 20, 'Por kilo. Mínimo 3 kilos.'), pl('Lavado, secado y doblado', 25, 'Por kilo.')] }, { titulo: 'Por pieza', platos: [pl('Edredón individual', 70), pl('Edredón matrimonial', 90), pl('Planchado', 10, 'Por pieza.')] }],
   papeleria: [{ titulo: 'Copias e impresiones', platos: [pl('Copia en blanco y negro', 1), pl('Impresión en blanco y negro', 2), pl('Impresión a color', 5)] }, { titulo: 'Servicios', platos: [pl('Engargolado', 30), pl('Enmicado tamaño carta', 20), pl('Escaneo', 5, 'Por hoja.')] }],
+  unas: [{ titulo: 'Manos', platos: [pl('Manicure', 120), pl('Gelish', 180), pl('Uñas acrílicas', 300), pl('Retoque de acrílico', 200)] }, { titulo: 'Pies', platos: [pl('Pedicure', 200), pl('Pedicure con gelish', 280)] }],
+  salon: [{ titulo: 'Cabello', platos: [pl('Corte de dama', 150), pl('Tinte', 450), pl('Alaciado', 600), pl('Peinado', 250)] }, { titulo: 'Uñas', platos: [pl('Manicure', 120), pl('Gelish', 180)] }],
   taqueria: [{ titulo: 'Tacos', platos: [pl('Taco al pastor', 18), pl('Taco de asada', 22), pl('Orden de 5 tacos al pastor', 80)] }, { titulo: 'Gringas y tortas', platos: [pl('Gringa', 55), pl('Torta al pastor', 50)] }, { titulo: 'Bebidas', platos: [pl('Refresco', 25), pl('Agua de sabor', 20)] }]
 };
 fs.mkdirSync(CARPETA, { recursive: true });
