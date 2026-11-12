@@ -186,7 +186,7 @@
     <h1 id="nombre"></h1>
     <p class="lema" id="lema"></p>
     <div class="atajos">
-      <a class="atajo" href="#menu">Ver menú</a>
+      <a class="atajo" href="#menu" id="verMenu">Ver menú</a>
       <a class="atajo" id="llamar">Llamar</a>
       <a class="atajo" id="llegar" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
@@ -208,7 +208,7 @@
 
 <div class="barra">
   <button class="pedir" id="pedir"></button>
-  <button class="quitar" id="quitar">Vaciar pedido</button>
+  <button class="quitar" id="quitar"></button>
 </div>
 <div class="aviso" id="aviso" role="status"></div>
 
@@ -223,6 +223,7 @@ const DATOS = {
   colores: {},                      // opcional, para usar los colores del negocio: { acento:"#B0281A", fondo:"#FFF8EE" }
   muestraHasta: "",                 // ej. "viernes 14 de noviembre"
   tipo: "Cocina económica",
+  giro: "comida",                   // comida | citas (barbería, estética) | servicio (lavandería, taller) | tienda (papelería, abarrotes)
   nombre: "Cocina Doña Mary",
   lema: "Comida casera recién hecha, de lunes a sábado.",
   whatsapp: "",                     // con lada del país, sin espacios: 5219991234567
@@ -277,6 +278,7 @@ const DATOS = {
     DATOS.delDia = {}; for (const [k,v] of Object.entries(j.delDia || {})) if (/^[0-6]$/.test(k) && plato(v)) DATOS.delDia[k] = v;
     if (j.horario){ DATOS.horario = {}; for (let i = 0; i < 7; i++){ const h = j.horario[i]; DATOS.horario[i] = Array.isArray(h) && h.length === 2 && h.every(x => /^\d{1,2}:\d{2}$/.test(x)) ? h : null; } }
     if (["casera","fonda","mercado","noche"].includes(j.piel)) DATOS.piel = j.piel;
+    DATOS.giro = ["comida","citas","servicio","tienda"].includes(j.giro) ? j.giro : "comida";
     DATOS.colores = {}; for (const k of ["acento","fondo","tinta","tarjeta","suave","linea","crema"]) if (j.colores && /^#[0-9a-fA-F]{3,8}$/.test(j.colores[k])) DATOS.colores[k] = j.colores[k];
     DATOS.muestra = true; DATOS.whatsapp = ""; DATOS.telefono = ""; DATOS.mapa = ""; DATOS.recomienda = "";
   }catch(e){ /* enlace dañado: se queda la muestra de ejemplo */ }
@@ -284,6 +286,13 @@ const DATOS = {
 const ARI_LABS = { whatsapp:"", web:"https://javierhedzd-ops.github.io/ari-labs/" };
 
 /* ============================ Página ============================ */
+const GIROS = {
+  comida:   { boton:"Pedir por WhatsApp",     uno:"platillo", varios:"platillos", saludo:"Hola, quiero hacer un pedido:",        vaciar:"Vaciar pedido" },
+  citas:    { boton:"Agendar por WhatsApp",   uno:"servicio", varios:"servicios", saludo:"Hola, quiero agendar una cita para:",  vaciar:"Quitar todo" },
+  servicio: { boton:"Pedir por WhatsApp",     uno:"servicio", varios:"servicios", saludo:"Hola, quiero pedir este servicio:",    vaciar:"Quitar todo" },
+  tienda:   { boton:"Preguntar por WhatsApp", uno:"artículo", varios:"artículos", saludo:"Hola, quiero preguntar por:",          vaciar:"Quitar todo" }
+};
+const T = GIROS[DATOS.giro] || GIROS.comida;
 const $ = id => document.getElementById(id);
 const DIAS = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 const dinero = n => DATOS.moneda + n;
@@ -308,7 +317,7 @@ function pintarEstado(){
 function botonMas(plato){
   const b = el("button","mas","+");
   b.type = "button";
-  b.setAttribute("aria-label","Agregar " + plato.nombre + " al pedido");
+  b.setAttribute("aria-label","Agregar " + plato.nombre);
   b.dataset.plato = plato.nombre;
   b.onclick = () => { const p = pedido.get(plato.nombre) || { precio:plato.precio, n:0 }; p.n++; pedido.set(plato.nombre,p); refrescar(); };
   return b;
@@ -353,14 +362,14 @@ function refrescar(){
   for (const p of pedido.values()){ piezas += p.n; total += p.n * p.precio; }
   document.querySelectorAll(".mas").forEach(b => { const p = pedido.get(b.dataset.plato); b.textContent = p ? p.n : "+"; b.classList.toggle("puesto", !!p); });
   const b = $("pedir"); b.textContent = "";
-  b.append(piezas ? "Pedir por WhatsApp" : "Escribir por WhatsApp");
-  if (piezas) b.append(el("small",null, piezas + (piezas === 1 ? " platillo · " : " platillos · ") + dinero(total)));
+  b.append(piezas ? T.boton : "Escribir por WhatsApp");
+  if (piezas) b.append(el("small",null, piezas + " " + (piezas === 1 ? T.uno : T.varios) + " · " + dinero(total)));
   $("quitar").classList.toggle("ver", piezas > 0);
 }
 
 function textoPedido(){
-  if (!pedido.size) return "Hola, vi su menú en la página. ¿Me puede atender?";
-  let total = 0; const l = ["Hola, quiero hacer un pedido:"];
+  if (!pedido.size) return "Hola, vi su página. ¿Me puede atender?";
+  let total = 0; const l = [T.saludo];
   for (const [nombre,p] of pedido){ l.push("• " + p.n + " x " + nombre + " (" + dinero(p.n * p.precio) + ")"); total += p.n * p.precio; }
   l.push("Total: " + dinero(total)); return l.join("\n");
 }
@@ -397,6 +406,7 @@ if (DATOS.muestra){
   const m = $("muestra"); m.hidden = false;
   m.append(el("b",null,"Muestra"), " · Ari Labs" + (DATOS.muestraHasta ? " · en línea hasta el " + DATOS.muestraHasta : ""));
 }
+$("quitar").textContent = T.vaciar; if (DATOS.giro && DATOS.giro !== "comida") $("verMenu").textContent = "Ver precios";
 pintarEstado(); pintarHoy(); pintarMenu(); pintarDatos(); pintarPie(); conectar(); refrescar();
 </script>
 </body>

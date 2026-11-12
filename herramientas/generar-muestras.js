@@ -5,7 +5,7 @@ const fs = require('fs');
 const [, , archivo, base, hasta = ''] = process.argv;
 if (!archivo || !/^https:\/\//.test(base || '')) { console.error('Uso: node generar.js prospectos.json https://.../modelos/cocina/ "fecha"'); process.exit(1); }
 const b64 = o => Buffer.from(JSON.stringify(o), 'utf8').toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-const CAMPOS = ['tipo', 'nombre', 'lema', 'direccion', 'colonia', 'entrega', 'horario', 'delDia', 'menu', 'piel', 'colores'];
+const CAMPOS = ['tipo', 'giro', 'nombre', 'lema', 'direccion', 'colonia', 'entrega', 'horario', 'delDia', 'menu', 'piel', 'colores'];
 const salida = JSON.parse(fs.readFileSync(archivo, 'utf8')).map(p => {
   const faltan = ['nombre', 'telefono', 'menu'].filter(k => !p[k] || (k === 'menu' && !p.menu.length));
   if (faltan.length) return { nombre: p.nombre || '(sin nombre)', error: 'faltan: ' + faltan.join(', ') };
@@ -13,7 +13,7 @@ const salida = JSON.parse(fs.readFileSync(archivo, 'utf8')).map(p => {
   if (tel.length !== 10) return { nombre: p.nombre, error: 'el teléfono debe tener 10 dígitos: ' + p.telefono };
   const datos = { muestraHasta: hasta }; for (const k of CAMPOS) if (p[k] != null) datos[k] = p[k];
   const muestra = base.replace(/\/?$/, '/') + '#d=' + b64(datos);
-  const mensaje = `Hola, buen día. Somos Ari Labs, de Mérida. Le hicimos una página de muestra para ${p.nombre}, con su menú, para que sus clientes vean el guiso del día y le pidan por WhatsApp:\n\n${muestra}\n\n` +
+  const mensaje = `Hola, buen día. Somos Ari Labs, de Mérida. Le hicimos una página de muestra para ${p.nombre}, ${p.giro && p.giro !== 'comida' ? 'con sus servicios y precios, para que sus clientes lo encuentren y le escriban por WhatsApp' : 'con su menú, para que sus clientes vean el guiso del día y le pidan por WhatsApp'}:\n\n${muestra}\n\n` +
     (hasta ? `Estará en línea hasta el ${hasta}. ` : '') + 'Si le gusta, se la dejamos funcionando por $700, pago único. Si no le interesa, no hay problema y no le volvemos a escribir.';
   return { nombre: p.nombre, colonia: p.colonia || '', telefono: tel, muestra, mensaje, whatsapp: 'https://wa.me/52' + tel + '?text=' + encodeURIComponent(mensaje) };
 });
