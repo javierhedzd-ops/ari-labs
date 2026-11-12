@@ -9,9 +9,19 @@ const BASE = 'https://javierhedzd-ops.github.io/ari-labs/modelos/cocina/';
 const CARPETA = path.join(__dirname, '..', 'modelos', 'cocina', 'muestras');
 const CAMPOS = ['tipo', 'giro', 'nombre', 'lema', 'direccion', 'colonia', 'entrega', 'horario', 'delDia', 'menu', 'piel', 'colores', 'ejemplo'];
 const slug = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+// Listas de ejemplo para cuando no se conocen los servicios del negocio. La página avisa que son de ejemplo.
+const pl = (nombre, precio, detalle) => detalle ? { nombre, precio, detalle } : { nombre, precio };
+const EJEMPLOS = {
+  barberia: [{ titulo: 'Cortes', platos: [pl('Corte clásico', 100), pl('Corte con degradado', 120), pl('Corte de niño', 80)] }, { titulo: 'Barba', platos: [pl('Arreglo de barba', 70), pl('Corte y barba', 170)] }],
+  estetica: [{ titulo: 'Cortes', platos: [pl('Corte de niño', 100), pl('Corte de niña', 120), pl('Primer corte', 150, 'Con diploma y mechón de recuerdo.')] }, { titulo: 'Peinados', platos: [pl('Peinado sencillo', 80), pl('Peinado para fiesta', 150)] }],
+  lavanderia: [{ titulo: 'Por kilo', platos: [pl('Lavado y secado', 20, 'Por kilo. Mínimo 3 kilos.'), pl('Lavado, secado y doblado', 25, 'Por kilo.')] }, { titulo: 'Por pieza', platos: [pl('Edredón individual', 70), pl('Edredón matrimonial', 90), pl('Planchado', 10, 'Por pieza.')] }],
+  papeleria: [{ titulo: 'Copias e impresiones', platos: [pl('Copia en blanco y negro', 1), pl('Impresión en blanco y negro', 2), pl('Impresión a color', 5)] }, { titulo: 'Servicios', platos: [pl('Engargolado', 30), pl('Enmicado tamaño carta', 20), pl('Escaneo', 5, 'Por hoja.')] }],
+  taqueria: [{ titulo: 'Tacos', platos: [pl('Taco al pastor', 18), pl('Taco de asada', 22), pl('Orden de 5 tacos al pastor', 80)] }, { titulo: 'Gringas y tortas', platos: [pl('Gringa', 55), pl('Torta al pastor', 50)] }, { titulo: 'Bebidas', platos: [pl('Refresco', 25), pl('Agua de sabor', 20)] }]
+};
 fs.mkdirSync(CARPETA, { recursive: true });
 const vistos = new Set();
 const salida = JSON.parse(fs.readFileSync(archivo, 'utf8')).map(p => {
+  if (p.ejemplo && !p.menu && p.ejemploDe) { if (!EJEMPLOS[p.ejemploDe]) return { nombre: p.nombre, error: 'no hay ejemplo de: ' + p.ejemploDe }; p.menu = EJEMPLOS[p.ejemploDe]; }
   const faltan = ['nombre', 'telefono'].filter(k => !p[k]);
   if (!p.ejemplo && !(p.menu && p.menu.length)) faltan.push('menu (o "ejemplo": true)');
   if (faltan.length) return { nombre: p.nombre || '(sin nombre)', error: 'faltan: ' + faltan.join(', ') };

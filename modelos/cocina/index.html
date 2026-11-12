@@ -26,9 +26,10 @@
   header{padding:22px 0 14px}
   .arriba{display:flex;align-items:center;justify-content:space-between;gap:12px}
   .tipo{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--acento);font-weight:700}
+  .estado[hidden]{display:none}
   .estado{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;white-space:nowrap;border:1px solid var(--linea);background:var(--tarjeta)}
   .estado.si{color:var(--bien)} .estado.no{color:var(--mal)}
-  h1{font-size:34px;line-height:1.08;letter-spacing:-.02em;margin-top:10px;text-wrap:balance}
+  h1{overflow-wrap:anywhere;font-size:34px;line-height:1.08;letter-spacing:-.02em;margin-top:10px;text-wrap:balance}
   .lema{color:var(--suave);margin-top:8px;font-size:16px}
   .atajos{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
   .atajo{flex:1 1 0;min-width:96px;min-height:46px;display:flex;align-items:center;justify-content:center;gap:6px;
@@ -275,12 +276,14 @@ function aplicarMuestra(j){
   const plato = p => p && txt(p.nombre) && Number.isFinite(p.precio) && (p.detalle == null || txt(p.detalle));
   const menuOk = Array.isArray(j.menu) && j.menu.length > 0 && j.menu.every(s => s && txt(s.titulo) && Array.isArray(s.platos) && s.platos.every(plato));
   if (!j || !txt(j.nombre) || (!menuOk && j.ejemplo !== true)) return;
-  for (const k of ["tipo","nombre","lema","direccion","colonia","entrega","muestraHasta"]) if (txt(j[k])) DATOS[k] = j[k];
+  // Lo que el negocio no trae se queda vacío: nunca se le prestan datos del ejemplo.
+  for (const k of ["tipo","nombre","lema","direccion","colonia","entrega","muestraHasta"]) DATOS[k] = txt(j[k]) ? j[k] : "";
   if (menuOk){
     DATOS.menu = j.menu;
     DATOS.delDia = {}; for (const [k,v] of Object.entries(j.delDia || {})) if (/^[0-6]$/.test(k) && plato(v)) DATOS.delDia[k] = v;
   }
   DATOS.ejemplo = j.ejemplo === true;
+  if (!j.horario) DATOS.horario = null;
   if (j.horario){ DATOS.horario = {}; for (let i = 0; i < 7; i++){ const h = j.horario[i]; DATOS.horario[i] = Array.isArray(h) && h.length === 2 && h.every(x => /^\d{1,2}:\d{2}$/.test(x)) ? h : null; } }
   if (["casera","fonda","mercado","noche"].includes(j.piel)) DATOS.piel = j.piel;
   DATOS.giro = ["comida","citas","servicio","tienda"].includes(j.giro) ? j.giro : "comida";
@@ -324,6 +327,7 @@ function hora12(h){ let [a,b] = h.split(":").map(Number); const t = a >= 12 ? "p
 function pintarEstado(){
   // Un cierre menor o igual que la apertura (11:00 a 0:30) significa que cierra pasada la medianoche.
   const tramo = h => { if (!h) return null; const a = minutos(h[0]); let c = minutos(h[1]); if (c <= a) c += 1440; return [a, c]; };
+  if (!DATOS.horario){ $("estado").hidden = true; return; }
   const h = DATOS.horario[hoy], m = ahora.getHours()*60 + ahora.getMinutes(), e = $("estado");
   const t = tramo(h), ayer = DATOS.horario[(hoy + 6) % 7], ta = tramo(ayer);
   const sigueDeAyer = ta && ta[1] > 1440 && m < ta[1] - 1440;
@@ -365,14 +369,20 @@ function pintarMenu(){
 
 function pintarDatos(){
   const fila = (eti, nodo) => { const f = el("div","dato"); f.append(el("div","eti",eti), nodo); return f; };
-  const dir = el("div","val",DATOS.direccion); dir.append(el("span",null,DATOS.colonia));
-  const hor = el("div","val");
-  for (const i of [1,2,3,4,5,6,0]){
-    const h = DATOS.horario[i], r = el("div","hor" + (i === hoy ? " hoyd" : ""));
-    r.append(el("span",null,DIAS[i]), el("span",null,h ? hora12(h[0]) + " a " + hora12(h[1]) : "Cerrado")); hor.append(r);
+  if (DATOS.direccion || DATOS.colonia){
+    const dir = el("div","val",DATOS.direccion || DATOS.colonia); if (DATOS.direccion && DATOS.colonia) dir.append(el("span",null,DATOS.colonia));
+    $("datos").append(fila("Dirección",dir));
   }
-  $("datos").append(fila("Dirección",dir), fila("Horario",hor));
+  if (DATOS.horario){
+    const hor = el("div","val");
+    for (const i of [1,2,3,4,5,6,0]){
+      const h = DATOS.horario[i], r = el("div","hor" + (i === hoy ? " hoyd" : ""));
+      r.append(el("span",null,DIAS[i]), el("span",null,h ? hora12(h[0]) + " a " + hora12(h[1]) : "Cerrado")); hor.append(r);
+    }
+    $("datos").append(fila("Horario",hor));
+  }
   if (DATOS.entrega) $("datos").append(fila("Entrega", el("div","val",DATOS.entrega)));
+  if (!$("datos").children.length) $("datos").parentElement.hidden = true;
 }
 
 function refrescar(){
@@ -420,7 +430,7 @@ const piel = new URLSearchParams(location.search).get("piel") || DATOS.piel;   /
 if (piel && piel !== "casera") document.body.dataset.piel = piel;
 for (const [k,v] of Object.entries(DATOS.colores || {})) document.body.style.setProperty("--" + k, v);
 document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.body).getPropertyValue("--fondo").trim();
-document.title = DATOS.nombre + " · " + DATOS.tipo + " en " + DATOS.colonia;
+document.title = [DATOS.nombre, [DATOS.tipo, DATOS.colonia].filter(Boolean).join(" en ")].filter(Boolean).join(" · ");
 $("tipo").textContent = DATOS.tipo; $("nombre").textContent = DATOS.nombre; $("lema").textContent = DATOS.lema;
 if (DATOS.muestra){
   const m = $("muestra"); m.hidden = false;
