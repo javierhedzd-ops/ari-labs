@@ -23,10 +23,10 @@ const salida = JSON.parse(fs.readFileSync(archivo, 'utf8')).map(p => {
   fs.writeFileSync(path.join(CARPETA, id + '.json'), JSON.stringify(datos) + '\n');
   const muestra = BASE + '?m=' + id, comida = !p.giro || p.giro === 'comida';
   const queEs = p.ejemplo
-    ? `Le armamos una página de muestra con el nombre de ${p.nombre}:\n\n${muestra}\n\n${comida ? 'El menú y los precios' : 'Los servicios y los precios'} son de ejemplo; los cambiamos por los suyos. Sirve para que sus clientes ${comida ? 'vean su menú y le pidan' : 'vean sus precios y le escriban'} por WhatsApp.`
-    : `Le hicimos una página de muestra para ${p.nombre}, ${comida ? 'con su menú, para que sus clientes vean lo que hay hoy y le pidan' : 'con sus servicios y precios, para que sus clientes lo encuentren y le escriban'} por WhatsApp:\n\n${muestra}\n`;
+    ? `Le armamos una página de muestra con el nombre de ${p.nombre}:\n\n${muestra}\n\n${comida ? 'El menú y los precios' : 'Los servicios y los precios'} son de ejemplo; los cambiamos por los suyos, y el diseño lo personalizamos con los colores y el estilo de su negocio. Sirve para que sus clientes ${comida ? 'vean su menú y le pidan' : 'vean sus precios y le escriban'} por WhatsApp.`
+    : `Le hicimos una página de muestra para ${p.nombre}, ${comida ? 'con su menú, para que sus clientes vean lo que hay hoy y le pidan' : 'con sus servicios y precios, para que sus clientes lo encuentren y le escriban'} por WhatsApp:\n\n${muestra}\n\nEl diseño lo personalizamos con los colores y el estilo de su negocio.`;
   const mensaje = `Hola, buen día. Somos Ari Labs, de Mérida. ${queEs}\n` + (hasta ? `Estará en línea hasta el ${hasta}. ` : '') +
-    'Si le gusta, se la dejamos funcionando por $700, pago único. Si no le interesa, no hay problema y no le volvemos a escribir.';
+    'Si le gusta, se la dejamos funcionando por $700, pago único. Sin compromiso.';
   return { id, nombre: p.nombre, telefono: tel, muestra, mensaje, whatsapp: 'https://wa.me/52' + tel + '?text=' + encodeURIComponent(mensaje) };
 });
 process.stdout.write(JSON.stringify(salida, null, 1) + '\n');
