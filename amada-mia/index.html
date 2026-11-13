@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amada Mía · Bistró Café — Héroes, Mérida</title>
+<meta name="description" content="Amada Mía Bistró Café, sucursal Héroes en Mérida. Desayunos, brunch y cenas todos los días de 7 am a 10 pm. Calle 149, Fraccionamiento Los Héroes.">
+<meta name="theme-color" content="#FBF5EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{
+  --crema:#FBF5EE;
+  --papel:#FFFCF8;
+  --rosa:#E9CBC6;
+  --rosa-hondo:#C68B84;
+  --vino:#6B302F;
+  --vino-hondo:#4E2120;
+  --dorado:#B7904F;
+  --tinta:#2C2320;
+  --tinta-2:#5C4B44;
+  --linea:#E3D3C6;
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Jost",system-ui,-apple-system,sans-serif;
+  --script:"Parisienne",cursive;
+  --ancho:1120px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--crema);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:17px;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.05}
+p{margin:0 0 1em}
+a{color:inherit}
+
+.envoltura{width:100%;max-width:var(--ancho);margin:0 auto;padding:0 24px}
+@media(min-width:760px){.envoltura{padding:0 40px}}
+
+.etiqueta{
+  font-family:var(--sans);font-weight:400;font-size:12px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--vino);
+}
+.filete{display:block;width:54px;height:1px;background:var(--dorado);border:0;margin:22px auto}
+
+/* ---------- Portada ---------- */
+.portada{
+  position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:96px 24px 72px;overflow:hidden;
+}
+.portada::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 60% at 50% -10%,rgba(233,203,198,.85),rgba(251,245,238,0) 62%),
+    radial-gradient(90% 40% at 50% 108%,rgba(183,144,79,.14),rgba(251,245,238,0) 70%);
+  pointer-events:none;
+}
+.rama{
+  position:absolute;width:min(46vw,300px);color:var(--rosa-hondo);
+  opacity:.45;pointer-events:none;
+}
+.rama.a{top:-26px;left:-46px;transform:rotate(8deg)}
+.rama.b{bottom:-30px;right:-44px;transform:rotate(188deg)}
+@media(min-width:900px){
+  .rama{width:340px;opacity:.5}
+  .rama.a{top:-20px;left:-10px}
+  .rama.b{bottom:-20px;right:-10px}
+}
+.portada > *{position:relative}
+
+.nombre{
+  font-family:var(--script);
+  font-size:clamp(66px,19vw,146px);
+  line-height:.9;color:var(--vino);
+  margin:6px 0 0;
+  letter-spacing:.01em;
+}
+.lema{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(21px,5.4vw,31px);line-height:1.3;
+  color:var(--tinta);margin:18px 0 0;
+}
+.horario{
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--tinta-2);margin:14px 0 0;
+}
+.acciones{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
+.boton{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:50px;padding:0 30px;border-radius:2px;
+  font-family:var(--sans);font-size:12.5px;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--vino);
+  transition:background .25s ease,color .25s ease,transform .25s ease;
+}
+.boton.solido{background:var(--vino);color:#FCF7F2}
+.boton.solido:hover{background:var(--vino-hondo);border-color:var(--vino-hondo)}
+.boton.hueco{color:var(--vino);background:transparent}
+.boton.hueco:hover{background:rgba(107,48,47,.07)}
+.boton:active{transform:translateY(1px)}
+:focus-visible{outline:2px solid var(--vino);outline-offset:3px}
+
+/* ---------- Franja de datos ---------- */
+.franja{background:var(--vino);color:#F7EDE6;padding:26px 0}
+.franja .envoltura{display:grid;gap:18px;text-align:center}
+@media(min-width:760px){.franja .envoltura{grid-template-columns:repeat(3,1fr);gap:0}}
+.franja div{padding:0 8px}
+@media(min-width:760px){
+  .franja div+div{border-left:1px solid rgba(247,237,230,.22)}
+}
+.franja b{
+  display:block;font-family:var(--serif);font-weight:400;
+  font-size:20px;line-height:1.2;margin-bottom:3px;color:#FFF8F2;
+}
+.franja span{
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(247,237,230,.72);
+}
+
+/* ---------- Secciones ---------- */
+section.bloque{padding:76px 0}
+@media(min-width:760px){section.bloque{padding:104px 0}}
+.titulo-seccion{
+  font-size:clamp(34px,8.5vw,58px);line-height:1.02;color:var(--vino);
+  margin:14px 0 0;
+}
+.titulo-seccion em{font-style:italic;color:var(--vino-hondo)}
+.entrada{max-width:44ch;color:var(--tinta-2);margin-top:20px;font-size:17.5px}
+.entrada.derecha{margin-left:auto}
+
+/* La mesa: texto editorial */
+.mesa{display:grid;gap:34px}
+@media(min-width:860px){.mesa{grid-template-columns:1.05fr .95fr;gap:64px;align-items:start}}
+.capitular::first-letter{
+  font-family:var(--serif);font-size:64px;line-height:.8;float:left;
+  padding:6px 10px 0 0;color:var(--vino);
+}
+.cita-lateral{
+  border-left:1px solid var(--dorado);padding:6px 0 6px 24px;
+  font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.45;
+  color:var(--vino);
+}
+.cita-lateral small{
+  display:block;font-family:var(--sans);font-style:normal;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--tinta-2);margin-top:14px;
+}
+
+/* ---------- Carta ---------- */
+.carta{background:var(--papel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.grupos{display:grid;gap:44px;margin-top:44px}
+@media(min-width:820px){.grupos{grid-template-columns:1fr 1fr;gap:52px 72px}}
+.grupo h3{
+  font-size:27px;color:var(--vino);
+  display:flex;align-items:baseline;gap:12px;margin-bottom:6px;
+}
+.grupo h3 .num{
+  font-family:var(--sans);font-size:12px;letter-spacing:.2em;
+  color:var(--dorado);font-weight:400;
+}
+.grupo .nota{
+  font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-2);margin-bottom:16px;
+}
+.plato{
+  display:flex;align-items:baseline;gap:10px;
+  padding:9px 0;border-bottom:1px dotted var(--linea);
+}
+.plato:last-child{border-bottom:0}
+.plato .n{font-family:var(--serif);font-size:20px;line-height:1.25;color:var(--tinta)}
+.plato .p{
+  margin-left:auto;font-size:14px;letter-spacing:.06em;color:var(--vino);
+  white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+.pie-carta{
+  margin-top:52px;text-align:center;font-size:14.5px;color:var(--tinta-2);
+}
+.pie-carta a{
+  color:var(--vino);text-decoration:none;border-bottom:1px solid var(--dorado);
+  padding-bottom:2px;
+}
+
+/* ---------- El lugar ---------- */
+.marcos{display:grid;gap:18px;margin-top:44px}
+@media(min-width:720px){.marcos{grid-template-columns:repeat(3,1fr);gap:22px}}
+.marco{
+  position:relative;aspect-ratio:4/5;border:1px solid var(--linea);
+  background:
+    linear-gradient(160deg,rgba(233,203,198,.30),rgba(255,252,248,.55)),
+    repeating-linear-gradient(0deg,transparent 0 26px,rgba(198,139,132,.13) 26px 27px);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:22px;
+}
+.marco::after{
+  content:"";position:absolute;inset:10px;border:1px solid rgba(183,144,79,.45);
+  pointer-events:none;
+}
+.marco span{
+  font-family:var(--serif);font-style:italic;font-size:19px;color:var(--vino);
+  line-height:1.35;
+}
+.marco span small{
+  display:block;font-family:var(--sans);font-style:normal;font-size:12px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--tinta-2);
+  margin-top:10px;
+}
+
+/* ---------- Testimonio ---------- */
+.testimonio{text-align:center;padding:78px 24px;background:var(--crema)}
+.testimonio blockquote{
+  margin:0 auto;max-width:22ch;
+  font-family:var(--serif);font-size:clamp(26px,6.8vw,40px);
+  line-height:1.28;color:var(--vino);font-style:italic;font-weight:300;
+}
+.testimonio cite{
+  display:block;margin-top:22px;font-family:var(--sans);font-style:normal;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--tinta-2);
+}
+
+/* ---------- Visítanos ---------- */
+.visita{background:var(--vino);color:#F7EDE6}
+.visita .titulo-seccion{color:#FFF8F2}
+.visita .etiqueta{color:var(--rosa)}
+.rejilla-visita{display:grid;gap:38px;margin-top:40px}
+@media(min-width:820px){.rejilla-visita{grid-template-columns:1.1fr .9fr;gap:64px}}
+.dato{margin-bottom:26px}
+.dato h4{
+  font-family:var(--sans);font-weight:400;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(247,237,230,.6);margin:0 0 7px;
+}
+.dato p,.dato address{
+  margin:0;font-family:var(--serif);font-size:23px;font-style:normal;line-height:1.35;color:#FFF8F2;
+}
+.dato a{text-decoration:none;border-bottom:1px solid rgba(233,203,198,.45);padding-bottom:1px}
+.horarios{width:100%;border-collapse:collapse;font-size:15.5px}
+.horarios td{padding:8px 0;border-bottom:1px solid rgba(247,237,230,.16);color:rgba(247,237,230,.9)}
+.horarios td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.visita .boton.solido{background:#F7EDE6;color:var(--vino);border-color:#F7EDE6}
+.visita .boton.solido:hover{background:#FFF8F2;color:var(--vino-hondo)}
+.visita :focus-visible{outline-color:#F7EDE6}
+
+/* ---------- Pie ---------- */
+footer{padding:44px 0 56px;text-align:center;background:var(--vino-hondo);color:rgba(247,237,230,.62)}
+footer .firma{font-family:var(--script);font-size:34px;color:#F7EDE6;line-height:1}
+footer p{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:14px 0 0}
+footer a{color:rgba(247,237,230,.85);text-decoration:none}
+
+/* ---------- Aparición ---------- */
+.sube{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.sube.dentro{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sube{opacity:1;transform:none;transition:none}
+  .boton{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- rama ornamental -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <g id="rama-hojas" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+    <path d="M22 258C48 214 46 168 68 126c14-27 34-46 42-72"/>
+    <path d="M64 138c-22-6-34-24-37-44"/>
+    <path d="M70 116c20-8 30-26 32-46"/>
+    <path d="M84 88c-18-8-26-24-27-40"/>
+    <path d="M96 66c16-6 24-20 26-34"/>
+    <g fill="currentColor" fill-opacity=".30" stroke="none">
+      <ellipse cx="27" cy="94" rx="7.5" ry="15" transform="rotate(-24 27 94)"/>
+      <ellipse cx="39" cy="70" rx="7" ry="14" transform="rotate(28 39 70)"/>
+      <ellipse cx="61" cy="52" rx="7" ry="13.5" transform="rotate(-30 61 52)"/>
+      <ellipse cx="88" cy="44" rx="6.5" ry="12.5" transform="rotate(34 88 44)"/>
+      <ellipse cx="112" cy="26" rx="6" ry="11.5" transform="rotate(-20 112 26)"/>
+      <ellipse cx="74" cy="80" rx="6.5" ry="12" transform="rotate(-46 74 80)"/>
+      <ellipse cx="57" cy="120" rx="7" ry="13" transform="rotate(-40 57 120)"/>
+      <ellipse cx="44" cy="150" rx="6.5" ry="12" transform="rotate(44 44 150)"/>
+      <ellipse cx="50" cy="186" rx="6.5" ry="12.5" transform="rotate(-38 50 186)"/>
+    </g>
+  </g>
+</svg>
+
+<header class="portada">
+  <svg class="rama a" viewBox="0 0 150 270" aria-hidden="true"><use href="#rama-hojas"/></svg>
+  <svg class="rama b" viewBox="0 0 150 270" aria-hidden="true"><use href="#rama-hojas"/></svg>
+
+  <span class="etiqueta">Bistró Café · Héroes, Mérida</span>
+  <h1 class="nombre">Amada Mía</h1>
+  <hr class="filete">
+  <p class="lema">Desayunos, brunch y cenas<br>en un rincón que se siente tuyo.</p>
+  <p class="horario">Todos los días · 7:00 a 22:00</p>
+
+  <div class="acciones">
+    <a class="boton solido" href="https://wa.link/thr9yt" target="_blank" rel="noopener">Reservar mesa</a>
+    <a class="boton hueco" href="#carta">Ver la carta</a>
+  </div>
+</header>
+
+<div class="franja">
+  <div class="envoltura">
+    <div><b>7:00 – 22:00</b><span>Todos los días</span></div>
+    <div><b>Calle 149</b><span>Fracc. Los Héroes</span></div>
+    <div><b>@amadamia.heroes</b><span>Instagram</span></div>
+  </div>
+</div>
+
+<section class="bloque">
+  <div class="envoltura">
+    <div class="mesa">
+      <div class="sube">
+        <span class="etiqueta">La casa</span>
+        <h2 class="titulo-seccion">Un café que se toma <em>sin prisa</em>.</h2>
+        <p class="entrada capitular">Amada Mía nació como un bistró de barrio en el oriente de Mérida: el tipo de lugar donde el desayuno se alarga hasta la comida y la sobremesa no tiene hora de salida. Aquí se viene a comer bien, pero también a quedarse.</p>
+        <p class="entrada">La sucursal de Héroes abre desde las siete de la mañana. Sirve desayunos, brunch y cenas, con café de especialidad hecho al momento y malteadas que valen el viaje.</p>
+      </div>
+      <aside class="sube cita-lateral">
+        “Desayunos, brunch y cenas, todos los días.”
+        <small>La casa, Héroes</small>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="bloque carta" id="carta">
+  <div class="envoltura">
+    <div class="sube" style="text-align:center">
+      <span class="etiqueta">La carta</span>
+      <h2 class="titulo-seccion">Lo que se pide <em>siempre</em>.</h2>
+    </div>
+
+    <div class="grupos">
+      <div class="grupo sube">
+        <h3><span class="num">I</span> Para desayunar</h3>
+        <p class="nota">Servido desde las 7:00</p>
+        <div class="plato"><span class="n">Chilaquiles</span></div>
+        <div class="plato"><span class="n">Huevos motuleños</span></div>
+        <div class="plato"><span class="n">Huevos benedictinos con papadzul</span></div>
+        <div class="plato"><span class="n">Omelette yucateco</span></div>
+        <div class="plato"><span class="n">Avocado toast</span></div>
+        <div class="plato"><span class="n">Pancakes</span></div>
+        <div class="plato"><span class="n">Croissant relleno</span></div>
+      </div>
+
+      <div class="grupo sube">
+        <h3><span class="num">II</span> Para la tarde</h3>
+        <p class="nota">Brunch y comida</p>
+        <div class="plato"><span class="n">Bowls</span></div>
+        <div class="plato"><span class="n">Burritos</span></div>
+        <div class="plato"><span class="n">Baguette cordon bleu</span></div>
+        <div class="plato"><span class="n">Hamburguesas</span></div>
+        <div class="plato"><span class="n">Ensaladas</span></div>
+        <div class="plato"><span class="n">Postres del día</span></div>
+      </div>
+
+      <div class="grupo sube">
+        <h3><span class="num">III</span> La barra</h3>
+        <p class="nota">Café de especialidad</p>
+        <div class="plato"><span class="n">Espresso sencillo</span><span class="p">$44</span></div>
+        <div class="plato"><span class="n">Flat white</span><span class="p">$59</span></div>
+        <div class="plato"><span class="n">Latte tiramisú</span></div>
+        <div class="plato"><span class="n">Nutella latte</span></div>
+        <div class="plato"><span class="n">Café horchata</span></div>
+        <div class="plato"><span class="n">Cold brew</span></div>
+        <div class="plato"><span class="n">Matcha · Taro · Té chai</span><span class="p">$64</span></div>
+      </div>
+
+      <div class="grupo sube">
+        <h3><span class="num">IV</span> Dulce</h3>
+        <p class="nota">Para el antojo</p>
+        <div class="plato"><span class="n">Malteadas</span><span class="p">$69 – $95</span></div>
+        <div class="plato"><span class="n">Smoothies</span><span class="p">$74 – $79</span></div>
+        <div class="plato"><span class="n">Chocolate caliente</span><span class="p">$54</span></div>
+        <div class="plato"><span class="n">Frappés</span></div>
+      </div>
+    </div>
+
+    <p class="pie-carta sube">La carta cambia con la temporada. <a href="https://linktr.ee/amadamiaheroes" target="_blank" rel="noopener">Menú oficial y ubicación</a></p>
+  </div>
+</section>
+
+<section class="bloque">
+  <div class="envoltura">
+    <div class="sube" style="max-width:52ch">
+      <span class="etiqueta">El lugar</span>
+      <h2 class="titulo-seccion">Hojas de libro <em>en la pared</em>.</h2>
+      <p class="entrada">El salón está forrado con páginas de libros, flores colgando del techo y un letrero dorado con el nombre. Luz cálida, mesas de madera y rincones pensados para dos. Es de esos lugares donde la foto sale bien sin buscar el ángulo.</p>
+    </div>
+
+    <div class="marcos">
+      <div class="marco sube"><span>El salón<br><small>Foto del lugar</small></span></div>
+      <div class="marco sube"><span>La mesa<br><small>Foto del lugar</small></span></div>
+      <div class="marco sube"><span>El café<br><small>Foto del lugar</small></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="testimonio">
+  <blockquote>“La decoración es súper cute y la comida deliciosa.”</blockquote>
+  <cite>Karla G. · reseña en Google</cite>
+</div>
+
+<section class="bloque visita" id="visita">
+  <div class="envoltura">
+    <div class="sube">
+      <span class="etiqueta">Visítanos</span>
+      <h2 class="titulo-seccion">Nos vemos <em>en Héroes</em>.</h2>
+    </div>
+
+    <div class="rejilla-visita">
+      <div class="sube">
+        <div class="dato">
+          <h4>Dirección</h4>
+          <address>Calle 149, Tablajes 27790 y 24540<br>Fracc. Los Héroes · Mérida, Yucatán</address>
+        </div>
+        <div class="dato">
+          <h4>Horario</h4>
+          <table class="horarios">
+            <tr><td>Lunes a domingo</td><td>7:00 – 22:00</td></tr>
+          </table>
+        </div>
+        <div class="dato">
+          <h4>Contacto</h4>
+          <p><a href="tel:+529993662063">+52 999 366 2063</a></p>
+          <p><a href="https://www.instagram.com/amadamia.heroes/" target="_blank" rel="noopener">Instagram @amadamia.heroes</a></p>
+        </div>
+        <div class="acciones" style="justify-content:flex-start;margin-top:30px">
+          <a class="boton solido" href="https://www.google.com/maps/search/?api=1&query=Amada+M%C3%ADa+Bistr%C3%B3+Caf%C3%A9+H%C3%A9roes+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a>
+          <a class="boton hueco" href="https://wa.link/thr9yt" target="_blank" rel="noopener" style="color:#F7EDE6;border-color:rgba(247,237,230,.5)">Reservar</a>
+        </div>
+      </div>
+
+      <div class="sube">
+        <div class="dato">
+          <h4>Buenos para</h4>
+          <p>Un café rápido antes del trabajo, un desayuno largo de domingo, una cita, un cumpleaños de los de mantel largo.</p>
+        </div>
+        <div class="dato">
+          <h4>Reservas</h4>
+          <p>Por WhatsApp o por Instagram. Los fines de semana conviene apartar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="envoltura">
+    <div class="firma">Amada Mía</div>
+    <p>Bistró Café · Héroes, Mérida</p>
+    <p style="letter-spacing:.1em;text-transform:none;font-size:12px;opacity:.75;margin-top:18px">Propuesta de sitio · Ari Labs</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var el = document.querySelectorAll('.sube');
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    el.forEach(function(n){ n.classList.add('dentro'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('dentro'); io.unobserve(e.target); }
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.12});
+  el.forEach(function(n){ io.observe(n); });
+})();
+</script>
+</body>
+</html>
