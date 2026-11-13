@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponga su página en su WhatsApp, Facebook y Google · Ari Labs</title>
+<meta name="description" content="Guía de Ari Labs: cómo poner el enlace de su página web en su WhatsApp Business, su página de Facebook y su perfil de Google Maps, en dos minutos.">
+<meta property="og:title" content="Ponga su página en su WhatsApp, Facebook y Google">
+<meta property="og:description" content="Tres pasos cortos desde su teléfono. Guía de Ari Labs.">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--glaciar:#f8fafc;--plata:#ced6e0;--acero:#5b6978;--artico:#64b6ff;--menta:#b2e4db;--noche:#2e2e3e;--tinta:#1f2633;--suave:#4b5868;--azul-texto:#2563a8}
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#eef4fa,#f8fafc 40%);color:var(--tinta);font:17px/1.55 "Inter Tight",system-ui,sans-serif}
+  main{max-width:680px;margin:0 auto;padding:28px 16px 48px}
+  .marca{font-weight:600;letter-spacing:-.02em;color:var(--noche);margin:0 0 22px;font-size:1rem}
+  .marca span{color:var(--azul-texto)}
+  h1{font-size:clamp(1.9rem,1.4rem + 2.4vw,2.6rem);line-height:1.05;letter-spacing:-.04em;margin:0 0 10px;color:var(--noche)}
+  .lead{color:var(--suave);margin:0 0 22px}
+  .enlace{background:#fff;border:1px solid var(--plata);border-radius:16px;padding:14px 16px;margin:0 0 26px;display:grid;gap:10px}
+  .enlace[hidden]{display:none}
+  .enlace small{color:var(--acero);font-weight:500}
+  .enlace code{font:600 .95rem ui-monospace,Menlo,monospace;color:var(--azul-texto);word-break:break-all}
+  button{font:600 1rem "Inter Tight",system-ui,sans-serif;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;background:var(--noche);color:#fff;justify-self:start}
+  section{background:#fff;border:1px solid #e3e9f0;border-radius:20px;padding:20px 20px 14px;margin:0 0 14px}
+  h2{font-size:1.3rem;letter-spacing:-.025em;margin:0 0 4px;color:var(--noche)}
+  .cuando{margin:0 0 12px;color:var(--suave);font-size:.95rem}
+  ol{margin:0;padding:0;list-style:none;counter-reset:p;display:grid;gap:10px}
+  ol li{counter-increment:p;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+  ol li::before{content:counter(p);width:26px;height:26px;border-radius:50%;background:#e6f2ff;color:var(--azul-texto);font-weight:600;font-size:.9rem;display:grid;place-items:center;margin-top:1px}
+  b{font-weight:600;color:var(--noche)}
+  .nota{margin:12px 0 4px;font-size:.92rem;color:var(--acero)}
+  .final{color:var(--suave);font-size:.95rem;margin:22px 0 0}
+  .final a{color:var(--azul-texto)}
+  @media print{
+    body{background:#fff;font-size:12pt}
+    main{padding:0}
+    .enlace button{display:none}
+    section{break-inside:avoid;border-color:#ccd}
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="marca">Ari <span>Labs</span></p>
+  <h1>Ponga su página en su WhatsApp, Facebook y Google</h1>
+  <p class="lead">Así sus clientes la encuentran donde ya lo buscan. Son dos minutos desde su teléfono y no tiene que darle su contraseña a nadie.</p>
+
+  <div class="enlace" id="caja-enlace" hidden>
+    <small id="de-quien">El enlace de su página</small>
+    <code id="su-enlace"></code>
+    <button type="button" id="copiar">Copiar enlace</button>
+  </div>
+
+  <section>
+    <h2>1. WhatsApp Business</h2>
+    <p class="cuando">El enlace sale en su perfil cuando un cliente le escribe.</p>
+    <ol>
+      <li><span>Abra WhatsApp Business y toque los <b>tres puntitos</b> (o <b>Configuración</b> en iPhone).</span></li>
+      <li><span>Entre a <b>Herramientas para la empresa</b> y luego a <b>Perfil de empresa</b>.</span></li>
+      <li><span>Toque <b>Sitio web</b>, pegue el enlace y guarde.</span></li>
+    </ol>
+    <p class="nota">Si usa WhatsApp normal, puede pegar el enlace en su <b>Info</b> (debajo de su foto de perfil) o compartirlo en su estado.</p>
+  </section>
+
+  <section>
+    <h2>2. Facebook</h2>
+    <p class="cuando">Para que salga en la información de su página de negocio.</p>
+    <ol>
+      <li><span>Abra Facebook y cámbiese al perfil de <b>su página de negocio</b>.</span></li>
+      <li><span>Toque <b>Editar</b> o <b>Editar detalles</b> en la parte de información.</span></li>
+      <li><span>Busque <b>Sitio web</b>, pegue el enlace y guarde.</span></li>
+    </ol>
+    <p class="nota">También puede publicarlo una vez con una foto de su local: "Ya tenemos página, aquí ve nuestros precios".</p>
+  </section>
+
+  <section>
+    <h2>3. Google Maps</h2>
+    <p class="cuando">Para que aparezca cuando lo buscan en Google.</p>
+    <ol>
+      <li><span>Con la cuenta de Google de su negocio, busque el nombre de su negocio en Google o en Maps.</span></li>
+      <li><span>Toque <b>Editar perfil</b> y entre a <b>Contacto</b>.</span></li>
+      <li><span>En <b>Sitio web</b>, pegue el enlace y guarde. Google puede tardar unos días en mostrarlo.</span></li>
+    </ol>
+    <p class="nota">¿No le sale "Editar perfil"? Es que su negocio no está a su nombre en Google. En Maps, toque su negocio, luego <b>Sugerir un cambio</b>, y agregue ahí el sitio web.</p>
+  </section>
+
+  <section>
+    <h2>4. Su código QR</h2>
+    <p class="cuando">Para los clientes que llegan al local.</p>
+    <ol>
+      <li><span>Imprima la hoja con su código QR que le mandamos.</span></li>
+      <li><span>Péguela en el mostrador, la puerta o la caja, a la altura de los ojos.</span></li>
+    </ol>
+  </section>
+
+  <p class="final">Si los nombres de su teléfono son un poco distintos, busque la opción que diga <b>Sitio web</b>. ¿Se atoró? Mándenos un WhatsApp y le ayudamos. · <a href="../../">Ari Labs</a></p>
+</main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), u = q.get('u') || '', n = (q.get('n') || '').slice(0, 60);
+  try { var x = new URL(u); if (x.protocol !== 'https:') return; } catch (e) { return; }
+  document.getElementById('caja-enlace').hidden = false;
+  document.getElementById('su-enlace').textContent = u;
+  if (n) document.getElementById('de-quien').textContent = 'El enlace de la página de ' + n;
+  document.getElementById('copiar').addEventListener('click', function () {
+    var b = this;
+    (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar enlace'; }, 2000); }).catch(function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('su-enlace')); getSelection().removeAllRanges(); getSelection().addRange(r);
+    });
+  });
+})();
+</script>
+</body>
+</html>

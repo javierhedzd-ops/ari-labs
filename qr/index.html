@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR para imprimir · Ari Labs</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--glaciar:#f8fafc;--plata:#ced6e0;--acero:#5b6978;--artico:#64b6ff;--noche:#2e2e3e;--tinta:#1f2633;--suave:#4b5868;--azul-texto:#2563a8;--color:#1f2633}
+  *{box-sizing:border-box}
+  body{margin:0;background:#e9eef4;color:var(--tinta);font:16px/1.5 "Inter Tight",system-ui,sans-serif}
+  .control{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .control h1{font-size:1.6rem;letter-spacing:-.03em;margin:0 0 4px;color:var(--noche)}
+  .control p{margin:0 0 16px;color:var(--suave)}
+  .campos{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+  .campos label{display:grid;gap:4px;font-weight:500;font-size:.92rem}
+  .campos .ancho{grid-column:1/-1}
+  input{font:inherit;padding:11px 12px;border:1px solid var(--plata);border-radius:12px;background:#fff;color:var(--tinta);min-width:0;width:100%}
+  input[type=color]{padding:4px;height:46px}
+  .botones{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 8px}
+  button{font:600 1rem "Inter Tight",system-ui,sans-serif;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;background:var(--noche);color:#fff}
+  button.sec{background:#fff;color:var(--noche);box-shadow:inset 0 0 0 1px var(--plata)}
+  .msg{min-height:1.5em;color:var(--azul-texto);font-size:.92rem;margin:0}
+  .error{color:#b42318}
+  /* la hoja (tamaño carta) */
+  .vista{padding:8px 16px 40px;overflow:hidden;display:flex;justify-content:center;align-items:flex-start}
+  .hoja{width:8.5in;height:11in;flex:none;margin:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.8in .7in;gap:.22in;box-shadow:0 10px 40px rgba(31,38,51,.15);transform-origin:top center;position:relative}
+  .h-nombre{font-size:42pt;font-weight:700;letter-spacing:-.035em;line-height:1.02;color:var(--color);margin:0;max-width:100%;overflow-wrap:anywhere}
+  .h-frase{font-size:20pt;font-weight:500;color:var(--tinta);margin:0;letter-spacing:-.01em}
+  .h-qr{width:4.6in;height:4.6in;padding:.18in;border-radius:.3in;border:3px solid var(--color);display:grid;place-items:center}
+  .h-qr svg{width:100%;height:100%;display:block}
+  .h-paso{font-size:15pt;color:var(--suave);margin:0}
+  .h-enlace{font:500 11pt ui-monospace,Menlo,monospace;color:var(--acero);margin:0;word-break:break-all;max-width:6in}
+  .h-pie{position:absolute;bottom:.45in;left:0;right:0;font-size:9.5pt;color:var(--acero);letter-spacing:.02em}
+  @page{size:Letter;margin:0}
+  @media print{
+    body{background:#fff}
+    .control{display:none}
+    .vista{padding:0;height:auto!important;overflow:visible;display:block}
+    .hoja{box-shadow:none;transform:none!important;margin:0}
+  }
+</style>
+</head>
+<body>
+<section class="control" aria-label="Datos del código">
+  <h1>QR para imprimir</h1>
+  <p>Escribe el nombre y el enlace de la página del negocio. La hoja de abajo se arma sola; luego tócale a "Imprimir o guardar PDF".</p>
+  <form class="campos" id="datos" onsubmit="return false">
+    <label class="ancho">Nombre del negocio<input id="n" maxlength="60" autocomplete="off" placeholder="Lavandería Quick Wash"></label>
+    <label class="ancho">Enlace de su página<input id="u" type="url" inputmode="url" autocomplete="off" placeholder="https://javierhedzd-ops.github.io/..."></label>
+    <label>Frase de arriba del código<input id="t" maxlength="60" autocomplete="off" value="Vea nuestros precios aquí"></label>
+    <label>Color del negocio<input id="c" type="color" value="#1f2633"></label>
+  </form>
+  <div class="botones">
+    <button type="button" id="imprimir">Imprimir o guardar PDF</button>
+    <button type="button" class="sec" id="copiar">Copiar enlace de esta hoja</button>
+  </div>
+  <p class="msg" id="msg" role="status"></p>
+</section>
+
+<div class="vista" id="vista">
+  <article class="hoja" id="hoja" aria-label="Hoja para imprimir">
+    <p class="h-nombre" id="h-nombre"></p>
+    <p class="h-frase" id="h-frase"></p>
+    <div class="h-qr" id="h-qr"></div>
+    <p class="h-paso">Abra la cámara de su teléfono y apunte al código</p>
+    <p class="h-enlace" id="h-enlace"></p>
+    <p class="h-pie">Página hecha por Ari Labs · Mérida</p>
+  </article>
+</div>
+
+<script src="../vendor/qrcode.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var q = new URLSearchParams(location.search);
+  ['n', 'u', 't', 'c'].forEach(function (k) { if (q.get(k)) $(k).value = q.get(k); });
+  if (!/^#[0-9a-f]{6}$/i.test($('c').value)) $('c').value = '#1f2633';
+
+  function enlaceValido(u) {
+    try { var x = new URL(u); return x.protocol === 'https:' && !!x.hostname; } catch (e) { return false; }
+  }
+  function armar() {
+    var n = $('n').value.trim(), u = $('u').value.trim(), t = $('t').value.trim(), c = $('c').value;
+    document.documentElement.style.setProperty('--color', c);
+    $('h-nombre').textContent = n || 'Nombre del negocio';
+    $('h-frase').textContent = t;
+    $('h-enlace').textContent = u.replace(/^https:\/\//, '');
+    var msg = $('msg'); msg.classList.remove('error'); msg.textContent = '';
+    if (!u) { $('h-qr').innerHTML = ''; return false; }
+    if (!enlaceValido(u)) { $('h-qr').innerHTML = ''; msg.classList.add('error'); msg.textContent = 'El enlace tiene que empezar con https://'; return false; }
+    var qr = qrcode(0, 'M'); qr.addData(u); qr.make();
+    $('h-qr').innerHTML = qr.createSvgTag({ cellSize: 8, margin: 0, scalable: true });
+    $('h-qr').querySelector('svg').setAttribute('aria-label', 'Código QR de ' + u);
+    return true;
+  }
+  function escalar() {
+    var hoja = $('hoja'), ancho = $('vista').clientWidth - 32, real = hoja.offsetWidth;
+    var f = Math.min(1, ancho / real);
+    hoja.style.transform = 'scale(' + f + ')';
+    $('vista').style.height = (hoja.offsetHeight * f + 48) + 'px';
+  }
+  function enlaceHoja() {
+    var p = new URLSearchParams();
+    ['n', 'u', 't', 'c'].forEach(function (k) { if ($(k).value.trim()) p.set(k, $(k).value.trim()); });
+    return location.origin + location.pathname + '?' + p.toString();
+  }
+  $('datos').addEventListener('input', function () { armar(); history.replaceState(null, '', enlaceHoja()); });
+  $('imprimir').addEventListener('click', function () {
+    if (!armar()) { $('msg').classList.add('error'); $('msg').textContent = 'Falta el enlace de la página del negocio.'; return; }
+    var antes = document.title;
+    document.title = 'QR ' + ($('n').value.trim() || 'negocio');
+    window.print();
+    document.title = antes;
+  });
+  $('copiar').addEventListener('click', function () {
+    var e = enlaceHoja();
+    (navigator.clipboard ? navigator.clipboard.writeText(e) : Promise.reject())
+      .then(function () { $('msg').textContent = 'Enlace copiado.'; })
+      .catch(function () { $('msg').textContent = e; });
+  });
+  addEventListener('resize', escalar);
+  armar(); escalar();
+})();
+</script>
+</body>
+</html>
