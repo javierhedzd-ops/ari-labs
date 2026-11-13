@@ -178,6 +178,8 @@
   .placa.cero p{margin:0 0 1.6rem;color:var(--suave)}
   .placa.cero .boton{margin:0}
   .nota-pista{margin:4px 0 0;color:var(--acero);font-size:.92rem}
+  .clientes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:8px}
+  .clientes-grid .placa{flex:initial;width:auto;min-width:0}
   @media (min-width:860px){
     .placa{flex:0 0 auto;width:clamp(520px,44vw,640px);flex-direction:row;gap:22px;padding:16px}
     .placa .marco{height:clamp(300px,46svh,440px);aspect-ratio:auto;width:calc(clamp(300px,46svh,440px) * .62);flex:none}
@@ -253,6 +255,7 @@
     .js .linea i{--lleno:1}
     .hielo{transform:none}
   }
+  @media (min-width:900px){ .clientes-grid .placa{width:auto} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -338,6 +341,24 @@
           <button type="button" aria-label="Detalle de una cita" aria-current="false"></button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 3b. Clientes: negocios reales -->
+  <section class="seccion clientes" id="clientes" aria-labelledby="t-clientes">
+    <h2 class="titulo" id="t-clientes" data-esquiva>Negocios que ya están en línea</h2>
+    <p class="entrada sube" data-esquiva>Dos negocios de Mérida, cada uno con su propia cara: sus colores, su letrero y sus precios.</p>
+    <div class="clientes-grid">
+      <article class="placa hielo inclina">
+        <div class="marco"><img src="img/cliente-elrey.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Página de Carnitas Michoacán El Rey: la catrina del mural del local, el logo del rey y la carta con precios."></div>
+        <div class="texto"><b>Carnitas Michoacán El Rey</b><span>Carta con precios, pedido por WhatsApp y envío a domicilio que se calcula con la ubicación del cliente. El dueño cambia precios y fotos desde su teléfono.</span>
+        <a class="boton secundario" href="https://javierhedzd-ops.github.io/Restaurante-el-rey/" target="_blank" rel="noopener">Ver página<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>
+      </article>
+      <article class="placa hielo inclina">
+        <div class="marco"><img src="img/cliente-quickwash.webp" width="540" height="1052" loading="lazy" decoding="async" alt="Página de la lavandería Quick Wash: su lema, su lavadora dibujada en 3D y la calculadora de precios por máquina."></div>
+        <div class="texto"><b>Lavandería Quick Wash</b><span>Calculadora de precios por máquina, cambio de precios programado y una lavadora que de verdad lava. La dueña cambia sus precios desde su panel.</span>
+        <a class="boton secundario" href="clientes/quick-wash/" target="_blank" rel="noopener">Ver página<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span></a></div>
+      </article>
     </div>
   </section>
 
