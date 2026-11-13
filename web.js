@@ -185,6 +185,7 @@
       }
     });
     var seccion = $('.modelos'), pista = $('.pista');
+    if (!seccion || !pista) return;
     seccion.classList.add('fijo');
     var distancia = function () { return Math.max(0, pista.scrollWidth - innerWidth); };
     var tw = null;
@@ -196,7 +197,7 @@
   });
   // teléfono: sin quedarse fija; el teléfono gira solo un poco
   mm.add('(max-width: 859px), (max-height: 599px)', function () {
-    $('.modelos').classList.remove('fijo');
+    if ($('.modelos')) $('.modelos').classList.remove('fijo');
     girar(-12, 4);
     ScrollTrigger.create({ trigger: '.telefono', start: 'top bottom', end: 'bottom top', scrub: 0.6,
       onUpdate: function (s) { girar(-12 + s.progress * 20, 5 - s.progress * 3); } });
