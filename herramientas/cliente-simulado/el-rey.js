@@ -57,6 +57,25 @@ const CASOS = [
     if (!m.includes('maps.google.com')) throw new Error('Falta el mapa');
     return 'Envío $54 y mapa incluidos';
   }],
+  ['Envío por calle', 'La ruta por calles da 7.2 km: cobra $68 y lo dice en el pedido', { rutaKm: 7.2, geo: lejos(4.5) }, async ({ p, enviado }) => {
+    await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); });
+    await p.fill('#f-nombre', 'Rut'); await p.fill('#f-telefono', '9991234567');
+    await p.check('input[name="entrega"][value="domicilio"]'); await p.fill('#f-direccion', 'Calle 50 #10, Centro');
+    await p.click('#f-ubicacion'); await p.waitForTimeout(800);
+    const estado = await p.textContent('#f-ubicacion-estado'); if (!/7\.2 km por calle/.test(estado)) throw new Error('No usa la ruta: ' + estado);
+    await p.click('#pedido-enviar'); await p.waitForTimeout(200);
+    const m = enviado() || ''; if (!m.includes('$68') || !m.includes('por calle')) throw new Error('El pedido no lleva el envío por calle');
+    return 'Cobra $68 por 7.2 km de ruta';
+  }],
+  ['Falla el cálculo de ruta', 'Si el servicio de rutas no responde, usa el cálculo de respaldo y deja pedir', { rutaFalla: true, geo: lejos(4.5) }, async ({ p, enviado }) => {
+    await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); });
+    await p.fill('#f-nombre', 'Res'); await p.fill('#f-telefono', '9991234567');
+    await p.check('input[name="entrega"][value="domicilio"]'); await p.fill('#f-direccion', 'Calle 50 #10, Centro');
+    await p.click('#f-ubicacion'); await p.waitForTimeout(800);
+    await p.click('#pedido-enviar'); await p.waitForTimeout(200);
+    const m = enviado() || ''; if (!m.includes('$54') || !m.includes('línea recta')) throw new Error('No usó el respaldo: ' + (m.match(/Envío[^\n]*/) || ['sin envío'])[0]);
+    return 'Respaldo: $54 en línea recta';
+  }],
   ['Olvida datos', 'Sin teléfono, sin dirección o sin ubicación: no deja enviar y dice qué falta', {}, async ({ p, enviado }) => {
     await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); });
     await p.fill('#f-nombre', 'Eva'); await p.check('input[name="entrega"][value="domicilio"]');
@@ -142,6 +161,7 @@ const CASOS = [
     await c.route('**/*.supabase.co/**', r => {
       const u = r.request().url();
       if (op.sinNube) return r.abort();
+      if (u.includes('/functions/v1/ruta')) return op.rutaKm ? r.fulfill({ contentType: 'application/json', body: JSON.stringify({ km: op.rutaKm }) }) : op.rutaFalla ? r.fulfill({ status: 503, body: '{"error":"sin_llave"}' }) : r.fulfill({ status: 503, body: '{}' });
       if (u.includes('/rest/v1/eventos')) { try { eventos.push(JSON.parse(r.request().postData())); } catch (e) {} return r.fulfill({ status: 201, body: '' }); }
       if (u.includes('ajustes')) return r.fulfill({ contentType: 'application/json', body: JSON.stringify([{ clave: 'envio', valor: ENVIO }, ...(op.pausa ? [{ clave: 'pedidos', valor: { activa: true, mensaje: 'Por ahora tenemos muchos pedidos. Vuelve a intentarlo en un rato, por favor.' } }] : [])]) });
       return r.fulfill({ contentType: 'application/json', body: '[]' });
