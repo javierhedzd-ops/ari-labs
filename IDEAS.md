@@ -13,6 +13,14 @@ Lo que Javi quiere trabajar más adelante. No se toca hasta que él diga.
 - Cuidado: verificación de repartidores, efectivo, datos de clientes (borrar a los pocos días), asesoría legal.
 - Seguimiento en vivo en el mapa: en iPhone no funciona bien en app web (segunda etapa).
 
+## Software para restaurantes con agentes ("Soft Restaurant con agentes") · 13/11/2026
+- Crecer por piezas sobre lo que ya tiene El Rey (pedidos, panel, contador), cada pieza útil y cobrable.
+- Agentes: WhatsApp que toma pedidos; clientes ("15 llevan un mes sin pedir"); cocina/inventario; resumen nocturno.
+- Base de clientes de Kevin (nivel 2): requiere aviso de privacidad, permiso del cliente, derecho a borrar
+  (ley de protección de datos personales) y revisión de alguien que sepa de leyes.
+- Soft Restaurant además cobra con tarjeta, factura (CFDI), imprime comandas: no competir de frente al inicio.
+- Va de la mano con la app de repartidores.
+
 ## "Mis números" en el panel del dueño · 13/11/2026
 - Visitas, carritos, pedidos y dinero por día/semana, a qué hora piden, de qué red llegan (`?de=tiktok`).
 - El contador ya está en El Rey (tabla `eventos`); falta la pantalla y anotar `?de=`.

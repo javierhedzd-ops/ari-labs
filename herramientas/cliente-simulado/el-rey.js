@@ -137,6 +137,20 @@ const CASOS = [
     if (!(enviado() || '').includes('inglés')) throw new Error('El pedido no avisa que el cliente habla inglés');
     return 'En inglés y avisado';
   }],
+  ['Cliente que repite', 'Pide una vez; la siguiente ya tiene sus datos llenos, y puede olvidarlos', { geo: lejos(4.5) }, async ({ p }) => {
+    await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); });
+    await p.fill('#f-nombre', 'Rosa'); await p.fill('#f-telefono', '9997654321');
+    await p.check('input[name="entrega"][value="domicilio"]'); await p.fill('#f-direccion', 'Calle 14 #10, Chuminópolis');
+    await p.click('#f-ubicacion'); await p.waitForTimeout(500); await p.click('#pedido-enviar'); await p.waitForTimeout(200);
+    await p.reload({ waitUntil: 'networkidle' }); await p.waitForTimeout(400);
+    await p.evaluate(() => { cambiar('t_cos', 1); abrirPedido(); });
+    const v = await p.evaluate(() => [$('f-nombre').value, $('f-telefono').value, $('f-direccion').value, domicilio()]);
+    if (v[0] !== 'Rosa' || v[1] !== '9997654321' || !v[2].includes('Calle 14') || !v[3]) throw new Error('No recordó: ' + JSON.stringify(v));
+    await p.click('#f-olvidar');
+    const w = await p.evaluate(() => [$('f-nombre').value, localStorage.getItem('rey_mis_datos')]);
+    if (w[0] || w[1]) throw new Error('No olvidó los datos');
+    return 'Recuerda y olvida';
+  }],
   ['Se cuentan las visitas', 'Visita, carrito y pedido quedan anotados (sin datos personales)', {}, async ({ p, eventos, enviado }) => {
     await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); });
     await p.fill('#f-nombre', 'Sol'); await p.fill('#f-telefono', '9991234567'); await p.click('#pedido-enviar'); await p.waitForTimeout(400);
