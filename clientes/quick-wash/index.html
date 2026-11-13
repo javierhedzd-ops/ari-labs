@@ -245,6 +245,11 @@ legend{font-weight:800;font-size:15px;padding:0 6px}
 .pd-form[hidden],.panel-duena[hidden]{display:none!important}
 .pd-ari .pd-boton{width:100%}
 .pie-ari{font-size:.85em;opacity:.75}.pie-ari a{color:inherit}
+
+/* Ventanita a prueba de iPhone: tamaño fijo (alto = ancho) y el video encerrado en un círculo que no puede estirar. */
+.ojo{width:min(78vw,340px);height:min(78vw,340px);aspect-ratio:auto;padding:0;flex:none}
+.ojo .tambor{position:absolute;inset:13%;width:auto;height:auto;border-radius:50%;overflow:hidden;-webkit-mask-image:-webkit-radial-gradient(white,black);mask-image:radial-gradient(circle,#000 70%,#000 71%);transform:translateZ(0)}
+.ojo .lavando{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
 </style>
 </head>
 <body>
@@ -264,7 +269,7 @@ legend{font-weight:800;font-size:15px;padding:0 6px}
       <button type="button" class="btn azul-b" data-contacto="Hola, quiero preguntar por el servicio de lavandería">Preguntar por WhatsApp</button>
       <a class="btn" href="#precios">Ver precios</a>
     </div>
-    <div class="ojo rev" style="animation-delay:.42s" aria-hidden="true"><div class="tambor"><video class="lavando" autoplay muted loop playsinline preload="auto" poster="lavando.jpg" aria-hidden="true"><source src="lavando.webm" type="video/webm"><source src="lavando.mp4" type="video/mp4"></video></div><i class="brillo"></i></div>
+    <div class="ojo rev" style="animation-delay:.42s" aria-hidden="true"><div class="tambor"><video class="lavando" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="auto" poster="lavando.jpg" aria-hidden="true"><source src="lavando.webm" type="video/webm"><source src="lavando.mp4" type="video/mp4"></video></div><i class="brillo"></i></div>
     <div class="manta"><span>Contamos con servicio de</span>Planchado y tintorería</div>
     <div class="datos">
       <div><b>3</b>tamaños de lavadora</div>
