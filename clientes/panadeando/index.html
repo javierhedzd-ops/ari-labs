@@ -92,7 +92,7 @@
   .marco{position:relative}
   .marco img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
   .marco::after{content:"";position:absolute;inset:14px;border:1px solid rgba(228,204,149,.45);pointer-events:none}
-  .marco .chica{position:absolute;width:40%;right:-5%;bottom:-8%;aspect-ratio:4/5;object-fit:cover;object-position:50% 78%;box-shadow:0 30px 60px rgba(0,0,0,.55);border:6px solid var(--nogal)}
+  .marco .chica{position:absolute;width:40%;right:-5%;bottom:-8%;aspect-ratio:4/5;object-fit:cover;object-position:28% 50%;box-shadow:0 30px 60px rgba(0,0,0,.55);border:6px solid var(--nogal)}
   @media (max-width:959px){ .marco .chica{right:-2%;bottom:-6%;width:40%} }
   .sabores{list-style:none;margin:36px 0 38px;padding:0;border-top:1px solid rgba(201,164,92,.28)}
   .roles9{display:grid;grid-template-columns:1fr 1fr 1fr}
@@ -150,7 +150,7 @@
   /* historia */
   .historia{position:relative;padding:0;isolation:isolate;overflow:hidden}
   .historia .foto{position:absolute;inset:0;z-index:-2}
-  .historia .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+  .historia .foto img{width:100%;height:100%;object-fit:cover;object-position:60% 50%}
   .historia::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(13,9,7,.94) 0%,rgba(13,9,7,.8) 45%,rgba(13,9,7,.35) 100%)}
   @media (max-width:899px){ .historia::before{background:linear-gradient(180deg,rgba(13,9,7,.55) 0%,rgba(13,9,7,.9) 45%,rgba(13,9,7,.97) 100%)} }
   .historia .ancho{padding:clamp(110px,16vw,190px) var(--margen)}
@@ -166,8 +166,9 @@
   .encargo .sub{margin:0 auto 36px}
 
   /* visítenos */
-  .visita .ancho{display:grid;gap:clamp(36px,6vw,80px);align-items:center}
-  @media (min-width:960px){ .visita .ancho{grid-template-columns:1fr 1fr} }
+  .visita .ancho{display:block}
+  .sucursales{display:grid;gap:0 40px;margin-top:30px}
+  @media (min-width:900px){ .sucursales{grid-template-columns:repeat(3,1fr)} .sucursales .sucursal{border-top:1px solid #d9ccb6;margin-top:0} }
   .visita .pared{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:30% 50%}
   .sucursal{padding:26px 0;border-bottom:1px solid #d9ccb6}
   .sucursal:first-of-type{border-top:1px solid #d9ccb6;margin-top:30px}
@@ -229,7 +230,7 @@
     <div class="ancho">
       <div class="marco sube">
         <img src="img/roles.webp" width="1000" height="1331" loading="lazy" alt="Roles de masa danesa en la vitrina de Panadeando: con glaseado y nuez, y con chocolate y queso de bola.">
-        <img class="chica" src="img/letrero.webp" width="1000" height="1331" loading="lazy" alt="Postres de la vitrina bajo el letrero dorado de Panadeando.">
+        <img class="chica" src="img/letrero-oro.webp" width="1000" height="736" loading="lazy" alt="El letrero dorado de Panadeando sobre la pared de madera.">
       </div>
       <div class="sube">
         <span class="num">01 · LA VITRINA</span>
@@ -268,8 +269,8 @@
       </div>
       <div class="galeria sube">
         <figure class="g1"><img src="img/hotcakes.webp" width="1000" height="1498" loading="lazy" alt="Hotcakes con fresas, huevo estrellado y tocino, con chocolate caliente y un postre al fondo."><figcaption>Hotcakes, huevo y tocino</figcaption></figure>
-        <figure class="g2"><img src="img/benedict.webp" width="1000" height="559" loading="lazy" alt="Huevos pochados sobre pan con aguacate, salsa y ensalada."><figcaption>Huevos pochados con aguacate</figcaption></figure>
-        <figure class="g3"><img src="img/latte.webp" width="1000" height="1331" loading="lazy" alt="Café con arte latte y un sándwich en pan rústico."><figcaption>Café y sándwich en pan rústico</figcaption></figure>
+        <figure class="g2"><img src="img/taza.webp" width="1000" height="675" loading="lazy" alt="Taza de café con espuma, jugo de naranja y un postre en la mesa de Panadeando."><figcaption>Para acompañar</figcaption></figure>
+        <figure class="g3"><img src="img/postres.webp" width="1000" height="646" loading="lazy" alt="Postres de la vitrina con cacao y pipetas de café."><figcaption>Postres de la vitrina</figcaption></figure>
       </div>
       <div class="carta sube">
         <div><h3>Desayunos</h3><ul><li>Chilaquiles verdes, rojos, de mole y motuleños</li><li>Benedictinos Panadeando</li><li>Hotcakes con Nutella, maple o mermelada</li><li>Avocado toast · Cochinita toast · French toast</li><li>Omelette · Molletes</li></ul></div>
@@ -281,7 +282,7 @@
   </section>
 
   <section class="historia" id="historia">
-    <div class="foto"><img src="img/fachada.webp" width="1280" height="1276" loading="lazy" alt="Fachada de Panadeando en Los Héroes al atardecer, con su terraza iluminada."></div>
+    <div class="foto"><img src="img/letrero-oro.webp" width="1000" height="736" loading="lazy" alt="Letrero dorado de Panadeando sobre la madera del local."></div>
     <div class="ancho">
       <div class="cuerpo sube">
         <span class="num">04 · NUESTRA HISTORIA</span>
@@ -304,10 +305,10 @@
 
   <section class="visita claro" id="visita">
     <div class="ancho">
-      <img class="pared sube" src="img/pared.webp" width="1000" height="747" loading="lazy" alt="Logo de Panadeando en la pared de la entrada de Los Héroes y su letrero de panadería, bistró y café.">
       <div class="sube">
         <span class="num">06 · VISÍTENOS</span>
         <h2>Tres casas <em>en Mérida</em></h2>
+        <div class="sucursales">
         <div class="sucursal">
           <h3>Buenavista</h3>
           <p>Calle 31A #480, Buenavista</p>
@@ -323,9 +324,10 @@
           
           <div class="dos-btn"><a class="btn linea chico" href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+San+Angelo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar <span class="flecha" aria-hidden="true"></span></a><button type="button" class="btn linea chico" data-contacto="Hola, les escribo a la sucursal San Ángelo">WhatsApp</button></div>
         </div>
+        </div>
         <div class="pedir">
-          <a class="btn oro" href="https://pedidos.panadeando.com/" target="_blank" rel="noopener">Pedir a domicilio o para recoger <span class="flecha" aria-hidden="true"></span></a>
-          <p>También en Rappi. Pregunte por su tarjeta de sellos.</p>
+          <a class="btn oro" href="https://pedidos.panadeando.com/" target="_blank" rel="noopener">Pedir en línea <span class="flecha" aria-hidden="true"></span></a>
+          <p>A domicilio o para recoger. También en Rappi. Pregunte por su tarjeta de sellos.</p>
         </div>
       </div>
     </div>
