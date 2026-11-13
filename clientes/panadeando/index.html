@@ -6,219 +6,346 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Panadeando · Panadería, bistró y café en Mérida</title>
 <meta name="description" content="Panadeando, panadería, bistró y café en Mérida: Buenavista, Los Héroes y San Ángelo. Roles de masa danesa, croissants, chilaquiles, benedictinos y café recién molido.">
-<meta property="og:title" content="Panadeando · Panadería, bistró y café">
-<meta property="og:description" content="Roles de masa danesa, croissants, desayunos y café en tres casas de Mérida.">
+<meta property="og:title" content="Panadeando · Pan de abuelos, técnica europea">
+<meta property="og:description" content="Roles de masa danesa, pan yucateco, desayunos y café en Los Héroes, Mérida.">
 <meta property="og:image" content="img/croissant.webp">
-<meta name="theme-color" content="#1b130e">
-<link rel="icon" href="img/logo-oro.webp" type="image/webp">
+<meta name="theme-color" content="#17110d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/logo-oro-xl.webp">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/croissant.webp">
+<link rel="icon" href="img/logo-oro.webp" type="image/webp">
 <style>
-  /* La pared del local: tablillas de nogal y el letrero de espejo dorado. Una tinta por fondo. */
   :root{
-    --nogal:#1b130e; --nogal-2:#241912; --oro:#d8b56f; --oro-suave:#b89558;
-    --crema:#efe6d8; --tinta:#2b1d15; --tinta-suave:#6a5646;
-    --letra:"Hanken Grotesk",system-ui,sans-serif;
-    --m:clamp(18px,5vw,64px);
+    --espresso:#17110d; --nogal:#221812; --nogal-2:#2c2018; --oro:#c9a45c; --oro-claro:#e4cc95;
+    --marfil:#f4ecde; --hueso:#ece3d4; --humo:#c9b9a2; --tinta:#2a1d16; --tinta-suave:#6b5a4c;
+    --serif:"Cormorant Garamond",Garamond,Georgia,serif; --sans:"Inter Tight",system-ui,sans-serif;
+    --margen:clamp(20px,5.5vw,72px); --curva:cubic-bezier(.2,.8,.2,1);
   }
   *{box-sizing:border-box}
-  html{background:var(--nogal)}
-  body{margin:0;background:var(--nogal);color:var(--oro);font:400 1.06rem/1.6 var(--letra);-webkit-font-smoothing:antialiased;padding-bottom:64px}
-  img{display:block;max-width:100%;height:auto}
+  html{scroll-behavior:smooth;background:var(--espresso)}
+  body{margin:0;background:var(--espresso);color:var(--marfil);font:16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  img{display:block;max-width:100%}
   a{color:inherit}
-  ::selection{background:var(--oro);color:var(--nogal)}
+  ::selection{background:var(--oro);color:var(--espresso)}
 
-  /* tablillas de madera, como la pared detrás del letrero */
-  .pared{background:
-    repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 2px,rgba(255,255,255,.025) 2px 4px,transparent 4px 26px),
-    linear-gradient(180deg,#22170f,#1b130e 60%,#17100c)}
+  .franja{position:relative;z-index:40;background:#0d0907;color:var(--oro);text-align:center;font:500 .7rem/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;padding:9px 12px;border-bottom:1px solid rgba(201,164,92,.25)}
 
-  .franja{background:#0f0a07;color:var(--oro);text-align:center;font:500 .85rem/1 var(--letra);padding:10px 12px}
+  /* encabezado sobre la portada */
+  header{position:absolute;z-index:30;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px var(--margen)}
+  .logo img{height:clamp(50px,5.5vw,64px);width:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,.65))}
+  nav{display:flex;gap:30px;font:500 .74rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase}
+  nav a{text-decoration:none;color:var(--hueso);opacity:.85;transition:opacity .2s,color .2s;padding:16px 0;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  nav a:hover{opacity:1;color:var(--oro-claro)}
+  @media (max-width:820px){ nav{display:none} }
 
-  /* 1 · el letrero */
-  .letrero{position:relative;padding:clamp(28px,6vw,64px) var(--m) 0;overflow:hidden}
-  .letrero .marca{width:100%;max-width:1180px;margin:0 auto}
-  .letrero .marca img{max-width:min(100%,780px,calc(52svh * 1.74))}
-  .letrero .marca img{width:100%}
-  .letrero .dice{max-width:1180px;margin:clamp(14px,2vw,26px) auto 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:clamp(1.05rem,.9rem + .6vw,1.5rem);line-height:1.35}
-  .letrero .dice span:last-child{color:var(--oro-suave)}
-  .sale{position:relative;margin:clamp(22px,3vw,40px) calc(var(--m) * -1) 0;height:min(78svh,760px);overflow:hidden}
-  .sale img{width:100%;height:118%;object-fit:cover;object-position:55% 45%;will-change:transform}
-  .sale::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--nogal) 0%,rgba(27,19,14,0) 22%,rgba(27,19,14,0) 80%,var(--nogal) 100%);pointer-events:none}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;font:600 .78rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;border-radius:0;padding:18px 28px;border:0;cursor:pointer;text-decoration:none;transition:background .3s var(--curva),color .3s var(--curva),transform .2s var(--curva)}
+  .btn:active{transform:scale(.98)}
+  .btn.oro{background:var(--oro);color:var(--espresso)}
+  .btn.oro:hover{background:var(--oro-claro)}
+  .btn.linea{background:transparent;color:var(--marfil);box-shadow:inset 0 0 0 1px rgba(244,236,222,.55)}
+  .btn.linea:hover{box-shadow:inset 0 0 0 1px var(--oro);color:var(--oro-claro)}
+  .btn.chico{padding:13px 18px;font-size:.7rem;min-height:44px}
+  .btn .flecha{width:16px;height:1px;background:currentColor;position:relative}
+  .btn .flecha::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
 
-  section{padding:clamp(72px,11vw,150px) var(--m)}
-  .ancho{max-width:1180px;margin:0 auto}
-  h2{font:500 clamp(2.3rem,1.3rem + 4.4vw,4.8rem)/1 var(--letra);letter-spacing:-.035em;margin:0 0 .5em}
-  .grande{font-size:clamp(1.25rem,1rem + 1vw,1.75rem);line-height:1.4;max-width:30ch;margin:0}
+  /* portada */
+  .portada{position:relative;min-height:min(100svh,980px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+  .portada .fondo{position:absolute;inset:0;z-index:-2}
+  .portada .fondo img{width:100%;height:100%;object-fit:cover;object-position:60% 50%;animation:acercar 2.6s var(--curva) both}
+  .portada::before{content:"";position:absolute;inset:0;z-index:-1;background:
+    linear-gradient(180deg,rgba(13,9,7,.78) 0%,rgba(13,9,7,.15) 26%,rgba(13,9,7,.2) 50%,rgba(13,9,7,.92) 88%,var(--espresso) 100%),
+    linear-gradient(90deg,rgba(13,9,7,.75) 0%,rgba(13,9,7,0) 62%)}
+  @keyframes acercar{from{transform:scale(1.09)}to{transform:scale(1)}}
+  .portada .texto{padding:150px var(--margen) clamp(56px,9vh,96px);max-width:900px}
+  .ceja{display:flex;align-items:center;gap:14px;text-shadow:0 1px 10px rgba(0,0,0,.8);font:500 .72rem/1.4 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--oro);margin:0 0 22px}
+  .ceja::before{content:"";width:34px;height:1px;background:var(--oro)}
+  h1{font:300 clamp(3.1rem,1.4rem + 7.4vw,7.4rem)/.92 var(--serif);letter-spacing:-.02em;margin:0 0 26px}
+  h1 em,h2 em{font-style:italic;color:var(--oro-claro)}
+  .entrada{font-size:clamp(1rem,.95rem + .3vw,1.15rem);color:var(--hueso);max-width:40ch;margin:0 0 34px;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+  h1{text-shadow:0 2px 24px rgba(0,0,0,.45)}
+  @media (max-width:600px){
+    .ceja{letter-spacing:.2em;font-size:.66rem}
+    .portada::before{background:linear-gradient(180deg,rgba(13,9,7,.8) 0%,rgba(13,9,7,.3) 22%,rgba(13,9,7,.55) 42%,rgba(13,9,7,.9) 70%,var(--espresso) 100%)}
+  }
+  .acciones{display:flex;flex-wrap:wrap;gap:12px}
 
-  /* 2 · roles */
-  .roles .ancho{display:grid;gap:clamp(32px,6vw,80px);align-items:end}
-  @media (min-width:900px){ .roles .ancho{grid-template-columns:1.1fr 1fr} }
-  .roles figure{margin:0}
-  .roles figure img{width:100%;aspect-ratio:4/5;object-fit:cover}
-  .nombres{list-style:none;margin:36px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.1em .55em;font:500 clamp(1.9rem,1.3rem + 2.4vw,3.2rem)/1.15 var(--letra);letter-spacing:-.03em}
-  .nombres li:not(:last-child)::after{content:",";color:var(--oro-suave)}
-  .nombres li:last-child{color:var(--oro-suave)}
+  /* cinta */
+  .cinta{border-top:1px solid rgba(201,164,92,.22);border-bottom:1px solid rgba(201,164,92,.22);padding:22px var(--margen);display:flex;justify-content:center;flex-wrap:wrap;gap:12px 34px;font:italic 400 clamp(1.15rem,1rem + .8vw,1.6rem)/1.2 var(--serif);color:var(--humo)}
+  .cinta span{display:inline-flex;align-items:center;gap:34px}
+  .cinta span+span::before{content:"";width:6px;height:6px;background:var(--oro);transform:rotate(45deg)}
 
-  /* 3 · del horno (fondo crema, tinta nogal) */
-  .crema{background:var(--crema);color:var(--tinta)}
-  .horno .cols{display:grid;gap:34px 56px;margin-top:clamp(36px,5vw,64px)}
-  @media (min-width:760px){ .horno .cols{grid-template-columns:1fr 1fr} }
-  @media (min-width:1100px){ .horno .cols{grid-template-columns:1fr 1fr 1fr} }
-  .horno h3,.carta h3{font:600 1.25rem/1.2 var(--letra);margin:0 0 6px;letter-spacing:-.01em}
-  .horno p,.carta p{margin:0;color:var(--tinta-suave)}
-  .horno .grande{color:var(--tinta)}
+  section{padding:clamp(80px,12vw,150px) var(--margen)}
+  .ancho{max-width:1240px;margin:0 auto}
+  h2{font:300 clamp(2.5rem,1.5rem + 4.4vw,5rem)/.98 var(--serif);letter-spacing:-.015em;margin:0 0 22px}
+  .sub{color:var(--humo);max-width:46ch;margin:0;font-size:1.05rem}
+  .num{font:400 .72rem/1 var(--sans);letter-spacing:.3em;color:var(--oro);margin:0 0 20px;display:block}
 
-  /* 4 · bistró */
-  .bistro{padding-left:0;padding-right:0}
-  .bistro .titulo{padding:0 var(--m)}
-  .plato{position:relative;margin:clamp(30px,5vw,56px) 0 0}
-  .plato img{width:100%;height:min(88svh,900px);object-fit:cover;object-position:62% 70%}
-  .par{display:grid;grid-template-columns:1fr;gap:16px;padding:16px var(--m) 0}
-  @media (min-width:760px){ .par{grid-template-columns:1.3fr 1fr;align-items:start} .par figure:last-child{margin-top:clamp(40px,8vw,120px)} }
-  .par figure{margin:0}
-  .par img{width:100%;aspect-ratio:3/2;object-fit:cover}
-  .par figcaption{margin-top:10px;font-size:.92rem;color:var(--oro-suave)}
-  .carta{display:grid;gap:34px 56px;padding:clamp(56px,8vw,100px) var(--m) 0;max-width:calc(1180px + 2 * var(--m));margin:0 auto}
-  @media (min-width:900px){ .carta{grid-template-columns:repeat(3,1fr)} }
-  .carta p{color:var(--oro-suave)}
-  .carta h3{color:var(--oro)}
+  /* madera: las tablillas de la pared del local */
+  .madera{background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 2px,transparent 2px 22px,rgba(0,0,0,.18) 22px 24px,transparent 24px 46px),
+    linear-gradient(180deg,var(--nogal),var(--espresso))}
 
-  /* 5 · historia */
-  .historia .ancho{display:grid;gap:clamp(32px,6vw,80px);align-items:center}
-  @media (min-width:900px){ .historia .ancho{grid-template-columns:1fr 1fr} }
-  .historia img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:30% 50%}
-  .historia p{margin:0 0 1em;max-width:44ch;color:var(--tinta-suave)}
-  .historia .grande{color:var(--tinta);margin-bottom:1em}
+  /* vitrina */
+  .vitrina .ancho{display:grid;gap:clamp(36px,6vw,90px);align-items:center}
+  @media (min-width:960px){ .vitrina .ancho{grid-template-columns:1.05fr 1fr} }
+  .marco{position:relative}
+  .marco img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+  .marco::after{content:"";position:absolute;inset:14px;border:1px solid rgba(228,204,149,.45);pointer-events:none}
+  .marco .chica{position:absolute;width:40%;right:-5%;bottom:-8%;aspect-ratio:4/5;object-fit:cover;object-position:28% 50%;box-shadow:0 30px 60px rgba(0,0,0,.55);border:6px solid var(--nogal)}
+  @media (max-width:959px){ .marco .chica{right:-2%;bottom:-6%;width:40%} }
+  .sabores{list-style:none;margin:36px 0 38px;padding:0;border-top:1px solid rgba(201,164,92,.28)}
+  .roles9{display:grid;grid-template-columns:1fr 1fr 1fr}
+  .roles9 li{display:block;padding:16px 0;font:400 clamp(1.25rem,1.05rem + .8vw,1.7rem)/1.1 var(--serif);color:var(--marfil);border-bottom:1px solid rgba(201,164,92,.28)}
+  .roles9 li.temp{font-style:italic;color:var(--oro-claro)}
+  @media (max-width:420px){ .roles9{grid-template-columns:1fr 1fr} }
+  .sabores li{display:grid;grid-template-columns:30px 1fr;gap:6px 22px;padding:20px 0;border-bottom:1px solid rgba(201,164,92,.28)}
+  .sabores i{font:italic 400 1.05rem/1.4 var(--serif);color:var(--oro);grid-row:span 2;padding-top:4px}
+  .sabores b{font:400 clamp(1.5rem,1.2rem + 1vw,2rem)/1.1 var(--serif);color:var(--marfil)}
+  .sabores span{color:var(--humo);font-size:.95rem}
 
-  /* 6 · visítenos */
-  .casas{display:grid;gap:44px 56px;margin-top:clamp(36px,5vw,64px)}
-  @media (min-width:860px){ .casas{grid-template-columns:repeat(3,1fr)} }
-  .casa h3{font:500 clamp(1.6rem,1.3rem + 1vw,2.2rem)/1.1 var(--letra);letter-spacing:-.02em;margin:0 0 8px}
-  .casa p{margin:0 0 14px;color:var(--oro-suave);min-height:1.6em}
-  .enlaces{display:flex;flex-wrap:wrap;gap:6px 22px}
-  .enlaces a,.enlaces button{font:500 1rem var(--letra);color:var(--oro);background:none;border:0;padding:12px 0;cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;min-height:44px}
-  .enlaces a:hover,.enlaces button:hover{color:#f0d49a}
-  .encargo{margin-top:clamp(56px,8vw,96px);display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center}
-  .encargo p{margin:0;font-size:clamp(1.25rem,1rem + 1vw,1.75rem);max-width:28ch;line-height:1.35}
+  /* pan yucateco (claro) */
+  .claro{background:var(--marfil);color:var(--tinta)}
+  .claro h2 em{color:#9a7230}
+  .claro .sub{color:var(--tinta-suave)}
+  .claro .num{color:#9a7230}
+  .pan .cabeza{display:grid;gap:22px;margin-bottom:50px}
+  @media (min-width:900px){ .pan .cabeza{grid-template-columns:1fr 1fr;align-items:end} }
+  .horno{display:grid;border-top:1px solid #d9ccb6}
+  @media (min-width:760px){ .horno{grid-template-columns:1fr 1fr 1fr} .horno>div:not(:nth-child(3n+1)){border-left:1px solid #d9ccb6;padding-left:26px} }
+  .horno>div{padding:30px 26px 30px 0;border-bottom:1px solid #d9ccb6}
+  .horno h3{font:400 clamp(1.7rem,1.4rem + .9vw,2.2rem)/1.05 var(--serif);margin:0 0 10px}
+  .horno p{margin:0;color:var(--tinta-suave);line-height:1.7}
+  .piezas{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid #d9ccb6}
+  @media (min-width:760px){ .piezas{grid-template-columns:1fr 1fr 1fr} .piezas li:nth-child(3n+2),.piezas li:nth-child(3n+3){border-left:1px solid #d9ccb6} }
+  .piezas li{padding:30px 26px 30px 0;border-bottom:1px solid #d9ccb6}
+  @media (min-width:760px){ .piezas li:nth-child(3n+2),.piezas li:nth-child(3n+3){padding-left:26px} }
+  .piezas b{display:block;font:400 clamp(1.6rem,1.3rem + .9vw,2.1rem)/1.05 var(--serif);margin-bottom:6px}
+  .piezas span{color:var(--tinta-suave);font-size:.92rem}
 
-  .boton{display:inline-flex;align-items:center;justify-content:center;font:600 1rem/1 var(--letra);padding:0 26px;min-height:52px;border:0;border-radius:0;cursor:pointer;text-decoration:none;background:var(--oro);color:var(--nogal);transition:background .2s}
-  .boton:hover{background:#ecca86}
+  /* bistró */
+  .bistro .cabeza{display:grid;gap:22px;margin-bottom:56px}
+  @media (min-width:900px){ .bistro .cabeza{grid-template-columns:1fr 1fr;align-items:end} }
+  .galeria{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+  .galeria figure{margin:0;position:relative;overflow:hidden}
+  .galeria img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--curva)}
+  .galeria figure:hover img{transform:scale(1.04)}
+  .galeria figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;background:linear-gradient(180deg,transparent,rgba(13,9,7,.85));font:italic 400 1.15rem/1.2 var(--serif);color:var(--marfil)}
+  .g1{grid-column:1/-1;aspect-ratio:4/3}
+  .g2{aspect-ratio:3/4}.g3{aspect-ratio:3/4}
+  .g1 img{object-position:62% 72%}
+  @media (min-width:900px){
+    .galeria{grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:280px 280px;gap:18px}
+    .g1{grid-column:1;grid-row:1/3;aspect-ratio:auto}
+    .g2{grid-column:2/4;grid-row:1;aspect-ratio:auto}
+    .g3{grid-column:2/4;grid-row:2;aspect-ratio:auto}
+    .g2 img{object-position:50% 40%} .g3 img{object-position:50% 55%}
+  }
 
-  footer{padding:clamp(60px,9vw,110px) var(--m) 40px;text-align:center}
-  footer img{width:min(320px,70%);margin:0 auto 22px}
-  footer p{margin:4px 0;color:var(--oro-suave);font-size:.92rem}
+  .carta{display:grid;gap:30px;margin-top:56px;padding-top:44px;border-top:1px solid rgba(201,164,92,.28)}
+  @media (min-width:900px){ .carta{grid-template-columns:repeat(3,1fr);gap:48px} }
+  .carta h3{font:italic 400 1.9rem/1 var(--serif);color:var(--oro-claro);margin:0 0 16px}
+  .carta ul{list-style:none;margin:0;padding:0}
+  .carta li{padding:10px 0;border-bottom:1px solid rgba(201,164,92,.16);color:var(--hueso)}
+  /* historia */
+  .historia{position:relative;padding:0;isolation:isolate;overflow:hidden}
+  .historia .foto{position:absolute;inset:0;z-index:-2}
+  .historia .foto img{width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+  .historia::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(13,9,7,.94) 0%,rgba(13,9,7,.8) 45%,rgba(13,9,7,.35) 100%)}
+  @media (max-width:899px){ .historia::before{background:linear-gradient(180deg,rgba(13,9,7,.55) 0%,rgba(13,9,7,.9) 45%,rgba(13,9,7,.97) 100%)} }
+  .historia .ancho{padding:clamp(110px,16vw,190px) var(--margen)}
+  @media (max-width:899px){ .historia .ancho{padding-top:300px} }
+  .historia .cuerpo{max-width:560px}
+  .historia p{color:var(--hueso);margin:0 0 18px;font-size:1.05rem}
+  .cita{font:italic 300 clamp(1.6rem,1.2rem + 1.6vw,2.4rem)/1.2 var(--serif);color:var(--oro-claro);margin:34px 0 0;padding-left:24px;border-left:1px solid var(--oro)}
 
-  /* barra fija para pedir, siempre a la mano */
-  .pedir{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:stretch;background:var(--oro);color:var(--nogal);padding-bottom:env(safe-area-inset-bottom)}
-  .pedir a,.pedir button{flex:1;display:flex;align-items:center;justify-content:center;min-height:56px;font:600 1.02rem var(--letra);color:inherit;text-decoration:none;background:none;border:0;cursor:pointer}
-  .pedir button{flex:0 0 auto;padding:0 22px;background:var(--nogal-2);color:var(--oro)}
+  /* encargos */
+  .encargo{text-align:center}
+  .encargo .ancho{max-width:760px}
+  .encargo h2{margin-bottom:18px}
+  .encargo .sub{margin:0 auto 36px}
 
-  #aviso{position:fixed;left:50%;bottom:76px;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--crema);color:var(--tinta);padding:13px 18px;font-size:.95rem;max-width:calc(100% - 32px);text-align:center;transition:.25s;z-index:30}
+  /* visítenos */
+  .visita .ancho{display:block}
+  .sucursales{display:grid;gap:0 40px;margin-top:30px}
+  @media (min-width:900px){ .sucursales{grid-template-columns:repeat(3,1fr)} .sucursales .sucursal{border-top:1px solid #d9ccb6;margin-top:0} }
+  .visita .pared{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:30% 50%}
+  .sucursal{padding:26px 0;border-bottom:1px solid #d9ccb6}
+  .sucursal:first-of-type{border-top:1px solid #d9ccb6;margin-top:30px}
+  .dos-btn{display:flex;flex-wrap:wrap;gap:10px}
+  .pedir{margin-top:34px}
+  .pedir p{margin:14px 0 0;color:var(--tinta-suave);font-size:.95rem}
+  .claro .btn.oro{background:var(--tinta);color:var(--marfil)}
+  .claro .btn.oro:hover{background:#3d2a1f}
+  .sucursal h3{font:400 2rem/1 var(--serif);margin:0 0 8px}
+  .sucursal p{margin:0 0 16px;color:var(--tinta-suave)}
+  .claro .btn.linea{color:var(--tinta);box-shadow:inset 0 0 0 1px rgba(42,29,22,.45)}
+  .claro .btn.linea:hover{color:#9a7230;box-shadow:inset 0 0 0 1px #9a7230}
+
+  footer{padding:70px var(--margen) 60px;text-align:center;border-top:1px solid rgba(201,164,92,.2)}
+  footer img{height:70px;width:auto;margin:0 auto 18px}
+  footer p{margin:4px 0;color:var(--humo);font-size:.82rem;letter-spacing:.18em;text-transform:uppercase}
+  footer small{display:block;margin-top:26px;color:#7d6c5c;font-size:.75rem;letter-spacing:.12em}
+
+  #aviso{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--marfil);color:var(--espresso);padding:14px 20px;font-size:.9rem;max-width:calc(100% - 32px);text-align:center;transition:.3s var(--curva);z-index:50;box-shadow:0 20px 40px rgba(0,0,0,.4)}
   #aviso.ver{opacity:1;transform:translate(-50%,0)}
-  @media (prefers-reduced-motion:reduce){ #aviso{transition:none} .sale img{height:100%} }
+
+  /* aparecer al bajar */
+  .sube{opacity:0;transform:translateY(26px);transition:opacity 1s var(--curva),transform 1s var(--curva)}
+  .sube.ya{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .portada .fondo img{animation:none}
+    .sube{opacity:1;transform:none;transition:none}
+    .galeria img,.btn,#aviso{transition:none}
+  }
 </style>
 </head>
 <body>
-<div class="franja">Muestra de Ari Labs para Panadeando</div>
+<div class="franja">Muestra · Ari Labs</div>
 
-<header class="letrero pared">
-  <h1 class="marca"><img src="img/logo-oro-xl.webp" width="1387" height="798" alt="Panadeando" fetchpriority="high"></h1>
-  <p class="dice"><span>Panadería, bistró y café en Mérida.</span><span>Buenavista · Los Héroes · San Ángelo</span></p>
-  <div class="sale"><img id="croissant" src="img/croissant.webp" width="1250" height="1262" alt="Croissant de Panadeando con chocolate y queso de bola rallado."></div>
+<header>
+  <a class="logo" href="#" aria-label="Panadeando, inicio"><img src="img/logo-oro.webp" width="640" height="368" alt="Panadeando"></a>
+  <nav aria-label="Secciones"><a href="#vitrina">La vitrina</a><a href="#bistro">Bistró y café</a><a href="#historia">Historia</a><a href="#visita">Visítenos</a></nav>
+  <a class="btn linea chico" href="https://pedidos.panadeando.com/" target="_blank" rel="noopener">Pedir</a>
 </header>
 
 <main>
-  <section class="roles pared">
+  <div class="portada">
+    <div class="fondo"><img src="img/croissant.webp" width="1280" height="1276" alt="Croissant de Panadeando con chocolate y queso de bola rallado." fetchpriority="high"></div>
+    <div class="texto">
+      <p class="ceja">Panadería · Bistró y café</p>
+      <h1>Pan de abuelos,<br><em>técnica europea.</em></h1>
+      <p class="entrada">Roles de masa danesa, croissants, desayunos y café recién molido. En tres casas de Mérida.</p>
+      <div class="acciones">
+        <a class="btn oro" href="#vitrina">Ver la vitrina <span class="flecha" aria-hidden="true"></span></a>
+        <button type="button" class="btn linea" data-contacto="Hola, quiero encargar pan">Encargar por WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cinta" aria-hidden="true"><span>Masa danesa</span><span>Croissants</span><span>Desayunos de bistró</span><span>Café recién molido</span></div>
+
+  <section class="vitrina madera" id="vitrina">
     <div class="ancho">
-      <figure><img src="img/roles.webp" width="1000" height="1347" loading="lazy" alt="Roles de masa danesa en la vitrina: con glaseado y nuez, y con chocolate y queso de bola."></figure>
-      <div>
-        <h2>Nueve roles</h2>
-        <p class="grande">Masa danesa en capas. Del clásico de canela al de tocino, y uno que cambia con la temporada.</p>
-        <ul class="nombres">
-          <li>Canela</li><li>Glaseado</li><li>Zarzamora</li><li>Nutella</li><li>Oreo</li><li>Maple</li><li>Tocino</li><li>Pizza</li><li>de temporada</li>
+      <div class="marco sube">
+        <img src="img/roles.webp" width="1000" height="1331" loading="lazy" alt="Roles de masa danesa en la vitrina de Panadeando: con glaseado y nuez, y con chocolate y queso de bola.">
+        <img class="chica" src="img/letrero-oro.webp" width="1000" height="736" loading="lazy" alt="El letrero dorado de Panadeando sobre la pared de madera.">
+      </div>
+      <div class="sube">
+        <span class="num">01 · LA VITRINA</span>
+        <h2>Los roles <em>de la casa</em></h2>
+        <p class="sub">Masa danesa en capas, horneada hasta dorar. Nueve rellenos, del clásico de canela al de tocino, y uno que cambia con la temporada.</p>
+        <ul class="sabores roles9">
+          <li>Canela</li><li>Glaseado</li><li>Zarzamora</li><li>Nutella</li><li>Oreo</li><li>Maple</li><li>Tocino</li><li>Pizza</li><li class="temp">De temporada</li>
         </ul>
+        <button type="button" class="btn oro" data-contacto="Hola, quiero apartar roles">Apartar roles <span class="flecha" aria-hidden="true"></span></button>
       </div>
     </div>
   </section>
 
-  <section class="horno crema">
+  <section class="pan claro" id="pan">
     <div class="ancho">
-      <h2>Del horno</h2>
-      <p class="grande">De lo francés a lo de aquí: de la concha Philadelphia a los tacos de guayaba.</p>
-      <div class="cols">
-        <div><h3>Croissants</h3><p>Natural, Philadelphia, Nutella, almendras y de temporada.</p></div>
-        <div><h3>Chocolatines</h3><p>Natural y almendrado.</p></div>
-        <div><h3>Tartas</h3><p>Manzana, nuez, plátano y limón.</p></div>
-        <div><h3>Para el antojo</h3><p>Cheesecake, cheesecake brownie y muffin de plátano.</p></div>
-        <div><h3>De la vitrina</h3><p>Hojaldra, orejas, concha Philadelphia, mini rosca brioche y tacos de guayaba.</p></div>
-        <div><h3>Salado y más</h3><p>Empanadas, bolita de queso, pan de elote y galletas de nuez y de chocolate.</p></div>
+      <div class="cabeza sube">
+        <div><span class="num">02 · DEL HORNO</span><h2>Croissants, tartas <em>y más</em></h2></div>
+        <p class="sub">Lo que sale del horno cada día, de lo francés a lo de aquí: de la concha Philadelphia a los tacos de guayaba.</p>
+      </div>
+      <div class="horno sube">
+        <div><h3>Croissants</h3><p>Natural · Philadelphia · Nutella · Almendras · De temporada</p></div>
+        <div><h3>Chocolatines</h3><p>Natural · Almendrado</p></div>
+        <div><h3>Tartas</h3><p>Manzana · Nuez · Plátano · Limón</p></div>
+        <div><h3>Para el antojo</h3><p>Cheesecake · Cheesecake brownie · Muffin de plátano</p></div>
+        <div><h3>De la vitrina</h3><p>Hojaldra · Orejas · Concha Philadelphia · Mini rosca brioche · Tacos de guayaba</p></div>
+        <div><h3>Salado y más</h3><p>Empanadas · Bolita de queso · Pan de elote · Galletas de nuez y de chocolate</p></div>
       </div>
     </div>
   </section>
 
-  <section class="bistro pared">
-    <div class="titulo ancho">
-      <h2>Desayunar sin prisa</h2>
-      <p class="grande">Chilaquiles, benedictinos y croissants rellenos. En la terraza, para llevar o a domicilio.</p>
-    </div>
-    <figure class="plato"><img src="img/hotcakes.webp" width="1000" height="1591" loading="lazy" alt="Hotcakes con fresas, huevo estrellado y tocino, con una taza al fondo."></figure>
-    <div class="par">
-      <figure><img src="img/taza.webp" width="1000" height="675" loading="lazy" alt="Taza de café con espuma, jugo de naranja y un postre en la mesa."><figcaption>Café recién molido, para acompañar.</figcaption></figure>
-      <figure><img src="img/postres.webp" width="1000" height="646" loading="lazy" alt="Postres de la vitrina con cacao y pipetas de café."><figcaption>Postres de la vitrina.</figcaption></figure>
-    </div>
-    <div class="carta">
-      <div><h3>Desayunos</h3><p>Chilaquiles verdes, rojos, de mole y motuleños. Benedictinos Panadeando. Hotcakes con Nutella, maple o mermelada. Avocado toast, cochinita toast y french toast. Omelette y molletes.</p></div>
-      <div><h3>Croissants y sándwiches</h3><p>Croissant Panadeando con pesto y omelette, Fifí y Monsieur. Sándwich de quesos en masa madre. Ciabatta pesto y ciabatta con arrachera.</p></div>
-      <div><h3>Para beber</h3><p>Lattes de caramelo, vainilla, avellana, mazapán y horchata. Chai y dirty chai. Cold brew, frappés, smoothies y sodas italianas.</p></div>
-    </div>
-  </section>
-
-  <section class="historia crema">
+  <section class="bistro" id="bistro">
     <div class="ancho">
-      <img src="img/letrero-oro.webp" width="1000" height="736" loading="lazy" alt="El letrero dorado de Panadeando sobre la pared de madera del local.">
-      <div>
-        <h2>De familia</h2>
-        <p class="grande">Jair Villanueva viene de una familia de panaderos: sus abuelos lo eran.</p>
-        <p>Aprendió el oficio mientras estudiaba la licenciatura, y con el impulso de su esposa abrió Panadeando en Los Héroes. Hoy son tres casas en Mérida, con el pan yucateco de toda la vida y las técnicas de la panadería europea.</p>
+      <div class="cabeza sube">
+        <div><span class="num">03 · BISTRÓ Y CAFÉ</span><h2>Desayunar <em>sin prisa</em></h2></div>
+        <p class="sub">Chilaquiles, benedictinos, croissants rellenos y pan de masa madre. Para comer en la terraza, para llevar o a domicilio.</p>
+      </div>
+      <div class="galeria sube">
+        <figure class="g1"><img src="img/hotcakes.webp" width="1000" height="1498" loading="lazy" alt="Hotcakes con fresas, huevo estrellado y tocino, con chocolate caliente y un postre al fondo."><figcaption>Hotcakes, huevo y tocino</figcaption></figure>
+        <figure class="g2"><img src="img/taza.webp" width="1000" height="675" loading="lazy" alt="Taza de café con espuma, jugo de naranja y un postre en la mesa de Panadeando."><figcaption>Para acompañar</figcaption></figure>
+        <figure class="g3"><img src="img/postres.webp" width="1000" height="646" loading="lazy" alt="Postres de la vitrina con cacao y pipetas de café."><figcaption>Postres de la vitrina</figcaption></figure>
+      </div>
+      <div class="carta sube">
+        <div><h3>Desayunos</h3><ul><li>Chilaquiles verdes, rojos, de mole y motuleños</li><li>Benedictinos Panadeando</li><li>Hotcakes con Nutella, maple o mermelada</li><li>Avocado toast · Cochinita toast · French toast</li><li>Omelette · Molletes</li></ul></div>
+        <div><h3>Croissants y sándwiches</h3><ul><li>Croissant Panadeando, con pesto y omelette</li><li>Croissant Fifí · Croissant Monsieur</li><li>Sándwich de quesos en masa madre</li><li>Ciabatta pesto · Ciabatta con arrachera</li></ul></div>
+        <div><h3>Para beber</h3><ul><li>Lattes de caramelo, vainilla, avellana, mazapán y horchata</li><li>Chai y dirty chai · Cold brew</li><li>Frappés y smoothies · Sodas italianas</li></ul></div>
+      </div>
       </div>
     </div>
   </section>
 
-  <section class="visita pared">
+  <section class="historia" id="historia">
+    <div class="foto"><img src="img/letrero-oro.webp" width="1000" height="736" loading="lazy" alt="Letrero dorado de Panadeando sobre la madera del local."></div>
     <div class="ancho">
-      <h2>Tres casas</h2>
-      <div class="casas">
-        <div class="casa"><h3>Buenavista</h3><p>Calle 31A #480, Buenavista</p><div class="enlaces"><a href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+Buenavista+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a><button type="button" data-contacto="Hola, les escribo a la sucursal Buenavista">WhatsApp</button></div></div>
-        <div class="casa"><h3>Los Héroes</h3><p>Calle 111 #527 por 134A</p><div class="enlaces"><a href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+Calle+111+527+Los+H%C3%A9roes+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a><button type="button" data-contacto="Hola, les escribo a la sucursal Los Héroes">WhatsApp</button></div></div>
-        <div class="casa"><h3>San Ángelo</h3><p>Mérida, Yucatán</p><div class="enlaces"><a href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+San+Angelo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar</a><button type="button" data-contacto="Hola, les escribo a la sucursal San Ángelo">WhatsApp</button></div></div>
+      <div class="cuerpo sube">
+        <span class="num">04 · NUESTRA HISTORIA</span>
+        <h2>Un oficio que viene <em>de familia</em></h2>
+        <p>Jair Villanueva viene de una familia de panaderos: sus abuelos lo eran. Aprendió el oficio mientras estudiaba la licenciatura, y con el impulso de su esposa abrió Panadeando en Los Héroes. Hoy son tres casas en Mérida.</p>
+        <p>Desde entonces junta las dos cosas que sabe hacer: el pan yucateco de toda la vida y las técnicas de la panadería europea, con ingredientes de la región.</p>
+        <p class="cita">Lo de aquí, hecho con lo mejor de fuera.</p>
       </div>
-      <div class="encargo">
-        <p>¿Pan para una reunión o una fiesta? Díganos cuánto y para cuándo.</p>
-        <button type="button" class="boton" data-contacto="Hola, quiero hacer un encargo de pan">Hacer un encargo</button>
+    </div>
+  </section>
+
+  <section class="encargo madera">
+    <div class="ancho sube">
+      <span class="num">05 · ENCARGOS</span>
+      <h2>Para la reunión, <em>la oficina o la fiesta</em></h2>
+      <p class="sub">Díganos qué pan necesita y para cuándo. Se lo tenemos listo para que solo pase a recogerlo.</p>
+      <button type="button" class="btn oro" data-contacto="Hola, quiero hacer un encargo de pan">Hacer un encargo <span class="flecha" aria-hidden="true"></span></button>
+    </div>
+  </section>
+
+  <section class="visita claro" id="visita">
+    <div class="ancho">
+      <div class="sube">
+        <span class="num">06 · VISÍTENOS</span>
+        <h2>Tres casas <em>en Mérida</em></h2>
+        <div class="sucursales">
+        <div class="sucursal">
+          <h3>Buenavista</h3>
+          <p>Calle 31A #480, Buenavista</p>
+          <div class="dos-btn"><a class="btn linea chico" href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+Buenavista+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar <span class="flecha" aria-hidden="true"></span></a><button type="button" class="btn linea chico" data-contacto="Hola, les escribo a la sucursal Buenavista">WhatsApp</button></div>
+        </div>
+        <div class="sucursal">
+          <h3>Los Héroes</h3>
+          <p>Calle 111 #527 por 134A, Fraccionamiento Los Héroes</p>
+          <div class="dos-btn"><a class="btn linea chico" href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+Calle+111+527+Los+H%C3%A9roes+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar <span class="flecha" aria-hidden="true"></span></a><button type="button" class="btn linea chico" data-contacto="Hola, les escribo a la sucursal Los Héroes">WhatsApp</button></div>
+        </div>
+        <div class="sucursal">
+          <h3>San Ángelo</h3>
+          
+          <div class="dos-btn"><a class="btn linea chico" href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+San+Angelo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar <span class="flecha" aria-hidden="true"></span></a><button type="button" class="btn linea chico" data-contacto="Hola, les escribo a la sucursal San Ángelo">WhatsApp</button></div>
+        </div>
+        </div>
+        <div class="pedir">
+          <a class="btn oro" href="https://pedidos.panadeando.com/" target="_blank" rel="noopener">Pedir en línea <span class="flecha" aria-hidden="true"></span></a>
+          <p>A domicilio o para recoger. También en Rappi. Pregunte por su tarjeta de sellos.</p>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="pared">
-  <img src="img/logo-marfil-xl.webp" width="1387" height="798" loading="lazy" alt="Panadeando">
-  <p>Panadería, bistró y café · Mérida, Yucatán</p>
-  <p>A domicilio, para recoger o en Rappi. Pregunte por su tarjeta de sellos.</p>
-  <p>Página hecha por Ari Labs</p>
+<footer>
+  <img src="img/logo-marfil.webp" width="640" height="368" alt="Panadeando" loading="lazy">
+  <p>Panadería · Bistró y café</p>
+  <p>Mérida, Yucatán</p>
+  <small>Página hecha por Ari Labs</small>
 </footer>
-
-<nav class="pedir" aria-label="Pedir">
-  <a href="https://pedidos.panadeando.com/" target="_blank" rel="noopener">Pedir en línea</a>
-  <button type="button" data-contacto="Hola, quiero hacer un pedido">WhatsApp</button>
-</nav>
 <div id="aviso" role="status"></div>
 
 <script>
 const D = { whatsapp: "9991634220" };
 let ACTIVA = false;
+document.querySelector(".franja").hidden = ACTIVA;
 
 let tAviso;
 function aviso(t){ const a = document.getElementById("aviso"); a.textContent = t; a.classList.add("ver"); clearTimeout(tAviso); tAviso = setTimeout(() => a.classList.remove("ver"), 2800); }
@@ -228,14 +355,9 @@ document.addEventListener("click", e => {
   window.open("https://wa.me/52" + D.whatsapp + "?text=" + encodeURIComponent(b.dataset.contacto), "_blank", "noopener");
 });
 
-// el único movimiento: el croissant sube despacio desde la oscuridad al bajar
-const img = document.getElementById("croissant");
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  let pend = false;
-  const mover = () => { pend = false; const r = img.parentElement.getBoundingClientRect(); const p = Math.max(-1, Math.min(1, r.top / innerHeight)); img.style.transform = "translate3d(0," + (p * 9 - 9) + "%,0)"; };
-  addEventListener("scroll", () => { if (!pend) { pend = true; requestAnimationFrame(mover); } }, { passive: true });
-  mover();
-}
+// aparecer al bajar
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("ya"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" }) : null;
+document.querySelectorAll(".sube").forEach(el => io ? io.observe(el) : el.classList.add("ya"));
 </script>
 </body>
 </html>
