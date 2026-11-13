@@ -474,7 +474,8 @@ const NUBE = { url:"https://hmzlpfljzdkpjqleejyd.supabase.co", llave:"sb_publish
 let D = { whatsapp:"9999551682", lav:[["Chica",44],["Mediana",54],["Grande",64]], sec:[["Mediana",56],["Grande",76]],
   desde:"2026-12-01", lavNuevo:[47,57,67], secNuevo:[60,80], extras:[["Detergente",10],["Desmanchante",12]],
   encargo:[{n:"Lavada, secada y medio acomodada",d:"Más lo que se use",p:60},{n:"Lavada, secada y bien doblada",d:"Precio desde",p:80}], aviso:"" };
-let ACTIVA = false;
+/* Página pagada y entregada (13/11/2026): siempre activa aunque la base de datos no responda. */
+let ACTIVA = true;
 let P = { lav:D.lav, sec:D.sec }, EXTRA = D.extras;
 const estado = { mes:"hoy", lav:null, sec:null, ext:[false,false] };
 const $ = id => document.getElementById(id);
