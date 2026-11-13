@@ -199,6 +199,34 @@
     .sube{opacity:1;transform:none;transition:none}
     .galeria img,.btn,#aviso{transition:none}
   }
+
+  /* ---------- formas suaves: menos cuadrada ---------- */
+  :root{--suave:clamp(18px,2.4vw,28px)}
+  .btn{border-radius:999px}
+  .cinta span+span::before{border-radius:50%;transform:none;width:7px;height:7px}
+  /* la foto de los roles en arco, como la boca de un horno */
+  .marco img{border-radius:999px 999px var(--suave) var(--suave)}
+  .marco::after{border-radius:999px 999px calc(var(--suave) - 6px) calc(var(--suave) - 6px)}
+  .marco .chica{border-radius:50%;aspect-ratio:1/1;width:38%;border-width:5px}
+  .roles9{display:flex;flex-wrap:wrap;gap:10px;border-top:0;margin-top:30px}
+  .roles9 li{border:0;padding:12px 20px;border-radius:999px;background:rgba(201,164,92,.1);box-shadow:inset 0 0 0 1px rgba(201,164,92,.35);font-size:clamp(1.15rem,1rem + .5vw,1.45rem)}
+  .roles9 li.temp{background:rgba(228,204,149,.16)}
+  .roles9 li{flex:0 0 auto;width:auto;white-space:nowrap;display:block}
+  /* hojas crema redondeadas que flotan sobre el café */
+  .claro{border-radius:clamp(28px,5vw,56px);margin:0 clamp(8px,1.6vw,18px)}
+  .historia{border-radius:clamp(28px,5vw,56px);margin:0 clamp(8px,1.6vw,18px)}
+  /* del horno: tarjetas suaves en vez de cuadrícula con líneas */
+  .horno{border-top:0;gap:12px}
+  .horno>div,.horno>div:not(:nth-child(3n+1)){border:0;border-radius:var(--suave);background:#e8dccb;padding:26px 26px 28px}
+  /* galería y carta */
+  .galeria figure{border-radius:var(--suave)}
+  .carta li{border-bottom:0;padding:7px 0}
+  .carta{border-top:0}
+  /* sucursales en tarjetas */
+  .sucursales{gap:12px}
+  .sucursal,.sucursal:first-of-type,.sucursales .sucursal{border:0;margin-top:0;border-radius:var(--suave);background:#e8dccb;padding:26px}
+  .sucursales{margin-top:30px}
+  #aviso{border-radius:16px}
 </style>
 </head>
 <body>
