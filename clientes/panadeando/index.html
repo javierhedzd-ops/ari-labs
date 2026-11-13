@@ -204,10 +204,11 @@
   :root{--suave:clamp(18px,2.4vw,28px)}
   .btn{border-radius:999px}
   .cinta span+span::before{border-radius:50%;transform:none;width:7px;height:7px}
-  /* la foto de los roles en arco, como la boca de un horno */
-  .marco img{border-radius:999px 999px var(--suave) var(--suave)}
-  .marco::after{border-radius:999px 999px calc(var(--suave) - 6px) calc(var(--suave) - 6px)}
-  .marco .chica{border-radius:50%;aspect-ratio:1/1;width:38%;border-width:5px}
+  /* la foto de los roles: esquinas suaves (sin arco, para no parecerse a El Rey) */
+  .marco img{border-radius:var(--suave)}
+  .marco::after{border-radius:calc(var(--suave) - 8px)}
+  .marco .chica{border-radius:calc(var(--suave) - 4px);aspect-ratio:4/5;width:38%;border-width:5px}
+  @media (max-width:600px){ .cinta{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;text-align:center} .cinta span{justify-content:center} .cinta span+span::before{display:none} }
   .roles9{display:flex;flex-wrap:wrap;gap:10px;border-top:0;margin-top:30px}
   .roles9 li{border:0;padding:12px 20px;border-radius:999px;background:rgba(201,164,92,.1);box-shadow:inset 0 0 0 1px rgba(201,164,92,.35);font-size:clamp(1.15rem,1rem + .5vw,1.45rem)}
   .roles9 li.temp{background:rgba(228,204,149,.16)}
