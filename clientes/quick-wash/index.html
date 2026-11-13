@@ -215,6 +215,8 @@ button.sin{border:0;border-radius:0;background:none;min-height:44px;padding:9px 
 .p1{width:44%;height:28%}.p2{width:38%;height:25%;background:repeating-linear-gradient(90deg,#7CC8B0 0 6px,#E9F6F1 6px 11px)}
 .p3{width:34%;height:22%}.p4{width:32%;height:21%;background:repeating-linear-gradient(0deg,#5FA8DC 0 5px,#F4F4F2 5px 9px)}
 .p5{width:26%;height:18%}.p6{width:24%;height:16%}
+.lavando{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04)}
+.tambor{background:#1d2230}
 </style>
 </head>
 <body>
@@ -233,7 +235,7 @@ button.sin{border:0;border-radius:0;background:none;min-height:44px;padding:9px 
       <button type="button" class="btn azul-b" data-aviso="Es una muestra: este botón se activa cuando se entrega la página.">Preguntar por WhatsApp</button>
       <a class="btn" href="#precios">Ver precios</a>
     </div>
-    <div class="ojo rev" style="animation-delay:.42s" aria-hidden="true"><div class="tambor"><div class="interior"></div><div class="giro"><i class="prenda p1"></i><i class="prenda p2"></i><i class="prenda p3"></i><i class="prenda p4"></i><i class="prenda p5"></i><i class="prenda p6"></i></div><svg class="agua" viewBox="0 0 200 120" preserveAspectRatio="none" aria-hidden="true"><path class="ola o1" d="M0 30 Q25 18 50 30 T100 30 T150 30 T200 30 T250 30 T300 30 T350 30 T400 30 V120 H0Z"/><path class="ola o2" d="M0 36 Q25 26 50 36 T100 36 T150 36 T200 36 T250 36 T300 36 T350 36 T400 36 V120 H0Z"/></svg><div class="espuma"><i class="burbuja b1"></i><i class="burbuja b2"></i><i class="burbuja b3"></i><i class="burbuja b4"></i><i class="burbuja b5"></i><i class="burbuja b6"></i><i class="burbuja b7"></i></div></div><i class="brillo"></i></div>
+    <div class="ojo rev" style="animation-delay:.42s" aria-hidden="true"><div class="tambor"><video class="lavando" autoplay muted loop playsinline preload="auto" poster="lavando.jpg" aria-hidden="true"><source src="lavando.webm" type="video/webm"><source src="lavando.mp4" type="video/mp4"></video></div><i class="brillo"></i></div>
     <div class="manta"><span>Contamos con servicio de</span>Planchado y tintorería</div>
     <div class="datos">
       <div><b>3</b>tamaños de lavadora</div>
@@ -402,6 +404,11 @@ pintar(); revisarHorario(); setInterval(revisarHorario,60000);
   if (Date.now() < fin) return;
   document.body.innerHTML = '<main class="vencida"><h1>Esta muestra ya no está disponible</h1><p>Era una muestra hecha por Ari Labs para Quick Wash. Si quiere su página, escríbanos.</p></main>';
 })();
+
+/* Si el teléfono pide menos movimiento, el video se queda quieto en su primera imagen. */
+(function(){ const v = document.querySelector('.lavando'); if (!v) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+  else { const p = v.play(); if (p && p.catch) p.catch(()=>{}); } })();
 </script>
 </body>
 </html>
