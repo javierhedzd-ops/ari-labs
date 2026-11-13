@@ -271,6 +271,12 @@ legend{font-weight:800;font-size:15px;padding:0 6px}
 .cartel .manta{transform:none;border-radius:14px;box-shadow:none;border:2px solid #3d84c4;background:var(--manta);-webkit-font-smoothing:antialiased;padding:14px 18px 16px}
 .cartel .manta span{letter-spacing:.08em}
 #encargo[hidden]{display:none!important}
+
+/* Respaldo: si el video no puede reproducirse, la foto del tambor gira despacio. */
+.ojo .girando{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transform:scale(1.25)}
+.ojo .tambor.sin-video .lavando{display:none}
+.ojo .tambor.sin-video .girando{display:block;animation:giro 9s linear infinite}
+@media (prefers-reduced-motion:reduce){.ojo .tambor.sin-video .girando{animation:none}}
 </style>
 </head>
 <body>
@@ -290,7 +296,7 @@ legend{font-weight:800;font-size:15px;padding:0 6px}
       <button type="button" class="btn azul-b" data-contacto="Hola, quiero preguntar por el servicio de lavandería">Preguntar por WhatsApp</button>
       <a class="btn" href="#precios">Ver precios</a>
     </div>
-    <div class="ojo rev" style="animation-delay:.42s" aria-hidden="true"><div class="tambor"><video class="lavando" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="auto" poster="lavando.jpg" aria-hidden="true"><source src="lavando.webm" type="video/webm"><source src="lavando.mp4" type="video/mp4"></video></div><i class="brillo"></i></div>
+    <div class="ojo rev" style="animation-delay:.42s" aria-hidden="true"><div class="tambor"><img class="girando" src="lavando.jpg" alt="" aria-hidden="true"><video class="lavando" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="auto" poster="lavando.jpg" aria-hidden="true"><source src="lavando.mp4" type="video/mp4"><source src="lavando.webm" type="video/webm"></video></div><i class="brillo"></i></div>
     <div class="manta"><span>Contamos con servicio de</span>Planchado y tintorería</div>
     <div class="elegir">
       <a href="#precios"><b>Lo lavo yo</b><span>Autoservicio: elige tu máquina y mira cuánto sale.</span></a>
@@ -588,8 +594,23 @@ function vencer(){
 
 /* Si el teléfono pide menos movimiento, el video se queda quieto en su primera imagen. */
 (function(){ const v = document.querySelector('.lavando'); if (!v) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
-  else { const p = v.play(); if (p && p.catch) p.catch(()=>{}); } })();
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (quieto) { v.removeAttribute('autoplay'); v.pause(); return; }
+  const tambor = v.parentElement;
+  /* Si el teléfono no deja reproducir videos solos (por ejemplo, iPhone en ahorro de batería), gira la foto. */
+  const sinVideo = () => tambor.classList.add('sin-video');
+  const dale = () => { if (document.hidden) return; const p = v.play(); if (p && p.catch) p.catch(sinVideo); };
+  /* Safari a veces se detiene al repetir o al volver a la pestaña: lo volvemos a arrancar. */
+  v.addEventListener('pause', () => setTimeout(dale, 120));
+  v.addEventListener('ended', () => { v.currentTime = 0; dale(); });
+  v.addEventListener('stalled', dale); v.addEventListener('suspend', () => { if (v.paused) dale(); });
+  v.addEventListener('timeupdate', () => { if (v.duration && v.currentTime > v.duration - 0.08) v.currentTime = 0.01; });
+  document.addEventListener('visibilitychange', dale);
+  addEventListener('pageshow', dale);
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) dale(); })).observe(v);
+  ['touchstart','click','scroll'].forEach(ev => addEventListener(ev, () => { if (v.paused) dale(); }, { passive: true, once: true }));
+  setInterval(() => { if (v.paused && !document.hidden && !tambor.classList.contains('sin-video')) dale(); }, 1500);
+  dale(); })();
 
 /* ===== Panel de la dueña (dirección + #panel) ===== */
 (function(){
