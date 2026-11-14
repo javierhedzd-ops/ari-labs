@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recibo · Ari Labs</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--plata:#ced6e0;--acero:#5b6978;--artico:#64b6ff;--noche:#2e2e3e;--tinta:#1f2633;--suave:#4b5868;--azul-texto:#2563a8}
+  *{box-sizing:border-box}
+  body{margin:0;background:#e9eef4;color:var(--tinta);font:16px/1.5 "Inter Tight",system-ui,sans-serif}
+  .control{max-width:760px;margin:0 auto;padding:24px 16px 8px}
+  .control h1{font-size:1.6rem;letter-spacing:-.03em;margin:0 0 4px;color:var(--noche)}
+  .control p{margin:0 0 16px;color:var(--suave)}
+  .campos{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+  .campos label{display:grid;gap:4px;font-weight:500;font-size:.92rem}
+  .campos .ancho{grid-column:1/-1}
+  input,select{font:inherit;padding:11px 12px;border:1px solid var(--plata);border-radius:12px;background:#fff;color:var(--tinta);min-width:0;width:100%}
+  .botones{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 8px}
+  button{font:600 1rem "Inter Tight",system-ui,sans-serif;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;background:var(--noche);color:#fff}
+  button.sec{background:#fff;color:var(--noche);box-shadow:inset 0 0 0 1px var(--plata)}
+  .msg{min-height:1.5em;color:var(--azul-texto);font-size:.92rem;margin:0}
+  @media (max-width:520px){.campos{grid-template-columns:1fr}}
+
+  .vista{padding:8px 16px 40px;display:flex;justify-content:center}
+  .recibo{width:100%;max-width:620px;background:#fff;border-radius:22px;padding:32px 30px 26px;box-shadow:0 10px 40px rgba(31,38,51,.12)}
+  .r-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid #e3e8ef;padding-bottom:18px}
+  .r-marca{font-weight:700;font-size:1.5rem;letter-spacing:-.035em;color:var(--noche);margin:0}
+  .r-marca i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--artico);margin-left:4px;font-style:normal}
+  .r-sub{margin:2px 0 0;color:var(--acero);font-size:.85rem}
+  .r-folio{text-align:right;font:500 .85rem "JetBrains Mono",ui-monospace,monospace;color:var(--acero);margin:0}
+  .r-folio b{display:block;font:700 1.05rem "Inter Tight",system-ui,sans-serif;color:var(--noche);letter-spacing:.06em}
+  .r-datos{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin:20px 0}
+  .r-datos div{min-width:0}
+  .r-datos span{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--acero)}
+  .r-datos b{font-weight:600;overflow-wrap:anywhere}
+  .r-datos .ancho{grid-column:1/-1}
+  .r-cuentas{border-top:1px solid #e3e8ef;padding-top:14px}
+  .r-fila{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:1rem}
+  .r-fila b{font:600 1rem "JetBrains Mono",ui-monospace,monospace;white-space:nowrap}
+  .r-fila.pagado{font-size:1.25rem;font-weight:700;color:var(--noche);border-top:2px solid var(--noche);margin-top:6px;padding-top:12px}
+  .r-fila.pagado b{font-size:1.25rem}
+  .r-fila.saldo b{color:var(--azul-texto)}
+  .r-sello{display:inline-block;margin-top:14px;padding:6px 14px;border-radius:999px;background:#e8f3ff;color:var(--azul-texto);font-weight:600;font-size:.9rem}
+  .r-sello.liquidado{background:#e6f6ec;color:#1d7a43}
+  .r-nota{margin:16px 0 0;color:var(--suave);font-size:.82rem;line-height:1.45}
+  .r-pie{margin:18px 0 0;padding-top:12px;border-top:1px solid #e3e8ef;color:var(--acero);font-size:.8rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  @media (max-width:520px){.recibo{padding:24px 18px 20px}.r-datos{grid-template-columns:1fr}}
+  @page{size:Letter;margin:.6in}
+  @media print{body{background:#fff}.control{display:none}.vista{padding:0}.recibo{box-shadow:none;max-width:none;border:1px solid #e3e8ef}}
+</style>
+</head>
+<body>
+<section class="control" aria-label="Datos del recibo">
+  <h1>Recibo de pago</h1>
+  <p>Llena los datos del cobro. El recibo de abajo se arma solo. Mándalo por WhatsApp como PDF o imprímelo y fírmalo.</p>
+  <form class="campos" id="datos" onsubmit="return false">
+    <label class="ancho">Cliente (negocio y nombre)<input id="cliente" maxlength="80" autocomplete="off" placeholder="Lavandería Quick Wash"></label>
+    <label class="ancho">Trabajo<input id="concepto" maxlength="120" autocomplete="off" placeholder="Página web con panel para cambiar precios"></label>
+    <label>Precio total (MXN)<input id="total" type="number" inputmode="numeric" min="0" step="1" placeholder="1500"></label>
+    <label>Este pago (MXN)<input id="pago" type="number" inputmode="numeric" min="0" step="1" placeholder="750"></label>
+    <label>Pagado antes (MXN)<input id="antes" type="number" inputmode="numeric" min="0" step="1" value="0"></label>
+    <label>Forma de pago<select id="forma"><option>Efectivo</option><option>Transferencia</option><option>Depósito</option><option>Tarjeta</option></select></label>
+    <label>Fecha<input id="fecha" type="date"></label>
+    <label>Folio<input id="folio" maxlength="20" autocomplete="off"></label>
+  </form>
+  <div class="botones">
+    <button type="button" id="imprimir">Guardar PDF o imprimir</button>
+    <button type="button" class="sec" id="nuevo">Recibo nuevo</button>
+  </div>
+  <p class="msg" id="msg" role="status"></p>
+</section>
+
+<div class="vista">
+  <article class="recibo" aria-label="Recibo">
+    <header class="r-cab">
+      <div><p class="r-marca">Ari Labs<i></i></p><p class="r-sub">Páginas web y apps · Mérida, Yucatán</p><p class="r-sub">arilabs.mx</p></div>
+      <p class="r-folio">RECIBO<b id="v-folio">—</b><span id="v-fecha">—</span></p>
+    </header>
+    <div class="r-datos">
+      <div class="ancho"><span>Recibimos de</span><b id="v-cliente">—</b></div>
+      <div class="ancho"><span>Por el trabajo</span><b id="v-concepto">—</b></div>
+      <div><span>Forma de pago</span><b id="v-forma">—</b></div>
+      <div><span>Tipo de pago</span><b id="v-tipo">—</b></div>
+    </div>
+    <div class="r-cuentas">
+      <div class="r-fila"><span>Precio total acordado</span><b id="v-total">$0</b></div>
+      <div class="r-fila" id="f-antes"><span>Pagado antes</span><b id="v-antes">$0</b></div>
+      <div class="r-fila pagado"><span>Este pago</span><b id="v-pago">$0</b></div>
+      <div class="r-fila saldo"><span>Queda por pagar</span><b id="v-saldo">$0</b></div>
+    </div>
+    <span class="r-sello" id="v-sello">Anticipo recibido</span>
+    <p class="r-nota" id="v-nota"></p>
+    <footer class="r-pie"><span>Recibo simple, no es factura.</span><span>Gracias por confiar en Ari Labs.</span></footer>
+  </article>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const pesos = n => '$' + Math.round(n).toLocaleString('es-MX') + ' MXN';
+  const num = id => Math.max(0, Number($(id).value) || 0);
+  const hoy = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
+  const folioNuevo = () => 'AL-' + hoy().replace(/-/g, '').slice(2) + '-' + String(Math.floor(Math.random() * 900) + 100);
+  const campos = ['cliente', 'concepto', 'total', 'pago', 'antes', 'forma', 'fecha', 'folio'];
+
+  function pintar() {
+    const total = num('total'), pago = num('pago'), antes = num('antes');
+    const saldo = Math.max(0, total - antes - pago);
+    const f = $('fecha').value ? new Date($('fecha').value + 'T12:00:00') : new Date();
+    $('v-cliente').textContent = $('cliente').value.trim() || '—';
+    $('v-concepto').textContent = $('concepto').value.trim() || '—';
+    $('v-forma').textContent = $('forma').value;
+    $('v-folio').textContent = $('folio').value.trim() || '—';
+    $('v-fecha').textContent = f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+    $('v-total').textContent = pesos(total); $('v-antes').textContent = pesos(antes);
+    $('v-pago').textContent = pesos(pago); $('v-saldo').textContent = pesos(saldo);
+    $('f-antes').hidden = antes === 0;
+    const liquidado = total > 0 && saldo === 0;
+    const tipo = liquidado ? (antes > 0 ? 'Liquidación' : 'Pago completo') : (antes > 0 ? 'Abono' : 'Anticipo');
+    $('v-tipo').textContent = tipo;
+    $('v-sello').textContent = liquidado ? 'Pagado por completo' : tipo + ' recibido';
+    $('v-sello').classList.toggle('liquidado', liquidado);
+    $('v-nota').textContent = liquidado
+      ? 'El trabajo queda pagado por completo. Los cambios pequeños del primer mes van incluidos.'
+      : 'El resto se paga al entregar el trabajo funcionando. Se respeta el precio acordado en este recibo.';
+    $('msg').textContent = total > 0 && antes + pago > total ? 'Ojo: lo pagado es más que el precio total.' : '';
+    try { const d = {}; campos.forEach(c => d[c] = $(c).value); localStorage.setItem('recibo_ari', JSON.stringify(d)); } catch (e) {}
+  }
+
+  try { const d = JSON.parse(localStorage.getItem('recibo_ari') || 'null'); if (d) campos.forEach(c => { if (d[c] != null) $(c).value = d[c]; }); } catch (e) {}
+  if (!$('fecha').value) $('fecha').value = hoy();
+  if (!$('folio').value) $('folio').value = folioNuevo();
+  campos.forEach(c => $(c).addEventListener('input', pintar));
+  $('imprimir').onclick = () => { const t = document.title; document.title = 'Recibo ' + ($('folio').value || '') + ' ' + ($('cliente').value || ''); print(); document.title = t; };
+  $('nuevo').onclick = () => { campos.forEach(c => $(c).value = ''); $('antes').value = 0; $('forma').value = 'Efectivo'; $('fecha').value = hoy(); $('folio').value = folioNuevo(); pintar(); $('cliente').focus(); };
+  pintar();
+</script>
+</body>
+</html>
