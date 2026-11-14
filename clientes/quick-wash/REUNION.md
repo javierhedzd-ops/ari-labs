@@ -19,7 +19,7 @@ y su correo de Gmail de siempre por si hace falta recuperar la ficha de Google.
 - Ya con acceso: fotos, horario, sitio web, servicio de planchado y lavadora pet friendly.
 
 ## 4. Lo que falta preguntarle
-- La lavadora pet friendly: ¿cuál es?, ¿qué tamaño?, ¿cuesta lo mismo?
+- La lavadora pet friendly: ya no hace falta, en la página dice que pregunten en el local.
 - Precios de encargo (lavado, secado y doblado; tintorería), si ya quiere publicarlos.
 - ¿Tiene letrero de mascotas? Si sí, foto.
 
