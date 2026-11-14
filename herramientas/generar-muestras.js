@@ -5,7 +5,7 @@
 const fs = require('fs'), path = require('path');
 const [, , archivo, hasta = ''] = process.argv;
 if (!archivo) { console.error('Uso: node herramientas/generar-muestras.js prospectos.json "fecha"'); process.exit(1); }
-const BASE = 'https://javierhedzd-ops.github.io/ari-labs/modelos/cocina/';
+const BASE = 'https://arilabs.mx/modelos/cocina/';
 const CARPETA = path.join(__dirname, '..', 'modelos', 'cocina', 'muestras');
 const CAMPOS = ['tipo', 'giro', 'nombre', 'lema', 'direccion', 'colonia', 'entrega', 'horario', 'delDia', 'menu', 'piel', 'colores', 'ejemplo'];
 const slug = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
