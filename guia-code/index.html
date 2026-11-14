@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Empezar con Claude Code · Ari Labs</title>
+<meta name="description" content="Herramientas, plugins y guía de OmniRoute para quien empieza con Claude Code.">
+<meta name="theme-color" content="#e9eff4">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Frostline de Ari Labs: claro y cristalino por defecto; oscuro azul hielo (docs/ESTILO.md) con el interruptor o si el teléfono está en oscuro. */
+  :root{
+    --fondo:#e9eff4; --vidrio:rgba(255,255,255,.62); --vidrio-2:rgba(255,255,255,.86); --borde:rgba(255,255,255,.8); --linea:#d3dce5;
+    --tinta:#1f2633; --suave:#4b5868; --tenue:#66727f; --acento:#64b6ff; --acento-texto:#2563a8; --acento-fuerte:#2e2e3e;
+    --sobre-acento:#10243a; --bien:#1d7a43; --bien-fondo:#e6f6ec; --alerta:#a4321f; --alerta-fondo:#fdeceb; --aviso:#8a5a00; --aviso-fondo:#fdf3dc;
+    --codigo:#1f2633; --codigo-texto:#e6eef7; --sombra:0 24px 50px -34px rgba(46,46,62,.45);
+    --fondo-body:radial-gradient(70% 50% at 80% 8%,rgba(100,182,255,.18),transparent 70%),radial-gradient(60% 50% at 8% 55%,rgba(178,228,219,.3),transparent 70%),linear-gradient(180deg,#eef3f7,#e4ebf1);
+  }
+  :root[data-tema="oscuro"]{
+    --fondo:#0e0f11; --vidrio:#15171a; --vidrio-2:#1a1d20; --borde:#23272b; --linea:#2e3338;
+    --tinta:#e6e8ea; --suave:#b9bfc5; --tenue:#8c939a; --acento:#9ed8ee; --acento-texto:#9ed8ee; --acento-fuerte:#def6fd;
+    --sobre-acento:#0e0f11; --bien:#6fd3a2; --bien-fondo:#16271f; --alerta:#f2685e; --alerta-fondo:#3a2224; --aviso:#e8b95a; --aviso-fondo:#2b2414;
+    --codigo:#0b0c0e; --codigo-texto:#def6fd; --sombra:0 24px 50px -34px rgba(0,0,0,.8);
+    --fondo-body:#0e0f11;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--fondo);scroll-padding-top:84px}
+  body{margin:0;min-height:100vh;color:var(--tinta);font:400 1rem/1.6 "Inter Tight",system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:var(--fondo-body);background-attachment:fixed;overflow-x:hidden}
+  ::selection{background:var(--acento);color:var(--sobre-acento)}
+  a{color:var(--acento-texto)}
+  :focus-visible{outline:2px solid var(--acento);outline-offset:3px;border-radius:8px}
+  h1,h2,h3,p{margin:0}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  button{font:inherit;color:inherit;cursor:pointer}
+
+  /* barra */
+  .barra{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px clamp(16px,4vw,40px);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:color-mix(in srgb,var(--fondo) 78%,transparent);border-bottom:1px solid var(--borde)}
+  .marca{font-weight:700;font-size:1.15rem;letter-spacing:-.03em;color:var(--tinta);text-decoration:none;display:flex;align-items:center;gap:8px}
+  .marca i{width:9px;height:9px;border-radius:50%;background:var(--acento);box-shadow:0 0 12px var(--acento)}
+  .barra .espacio{flex:1}
+  .etiqueta{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.06em;color:var(--tenue);text-transform:uppercase}
+  .tema{min-height:44px;min-width:44px;border-radius:999px;border:1px solid var(--linea);background:var(--vidrio);display:grid;place-items:center;padding:0 14px;font-size:.85rem}
+
+  /* estructura */
+  .app{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;max-width:1180px;margin:0 auto;padding:20px clamp(16px,4vw,40px) 80px}
+  @media (min-width:900px){.app{grid-template-columns:220px minmax(0,1fr);gap:32px;padding-top:32px}}
+  .menu{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;position:sticky;top:64px;z-index:10;margin:0 calc(-1 * clamp(16px,4vw,40px));padding:8px clamp(16px,4vw,40px);background:color-mix(in srgb,var(--fondo) 80%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .menu::-webkit-scrollbar{display:none}
+  @media (min-width:900px){.menu{flex-direction:column;overflow:visible;position:sticky;top:92px;align-self:start;margin:0;padding:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}}
+  .menu button{flex:none;min-height:44px;text-align:left;border:1px solid transparent;background:transparent;border-radius:14px;padding:8px 14px;color:var(--suave);font-weight:500;display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .menu button:hover{background:var(--vidrio)}
+  .menu button[aria-selected="true"]{background:var(--vidrio-2);border-color:var(--borde);color:var(--tinta);box-shadow:var(--sombra)}
+  .menu button .n{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--tenue)}
+  .menu button[aria-selected="true"] .n{color:var(--acento-texto)}
+
+  .panel{display:none;animation:entra .3s ease;min-width:0}
+  .panel.activo{display:block}
+  @keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.panel{animation:none}}
+  .titulo{font-size:clamp(1.9rem,1.3rem + 2.6vw,3rem);line-height:1.04;letter-spacing:-.04em;font-weight:600;color:var(--tinta)}
+  .entrada{color:var(--suave);max-width:60ch;margin:10px 0 24px}
+
+  .tarjeta{background:var(--vidrio);border:1px solid var(--borde);border-radius:22px;padding:18px 20px;box-shadow:var(--sombra);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .rejilla{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
+  .cifras{display:grid;gap:12px;grid-template-columns:repeat(2,1fr);margin-bottom:22px}
+  @media (min-width:700px){.cifras{grid-template-columns:repeat(4,1fr)}}
+  .cifra b{display:block;font-size:2rem;letter-spacing:-.04em;font-weight:700;line-height:1.1;color:var(--tinta)}
+  .cifra span{font-size:.82rem;color:var(--tenue)}
+  .barra-avance{height:8px;border-radius:99px;background:var(--linea);overflow:hidden;margin-top:8px}
+  .barra-avance i{display:block;height:100%;width:0;background:var(--acento);transition:width .4s ease;border-radius:99px}
+
+  /* lista de pasos */
+  .pasos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .paso{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:18px;background:var(--vidrio);border:1px solid var(--borde);cursor:pointer;min-height:56px}
+  .paso input{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;margin-top:2px;border-radius:8px;border:1.5px solid var(--tenue);background:transparent;display:grid;place-items:center;cursor:pointer}
+  .paso input:checked{background:var(--acento);border-color:var(--acento)}
+  .paso input:checked::after{content:"";width:6px;height:11px;border:solid var(--sobre-acento);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+  .paso b{display:block;font-weight:600}
+  .paso span{color:var(--suave);font-size:.93rem}
+  .paso.hecho b{color:var(--tenue);text-decoration:line-through}
+  .opc{font-family:"JetBrains Mono",monospace;font-size:.68rem;border:1px solid var(--linea);border-radius:99px;padding:1px 8px;color:var(--tenue);margin-left:6px;vertical-align:middle}
+
+  /* herramientas */
+  .controles{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;align-items:center}
+  .buscar{flex:1 1 220px;min-height:44px;border-radius:999px;border:1px solid var(--linea);background:var(--vidrio-2);padding:0 18px;color:var(--tinta);font:inherit}
+  .buscar::placeholder{color:var(--tenue)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{min-height:44px;border-radius:999px;border:1px solid var(--linea);background:transparent;padding:0 16px;color:var(--suave);font-size:.9rem}
+  .chip[aria-pressed="true"]{background:var(--acento);color:var(--sobre-acento);border-color:var(--acento);font-weight:600}
+  .herr h3{font-size:1.1rem;letter-spacing:-.02em;font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .herr p{color:var(--suave);font-size:.94rem;margin-top:6px}
+  .herr .nota{font-size:.84rem;color:var(--tenue);margin-top:10px;padding-top:10px;border-top:1px solid var(--linea)}
+  .insignia{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 9px;background:var(--bien-fondo);color:var(--bien)}
+  .insignia.riesgo{background:var(--alerta-fondo);color:var(--alerta)}
+  .insignia.ojo{background:var(--aviso-fondo);color:var(--aviso)}
+  .vacio{color:var(--tenue);padding:24px;text-align:center;display:none}
+
+  /* código */
+  .codigo{display:flex;align-items:flex-start;gap:4px;margin:12px 0;border-radius:16px;background:var(--codigo);color:var(--codigo-texto);overflow:hidden}
+  .codigo pre{flex:1;min-width:0;margin:0;padding:16px 4px 16px 18px;overflow-x:auto;font:400 .85rem/1.65 "JetBrains Mono",monospace;white-space:pre}
+  .copiar{flex:none;margin:6px 6px 6px 0;min-height:44px;min-width:44px;border-radius:12px;border:1px solid rgba(222,246,253,.2);background:rgba(222,246,253,.08);color:var(--codigo-texto);display:grid;place-items:center;font-size:.75rem;font-family:"JetBrains Mono",monospace}
+  .copiar:hover{background:rgba(222,246,253,.16)}
+  .copiar.listo{background:#1d7a43;border-color:#1d7a43;color:#fff}
+  .selector{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--vidrio);border:1px solid var(--borde);margin:6px 0}
+  .selector button{min-height:40px;border:0;background:transparent;border-radius:999px;padding:0 16px;color:var(--suave)}
+  .selector button[aria-pressed="true"]{background:var(--acento);color:var(--sobre-acento);font-weight:600}
+
+  .seccion{margin-top:26px}
+  .seccion>h2{font-size:1.35rem;letter-spacing:-.03em;font-weight:600;margin-bottom:6px}
+  .seccion>p{color:var(--suave);max-width:64ch}
+  .numerada{counter-reset:n;list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+  .numerada>li{counter-increment:n;display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px}
+  .numerada>li::before{content:counter(n);width:32px;height:32px;border-radius:50%;background:var(--acento);color:var(--sobre-acento);display:grid;place-items:center;font:600 .85rem "JetBrains Mono",monospace;margin-top:2px}
+  .numerada code,.inline{font-family:"JetBrains Mono",monospace;font-size:.85em;background:var(--vidrio-2);border:1px solid var(--linea);padding:1px 7px;border-radius:7px}
+  .aviso{display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--aviso-fondo);color:var(--tinta);border:1px solid color-mix(in srgb,var(--aviso) 35%,transparent);margin:16px 0}
+  .aviso.rojo{background:var(--alerta-fondo);border-color:color-mix(in srgb,var(--alerta) 35%,transparent)}
+  .aviso b{color:var(--aviso)}
+  .aviso.rojo b{color:var(--alerta)}
+  .tabla-caja{overflow-x:auto;border-radius:18px;border:1px solid var(--borde);background:var(--vidrio);margin-top:12px}
+  table{width:100%;border-collapse:collapse;min-width:520px}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--linea);vertical-align:top;font-size:.93rem}
+  th{font:500 .72rem "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--tenue)}
+  tr:last-child td{border-bottom:0}
+  ul.lista{margin:12px 0 0;padding-left:20px;display:grid;gap:8px;color:var(--suave)}
+  ul.lista b{color:var(--tinta)}
+  .fuentes{columns:1;gap:24px;font-size:.9rem}
+  @media (min-width:700px){.fuentes{columns:2}}
+  .fuentes li{break-inside:avoid;margin-bottom:6px}
+  footer{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 40px;color:var(--tenue);font-size:.85rem}
+</style>
+</head>
+<body>
+<header class="barra">
+  <a class="marca" href="https://arilabs.mx/"><i aria-hidden="true"></i>Ari Labs</a>
+  <span class="etiqueta">guía · claude code</span>
+  <span class="espacio"></span>
+  <button class="tema" id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Oscuro</button>
+</header>
+
+<div class="app">
+  <nav class="menu" role="tablist" aria-label="Secciones">
+    <button role="tab" aria-selected="true" data-panel="inicio"><span class="n">01</span>Inicio</button>
+    <button role="tab" aria-selected="false" data-panel="programar"><span class="n">02</span>Programar</button>
+    <button role="tab" aria-selected="false" data-panel="trading"><span class="n">03</span>Trading</button>
+    <button role="tab" aria-selected="false" data-panel="omniroute"><span class="n">04</span>OmniRoute</button>
+    <button role="tab" aria-selected="false" data-panel="cuidados"><span class="n">05</span>Cuidados</button>
+  </nav>
+
+  <main>
+    <!-- INICIO -->
+    <section class="panel activo" id="inicio" role="tabpanel">
+      <h1 class="titulo">Empezar con Claude Code</h1>
+      <p class="entrada">Instala pocas cosas y una a la vez. Marca cada paso cuando lo termines: tu avance se queda guardado en este teléfono o computadora.</p>
+      <div class="cifras">
+        <div class="tarjeta cifra"><b id="c-herr">11</b><span>herramientas para programar</span></div>
+        <div class="tarjeta cifra"><b>6</b><span>para trading</span></div>
+        <div class="tarjeta cifra"><b>6</b><span>proveedores gratis</span></div>
+        <div class="tarjeta cifra"><b id="c-av">0/7</b><span>pasos hechos</span><div class="barra-avance"><i id="c-barra"></i></div></div>
+      </div>
+      <ol class="pasos" id="pasos"></ol>
+    </section>
+
+    <!-- PROGRAMAR -->
+    <section class="panel" id="programar" role="tabpanel">
+      <h1 class="titulo">Para programar</h1>
+      <p class="entrada">Lo que más aparece en las guías de 2026. Un plugin agrega habilidades a Claude Code. Las primeras tres son las que conviene instalar primero.</p>
+
+      <div class="seccion" style="margin-top:0">
+        <h2>Cómo se instalan</h2>
+        <p>Dentro de Claude Code escribe <code class="inline">/plugin</code>, entra a Discover y elige. O por comandos, como este ejemplo con Caveman:</p>
+        <div class="codigo"><pre>claude plugin marketplace add JuliusBrussee/caveman
+claude plugin install caveman@caveman</pre><button class="copiar" type="button" aria-label="Copiar comandos">copiar</button></div>
+        <p>Después, cierra Claude Code y ábrelo de nuevo.</p>
+      </div>
+
+      <div class="seccion">
+        <div class="controles">
+          <input class="buscar" id="buscar-herr" type="search" placeholder="Buscar herramienta…" aria-label="Buscar herramienta">
+          <div class="chips" id="chips-herr">
+            <button class="chip" type="button" aria-pressed="true" data-f="todas">Todas</button>
+            <button class="chip" type="button" aria-pressed="false" data-f="esencial">Primeras</button>
+            <button class="chip" type="button" aria-pressed="false" data-f="calidad">Calidad</button>
+            <button class="chip" type="button" aria-pressed="false" data-f="web">Web</button>
+            <button class="chip" type="button" aria-pressed="false" data-f="ahorro">Memoria y ahorro</button>
+          </div>
+        </div>
+        <div class="rejilla" id="rejilla-herr"></div>
+        <p class="vacio" id="vacio-herr">No hay herramientas con eso. Prueba otra palabra.</p>
+      </div>
+    </section>
+
+    <!-- TRADING -->
+    <section class="panel" id="trading" role="tabpanel">
+      <h1 class="titulo">Para trading</h1>
+      <p class="entrada">Son proyectos de la comunidad, no oficiales. No se revisó su código ni si siguen mantenidos: míralos en GitHub antes de instalar. La más ligera para empezar es tradingview-mcp.</p>
+      <div class="aviso rojo"><span><b>Antes de nada:</b> un backtest dice cómo le habría ido a una estrategia en el pasado, no cómo le irá en el futuro. Claude no es asesor financiero. Empieza siempre con cuenta demo.</span></div>
+      <div class="rejilla" id="rejilla-trading"></div>
+    </section>
+
+    <!-- OMNIROUTE -->
+    <section class="panel" id="omniroute" role="tabpanel">
+      <h1 class="titulo">OmniRoute en la computadora</h1>
+      <p class="entrada">Un programa que corre en tu computadora y junta muchos modelos de IA, gratis o de paga, detrás de una sola dirección local. Claude Code se conecta a ella; si un modelo se agota, pasa al siguiente.</p>
+      <div class="aviso"><span><b>Ten claro esto:</b> los modelos que contesten serán los de los proveedores que conectes (Groq, NVIDIA, Gemini y otros), no necesariamente Claude. Sirve para aprender y para trabajo ligero; la calidad y el límite diario dependen de cada proveedor.</span></div>
+
+      <div class="seccion" style="margin-top:8px">
+        <h2>Instalación paso a paso</h2>
+        <p>Los comandos son los mismos en Windows, Mac y Linux. Las guías difieren en detalles de versión: si algo falla, revisa el README oficial.</p>
+        <ol class="numerada">
+          <li><div>Instala <b>Node.js</b>, de preferencia la versión LTS más nueva. Una guía pide Node 22 o más nuevo; otra dice que basta con 18.</div></li>
+          <li><div>Instala OmniRoute:<div class="codigo"><pre>npm install -g omniroute</pre><button class="copiar" type="button" aria-label="Copiar comando">copiar</button></div></div></li>
+          <li><div>Arráncalo. Se abre el panel en <code>http://localhost:20128</code>:<div class="codigo"><pre>omniroute</pre><button class="copiar" type="button" aria-label="Copiar comando">copiar</button></div></div></li>
+          <li><div>Si algo no arranca, revisa puertos y dependencias. El asistente te guía la primera vez:<div class="codigo"><pre>omniroute doctor
+omniroute setup</pre><button class="copiar" type="button" aria-label="Copiar comandos">copiar</button></div></div></li>
+          <li><div>En el panel, entra a <b>Providers</b> y conecta uno. Empieza por los de llave gratis (tabla de abajo).</div></li>
+          <li><div>Crea una llave de OmniRoute en el panel (aparece como <b>Endpoints</b> o <b>API Keys</b>, según la versión).</div></li>
+        </ol>
+      </div>
+
+      <div class="seccion">
+        <h2>Conectarlo con Claude Code</h2>
+        <p>La forma rápida: con OmniRoute abierto, corre este comando. Pone la conexión solo para esa sesión y abre Claude Code.</p>
+        <div class="codigo"><pre>omniroute launch</pre><button class="copiar" type="button" aria-label="Copiar comando">copiar</button></div>
+        <p>La forma manual: dos variables de entorno y luego abres Claude Code. La dirección va sin <code class="inline">/v1</code>.</p>
+        <div class="selector" role="group" aria-label="Sistema">
+          <button type="button" aria-pressed="true" data-so="unix">Mac y Linux</button>
+          <button type="button" aria-pressed="false" data-so="win">Windows</button>
+        </div>
+        <div class="codigo"><pre id="env-codigo"></pre><button class="copiar" type="button" aria-label="Copiar comandos">copiar</button></div>
+        <p>Deja OmniRoute abierto mientras uses Claude Code. Si lo cierras, deja de contestar.</p>
+      </div>
+
+      <div class="seccion">
+        <h2>Proveedores gratis para empezar</h2>
+        <p>Límites que publica la wiki de OmniRoute, investigados en junio de 2026. Cambian seguido: confirma en cada página.</p>
+        <div class="tabla-caja"><table>
+          <thead><tr><th>Proveedor</th><th>Qué da gratis</th><th>Nota</th></tr></thead>
+          <tbody>
+            <tr><td><b>Groq</b></td><td>Unas 1,000 consultas al día por modelo, sin tarjeta.</td><td>Rápido. De los más constantes.</td></tr>
+            <tr><td><b>NVIDIA NIM</b></td><td>40 consultas por minuto, más de 70 modelos, sin tarjeta.</td><td>El uso gratis es para pruebas y desarrollo.</td></tr>
+            <tr><td><b>Google AI Studio (Gemini)</b></td><td>Cupo diario gratis, sin tarjeta.</td><td>Los límites se ven dentro de AI Studio.</td></tr>
+            <tr><td><b>Mistral (Experiment)</b></td><td>Cerca de mil millones de tokens al mes, con verificación de teléfono.</td><td>Lento: 2 consultas por minuto.</td></tr>
+            <tr><td><b>LongCat</b></td><td>5 millones de tokens al día, en beta.</td><td>No se sabe qué tan bien usa herramientas: pruébalo.</td></tr>
+            <tr><td><b>OpenRouter</b></td><td>Modelos con :free, 50 consultas al día.</td><td>Sube a 1,000 con una compra única de 10 dólares.</td></tr>
+          </tbody></table></div>
+        <div class="aviso" style="margin-top:14px"><span><b>Ya no sirven:</b> Gemini CLI y Qwen Code terminaron su versión gratis este año. Kiro da solo 50 créditos al mes por cuenta y sus términos prohíben usarlo a través de programas como OmniRoute.</span></div>
+      </div>
+    </section>
+
+    <!-- CUIDADOS -->
+    <section class="panel" id="cuidados" role="tabpanel">
+      <h1 class="titulo">Cuidados</h1>
+      <p class="entrada">Cinco reglas que te ahorran problemas.</p>
+      <div class="rejilla">
+        <div class="tarjeta herr"><h3>Plugins con cuidado</h3><p>Pueden ejecutar comandos en tu computadora. Instala solo los conocidos y revisa en GitHub quién los hizo y cuándo se actualizaron.</p></div>
+        <div class="tarjeta herr"><h3>Llaves fuera del chat</h3><p>Nunca pegues llaves ni contraseñas en el chat. Guárdalas como variables de entorno o en un archivo <code class="inline">.env</code> que no subas a GitHub.</p></div>
+        <div class="tarjeta herr"><h3>Cuentas aparte</h3><p>Algunos servicios prohíben usar su cuenta por programas intermedios y pueden suspenderla. No uses tu cuenta principal de Google o GitHub para probar eso.</p></div>
+        <div class="tarjeta herr"><h3>Trading: demo primero</h3><p>No le des a ninguna herramienta llaves con permiso de retiro. No pongas dinero real hasta entender qué hace cada orden.</p></div>
+        <div class="tarjeta herr"><h3>Lo gratis tiene límite</h3><p>Para trabajo serio todos los días, un plan de pago es más estable que juntar cuentas gratis.</p></div>
+      </div>
+      <div class="seccion">
+        <h2>Fuentes</h2>
+        <p>Salen de resultados de búsqueda del 14 de noviembre de 2026, no de leer cada página completa. Confirma los comandos y los límites en la página de cada herramienta antes de usarlos.</p>
+        <ul class="lista fuentes">
+          <li><a href="https://www.ngjoo.com/en/trending/projects/omniroute/guide/" target="_blank" rel="noopener">OmniRoute: instalación y conexión (ngjoo)</a></li>
+          <li><a href="https://iamag.it/en/guides/omniroute-claude-code-setup-common-problems" target="_blank" rel="noopener">OmniRoute con Claude Code (iamag.it)</a></li>
+          <li><a href="https://github.com/diegosouzapw/OmniRoute/wiki/Free-Tiers" target="_blank" rel="noopener">OmniRoute: wiki de planes gratis</a></li>
+          <li><a href="https://pasqualepillitteri.it/en/news/846/claude-code-caveman-mode-token-saving" target="_blank" rel="noopener">Caveman: uso y ahorro real</a></li>
+          <li><a href="https://www.claudepluginhub.com/plugins/juliusbrussee-caveman" target="_blank" rel="noopener">Caveman en el mercado de plugins</a></li>
+          <li><a href="https://buildtolaunch.substack.com/p/best-claude-code-plugins-tested-review" target="_blank" rel="noopener">Mejores plugins 2026 (Build to Launch)</a></li>
+          <li><a href="https://designrevision.com/blog/best-claude-code-plugins" target="_blank" rel="noopener">Mejores plugins 2026 (DesignRevision)</a></li>
+          <li><a href="https://www.developersdigest.tech/blog/best-claude-code-skills-2026" target="_blank" rel="noopener">Mejores skills y plugins 2026 (Developers Digest)</a></li>
+          <li><a href="https://snyk.io/articles/top-claude-skills-finance-quantitative-developers/" target="_blank" rel="noopener">Skills para finanzas y código cuantitativo (Snyk)</a></li>
+          <li><a href="https://github.com/zw008/quant-trader" target="_blank" rel="noopener">quant-trader (GitHub)</a></li>
+          <li><a href="https://github.com/Trade-With-Claude/cbt-framework" target="_blank" rel="noopener">CBT Framework (GitHub)</a></li>
+          <li><a href="https://www.blog.brightcoding.dev/2026/08/02/atilaahmettanertradingview-mcp-backtest-strategies-in-claude-code" target="_blank" rel="noopener">tradingview-mcp (artículo)</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+<footer><span class="mono">ARI LABS · MÉRIDA · 14/11/2026</span></footer>
+
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var guardar = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
+  var leer = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+  /* tema: claro por defecto; oscuro si el teléfono lo pide o si Javi lo eligió */
+  var raiz = document.documentElement, botonTema = $('#tema');
+  function poner(t) { if (t === 'oscuro') raiz.setAttribute('data-tema', 'oscuro'); else raiz.removeAttribute('data-tema'); botonTema.textContent = t === 'oscuro' ? 'Claro' : 'Oscuro'; }
+  var guardado = leer('guia-tema');
+  poner(guardado || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro'));
+  botonTema.onclick = function () { var n = raiz.getAttribute('data-tema') === 'oscuro' ? 'claro' : 'oscuro'; poner(n); guardar('guia-tema', n); };
+
+  /* pestañas */
+  var botones = $$('.menu button');
+  function ir(id, sinHash) {
+    botones.forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.panel === id)); });
+    $$('.panel').forEach(function (p) { p.classList.toggle('activo', p.id === id); });
+    if (!sinHash) { try { history.replaceState(null, '', '#' + id); } catch (e) {} }
+    window.scrollTo({ top: 0 });
+    var activo = botones.filter(function (b) { return b.dataset.panel === id; })[0], m = activo && activo.parentNode;
+    if (m && m.scrollWidth > m.clientWidth) m.scrollLeft = activo.offsetLeft - (m.clientWidth - activo.offsetWidth) / 2;
+  }
+  botones.forEach(function (b) { b.onclick = function () { ir(b.dataset.panel); }; });
+  var hash = (location.hash || '').slice(1);
+  if (hash && $('#' + hash) && $('#' + hash).classList.contains('panel')) ir(hash, true);
+
+  /* pasos con avance guardado */
+  var PASOS = [
+    ['Instala Claude Code', 'Sigue la guía oficial en code.claude.com/docs y abre Claude Code en una carpeta de prueba.', false],
+    ['Instala Skill Creator', 'Escribe /plugin, busca Skill Creator y elige instalar.', false],
+    ['Instala Superpowers', 'Hace que Claude piense antes de programar y haga pruebas.', false],
+    ['Instala code-review', 'Para que revise tus cambios antes de subirlos.', false],
+    ['Prueba Caveman', 'Los dos comandos de la pestaña Programar. Ahorra respuestas, no lo que tú le mandas.', true],
+    ['Instala Node.js y OmniRoute', 'Pestaña OmniRoute, pasos 1 a 3.', true],
+    ['Conecta un proveedor gratis', 'Empieza con Groq o Google AI Studio y crea tu llave de OmniRoute.', true]
+  ];
+  var hechos = {};
+  try { hechos = JSON.parse(leer('guia-pasos') || '{}') || {}; } catch (e) { hechos = {}; }
+  var lista = $('#pasos');
+  function pintarAvance() {
+    var n = PASOS.filter(function (_, i) { return hechos[i]; }).length;
+    $('#c-av').textContent = n + '/' + PASOS.length;
+    $('#c-barra').style.width = Math.round(n * 100 / PASOS.length) + '%';
+  }
+  PASOS.forEach(function (p, i) {
+    var li = document.createElement('li'); li.className = 'paso' + (hechos[i] ? ' hecho' : '');
+    var chk = document.createElement('input'); chk.type = 'checkbox'; chk.checked = !!hechos[i]; chk.id = 'paso-' + i; chk.setAttribute('aria-label', p[0]);
+    var txt = document.createElement('label'); txt.setAttribute('for', chk.id); txt.style.cursor = 'pointer';
+    txt.innerHTML = '<b></b><span></span>'; txt.firstChild.textContent = p[0]; txt.lastChild.textContent = p[1];
+    if (p[2]) { var o = document.createElement('em'); o.className = 'opc'; o.style.fontStyle = 'normal'; o.textContent = 'opcional'; txt.firstChild.appendChild(o); }
+    chk.onchange = function () { hechos[i] = chk.checked; li.classList.toggle('hecho', chk.checked); guardar('guia-pasos', JSON.stringify(hechos)); pintarAvance(); };
+    li.append(chk, txt); lista.appendChild(li);
+  });
+  pintarAvance();
+
+  /* herramientas */
+  var HERR = [
+    ['Skill Creator', 'Crear tus propios skills: instrucciones que Claude aprende y repite.', 'Varias guías la ponen como de las primeras.', 'esencial calidad', 'Primera'],
+    ['Superpowers', 'Hace que Claude piense antes de programar, haga pruebas y depure con orden.', 'La que más aparece en las listas.', 'esencial calidad', 'Primera'],
+    ['code-review', 'Revisa tus cambios antes de subirlos.', 'Plugin oficial.', 'esencial calidad', 'Primera'],
+    ['Caveman', 'Hace que Claude conteste corto, como cavernícola, para gastar menos.', 'Las pruebas independientes midieron un ahorro de 12 a 25 %; las páginas del proyecto dicen 65 a 75 %. Solo ahorra en lo que Claude escribe.', 'ahorro', 'Opcional'],
+    ['security-guidance', 'Avisa si lo que Claude escribió tiene fallas de seguridad.', 'Útil si tu código maneja datos o dinero.', 'calidad', ''],
+    ['Servidor de lenguaje', 'typescript-lsp, pyright-lsp… Claude entiende mejor tu código y se equivoca menos.', 'Elige el de tu lenguaje.', 'calidad', ''],
+    ['Frontend Design', 'Páginas y pantallas más cuidadas.', 'Plugin oficial.', 'web', ''],
+    ['Context7', 'Le da a Claude la documentación actualizada de las librerías.', 'Evita que invente funciones viejas.', 'web ahorro', ''],
+    ['Claude Mem', 'Memoria entre una sesión y otra.', 'Opcional.', 'ahorro', 'Opcional'],
+    ['Chrome DevTools / Playwright', 'Que Claude abra tu página en un navegador y la pruebe.', 'Útil para webs.', 'web', ''],
+    ['claude-md-management', 'Mantener ordenado tu archivo CLAUDE.md, donde guardas reglas de tu proyecto.', 'Opcional.', 'ahorro', 'Opcional']
+  ];
+  var TRAD = [
+    ['tradingview-mcp', 'Datos de mercado, indicadores, filtros de acciones y backtests.', 'Un listado la describe como solo lectura: no manda órdenes.', 'Para empezar', ''],
+    ['ai-trader', 'Marco de pruebas con más de 20 estrategias para acciones, cripto y forex.', 'Sirve para practicar y comparar estrategias.', 'Cripto', ''],
+    ['CBT Framework', 'De la idea al backtest: 21 comandos y 4 exchanges. Puede usar Alpha Vantage y FRED con llaves gratis.', 'Revisa qué exchanges conecta antes de darle llaves.', 'Ojo', 'ojo'],
+    ['quant-trader', '39 herramientas de análisis y backtest para acciones.', 'Puede mandar órdenes reales por Interactive Brokers: úsalo solo con cuenta demo.', 'Órdenes reales', 'riesgo'],
+    ['Alpha Vantage y FRED', 'Datos de bolsa y de economía, con llave gratis.', 'Son fuentes de datos, no estrategias.', 'Datos', ''],
+    ['Polymarket MCP', 'Historial y backtests de mercados de predicción.', 'Es otro tipo de mercado.', 'Otro mercado', '']
+  ];
+  function tarjeta(h, esTrading) {
+    var d = document.createElement('article'); d.className = 'tarjeta herr';
+    var t = document.createElement('h3'), nom = document.createElement('span'); nom.textContent = h[0]; t.appendChild(nom);
+    if (h[4] || (esTrading && h[3])) { var ins = document.createElement('span'); ins.className = 'insignia' + (h[4] === 'riesgo' ? ' riesgo' : h[4] === 'ojo' ? ' ojo' : ''); ins.textContent = esTrading ? h[3] : h[4]; t.appendChild(ins); }
+    var p = document.createElement('p'); p.textContent = h[1];
+    var n = document.createElement('p'); n.className = 'nota'; n.textContent = h[2];
+    d.append(t, p, n); d.dataset.texto = (h[0] + ' ' + h[1] + ' ' + h[2]).toLowerCase(); d.dataset.tags = esTrading ? '' : h[3];
+    return d;
+  }
+  var rej = $('#rejilla-herr'); HERR.forEach(function (h) { rej.appendChild(tarjeta(h, false)); });
+  var rejT = $('#rejilla-trading'); TRAD.forEach(function (h) { rejT.appendChild(tarjeta(h, true)); });
+  var filtro = 'todas';
+  function filtrar() {
+    var q = $('#buscar-herr').value.trim().toLowerCase(), visibles = 0;
+    $$('.herr', rej).forEach(function (c) {
+      var ok = (filtro === 'todas' || c.dataset.tags.split(' ').indexOf(filtro) >= 0) && (!q || c.dataset.texto.indexOf(q) >= 0);
+      c.style.display = ok ? '' : 'none'; if (ok) visibles++;
+    });
+    $('#vacio-herr').style.display = visibles ? 'none' : 'block';
+  }
+  $('#buscar-herr').addEventListener('input', filtrar);
+  $$('#chips-herr .chip').forEach(function (c) { c.onclick = function () { filtro = c.dataset.f; $$('#chips-herr .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); }); filtrar(); }; });
+
+  /* variables de entorno por sistema */
+  var ENV = {
+    unix: '# Mac y Linux\nexport ANTHROPIC_BASE_URL="http://localhost:20128"\nexport ANTHROPIC_AUTH_TOKEN="la-llave-que-creaste-en-omniroute"',
+    win: '# Windows (PowerShell)\n$env:ANTHROPIC_BASE_URL="http://localhost:20128"\n$env:ANTHROPIC_AUTH_TOKEN="la-llave-que-creaste-en-omniroute"'
+  };
+  function ponerSO(so) { $('#env-codigo').textContent = ENV[so]; $$('.selector button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.so === so)); }); guardar('guia-so', so); }
+  $$('.selector button').forEach(function (b) { b.onclick = function () { ponerSO(b.dataset.so); }; });
+  ponerSO(leer('guia-so') || (/Win/i.test(navigator.platform || navigator.userAgent) ? 'win' : 'unix'));
+
+  /* copiar */
+  $$('.copiar').forEach(function (b) {
+    b.onclick = function () {
+      var texto = $('pre', b.parentNode).textContent;
+      var listo = function () { var antes = b.textContent; b.textContent = '✓'; b.classList.add('listo'); setTimeout(function () { b.textContent = antes; b.classList.remove('listo'); }, 1400); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(listo, function () { respaldo(texto, listo); });
+      else respaldo(texto, listo);
+    };
+  });
+  function respaldo(texto, listo) {
+    var t = document.createElement('textarea'); t.value = texto; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); listo(); } catch (e) {} document.body.removeChild(t);
+  }
+})();
+</script>
+</body>
+</html>
