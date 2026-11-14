@@ -270,6 +270,17 @@
     .clientes-grid .placa{width:auto}
   }
   @media (min-width:1280px){ .clientes-grid{grid-template-columns:1fr 1fr} }
+
+  /* Precios */
+  .precio{margin:.4rem 0 1rem;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .precio b{font-size:clamp(2.4rem,2rem + 2vw,3.4rem);font-weight:700;letter-spacing:-.045em;color:var(--noche);line-height:1}
+  .precio span{color:var(--suave);font-size:.95rem}
+  .nota-precios{margin:22px 0 0;color:var(--suave);font-size:.9rem}
+  /* Tarjetas de negocios: la foto va dentro de un teléfono, para que no parezca la página misma */
+  .clientes-grid .marco{background:#1f2633;padding:7px;border-radius:30px;box-shadow:0 22px 44px -22px rgba(31,38,51,.55);aspect-ratio:9/16;width:min(62%,250px);margin:6px auto 0}
+  .clientes-grid .marco img{border-radius:23px}
+  .clientes-grid .marco::before{content:"";position:absolute;top:13px;left:50%;translate:-50% 0;width:28%;height:7px;border-radius:9px;background:#1f2633;z-index:1}
+  @media (min-width:860px){ .clientes-grid .placa .marco{height:clamp(320px,46svh,440px);width:auto;aspect-ratio:9/16;margin:0} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -289,7 +300,7 @@
     <p class="lema aparece" data-esquiva>Páginas web y apps para negocios de Mérida.</p>
     <div class="botones aparece" data-esquiva>
       <a class="boton principal" href="https://wa.link/eut47p" target="_blank" rel="noopener">Cuéntanos tu idea<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      <a class="boton secundario" href="#que-hacemos">Ver lo que hacemos<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+      <a class="boton secundario" href="#precios">Ver precios<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
     </div>
     <span class="bajar" aria-hidden="true"><i></i>baja</span>
   </div>
@@ -392,15 +403,39 @@
   <!-- 5. Cómo trabajamos -->
   <section class="seccion como" id="como" aria-labelledby="t-como">
     <h2 class="titulo" id="t-como" data-esquiva>Cómo trabajamos</h2>
-    <p class="entrada sube" data-esquiva>Tres pasos, sin enredos.</p>
+    <p class="entrada sube" data-esquiva>Primero la ves. Si te gusta, la pagas.</p>
     <div class="pasos-caja">
       <div class="linea" aria-hidden="true"><i></i></div>
       <ol class="pasos">
-        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">1</span><b>Nos escribes</b><span>Por WhatsApp: qué haces y qué quieres resolver. Si viste una página que te guste, mándanosla y partimos de ahí.</span></li>
-        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">2</span><b>Ves una vista previa</b><span>En tu teléfono, y nos dices qué cambiar antes de terminar.</span></li>
-        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">3</span><b>Queda funcionando</b><span>La publicamos o instalamos tu app, y te enseñamos a usarla.</span></li>
+        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">1</span><b>Nos escribes o te visitamos</b><span>Nos cuentas de tu negocio. Si viste una página que te guste, mándanosla y partimos de ahí.</span></li>
+        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">2</span><b>Te armamos una muestra, sin costo</b><span>Con tu nombre, tus precios y tus fotos, en tu teléfono. Nos dices qué cambiar hasta que quede como quieres.</span></li>
+        <li class="paso hielo sube inclina"><span class="nodo" aria-hidden="true">3</span><b>La pagas al recibirla</b><span>La dejamos funcionando con tu dirección, tu QR y tu WhatsApp, y te enseñamos a usarla.</span></li>
       </ol>
     </div>
+  </section>
+
+  <!-- 5a. Precios -->
+  <section class="seccion" id="precios" aria-labelledby="t-precios">
+    <h2 class="titulo" id="t-precios" data-esquiva>Precios</h2>
+    <p class="entrada sube" data-esquiva>Pago único, sin mensualidades. Primero ves tu página armada; si te gusta, la pagas.</p>
+    <div class="dos">
+      <article class="hielo sube inclina">
+        <span class="tipo"><span class="circulo"></span>Página sencilla</span>
+        <p class="precio"><b>$700</b> <span>MXN · pago único</span></p>
+        <ul class="rombos"><li>Menú o lista de servicios con precios</li><li>Horario, ubicación y botón de WhatsApp</li><li>Colores de tu negocio y código QR</li><li>Tu dirección incluida: tu-negocio.arilabs.mx</li><li>Lista el mismo día</li></ul>
+      </article>
+      <article class="hielo sube inclina">
+        <span class="tipo"><span class="circulo"></span>Página personalizada</span>
+        <p class="precio"><b>$1,500</b> <span>MXN · pago único</span></p>
+        <ul class="rombos"><li>Todo lo de la sencilla</li><li>Diseño a la medida de tu negocio</li><li>Pedido o cita armado por WhatsApp</li><li>Tu panel: cambias precios y avisos desde tu teléfono</li><li>Ajustes hasta que quede como quieres</li></ul>
+      </article>
+    </div>
+    <ul class="formas sube" aria-label="Extras" data-esquiva>
+      <li><span><b>Puesta en marcha</b> (QR impreso, WhatsApp Business, Facebook y Google Maps): $500, gratis a nuestros primeros clientes</span></li>
+      <li><span><b>Dominio propio</b> (tunegocio.com): $650 el primer año</span></li>
+      <li><span><b>Sistemas a la medida</b> (pedidos a domicilio, citas, varias sucursales): se cotizan</span></li>
+    </ul>
+    <p class="nota-precios sube" data-esquiva>Precios sujetos a cambios sin previo aviso. Se respeta el precio acordado al confirmar el trabajo.</p>
   </section>
 
   <!-- 5b. Preguntas frecuentes -->
@@ -414,7 +449,7 @@
       </div>
       <div class="pregunta hielo sube">
         <h3><button type="button" aria-expanded="false" aria-controls="r2" id="p2">¿Cómo se paga?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
-        <div class="respuesta" id="r2" role="region" aria-labelledby="p2"><div><p>Te mandamos la cotización por WhatsApp con el precio cerrado. Pagas la mitad al empezar y la otra mitad cuando ya la viste funcionando. En efectivo, en persona, o por transferencia. Cada pago lleva su recibo. Los precios pueden cambiar, pero el que acordamos contigo se respeta.</p></div></div>
+        <div class="respuesta" id="r2" role="region" aria-labelledby="p2"><div><p>Las páginas se pagan al recibirlas, cuando ya las viste funcionando. En trabajos más grandes (apps o sistemas de pedidos) se pide la mitad al empezar. En efectivo, en persona, o por transferencia, y cada pago lleva su recibo. Los precios pueden cambiar, pero el que acordamos contigo se respeta.</p></div></div>
       </div>
       <div class="pregunta hielo sube">
         <h3><button type="button" aria-expanded="false" aria-controls="r3" id="p3">¿Qué necesito darte (fotos, textos, logo)?<span class="circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></button></h3>
@@ -437,7 +472,7 @@
     <p class="entrada sube" data-esquiva>Te contestamos el mismo día. Estudio pequeño en Mérida, Yucatán.</p>
     <div class="botones sube" data-esquiva>
       <a class="boton principal grande" href="https://wa.link/eut47p" target="_blank" rel="noopener">Escríbenos por WhatsApp<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/></svg></span></a>
-      <a class="boton secundario" href="mailto:Ari.ice.signal@gmail.com?subject=Hola%20Ari%20Labs">Ari.ice.signal@gmail.com<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span></a>
+      <a class="boton secundario" href="mailto:contacto.arilabs@gmail.com?subject=Hola%20Ari%20Labs">contacto.arilabs@gmail.com<span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg></span></a>
     </div>
   </section>
 </main>
