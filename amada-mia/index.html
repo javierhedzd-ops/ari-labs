@@ -5,22 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amada Mía · Bistró Café — Héroes, Mérida</title>
 <meta name="description" content="Amada Mía Bistró Café, sucursal Héroes en Mérida. Desayunos, brunch y cenas todos los días de 7 am a 10 pm. Calle 149, Fraccionamiento Los Héroes.">
-<meta name="theme-color" content="#FBF5EE">
+<meta name="theme-color" content="#E6CFC8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
 <style>
 :root{
-  --crema:#FBF5EE;
-  --papel:#FFFCF8;
-  --rosa:#E9CBC6;
-  --rosa-hondo:#C68B84;
-  --vino:#6B302F;
-  --vino-hondo:#4E2120;
-  --dorado:#B7904F;
-  --tinta:#2C2320;
-  --tinta-2:#5C4B44;
-  --linea:#E3D3C6;
+  /* Paleta de atardecer (14/11/2026): rosa viejo, durazno, crema, terracota, olivo y tierra. Nada brillante. */
+  --crema:#F4EEE7;
+  --papel:#FAF5EE;
+  --rosa:#DEBAB0;
+  --rosa-hondo:#B9948F;
+  --durazno:#CDA28B;
+  --vino:#8A5549;
+  --vino-hondo:#5E3C34;
+  --dorado:#7B824E;
+  --olivo:#58543F;
+  --tierra:#6E5841;
+  --tinta:#222328;
+  --tinta-2:#5E5450;
+  --linea:#E2D3C8;
   --serif:"Cormorant Garamond",Georgia,serif;
   --sans:"Jost",system-ui,-apple-system,sans-serif;
   --script:"Parisienne",cursive;
@@ -62,13 +66,13 @@ a{color:inherit}
 .portada::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(120% 60% at 50% -10%,rgba(233,203,198,.85),rgba(251,245,238,0) 62%),
-    radial-gradient(90% 40% at 50% 108%,rgba(183,144,79,.14),rgba(251,245,238,0) 70%);
+    linear-gradient(180deg,#D9BDB6 0%,#E3CBC3 34%,#EBD9CF 62%,rgba(244,238,231,0) 86%),
+    linear-gradient(0deg,rgba(123,130,78,.16) 0%,rgba(123,130,78,0) 18%);
   pointer-events:none;
 }
 .rama{
-  position:absolute;width:min(46vw,300px);color:var(--rosa-hondo);
-  opacity:.45;pointer-events:none;
+  position:absolute;width:min(46vw,300px);color:var(--dorado);
+  opacity:.42;pointer-events:none;
 }
 .rama.a{top:-26px;left:-46px;transform:rotate(8deg)}
 .rama.b{bottom:-30px;right:-44px;transform:rotate(188deg)}
@@ -82,7 +86,7 @@ a{color:inherit}
 .nombre{
   font-family:var(--script);
   font-size:clamp(66px,19vw,146px);
-  line-height:.9;color:var(--vino);
+  line-height:.9;color:var(--vino-hondo);
   margin:6px 0 0;
   letter-spacing:.01em;
 }
@@ -104,9 +108,10 @@ a{color:inherit}
   border:1px solid var(--vino);
   transition:background .25s ease,color .25s ease,transform .25s ease;
 }
-.boton.solido{background:var(--vino);color:#FCF7F2}
+.boton.solido{background:var(--tinta);color:#FAF3EA;border-color:var(--tinta)}
 .boton.solido:hover{background:var(--vino-hondo);border-color:var(--vino-hondo)}
-.boton.hueco{color:var(--vino);background:transparent}
+.boton.hueco{border-color:var(--tinta)}
+.boton.hueco{color:var(--tinta);background:transparent}
 .boton.hueco:hover{background:rgba(107,48,47,.07)}
 .boton:active{transform:translateY(1px)}
 :focus-visible{outline:2px solid var(--vino);outline-offset:3px}
@@ -228,8 +233,9 @@ section.bloque{padding:76px 0}
 }
 
 /* ---------- Visítanos ---------- */
-.visita{background:var(--vino);color:#F7EDE6}
+.visita{background:var(--olivo);color:#F7EDE6}
 .visita .titulo-seccion{color:#FFF8F2}
+.visita .titulo-seccion em{color:var(--rosa)}
 .visita .etiqueta{color:var(--rosa)}
 .rejilla-visita{display:grid;gap:38px;margin-top:40px}
 @media(min-width:820px){.rejilla-visita{grid-template-columns:1.1fr .9fr;gap:64px}}
@@ -245,12 +251,12 @@ section.bloque{padding:76px 0}
 .horarios{width:100%;border-collapse:collapse;font-size:15.5px}
 .horarios td{padding:8px 0;border-bottom:1px solid rgba(247,237,230,.16);color:rgba(247,237,230,.9)}
 .horarios td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-.visita .boton.solido{background:#F7EDE6;color:var(--vino);border-color:#F7EDE6}
-.visita .boton.solido:hover{background:#FFF8F2;color:var(--vino-hondo)}
+.visita .boton.solido{background:#F7EDE6;color:var(--olivo);border-color:#F7EDE6}
+.visita .boton.solido:hover{background:#FFF8F2;color:var(--tinta)}
 .visita :focus-visible{outline-color:#F7EDE6}
 
 /* ---------- Pie ---------- */
-footer{padding:44px 0 56px;text-align:center;background:var(--vino-hondo);color:rgba(247,237,230,.62)}
+footer{padding:44px 0 56px;text-align:center;background:var(--tinta);color:rgba(247,237,230,.62)}
 footer .firma{font-family:var(--script);font-size:34px;color:#F7EDE6;line-height:1}
 footer p{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:14px 0 0}
 footer a{color:rgba(247,237,230,.85);text-decoration:none}
