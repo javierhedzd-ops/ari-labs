@@ -12,7 +12,9 @@ function arrancar() {
   const render = new THREE.WebGLRenderer({ canvas: lienzo, antialias: true, powerPreference: 'high-performance' });
   if (!render.getContext()) throw new Error('sin WebGL');
   const movilAlAbrir = innerWidth < 760;
-  render.setPixelRatio(Math.min(devicePixelRatio, movilAlAbrir ? 1.5 : 1.75));
+  // En teléfono (pantalla chica o táctil) se cuida la batería y la fluidez: menos resolución, 30 cuadros por segundo y un fondo más simple.
+  const ligero = movilAlAbrir || matchMedia('(hover: none)').matches || (navigator.hardwareConcurrency || 8) <= 4;
+  render.setPixelRatio(Math.min(devicePixelRatio, ligero ? 1 : 1.75));
   const escena = new THREE.Scene();
 
   // Un "estudio" chiquito que solo sirve para los brillos de agua (tiras de luz que se reflejan en las caras).
@@ -92,6 +94,7 @@ function arrancar() {
 
   // ---- fondo: cáusticas claras en blanco glaciar, plata, menta y azul ártico ----
   const fondoMat = new THREE.ShaderMaterial({
+    defines: ligero ? { LIGERO: '' } : {},
     uniforms: { t: { value: 0 }, m: { value: new THREE.Vector2(0.5, 0.5) }, asp: { value: 1 } },
     vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
     fragmentShader: `
@@ -108,9 +111,13 @@ function arrancar() {
       void main(){
         vec2 uv = vUv; uv.x *= asp; uv += (m - 0.5) * 0.05;
         float tt = t * 0.32;
+        #ifdef LIGERO
+        float g = causticas(uv, tt); float r = g; float b = g;
+        #else
         float r = causticas(uv + vec2(0.004, 0.0), tt);
         float g = causticas(uv, tt);
         float b = causticas(uv - vec2(0.004, 0.0), tt);
+        #endif
         vec3 base = mix(vec3(0.85,0.90,0.94), vec3(0.94,0.96,0.98), vUv.y);
         base = mix(base, vec3(0.70,0.89,0.86), smoothstep(0.55, 1.0, sin(vUv.x * 2.2 + t * 0.05) * 0.5 + 0.5) * 0.22);
         vec3 col = base + vec3(r * 0.95, g, b * 1.08) * vec3(0.55, 0.62, 0.72);
@@ -185,7 +192,7 @@ function arrancar() {
   const meta = new THREE.Vector3(), dif = new THREE.Vector3(), tmp = new THREE.Vector3();
 
   // los pedazos de la rotura: 10 en teléfono, 20 en compu, repartidos en una rejilla movida al azar
-  const pedazos = [], nPedazos = movilAlAbrir ? 10 : 20, cols = movilAlAbrir ? 3 : 5;
+  const pedazos = [], nPedazos = movilAlAbrir ? 6 : ligero ? 12 : 20, cols = movilAlAbrir ? 3 : 5;
   for (let i = 0; i < nPedazos; i++) {
     const pz = new THREE.Mesh(octaedroBruto(0.16 + azar() * 0.2, 0.22, 3), matHielo);
     const u = azar() * 2 - 1, th = azar() * Math.PI * 2, rr = Math.cbrt(azar()) * radioGrande * 0.6;
@@ -286,7 +293,9 @@ function arrancar() {
   // calidad automática: si el teléfono no llega a ~42 cuadros por segundo, baja la resolución un poco (sin tirones)
   let pr = render.getPixelRatio(), sumaDt = 0, nDt = 0;
 
+  let tCuadro = -1;
   render.setAnimationLoop(() => {
+    if (ligero) { const ahora = reloj.getElapsedTime(); if (ahora - tCuadro < 1 / 32) return; tCuadro = ahora; }
     const t = reloj.getElapsedTime(), tv = quieto ? 8 : t;   // tv: tiempo visual (quieto con "reducir movimiento")
     const dt = Math.min(0.05, Math.max(0.001, t - tPrev)); tPrev = t;
     const f = dt * 60, k = a => 1 - Math.pow(1 - a, f);     // suavizados iguales a 30, 60 o 120 cuadros por segundo
@@ -418,7 +427,7 @@ function arrancar() {
       });
     }
 
-    if (cuadro++ % 5 === 0) {   // el fondo cambia despacio: basta fotografiarlo cada 5 cuadros
+    if (cuadro++ % (ligero ? 12 : 5) === 0) {   // el fondo cambia despacio: basta fotografiarlo cada 5 cuadros
       const visibles = [diamante, halo, ...todos].map(o => o.visible);
       diamante.visible = halo.visible = false; todos.forEach(o => o.visible = false);
       camHielo.position.copy(grupo.position); camHielo.update(render, escena);
