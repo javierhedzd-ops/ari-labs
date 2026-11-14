@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amada Mía · Bistró Café — Héroes, Mérida</title>
 <meta name="description" content="Amada Mía Bistró Café, sucursal Héroes en Mérida. Desayunos, brunch y cenas todos los días de 7 am a 10 pm. Calle 149, Fraccionamiento Los Héroes.">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#E6CFC8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -269,6 +270,16 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
   .sube{opacity:1;transform:none;transition:none}
   .boton{transition:none}
 }
+
+/* ---------- Fotos ---------- */
+.tira{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 10px 10px;background:var(--crema)}
+@media(min-width:760px){.tira{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 14px 14px}}
+.tira figure{margin:0;position:relative;overflow:hidden;border-radius:3px}
+.tira img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.tira figcaption,.marco.foto figcaption{position:absolute;left:12px;bottom:10px;font-family:var(--serif);font-style:italic;font-size:19px;color:#FFF8F2;text-shadow:0 1px 10px rgba(34,35,40,.55)}
+.marco.foto{margin:0;padding:0;background:none;overflow:hidden}
+.marco.foto img{display:block;width:100%;height:100%;object-fit:cover}
+.marco.foto::after{border-color:rgba(255,248,242,.55)}
 </style>
 </head>
 <body>
@@ -329,12 +340,19 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
         <p class="entrada">La sucursal de Héroes abre desde las siete de la mañana. Sirve desayunos, brunch y cenas, con café de especialidad hecho al momento y malteadas que valen el viaje.</p>
       </div>
       <aside class="sube cita-lateral">
-        “Desayunos, brunch y cenas, todos los días.”
-        <small>La casa, Héroes</small>
+        “Las luces bajan, la música suave acaricia el alma y nuestro menú de noche te invita a disfrutar como antes: sin prisas, con charla, con amor.”
+        <small>De la carta de Amada Mía</small>
       </aside>
     </div>
   </div>
 </section>
+
+<div class="tira" aria-label="Platillos de Amada Mía">
+  <figure class="sube"><img src="img/latte.webp" width="720" height="900" loading="lazy" alt="Latte con arte en taza de barro"><figcaption>Latte</figcaption></figure>
+  <figure class="sube"><img src="img/waffle.webp" width="720" height="900" loading="lazy" alt="Chicken waffle con huevo y ensalada"><figcaption>Chicken waffle</figcaption></figure>
+  <figure class="sube"><img src="img/pizza.webp" width="720" height="900" loading="lazy" alt="Pizza de masa delgada con tomate cherry, tocino y arúgula"><figcaption>Para compartir</figcaption></figure>
+  <figure class="sube"><img src="img/sopes.webp" width="720" height="900" loading="lazy" alt="Sopes de maíz azul con carne, lechuga, queso y rábano sandía"><figcaption>De la casa</figcaption></figure>
+</div>
 
 <section class="bloque carta" id="carta">
   <div class="envoltura">
@@ -345,51 +363,78 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
 
     <div class="grupos">
       <div class="grupo sube">
-        <h3><span class="num">I</span> Para desayunar</h3>
-        <p class="nota">Servido desde las 7:00</p>
-        <div class="plato"><span class="n">Chilaquiles</span></div>
-        <div class="plato"><span class="n">Huevos motuleños</span></div>
-        <div class="plato"><span class="n">Huevos benedictinos con papadzul</span></div>
-        <div class="plato"><span class="n">Omelette yucateco</span></div>
-        <div class="plato"><span class="n">Avocado toast</span></div>
-        <div class="plato"><span class="n">Pancakes</span></div>
-        <div class="plato"><span class="n">Croissant relleno</span></div>
+        <h3><span class="num">I</span> Chilaquiles y huevos</h3>
+        <p class="nota">Desde las 7:00</p>
+        <div class="plato"><span class="n">Chilaquiles rojos, verdes, poblanos o de mole</span><span class="p">$145</span></div>
+        <div class="plato"><span class="n">Chilaquiles de picaña</span><span class="p">$259</span></div>
+        <div class="plato"><span class="n">Chilaquiles de Temozón</span><span class="p">$229</span></div>
+        <div class="plato"><span class="n">Huevos al gusto</span><span class="p">$149</span></div>
+        <div class="plato"><span class="n">Omelette yucateco</span><span class="p">$139</span></div>
+        <div class="plato"><span class="n">Benedictinos Amada Mía</span><span class="p">$239</span></div>
+        <div class="plato"><span class="n">Motuleños de la casa</span><span class="p">$179</span></div>
       </div>
 
       <div class="grupo sube">
-        <h3><span class="num">II</span> Para la tarde</h3>
-        <p class="nota">Brunch y comida</p>
-        <div class="plato"><span class="n">Bowls</span></div>
-        <div class="plato"><span class="n">Burritos</span></div>
-        <div class="plato"><span class="n">Baguette cordon bleu</span></div>
-        <div class="plato"><span class="n">Hamburguesas</span></div>
-        <div class="plato"><span class="n">Ensaladas</span></div>
-        <div class="plato"><span class="n">Postres del día</span></div>
+        <h3><span class="num">II</span> Especialidades</h3>
+        <p class="nota">De la casa</p>
+        <div class="plato"><span class="n">Chicken waffle</span><span class="p">$189</span></div>
+        <div class="plato"><span class="n">Chilaquiles de birria</span><span class="p">$189</span></div>
+        <div class="plato"><span class="n">Croissant Amada</span><span class="p">$199</span></div>
+        <div class="plato"><span class="n">Enchiladas poblanas</span><span class="p">$189</span></div>
+        <div class="plato"><span class="n">Grilled cheese</span><span class="p">$209</span></div>
+        <div class="plato"><span class="n">Molletes Amada</span><span class="p">$149</span></div>
+        <div class="plato"><span class="n">Torta de chilaquiles</span><span class="p">$179</span></div>
       </div>
 
       <div class="grupo sube">
-        <h3><span class="num">III</span> La barra</h3>
+        <h3><span class="num">III</span> Para la tarde</h3>
+        <p class="nota">Toast, paninis y algo más</p>
+        <div class="plato"><span class="n">Toast de avocado y huevo</span><span class="p">$179</span></div>
+        <div class="plato"><span class="n">Toast de birria</span><span class="p">$219</span></div>
+        <div class="plato"><span class="n">Croque monsieur</span><span class="p">$169</span></div>
+        <div class="plato"><span class="n">Baguette cordón bleu</span><span class="p">$189</span></div>
+        <div class="plato"><span class="n">Classic cheese burger</span><span class="p">$199</span></div>
+        <div class="plato"><span class="n">Burrito de arrachera</span><span class="p">$191</span></div>
+        <div class="plato"><span class="n">Ensalada César</span><span class="p">$189</span></div>
+      </div>
+
+      <div class="grupo sube">
+        <h3><span class="num">IV</span> Dulce y panadería</h3>
+        <p class="nota">Para el antojo</p>
+        <div class="plato"><span class="n">Pancakes clásicos</span><span class="p">$129</span></div>
+        <div class="plato"><span class="n">French toast</span><span class="p">$189</span></div>
+        <div class="plato"><span class="n">Acai bowl</span><span class="p">$149</span></div>
+        <div class="plato"><span class="n">Chocolatín</span><span class="p">$79</span></div>
+        <div class="plato"><span class="n">Rol de canela</span><span class="p">$79</span></div>
+        <div class="plato"><span class="n">Croissant almendrado</span><span class="p">$89</span></div>
+      </div>
+
+      <div class="grupo sube">
+        <h3><span class="num">V</span> La barra</h3>
         <p class="nota">Café de especialidad</p>
-        <div class="plato"><span class="n">Espresso sencillo</span><span class="p">$44</span></div>
+        <div class="plato"><span class="n">Americano</span><span class="p">$55</span></div>
+        <div class="plato"><span class="n">Latte</span><span class="p">$54</span></div>
         <div class="plato"><span class="n">Flat white</span><span class="p">$59</span></div>
-        <div class="plato"><span class="n">Latte tiramisú</span></div>
-        <div class="plato"><span class="n">Nutella latte</span></div>
-        <div class="plato"><span class="n">Café horchata</span></div>
-        <div class="plato"><span class="n">Cold brew</span></div>
+        <div class="plato"><span class="n">Latte tiramisú</span><span class="p">$89</span></div>
+        <div class="plato"><span class="n">Nutella latte</span><span class="p">$89</span></div>
+        <div class="plato"><span class="n">Café horchata</span><span class="p">$79</span></div>
+        <div class="plato"><span class="n">Cold brew</span><span class="p">$74</span></div>
         <div class="plato"><span class="n">Matcha · Taro · Té chai</span><span class="p">$64</span></div>
       </div>
 
       <div class="grupo sube">
-        <h3><span class="num">IV</span> Dulce</h3>
-        <p class="nota">Para el antojo</p>
-        <div class="plato"><span class="n">Malteadas</span><span class="p">$69 – $95</span></div>
-        <div class="plato"><span class="n">Smoothies</span><span class="p">$74 – $79</span></div>
-        <div class="plato"><span class="n">Chocolate caliente</span><span class="p">$54</span></div>
-        <div class="plato"><span class="n">Frappés</span></div>
+        <h3><span class="num">VI</span> Frappés y malteadas</h3>
+        <p class="nota">Frío y dulce</p>
+        <div class="plato"><span class="n">Frappé con café</span><span class="p">$79</span></div>
+        <div class="plato"><span class="n">Frappé sin café</span><span class="p">$74</span></div>
+        <div class="plato"><span class="n">Smoothies</span><span class="p">$74</span></div>
+        <div class="plato"><span class="n">Cookie shake</span><span class="p">$95</span></div>
+        <div class="plato"><span class="n">Marquesita shake</span><span class="p">$95</span></div>
+        <div class="plato"><span class="n">Protein shakes</span><span class="p">desde $119</span></div>
       </div>
     </div>
 
-    <p class="pie-carta sube">La carta cambia con la temporada. <a href="https://linktr.ee/amadamiaheroes" target="_blank" rel="noopener">Menú oficial y ubicación</a></p>
+    <p class="pie-carta sube">Algunos platillos de la carta. Precios en pesos; pueden cambiar con la temporada. <a href="https://linktr.ee/amadamiaheroes" target="_blank" rel="noopener">Menú oficial y ubicación</a></p>
   </div>
 </section>
 
@@ -397,21 +442,21 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
   <div class="envoltura">
     <div class="sube" style="max-width:52ch">
       <span class="etiqueta">El lugar</span>
-      <h2 class="titulo-seccion">Hojas de libro <em>en la pared</em>.</h2>
-      <p class="entrada">El salón está forrado con páginas de libros, flores colgando del techo y un letrero dorado con el nombre. Luz cálida, mesas de madera y rincones pensados para dos. Es de esos lugares donde la foto sale bien sin buscar el ángulo.</p>
+      <h2 class="titulo-seccion">Luz de día, <em>flores en la mesa</em>.</h2>
+      <p class="entrada">Ventanales de piso a techo, sillas de bejuco, un sillón lila a lo largo de la pared y flores colgando sobre las mesas. De día entra toda la luz; de noche las luces bajan y la música se vuelve suave. Es de esos lugares donde la foto sale bien sin buscar el ángulo.</p>
     </div>
 
     <div class="marcos">
-      <div class="marco sube"><span>El salón<br><small>Foto del lugar</small></span></div>
-      <div class="marco sube"><span>La mesa<br><small>Foto del lugar</small></span></div>
-      <div class="marco sube"><span>El café<br><small>Foto del lugar</small></span></div>
+      <figure class="marco foto sube"><img src="img/salon.webp" width="720" height="900" loading="lazy" alt="El salón: sillón lila, sillas de bejuco y ventanales"><figcaption>El salón</figcaption></figure>
+      <figure class="marco foto sube"><img src="img/mesa.webp" width="720" height="900" loading="lazy" alt="Un café junto a la carta coral de Amada Mía"><figcaption>La mesa</figcaption></figure>
+      <figure class="marco foto sube"><img src="img/flor.webp" width="720" height="900" loading="lazy" alt="Flor en florero de vidrio junto a la ventana"><figcaption>Los detalles</figcaption></figure>
     </div>
   </div>
 </section>
 
 <div class="testimonio">
-  <blockquote>“La decoración es súper cute y la comida deliciosa.”</blockquote>
-  <cite>Karla G. · reseña en Google</cite>
+  <blockquote>“La decoración súper cute. La comida: 1000000/10.”</blockquote>
+  <cite>Nahomi A. · reseña de 5 estrellas en Google</cite>
 </div>
 
 <section class="bloque visita" id="visita">
@@ -462,7 +507,8 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
   <div class="envoltura">
     <div class="firma">Amada Mía</div>
     <p>Bistró Café · Héroes, Mérida</p>
-    <p style="letter-spacing:.1em;text-transform:none;font-size:12px;opacity:.75;margin-top:18px">Propuesta de sitio · Ari Labs</p>
+    <p style="letter-spacing:.1em;text-transform:none;font-size:12px;opacity:.75;margin-top:18px">Para ti, con amor ♡</p>
+    <p style="letter-spacing:.1em;text-transform:none;font-size:11px;opacity:.6;margin-top:6px">Propuesta de sitio · Ari Labs · fotos de clientes en Google, de muestra</p>
   </div>
 </footer>
 
