@@ -46,6 +46,27 @@ const CASOS = [
     for (const x of ['Taco de maciza', 'Taco de costilla', '$70', '9991234567', 'Paso a recoger']) if (!m.includes(x)) throw new Error('Al mensaje le falta: ' + x);
     return 'Mensaje correcto';
   }],
+  ['No estorba al abrir', 'El aviso de "guardar en el teléfono" no sale al entrar, aunque pase un rato', {}, async ({ p }) => {
+    await p.clock.runFor(15000); await p.waitForTimeout(100);
+    if (await p.evaluate(() => document.getElementById('instalar').classList.contains('active'))) throw new Error('Sale el aviso de instalar nada más entrar');
+    return 'No sale';
+  }],
+  ['Guardarla en el teléfono', 'Después del pedido ofrece guardar El Rey; con "Ahora no" ya no insiste', {}, async ({ p, enviado }) => {
+    await p.evaluate(() => { const e = new Event('beforeinstallprompt'); e.prompt = () => {}; e.userChoice = Promise.resolve({ outcome: 'dismissed' }); dispatchEvent(e); });
+    await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); });
+    await p.fill('#f-nombre', 'Eva'); await p.fill('#f-telefono', '9991234567');
+    await p.click('#pedido-enviar'); await p.waitForTimeout(100);
+    if (!enviado()) throw new Error('No se abrió WhatsApp');
+    await p.clock.runFor(9000); await p.waitForTimeout(200);
+    if (!await p.isVisible('#instalar .sheet')) throw new Error('No ofrece guardar la página después del pedido');
+    if (!await p.isVisible('#instalar-android button')) throw new Error('No sale el botón para guardar');
+    await p.click('#instalar .instalar-luego'); await p.waitForTimeout(300);
+    if (await p.evaluate(() => document.getElementById('instalar').classList.contains('active'))) throw new Error('"Ahora no" no cierra el aviso');
+    await p.evaluate(() => { cambiar('t_mac', 1); abrirPedido(); }); await p.click('#pedido-enviar');
+    await p.clock.runFor(9000); await p.waitForTimeout(200);
+    if (await p.evaluate(() => document.getElementById('instalar').classList.contains('active'))) throw new Error('Vuelve a insistir después de "Ahora no"');
+    return 'Ofrece una vez y respeta "Ahora no"';
+  }],
   ['Pide a domicilio', 'Con dirección y ubicación a ~6 km: cobra el envío correcto', { geo: lejos(4.5) }, async ({ p, enviado }) => {
     await p.evaluate(() => { cambiar('k_promo', 1); abrirPedido(); });
     await p.fill('#f-nombre', 'Luis'); await p.fill('#f-telefono', '9991234567');
