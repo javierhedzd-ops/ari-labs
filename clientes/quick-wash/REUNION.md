@@ -14,9 +14,14 @@ y su correo de Gmail de siempre por si hace falta recuperar la ficha de Google.
 
 ## 3. Ficha de Google (15-30 min)
 - Seguir la guía https://arilabs.mx/guias/google/ con ella.
-- Si la ficha es suya: agregarte como administrador (no como propietario).
-- Si no aparece: pedir el acceso con verificación por video (grabar la fachada, el letrero, por dentro y la caja).
-- Ya con acceso: fotos, horario, sitio web, servicio de planchado y lavadora pet friendly.
+- La dueña es la propietaria y la única que administra su ficha, con el Gmail del negocio. Nosotros NO quedamos como administradores
+  (administrarle Google será un servicio aparte más adelante, cuando Ari Labs tenga su propio equipo).
+- Si la ficha ya es suya: confirmar que entra sola desde su teléfono nuevo.
+- Si no aparece: ayudarle a pedir el acceso a su nombre, con verificación por video (fachada, letrero, por dentro y la caja).
+- Hacerlo CON ella, en su teléfono, para que aprenda: fotos, horario, sitio web (https://arilabs.mx/clientes/quick-wash/),
+  servicio de planchado y lavadora pet friendly. Que ella toque los botones.
+- Enseñarle lo básico para cuando ya no estés: contestar reseñas y cambiar el horario en días festivos.
+- Contraseñas: las escribe ella en su libreta. Nosotros no las guardamos.
 
 ## 4. Lo que falta preguntarle
 - La lavadora pet friendly: ya no hace falta, en la página dice que pregunten en el local.
