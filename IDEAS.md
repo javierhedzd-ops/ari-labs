@@ -34,3 +34,7 @@ Lo que Javi quiere trabajar más adelante. No se toca hasta que él diga.
 - Elegido: reenvío gratis con Cloudflare Email Routing (hola@, elrey@ → al Gmail de cada quien).
 - Al retomarlo: Javi activa Email Routing y confirma los destinos (Kevin confirma el suyo); luego se cambia
   el acceso de Kevin a elrey@arilabs.mx en auth.users y editores (misma contraseña) y se actualiza su guía.
+
+## Servicio: administrar Google y redes del cliente · 14/11/2026
+- Para más adelante, cuando Ari Labs tenga equipo propio, servidores y gente para atenderlo siempre.
+- Por ahora cada dueño administra su ficha de Google; nosotros solo le enseñamos.
