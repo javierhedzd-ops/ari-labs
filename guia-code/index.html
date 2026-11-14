@@ -127,6 +127,12 @@
   tr:last-child td{border-bottom:0}
   ul.lista{margin:12px 0 0;padding-left:20px;display:grid;gap:8px;color:var(--suave)}
   ul.lista b{color:var(--tinta)}
+  .flujo{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);margin:16px 0 4px}
+  @media (min-width:800px){.flujo{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  .flujo .tarjeta h3{font-size:1.02rem;letter-spacing:-.02em;font-weight:600;margin:6px 0}
+  .flujo .tarjeta p{font-size:.9rem;color:var(--suave)}
+  .flujo .etapa{font:500 .7rem "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--acento-texto)}
+  .flujo .clave{border-color:var(--acento);box-shadow:0 0 0 1px var(--acento),var(--sombra)}
   .fuentes{columns:1;gap:24px;font-size:.9rem}
   @media (min-width:700px){.fuentes{columns:2}}
   .fuentes li{break-inside:avoid;margin-bottom:6px}
@@ -147,7 +153,8 @@
     <button role="tab" aria-selected="false" data-panel="programar"><span class="n">02</span>Programar</button>
     <button role="tab" aria-selected="false" data-panel="trading"><span class="n">03</span>Trading</button>
     <button role="tab" aria-selected="false" data-panel="omniroute"><span class="n">04</span>OmniRoute</button>
-    <button role="tab" aria-selected="false" data-panel="cuidados"><span class="n">05</span>Cuidados</button>
+    <button role="tab" aria-selected="false" data-panel="trabajar"><span class="n">05</span>Cómo trabajar</button>
+    <button role="tab" aria-selected="false" data-panel="cuidados"><span class="n">06</span>Cuidados</button>
   </nav>
 
   <main>
@@ -251,15 +258,105 @@ omniroute setup</pre><button class="copiar" type="button" aria-label="Copiar com
       </div>
     </section>
 
+    <!-- CÓMO TRABAJAR -->
+    <section class="panel" id="trabajar" role="tabpanel">
+      <h1 class="titulo">Cómo se trabaja con OmniRoute</h1>
+      <p class="entrada">La idea: el trabajo grande lo hacen los modelos gratis de OmniRoute. Cuando algo queda casi bien y solo falta corregir un detalle, cambias de cerebro un momento, pides solo esa corrección y regresas.</p>
+
+      <div class="flujo">
+        <div class="tarjeta"><span class="etapa">Paso 1</span><h3>Trabaja con OmniRoute</h3><p>Construye, prueba y repite con tu combo <b>pensar</b>. Aquí se gasta la cuota gratis.</p></div>
+        <div class="tarjeta"><span class="etapa">Paso 2</span><h3>Corre las pruebas</h3><p>Si pasan, sigue. Si fallan una o dos veces, deja que el mismo combo lo intente de nuevo.</p></div>
+        <div class="tarjeta clave"><span class="etapa">Paso 3</span><h3>Cambia de cerebro</h3><p>Si falla de nuevo o falta un detalle chico, usa un modelo más fuerte. Pídele solo esa corrección.</p></div>
+        <div class="tarjeta"><span class="etapa">Paso 4</span><h3>Regresa a OmniRoute</h3><p>Corregido el detalle, vuelves al combo gratis y sigues con lo siguiente.</p></div>
+      </div>
+
+      <div class="seccion">
+        <h2>Por qué así</h2>
+        <ul class="lista">
+          <li><b>Lo grande es mucho texto,</b> y ahí se acaba la cuota. Eso se queda en lo gratis.</li>
+          <li><b>Una corrección mínima es poco texto,</b> así que gastarla en un modelo fuerte cuesta poco y casi siempre sale a la primera.</li>
+          <li><b>Un modelo gratis se atora en lo difícil:</b> repite el mismo error. Cambiar de cerebro rompe ese ciclo.</li>
+        </ul>
+      </div>
+
+      <div class="seccion">
+        <h2>Combos con 6 cuentas</h2>
+        <p>Un <b>combo</b> es una lista de modelos en orden. Si el primero se agota o falla, OmniRoute pasa al siguiente. Lo creas en el panel, en la sección de combos (el nombre exacto cambia según la versión).</p>
+        <div class="tabla-caja"><table>
+          <thead><tr><th>Estrategia</th><th>Cómo funciona</th><th>Úsala para</th></tr></thead>
+          <tbody>
+            <tr><td><b>Prioridad</b></td><td>Siempre prueba en el orden de la lista. El primero hace todo hasta que falla.</td><td>Programar: mejor calidad primero.</td></tr>
+            <tr><td><b>Round-robin</b></td><td>Reparte entre cuentas equivalentes. La guía dice que por defecto da 3 llamadas a cada cuenta antes de pasar a la siguiente.</td><td>Repartir carga entre cuentas iguales.</td></tr>
+            <tr><td><b>Fill-first</b></td><td>Gasta una cuenta por completo antes de pasar a la otra.</td><td>Aprovechar una cuenta hasta el final.</td></tr>
+          </tbody></table></div>
+
+        <h3 style="margin:22px 0 4px;font-size:1.05rem">Las 6 cuentas: una por proveedor</h3>
+        <p style="color:var(--suave)">La forma más limpia son los seis de la pestaña OmniRoute: <b>Groq, NVIDIA NIM, Google AI Studio, Mistral, LongCat y OpenRouter</b>, una cuenta de cada uno. Así los combos se reparten entre proveedores distintos y cada uno aporta su cuota.</p>
+        <div class="aviso rojo"><span><b>Ojo con las cuentas repetidas:</b> abrir varias cuentas del mismo servicio gratis para saltarte su límite puede ir contra sus términos y te pueden suspender todas. Usa tus propias cuentas, una por proveedor, y lee los términos de cada uno.</span></div>
+
+        <h3 style="margin:22px 0 4px;font-size:1.05rem">Combos de ejemplo</h3>
+        <p style="color:var(--suave)">Los modelos con <b>*</b> salieron bien en una prueba con herramientas hecha en Ari el 7 de noviembre de 2026. Los demás sin probar: pruébalos tú antes de confiar en ellos.</p>
+        <div class="tabla-caja"><table>
+          <thead><tr><th>Combo</th><th>Para qué</th><th>Modelos, en orden (prioridad)</th></tr></thead>
+          <tbody>
+            <tr><td><b>rapido</b></td><td>Charla y cosas simples.</td><td>Groq gpt-oss-120b* → NVIDIA nemotron-3.5-lightning* → LongCat</td></tr>
+            <tr><td><b>pensar</b></td><td>Programar de verdad.</td><td>NVIDIA nemotron-3-ultra* → Groq gpt-oss-120b* → un modelo de código de Mistral → LongCat</td></tr>
+            <tr><td><b>leer</b></td><td>Documentos y archivos largos.</td><td>Gemini flash-lite* → LongCat → NVIDIA nemotron-3-ultra*</td></tr>
+            <tr><td><b>fuerte</b></td><td>El cerebro para corregir lo mínimo.</td><td>Un modelo de paga: Claude con tu plan, o DeepSeek de pago. Se usa poco.</td></tr>
+          </tbody></table></div>
+        <div class="aviso"><span><b>Antes de confiar en un modelo, pruébalo:</b> pídele que use una herramienta, por ejemplo leer un archivo. Los que no saben usar herramientas inventan respuestas. Y no mezcles modelos de distinto nivel a media tarea: cada cambio pierde el hilo.</span></div>
+      </div>
+
+      <div class="seccion">
+        <h2>Cómo cambiar de cerebro</h2>
+        <ol class="numerada">
+          <li><div><b>Dentro de Claude Code,</b> escribe <code>/model</code> y elige otro modelo. Los nombres de tus combos pueden aparecer si OmniRoute los expone; no encontré documentación de cómo los resuelve <code>/model</code>, así que pruébalo con tu configuración.</div></li>
+          <li><div><b>Abriendo Claude Code sin OmniRoute.</b> Quita las dos variables de conexión y abre una terminal nueva: vuelve a funcionar con tu plan normal.
+            <div class="selector" role="group" aria-label="Sistema"><button type="button" aria-pressed="true" data-so="unix">Mac y Linux</button><button type="button" aria-pressed="false" data-so="win">Windows</button></div>
+            <div class="codigo"><pre id="env-quitar"></pre><button class="copiar" type="button" aria-label="Copiar comandos">copiar</button></div>
+            Para volver a OmniRoute, corre otra vez <code>omniroute launch</code>.</div></li>
+          <li><div><b>Con un combo fuerte en OmniRoute:</b> el combo <b>fuerte</b> de la tabla de arriba, para quien no tiene plan de paga de Claude.</div></li>
+        </ol>
+      </div>
+
+      <div class="seccion">
+        <h2>Rutina de cada día</h2>
+        <ol class="numerada">
+          <li><div>Abre OmniRoute y corre <code>omniroute launch</code> con el combo <b>pensar</b>.</div></li>
+          <li><div>Pide tareas chicas y concretas. Haz un <b>commit</b> de git después de cada una, para poder regresar.</div></li>
+          <li><div>Corre las pruebas. Si fallan dos veces, <b>cambia de cerebro</b>.</div></li>
+          <li><div>Pide solo la corrección: <i>“Arregla únicamente X en el archivo Y. No toques nada más.”</i></div></li>
+          <li><div>Regresa al combo gratis y sigue con lo siguiente.</div></li>
+        </ol>
+        <ul class="lista">
+          <li><b>Escribe <code>/clear</code> entre una tarea y otra:</b> menos texto acumulado, menos gasto.</li>
+          <li><b>Si un combo marca límite (error 429),</b> espera un momento o pasa al siguiente combo.</li>
+          <li><b>Caveman</b> baja el largo de las respuestas; solo ahorra en lo que escribe el modelo.</li>
+        </ul>
+      </div>
+
+      <div class="seccion">
+        <h2>Fuentes de esta pestaña</h2>
+        <ul class="lista fuentes">
+          <li><a href="https://www.binwh.com/en/2026/07/04/omniroute-combo-free-model-strategy/" target="_blank" rel="noopener">OmniRoute Combo: modelos gratis y cuota de paga para cuando importa</a></li>
+          <li><a href="https://deepwiki.com/diegosouzapw/OmniRoute/7.2-routing-strategies" target="_blank" rel="noopener">OmniRoute: estrategias de ruteo (DeepWiki)</a></li>
+          <li><a href="https://www.legendu.net/drafts/2026/08/customize-routing-strategies-in-omniroute/" target="_blank" rel="noopener">Personalizar estrategias de ruteo en OmniRoute</a></li>
+          <li><a href="https://github.com/cheaper-inference/OmniRoute/blob/main/docs/routing/AUTO-COMBO.md" target="_blank" rel="noopener">OmniRoute: documentación de combos (GitHub)</a></li>
+        </ul>
+        <p style="color:var(--tenue);font-size:.85rem;margin-top:8px">Salen de resultados de búsqueda, no de leer cada página completa. Las fuentes difieren en versión y detalle: confirma cómo se ve en tu OmniRoute.</p>
+      </div>
+    </section>
+
     <!-- CUIDADOS -->
     <section class="panel" id="cuidados" role="tabpanel">
       <h1 class="titulo">Cuidados</h1>
-      <p class="entrada">Cinco reglas que te ahorran problemas.</p>
+      <p class="entrada">Seis reglas que te ahorran problemas.</p>
       <div class="rejilla">
         <div class="tarjeta herr"><h3>Plugins con cuidado</h3><p>Pueden ejecutar comandos en tu computadora. Instala solo los conocidos y revisa en GitHub quién los hizo y cuándo se actualizaron.</p></div>
         <div class="tarjeta herr"><h3>Llaves fuera del chat</h3><p>Nunca pegues llaves ni contraseñas en el chat. Guárdalas como variables de entorno o en un archivo <code class="inline">.env</code> que no subas a GitHub.</p></div>
         <div class="tarjeta herr"><h3>Cuentas aparte</h3><p>Algunos servicios prohíben usar su cuenta por programas intermedios y pueden suspenderla. No uses tu cuenta principal de Google o GitHub para probar eso.</p></div>
         <div class="tarjeta herr"><h3>Trading: demo primero</h3><p>No le des a ninguna herramienta llaves con permiso de retiro. No pongas dinero real hasta entender qué hace cada orden.</p></div>
+        <div class="tarjeta herr"><h3>Una cuenta por proveedor</h3><p>Abrir varias cuentas del mismo servicio gratis para saltarte su límite puede ir contra sus términos y suspender todas. Usa una cuenta tuya por proveedor.</p></div>
         <div class="tarjeta herr"><h3>Lo gratis tiene límite</h3><p>Para trabajo serio todos los días, un plan de pago es más estable que juntar cuentas gratis.</p></div>
       </div>
       <div class="seccion">
@@ -321,7 +418,9 @@ omniroute setup</pre><button class="copiar" type="button" aria-label="Copiar com
     ['Instala code-review', 'Para que revise tus cambios antes de subirlos.', false],
     ['Prueba Caveman', 'Los dos comandos de la pestaña Programar. Ahorra respuestas, no lo que tú le mandas.', true],
     ['Instala Node.js y OmniRoute', 'Pestaña OmniRoute, pasos 1 a 3.', true],
-    ['Conecta un proveedor gratis', 'Empieza con Groq o Google AI Studio y crea tu llave de OmniRoute.', true]
+    ['Conecta un proveedor gratis', 'Empieza con Groq o Google AI Studio y crea tu llave de OmniRoute.', true],
+    ['Arma tus combos', 'Pestaña Cómo trabajar: rapido, pensar, leer y fuerte.', true],
+    ['Practica el cambio de cerebro', 'Trabaja con el combo pensar y, cuando falle dos veces, cambia de modelo para una corrección mínima.', true]
   ];
   var hechos = {};
   try { hechos = JSON.parse(leer('guia-pasos') || '{}') || {}; } catch (e) { hechos = {}; }
@@ -392,7 +491,11 @@ omniroute setup</pre><button class="copiar" type="button" aria-label="Copiar com
     unix: '# Mac y Linux\nexport ANTHROPIC_BASE_URL="http://localhost:20128"\nexport ANTHROPIC_AUTH_TOKEN="la-llave-que-creaste-en-omniroute"',
     win: '# Windows (PowerShell)\n$env:ANTHROPIC_BASE_URL="http://localhost:20128"\n$env:ANTHROPIC_AUTH_TOKEN="la-llave-que-creaste-en-omniroute"'
   };
-  function ponerSO(so) { $('#env-codigo').textContent = ENV[so]; $$('.selector button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.so === so)); }); guardar('guia-so', so); }
+  var QUITAR = {
+    unix: '# Mac y Linux\nunset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN',
+    win: '# Windows (PowerShell)\nRemove-Item Env:ANTHROPIC_BASE_URL, Env:ANTHROPIC_AUTH_TOKEN'
+  };
+  function ponerSO(so) { $('#env-codigo').textContent = ENV[so]; $('#env-quitar').textContent = QUITAR[so]; $$('.selector button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.so === so)); }); guardar('guia-so', so); }
   $$('.selector button').forEach(function (b) { b.onclick = function () { ponerSO(b.dataset.so); }; });
   ponerSO(leer('guia-so') || (/Win/i.test(navigator.platform || navigator.userAgent) ? 'win' : 'unix'));
 
