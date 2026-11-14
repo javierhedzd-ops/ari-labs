@@ -29,3 +29,8 @@ Lo que Javi quiere trabajar más adelante. No se toca hasta que él diga.
 - Mensaje de presentación que nombra clientes reales (El Rey, Quick Wash); página "¿Quiénes somos?".
 - Formulario "Antes de empezar" con una página de referencia que le guste al cliente (captura).
 - "Pedir un cambio" en los paneles, para juntar cambios y hacerlos de una vez.
+
+## Correos @arilabs.mx · 14/11/2026 (en pausa: "nos estamos complicando")
+- Elegido: reenvío gratis con Cloudflare Email Routing (hola@, elrey@ → al Gmail de cada quien).
+- Al retomarlo: Javi activa Email Routing y confirma los destinos (Kevin confirma el suyo); luego se cambia
+  el acceso de Kevin a elrey@arilabs.mx en auth.users y editores (misma contraseña) y se actualiza su guía.
