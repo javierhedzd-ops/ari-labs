@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prueba tus colores</title>
+<meta name="description" content="Pinta cada parte de la casa y prueba combinaciones de colores antes de comprar la pintura.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fondo:#0E0F11; --panel:#121417; --tarjeta:#15171A; --boton:#1A1D20; --sel:#1F2327;
+    --borde:#23272B; --borde2:#2E3338; --texto:#E6E8EA; --sec:#B9BFC5; --tenue:#8C939A;
+    --hielo:#9ED8EE; --hielo2:#DEF6FD;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--fondo);color:var(--texto);font-family:'Inter Tight',system-ui,sans-serif;font-size:15px;line-height:1.5;min-height:100vh}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+  header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:16px 16px 0;max-width:1200px;margin:0 auto}
+  .marca{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--tenue)}
+  .marca b{color:var(--hielo);font-weight:500}
+  h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:600;letter-spacing:-.01em;line-height:1.15}
+  .intro{max-width:1200px;margin:0 auto;padding:18px 16px 14px}
+  .intro p{color:var(--sec);margin-top:6px;max-width:60ch}
+  main{max-width:1200px;margin:0 auto;padding:0 16px 40px;display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+  @media(min-width:900px){main{grid-template-columns:minmax(0,1.7fr) minmax(320px,1fr);align-items:start}}
+  .escena{position:relative;background:var(--tarjeta);border:1px solid var(--borde);border-radius:14px;overflow:hidden}
+  @media(min-width:900px){.escena{position:sticky;top:16px}}
+  canvas{display:block;width:100%;height:auto;touch-action:manipulation;cursor:pointer}
+  .barra{display:flex;flex-wrap:wrap;gap:8px;padding:10px;border-top:1px solid var(--borde)}
+  button{font:inherit;color:var(--texto);background:var(--boton);border:1px solid var(--borde2);border-radius:10px;padding:8px 12px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+  button:hover{background:var(--sel)}
+  button:focus-visible,input:focus-visible{outline:2px solid var(--hielo);outline-offset:2px}
+  button.principal{background:var(--hielo);color:#0E0F11;border-color:var(--hielo);font-weight:600}
+  button.principal:hover{background:var(--hielo2)}
+  .etiqueta{position:absolute;left:10px;top:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--hielo2);background:rgba(14,15,17,.72);padding:4px 9px;border-radius:8px;opacity:0;transition:opacity .25s;pointer-events:none}
+  .etiqueta.ver{opacity:1}
+  .panel{display:grid;gap:12px}
+  .caja{background:var(--tarjeta);border:1px solid var(--borde);border-radius:14px;padding:14px}
+  .caja h2{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--tenue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .combos{display:flex;flex-wrap:wrap;gap:8px}
+  .combo{display:flex;align-items:center;gap:8px;padding:7px 11px 7px 8px}
+  .combo i{display:flex;border-radius:5px;overflow:hidden;width:34px;height:16px;flex:none;border:1px solid var(--borde2)}
+  .combo i s{flex:1}
+  .zona{padding:10px 0;border-top:1px solid var(--borde)}
+  .zona:first-of-type{border-top:0;padding-top:0}
+  .zona.activa .nombre{color:var(--hielo)}
+  .cab{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+  .nombre{font-weight:500;cursor:pointer}
+  .actual{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tenue)}
+  .muestras{display:flex;flex-wrap:wrap;gap:8px}
+  .m{width:30px;height:30px;border-radius:50%;padding:0;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+  .m[aria-pressed=true]{border-color:var(--hielo2);box-shadow:0 0 0 2px var(--fondo) inset,0 0 10px rgba(158,216,238,.45)}
+  .m.orig{background:repeating-linear-gradient(45deg,#2a2e33 0 5px,#1a1d20 5px 10px);}
+  .m.otro{position:relative;overflow:hidden;background:conic-gradient(#f2685e,#f2c14e,#6fd3a2,#9ed8ee,#a98bf0,#f2685e)}
+  .m.otro input{position:absolute;inset:-8px;width:60px;height:60px;opacity:0;cursor:pointer}
+  .nota{color:var(--tenue);font-size:13px}
+  .guardados{display:grid;gap:8px}
+  .guardados .fila{display:flex;gap:8px;align-items:center;justify-content:space-between}
+  footer{max-width:1200px;margin:0 auto;padding:0 16px 32px;color:var(--tenue);font-size:13px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="marca">› <b>ari</b> labs</div></header>
+<div class="intro">
+  <h1>Prueba los colores de tu casa</h1>
+  <p>Toca una parte de la casa (o elige una de la lista) y cámbiale el color. Mezcla hasta que te guste y guarda tu combinación.</p>
+</div>
+<main>
+  <section class="escena" aria-label="Foto de la casa">
+    <canvas id="lienzo" width="1600" height="900" role="img" aria-label="Casa que puedes pintar"></canvas>
+    <div class="etiqueta mono" id="etiqueta">Foto original</div>
+    <div class="barra">
+      <button id="comparar" title="Mantén apretado para ver la foto original">Mantén para ver el antes</button>
+      <button id="azar">Sorpréndeme</button>
+      <button id="reiniciar">Quitar colores</button>
+      <button id="bajar" class="principal">Guardar imagen</button>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="caja"><h2>Combinaciones listas</h2><div class="combos" id="combos"></div></div>
+    <div class="caja"><h2>Pinta por partes</h2><div id="zonas"></div>
+      <p class="nota" style="margin-top:10px">Los colores son una aproximación: la luz de la foto y la pantalla cambian cómo se ven. Antes de pintar, prueba una muestra en el muro.</p></div>
+  </section>
+</main>
+<footer>Hecho por Ari Labs · Mérida, Yucatán</footer>
+
+<script>
+(() => {
+'use strict';
+const W = 1600, H = 900;
+// Zonas pintables: polígonos sobre la foto (en píxeles de 1600x900).
+// "hueco" recorta ventanas. "sat" y "luz": qué tanto se protege lo muy colorido (el coche) y lo muy oscuro (rejas, personas).
+const ZONAS = [
+  { id:'azotea',  nombre:'Muro de arriba',        poli:[[78,140],[1018,150],[1215,158],[1218,290],[68,268]], sat:.30, lmin:70,  lmax:230 },
+  { id:'losa',    nombre:'Losa y cornisa',        poli:[[38,270],[1295,292],[1295,335],[50,312]],             sat:.30, lmin:20,  lmax:230 },
+  { id:'cochera', nombre:'Muro de la cochera',    poli:[[398,432],[838,440],[836,705],[398,705]],             sat:.14, lmin:120, lmax:255 },
+  { id:'fondo',   nombre:'Muro del fondo',        poli:[[838,452],[952,456],[952,690],[922,688],[920,492],[838,490]], sat:.45, lmin:50, lmax:230 },
+  { id:'frente',  nombre:'Muro y columna del frente', poli:[[965,392],[1310,380],[1310,805],[965,835]],
+                  hueco:[[[1056,517],[1209,517],[1209,622],[1056,622]]], sat:.30, lmin:70, lmax:240 }
+];
+const PINTURAS = [
+  ['Blanco hueso','#EFE9DC'],['Arena','#D9C3A0'],['Amarillo maya','#E8B84A'],['Terracota','#B8553A'],
+  ['Rosa mexicano','#D9487C'],['Verde menta','#9FD3B5'],['Verde olivo','#6B7A45'],['Azul cielo','#8EC1E6'],
+  ['Azul añil','#2C4C8C'],['Gris perla','#B8BCC0'],['Grafito','#3A3F45'],['Café chocolate','#5A3A29']
+];
+const COMBOS = [
+  { n:'Yucateca',     c:{azotea:'#E8B84A',losa:'#EFE9DC',cochera:'#EFE9DC',fondo:'#B8553A',frente:'#E8B84A'} },
+  { n:'Moderna',      c:{azotea:'#B8BCC0',losa:'#3A3F45',cochera:'#EFE9DC',fondo:'#3A3F45',frente:'#B8BCC0'} },
+  { n:'Mediterránea', c:{azotea:'#EFE9DC',losa:'#2C4C8C',cochera:'#8EC1E6',fondo:'#2C4C8C',frente:'#EFE9DC'} },
+  { n:'Tropical',     c:{azotea:'#9FD3B5',losa:'#EFE9DC',cochera:'#EFE9DC',fondo:'#6B7A45',frente:'#9FD3B5'} },
+  { n:'Tierra',       c:{azotea:'#D9C3A0',losa:'#5A3A29',cochera:'#EFE9DC',fondo:'#B8553A',frente:'#D9C3A0'} },
+  { n:'Atrevida',     c:{azotea:'#D9487C',losa:'#EFE9DC',cochera:'#EFE9DC',fondo:'#2C4C8C',frente:'#D9487C'} }
+];
+
+const lienzo = document.getElementById('lienzo'), ctx = lienzo.getContext('2d', { willReadFrequently:true });
+const etiqueta = document.getElementById('etiqueta');
+const estado = {}; // id -> '#rrggbb' | null
+ZONAS.forEach(z => estado[z.id] = null);
+let activa = ZONAS[0].id, original = null, salida = null, comparando = false;
+
+const hex2rgb = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const suave = (a,b,x) => { const t = Math.min(1, Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
+
+// Prepara, para cada zona, qué píxeles toca y con cuánta fuerza (borde suave, y sin tocar lo muy colorido u oscuro).
+function preparar(img){
+  const off = document.createElement('canvas'); off.width = W; off.height = H;
+  const o = off.getContext('2d', { willReadFrequently:true });
+  o.drawImage(img,0,0,W,H);
+  original = o.getImageData(0,0,W,H);
+  salida = new ImageData(new Uint8ClampedArray(original.data), W, H);
+  const d = original.data;
+  const m = document.createElement('canvas'); m.width = W; m.height = H;
+  const mc = m.getContext('2d', { willReadFrequently:true });
+  for (const z of ZONAS){
+    mc.clearRect(0,0,W,H);
+    mc.filter = 'blur(1.2px)'; mc.fillStyle = '#fff';
+    mc.beginPath();
+    z.poli.forEach((p,i) => i ? mc.lineTo(p[0],p[1]) : mc.moveTo(p[0],p[1])); mc.closePath();
+    (z.hueco||[]).forEach(h => { h.forEach((p,i) => i ? mc.lineTo(p[0],p[1]) : mc.moveTo(p[0],p[1])); mc.closePath(); });
+    mc.fill('evenodd');
+    const mk = mc.getImageData(0,0,W,H).data;
+    const idx = [], pes = []; let suma = 0, n = 0;
+    for (let p = 0; p < W*H; p++){
+      const a = mk[p*4+3]/255; if (a < .02) continue;
+      const r = d[p*4], g = d[p*4+1], b = d[p*4+2];
+      const mx = Math.max(r,g,b), mn = Math.min(r,g,b), L = .299*r + .587*g + .114*b;
+      const sat = mx ? (mx-mn)/mx : 0;
+      const w = a * (1 - suave(z.sat, z.sat+.18, sat)) * suave(z.lmin-25, z.lmin+15, L) * (1 - suave(z.lmax, z.lmax+20, L)*.0);
+      if (w < .02) continue;
+      idx.push(p); pes.push(w); suma += L*w; n += w;
+    }
+    z.idx = Int32Array.from(idx); z.pes = Float32Array.from(pes); z.Lref = Math.max(40, suma/n);
+  }
+}
+
+// Pinta una zona: el color nuevo conserva las luces, sombras y manchas de la foto.
+function pintar(z){
+  const d = original.data, s = salida.data, c = estado[z.id];
+  for (let k = 0; k < z.idx.length; k++){
+    const p = z.idx[k]*4;
+    if (!c){ s[p]=d[p]; s[p+1]=d[p+1]; s[p+2]=d[p+2]; continue; }
+    const rgb = hex2rgb(c), w = z.pes[k];
+    const L = .299*d[p] + .587*d[p+1] + .114*d[p+2];
+    // factor de luz respecto al promedio de la zona, suavizado
+    let f = L / z.Lref; f = 1 + (f-1)*.5; if (f < .6) f = .6; // pintura nueva: las manchas se notan menos
+    for (let i = 0; i < 3; i++){
+      const nuevo = Math.min(255, rgb[i]*f);
+      s[p+i] = d[p+i]*(1-w) + nuevo*w;
+    }
+  }
+}
+function dibujar(){
+  if (!original) return;
+  ctx.putImageData(comparando ? original : salida, 0, 0);
+  if (!comparando){
+    const z = ZONAS.find(x => x.id === activa);
+    ctx.save(); ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(158,216,238,.85)'; ctx.setLineDash([10,8]);
+    ctx.beginPath(); z.poli.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.stroke();
+    ctx.restore();
+  }
+}
+function aplicar(id, color){ estado[id] = color; pintar(ZONAS.find(z => z.id === id)); refrescarPanel(); dibujar(); }
+
+// ---------- panel
+const cZonas = document.getElementById('zonas'), cCombos = document.getElementById('combos');
+function refrescarPanel(){
+  cZonas.innerHTML = '';
+  for (const z of ZONAS){
+    const caja = document.createElement('div'); caja.className = 'zona' + (z.id === activa ? ' activa' : '');
+    const nombreP = estado[z.id] ? (PINTURAS.find(p => p[1].toLowerCase() === estado[z.id].toLowerCase())?.[0] || estado[z.id].toUpperCase()) : 'Original';
+    caja.innerHTML = `<div class="cab"><span class="nombre">${z.nombre}</span><span class="actual">${nombreP}</span></div>`;
+    caja.querySelector('.nombre').onclick = () => { activa = z.id; refrescarPanel(); dibujar(); };
+    const fila = document.createElement('div'); fila.className = 'muestras';
+    const o = document.createElement('button'); o.className = 'm orig'; o.title = 'Color original'; o.setAttribute('aria-label','Color original de '+z.nombre);
+    o.setAttribute('aria-pressed', String(!estado[z.id])); o.onclick = () => { activa = z.id; aplicar(z.id, null); };
+    fila.appendChild(o);
+    for (const [n,h] of PINTURAS){
+      const b = document.createElement('button'); b.className = 'm'; b.style.background = h; b.title = n; b.setAttribute('aria-label', n+' en '+z.nombre);
+      b.setAttribute('aria-pressed', String(estado[z.id] && estado[z.id].toLowerCase() === h.toLowerCase()));
+      b.onclick = () => { activa = z.id; aplicar(z.id, h); };
+      fila.appendChild(b);
+    }
+    const otro = document.createElement('label'); otro.className = 'm otro'; otro.title = 'Elegir otro color';
+    otro.innerHTML = '<input type="color" aria-label="Elegir otro color para '+z.nombre+'">';
+    otro.querySelector('input').oninput = e => { activa = z.id; aplicar(z.id, e.target.value); };
+    fila.appendChild(otro);
+    caja.appendChild(fila); cZonas.appendChild(caja);
+  }
+}
+COMBOS.forEach(cb => {
+  const b = document.createElement('button'); b.className = 'combo';
+  b.innerHTML = '<i>' + Object.values(cb.c).map(h => `<s style="background:${h}"></s>`).join('') + '</i>' + cb.n;
+  b.onclick = () => { for (const z of ZONAS){ estado[z.id] = cb.c[z.id]; pintar(z); } refrescarPanel(); dibujar(); };
+  cCombos.appendChild(b);
+});
+
+// ---------- botones y toque sobre la foto
+document.getElementById('reiniciar').onclick = () => { for (const z of ZONAS){ estado[z.id] = null; pintar(z); } refrescarPanel(); dibujar(); };
+document.getElementById('azar').onclick = () => {
+  const cols = PINTURAS.map(p => p[1]).sort(() => Math.random()-.5);
+  ZONAS.forEach((z,i) => { estado[z.id] = cols[i % cols.length]; pintar(z); }); refrescarPanel(); dibujar();
+};
+const cmp = document.getElementById('comparar');
+const ver = v => { comparando = v; etiqueta.classList.toggle('ver', v); dibujar(); };
+['pointerdown'].forEach(e => cmp.addEventListener(e, () => ver(true)));
+['pointerup','pointerleave','pointercancel','blur'].forEach(e => cmp.addEventListener(e, () => ver(false)));
+cmp.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); ver(true); } });
+cmp.addEventListener('keyup', () => ver(false));
+document.getElementById('bajar').onclick = () => {
+  comparando = false; const z = activa; activa = null;
+  ctx.putImageData(salida,0,0);
+  const a = document.createElement('a'); a.download = 'mi-casa-colores.png';
+  lienzo.toBlob(b => { a.href = URL.createObjectURL(b); a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); activa = z; dibujar(); });
+};
+function dentro(x, y, poli){ let c = false; for (let i = 0, j = poli.length-1; i < poli.length; j = i++){
+  const [xi,yi] = poli[i], [xj,yj] = poli[j]; if ((yi > y) !== (yj > y) && x < (xj-xi)*(y-yi)/(yj-yi)+xi) c = !c; } return c; }
+lienzo.addEventListener('click', e => {
+  const r = lienzo.getBoundingClientRect(), x = (e.clientX-r.left)*W/r.width, y = (e.clientY-r.top)*H/r.height;
+  const z = ZONAS.find(z => dentro(x,y,z.poli) && !(z.hueco||[]).some(h => dentro(x,y,h)));
+  if (z){ activa = z.id; refrescarPanel(); dibujar(); }
+});
+
+// ---------- arranque
+const img = new Image();
+img.onload = () => { preparar(img); ZONAS.forEach(pintar); refrescarPanel(); dibujar(); window.__listo = true; };
+img.src = 'casa.jpg';
+refrescarPanel();
+})();
+</script>
+</body>
+</html>
