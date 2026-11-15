@@ -97,16 +97,21 @@
 // Escenas: cada foto con sus zonas pintables (polígonos en píxeles de la foto). "hueco" recorta ventanas y puertas.
 // sat y lmin: protegen lo muy colorido (el coche, las plantas) y lo muy oscuro (rejas) para que no se pinten.
 const ESCENAS = [
-  { id:'fachada', nombre:'Fachada de noche', img:'casa-limpia.jpg', W:1600, H:900,
-    mapa:{azotea:'A',losa:'B',cochera:'M',murito:'M',fondo:'C',frente:'A'},
+  { id:'fachada', nombre:'Fachada de noche', img:'casa2-limpia.jpg', W:1600, H:1200,
+    mapa:{azotea:'A',losa:'B',techo:'#F2EFE8',colder:'B',murito:'M',cochera:'M',fondo:'C',coldr:'B',frente:'A'},
     zonas:[
-      { id:'azotea',  nombre:'Muro de arriba', poli:[[78,140],[1018,150],[1215,158],[1218,290],[68,268]], sat:.30, lmin:70 },
-      { id:'losa',    nombre:'Losa y cornisa', poli:[[38,270],[1295,292],[1295,335],[50,312]], sat:.30, lmin:20 },
-      { id:'murito',  nombre:'Murito de la entrada', poli:[[120,509],[398,512],[398,712],[120,712]], sat:.14, lmin:120 },
-      { id:'cochera', nombre:'Muro de la cochera', poli:[[398,432],[838,440],[836,712],[398,712]], sat:.14, lmin:120 },
-      { id:'fondo',   nombre:'Muro del fondo', poli:[[838,452],[952,456],[952,690],[922,688],[920,492],[838,490]], sat:.45, lmin:50 },
-      { id:'frente',  nombre:'Muro y columna del frente', poli:[[965,392],[1310,380],[1310,805],[965,835]],
-        hueco:[[[1056,517],[1209,517],[1209,622],[1056,622]]], sat:.30, lmin:70 }
+      { id:'azotea', nombre:'Muro de arriba', poli:[[192, 346], [1176, 366], [1328, 370], [1332, 512], [1176, 506], [182, 488]], sat:0.3, lmin:40 },
+      { id:'losa', nombre:'Losa y cornisa', poli:[[164, 488], [1448, 538], [1448, 560], [164, 532]], sat:0.4, lmin:20 },
+      { id:'techo', nombre:'Techo de la cochera', poli:[[180, 536], [1180, 560], [1180, 592], [1076, 612], [412, 628], [228, 602]], sat:0.3, lmin:60 },
+      { id:'colder', nombre:'Columna izquierda', poli:[[172, 536], [224, 596], [228, 1032], [132, 1048], [128, 880]], sat:0.3, lmin:50 },
+      { id:'murito', nombre:'Pared de la izquierda', poli:[[220, 746], [410, 746], [426, 908], [208, 1028]], sat:0.25, lmin:100 },
+      { id:'cochera', nombre:'Muro de la cochera', poli:[[412, 628], [880, 632], [880, 912], [424, 908]],
+        hueco:[[[624, 670], [776, 670], [776, 842], [624, 842]], [[436, 656], [516, 656], [516, 908], [436, 908]]], sat:0.14, lmin:110 },
+      { id:'fondo', nombre:'Muro azul del fondo', poli:[[880, 644], [1076, 644], [1076, 888], [880, 888]],
+        hueco:[[[880, 684], [956, 684], [956, 888], [880, 888]], [[1038, 684], [1076, 684], [1076, 796], [1038, 796]]], sat:0.85, lmin:30 },
+      { id:'coldr', nombre:'Columna del frente', poli:[[1072, 640], [1144, 634], [1184, 656], [1196, 1048], [1136, 1052], [1082, 992]], sat:0.3, lmin:50 },
+      { id:'frente', nombre:'Muro de la derecha', poli:[[1184, 564], [1440, 564], [1440, 1012], [1196, 1016]],
+        hueco:[[[1190, 732], [1324, 732], [1324, 824], [1190, 824]]], sat:0.3, lmin:40 }
     ] },
   { id:'cochera', nombre:'Cochera de día', img:'cochera.jpg', W:900, H:1601,
     mapa:{losa:'B',fascia:'A',techo:'#F2EFE8',cochera:'M',murito:'M',fondo:'C'},
