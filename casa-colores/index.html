@@ -97,7 +97,8 @@ const W = 1600, H = 900;
 const ZONAS = [
   { id:'azotea',  nombre:'Muro de arriba',        poli:[[78,140],[1018,150],[1215,158],[1218,290],[68,268]], sat:.30, lmin:70,  lmax:230 },
   { id:'losa',    nombre:'Losa y cornisa',        poli:[[38,270],[1295,292],[1295,335],[50,312]],             sat:.30, lmin:20,  lmax:230 },
-  { id:'cochera', nombre:'Muro de la cochera',    poli:[[398,432],[838,440],[836,705],[398,705]],             sat:.14, lmin:120, lmax:255 },
+  { id:'murito',  nombre:'Murito de la entrada',  poli:[[120,509],[398,512],[398,712],[120,712]],             sat:.14, lmin:120, lmax:255 },
+  { id:'cochera', nombre:'Muro de la cochera',    poli:[[398,432],[838,440],[836,712],[398,712]],             sat:.14, lmin:120, lmax:255 },
   { id:'fondo',   nombre:'Muro del fondo',        poli:[[838,452],[952,456],[952,690],[922,688],[920,492],[838,490]], sat:.45, lmin:50, lmax:230 },
   { id:'frente',  nombre:'Muro y columna del frente', poli:[[965,392],[1310,380],[1310,805],[965,835]],
                   hueco:[[[1056,517],[1209,517],[1209,622],[1056,622]]], sat:.30, lmin:70, lmax:240 }
@@ -108,12 +109,12 @@ const PINTURAS = [
   ['Azul añil','#2C4C8C'],['Gris perla','#B8BCC0'],['Grafito','#3A3F45'],['Café chocolate','#5A3A29']
 ];
 const COMBOS = [
-  { n:'Yucateca',     c:{azotea:'#E8B84A',losa:'#EFE9DC',cochera:'#EFE9DC',fondo:'#B8553A',frente:'#E8B84A'} },
-  { n:'Moderna',      c:{azotea:'#B8BCC0',losa:'#3A3F45',cochera:'#EFE9DC',fondo:'#3A3F45',frente:'#B8BCC0'} },
-  { n:'Mediterránea', c:{azotea:'#EFE9DC',losa:'#2C4C8C',cochera:'#8EC1E6',fondo:'#2C4C8C',frente:'#EFE9DC'} },
-  { n:'Tropical',     c:{azotea:'#9FD3B5',losa:'#EFE9DC',cochera:'#EFE9DC',fondo:'#6B7A45',frente:'#9FD3B5'} },
-  { n:'Tierra',       c:{azotea:'#D9C3A0',losa:'#5A3A29',cochera:'#EFE9DC',fondo:'#B8553A',frente:'#D9C3A0'} },
-  { n:'Atrevida',     c:{azotea:'#D9487C',losa:'#EFE9DC',cochera:'#EFE9DC',fondo:'#2C4C8C',frente:'#D9487C'} }
+  { n:'Yucateca',     c:{azotea:'#E8B84A',losa:'#EFE9DC',cochera:'#EFE9DC',murito:'#EFE9DC',fondo:'#B8553A',frente:'#E8B84A'} },
+  { n:'Moderna',      c:{azotea:'#B8BCC0',losa:'#3A3F45',cochera:'#EFE9DC',murito:'#EFE9DC',fondo:'#3A3F45',frente:'#B8BCC0'} },
+  { n:'Mediterránea', c:{azotea:'#EFE9DC',losa:'#2C4C8C',cochera:'#8EC1E6',murito:'#8EC1E6',fondo:'#2C4C8C',frente:'#EFE9DC'} },
+  { n:'Tropical',     c:{azotea:'#9FD3B5',losa:'#EFE9DC',cochera:'#EFE9DC',murito:'#EFE9DC',fondo:'#6B7A45',frente:'#9FD3B5'} },
+  { n:'Tierra',       c:{azotea:'#D9C3A0',losa:'#5A3A29',cochera:'#EFE9DC',murito:'#EFE9DC',fondo:'#B8553A',frente:'#D9C3A0'} },
+  { n:'Atrevida',     c:{azotea:'#D9487C',losa:'#EFE9DC',cochera:'#EFE9DC',murito:'#EFE9DC',fondo:'#2C4C8C',frente:'#D9487C'} }
 ];
 
 const lienzo = document.getElementById('lienzo'), ctx = lienzo.getContext('2d', { willReadFrequently:true });
@@ -247,7 +248,7 @@ lienzo.addEventListener('click', e => {
 // ---------- arranque
 const img = new Image();
 img.onload = () => { preparar(img); ZONAS.forEach(pintar); refrescarPanel(); dibujar(); window.__listo = true; };
-img.src = 'casa.jpg';
+img.src = 'casa-limpia.jpg';
 refrescarPanel();
 })();
 </script>
