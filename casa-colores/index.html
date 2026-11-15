@@ -97,31 +97,31 @@
 // Escenas: cada foto con sus zonas pintables (polígonos en píxeles de la foto). "hueco" recorta ventanas y puertas.
 // sat y lmin: protegen lo muy colorido (el coche, las plantas) y lo muy oscuro (rejas) para que no se pinten.
 const ESCENAS = [
-  { id:'fachada', nombre:'Fachada de noche', img:'casa2-limpia.jpg', W:1600, H:1200,
+  { id:'fachada', nombre:'Fachada de noche', img:'casa3-limpia.jpg', W:1600, H:1200,
     mapa:{azotea:'A',losa:'B',techo:'#F2EFE8',colder:'B',murito:'M',cochera:'M',fondo:'C',coldr:'B',frente:'A'},
     zonas:[
-      { id:'azotea', nombre:'Muro de arriba', poli:[[192, 346], [1176, 366], [1328, 370], [1332, 512], [1176, 506], [182, 488]], sat:0.3, lmin:40 },
-      { id:'losa', nombre:'Losa y cornisa', poli:[[164, 488], [1448, 538], [1448, 560], [164, 532]], sat:0.4, lmin:20 },
-      { id:'techo', nombre:'Techo de la cochera', poli:[[180, 536], [1180, 560], [1180, 592], [1076, 612], [412, 628], [228, 602]], sat:0.3, lmin:60 },
-      { id:'colder', nombre:'Columna izquierda', poli:[[172, 536], [224, 596], [228, 1032], [132, 1048], [128, 880]], sat:0.3, lmin:50 },
-      { id:'murito', nombre:'Pared de la izquierda', poli:[[220, 746], [410, 746], [426, 908], [208, 1028]], sat:0.25, lmin:100 },
-      { id:'cochera', nombre:'Muro de la cochera', poli:[[412, 628], [880, 632], [880, 912], [424, 908]],
-        hueco:[[[624, 670], [776, 670], [776, 842], [624, 842]], [[436, 656], [516, 656], [516, 908], [436, 908]]], sat:0.14, lmin:110 },
-      { id:'fondo', nombre:'Muro azul del fondo', poli:[[880, 644], [1076, 644], [1076, 888], [880, 888]],
-        hueco:[[[880, 684], [956, 684], [956, 888], [880, 888]], [[1038, 684], [1076, 684], [1076, 796], [1038, 796]]], sat:0.85, lmin:30 },
-      { id:'coldr', nombre:'Columna del frente', poli:[[1072, 640], [1144, 634], [1184, 656], [1196, 1048], [1136, 1052], [1082, 992]], sat:0.3, lmin:50 },
-      { id:'frente', nombre:'Muro de la derecha', poli:[[1184, 564], [1440, 564], [1440, 1012], [1196, 1016]],
-        hueco:[[[1190, 732], [1324, 732], [1324, 824], [1190, 824]]], sat:0.3, lmin:40 }
+      { id:'azotea', p:0.93, nombre:'Muro de arriba', poli:[[188, 345], [1171, 365], [1326, 369], [1328, 510], [1173, 488], [183, 486]], sat:0.55, lmin:40 },
+      { id:'losa', nombre:'Losa y cornisa', poli:[[164, 488], [1448, 515], [1448, 556], [166, 533]], sat:0.6, lmin:20 },
+      { id:'techo', nombre:'Techo de la cochera', poli:[[175, 535], [1182, 558], [1180, 575], [1138, 610], [1077, 632], [411, 632], [370, 606], [210, 597]], sat:0.55, lmin:60 },
+      { id:'colder', p:0.88, nombre:'Columna izquierda', poli:[[168, 535], [227, 602], [218, 1033], [141, 1055], [124, 1000], [149, 707]], sat:0.55, lmin:50 },
+      { id:'murito', nombre:'Pared de la izquierda', poli:[[218, 749], [411, 749], [425, 926], [210, 1022]], sat:0.5, lmin:100 },
+      { id:'cochera', nombre:'Muro de la cochera', poli:[[411, 632], [880, 635], [882, 923], [429, 923]],
+        hueco:[[[621, 671], [776, 671], [776, 840], [621, 840]], [[429, 659], [515, 659], [515, 915], [429, 915]]], sat:0.35, lmin:110 },
+      { id:'fondo', nombre:'Muro azul del fondo', poli:[[880, 646], [1076, 646], [1076, 890], [880, 890]],
+        hueco:[[[881, 682], [956, 682], [956, 890], [881, 890]], [[1036, 685], [1074, 685], [1074, 796], [1036, 796]]], sat:0.85, lmin:30 },
+      { id:'coldr', nombre:'Columna del frente', poli:[[1080, 639], [1138, 610], [1193, 624], [1196, 1044], [1138, 1044], [1088, 1000]], sat:0.55, lmin:50 },
+      { id:'frente', p:0.93, nombre:'Muro de la derecha', poli:[[1180, 558], [1448, 558], [1448, 1011], [1196, 1014]],
+        hueco:[[[1190, 733], [1326, 733], [1326, 823], [1190, 823]]], sat:0.55, lmin:40 }
     ] },
   { id:'cochera', nombre:'Cochera de día', img:'cochera.jpg', W:900, H:1601,
     mapa:{losa:'B',fascia:'A',techo:'#F2EFE8',cochera:'M',murito:'M',fondo:'C'},
     zonas:[
-      { id:'losa',    nombre:'Losa de arriba', poli:[[0,44],[560,6],[900,36],[900,140],[0,50]], sat:.40, lmin:40 },
-      { id:'fascia',  nombre:'Muro de arriba', poli:[[0,52],[900,142],[900,295],[0,240]], sat:.30, lmin:90 },
-      { id:'techo',   nombre:'Techo de la cochera', poli:[[0,240],[900,295],[900,560],[705,598],[60,600],[0,470]], sat:.30, lmin:90 },
+      { id:'losa',    nombre:'Losa de arriba', poli:[[0,44],[560,6],[900,36],[900,140],[0,50]], sat:.60, lmin:40 },
+      { id:'fascia', p:.8,  nombre:'Muro de arriba', poli:[[0,52],[900,142],[900,295],[0,240]], sat:.55, lmin:90 },
+      { id:'techo',   nombre:'Techo de la cochera', poli:[[0,240],[900,295],[900,560],[705,598],[60,600],[0,470]], sat:.55, lmin:90 },
       { id:'cochera', nombre:'Muro de la cochera', poli:[[60,600],[705,598],[730,970],[700,990],[225,1022],[62,990]],
-        hueco:[[[85,645],[205,645],[218,985],[95,985]],[[365,655],[572,655],[585,890],[375,898]]], sat:.30, lmin:90 },
-      { id:'murito',  nombre:'Murito de la izquierda', poli:[[0,735],[58,758],[60,990],[0,1150]], sat:.30, lmin:90 },
+        hueco:[[[85,645],[205,645],[218,985],[95,985]],[[365,655],[572,655],[585,890],[375,898]]], sat:.55, lmin:90 },
+      { id:'murito',  nombre:'Murito de la izquierda', poli:[[0,735],[58,758],[60,990],[0,1150]], sat:.55, lmin:90 },
       { id:'fondo',   nombre:'Muro azul del fondo', poli:[[708,628],[900,628],[900,935],[735,938],[712,685]],
         hueco:[[[713,680],[750,682],[765,935],[730,938]]], sat:.85, lmin:25 }
     ] }
@@ -143,15 +143,36 @@ const COMBOS = [
 
 const lienzo = document.getElementById('lienzo'), ctx = lienzo.getContext('2d', { willReadFrequently:true });
 const etiqueta = document.getElementById('etiqueta'), cTabs = document.getElementById('tabs');
-let esc = ESCENAS[0], activa = esc.zonas[0].id, comparando = false;
+let esc = ESCENAS[0], activa = esc.zonas[0].id, comparando = false, resaltarHasta = 0;
 ESCENAS.forEach(e => { e.estado = {}; e.zonas.forEach(z => e.estado[z.id] = null); });
 
 const hex2rgb = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
 const suave = (a,b,x) => { const t = Math.min(1, Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
 
-// Para cada zona: qué píxeles toca y con cuánta fuerza (borde suave, sin tocar lo muy colorido ni lo muy oscuro).
+// Promedio móvil rápido (ventana cuadrada de radio r) sobre un arreglo W x H
+function desenfocar(src, W, H, r, dst, tmp){
+  const k = 2*r+1;
+  for (let y = 0; y < H; y++){
+    let acc = 0; const o = y*W;
+    for (let x = -r; x <= r; x++) acc += src[o + Math.min(W-1, Math.max(0,x))];
+    for (let x = 0; x < W; x++){
+      tmp[o+x] = acc/k;
+      acc += src[o + Math.min(W-1, x+r+1)] - src[o + Math.max(0, x-r)];
+    }
+  }
+  for (let x = 0; x < W; x++){
+    let acc = 0;
+    for (let y = -r; y <= r; y++) acc += tmp[Math.min(H-1, Math.max(0,y))*W + x];
+    for (let y = 0; y < H; y++){
+      dst[y*W+x] = acc/k;
+      acc += tmp[Math.min(H-1, y+r+1)*W + x] - tmp[Math.max(0, y-r)*W + x];
+    }
+  }
+}
+// Para cada zona: qué píxeles toca, con cuánta fuerza, y cómo se reparte la luz.
+// La luz y las sombras de la foto se conservan; las manchas y la pintura vieja se quitan: queda como pintura nueva.
 function preparar(e, img){
-  const W = e.W, H = e.H;
+  const W = e.W, H = e.H, N = W*H;
   const off = document.createElement('canvas'); off.width = W; off.height = H;
   const o = off.getContext('2d', { willReadFrequently:true });
   o.drawImage(img,0,0,W,H);
@@ -160,6 +181,7 @@ function preparar(e, img){
   const d = e.original.data;
   const m = document.createElement('canvas'); m.width = W; m.height = H;
   const mc = m.getContext('2d', { willReadFrequently:true });
+  const A = new Float32Array(N), B = new Float32Array(N), C = new Float32Array(N), T = new Float32Array(N), U = new Float32Array(N);
   for (const z of e.zonas){
     mc.clearRect(0,0,W,H);
     mc.filter = 'blur(1.2px)'; mc.fillStyle = '#fff';
@@ -168,42 +190,74 @@ function preparar(e, img){
     (z.hueco||[]).forEach(h => { h.forEach((p,i) => i ? mc.lineTo(p[0],p[1]) : mc.moveTo(p[0],p[1])); mc.closePath(); });
     mc.fill('evenodd');
     const mk = mc.getImageData(0,0,W,H).data;
-    const idx = [], pes = []; let suma = 0, n = 0;
-    for (let p = 0; p < W*H; p++){
-      const a = mk[p*4+3]/255; if (a < .02) continue;
-      const r = d[p*4], g = d[p*4+1], b = d[p*4+2];
-      const mx = Math.max(r,g,b), mn = Math.min(r,g,b), L = .299*r + .587*g + .114*b;
-      const sat = mx ? (mx-mn)/mx : 0;
-      const w = a * (1 - suave(z.sat, z.sat+.18, sat)) * suave(z.lmin-25, z.lmin+15, L);
-      if (w < .02) continue;
-      idx.push(p); pes.push(w); suma += L*w; n += w;
+    const cand = [], Ls = [];
+    for (let p = 0; p < N; p++){
+      if (mk[p*4+3] < 5) continue;
+      cand.push(p); Ls.push(.299*d[p*4] + .587*d[p*4+1] + .114*d[p*4+2]);
     }
-    z.idx = Int32Array.from(idx); z.pes = Float32Array.from(pes); z.Lref = Math.max(40, suma/(n||1));
+    // las manchas son más oscuras que el repello limpio: se levantan hasta un percentil alto de la zona (z.p)
+    const orden = Float32Array.from(Ls).sort();
+    const piso = orden[Math.min(orden.length-1, Math.floor(orden.length*(z.p || .6)))] || 0;
+    A.fill(0); B.fill(0);
+    const idx = [], pes = [], lum = [];
+    for (let k = 0; k < cand.length; k++){
+      const p = cand[k], r = d[p*4], g = d[p*4+1], b = d[p*4+2];
+      const mx = Math.max(r,g,b), mn = Math.min(r,g,b), L = Ls[k], Lc = Math.max(L, piso);
+      const sat = (mx ? (mx-mn)/mx : 0) * suave(30, 80, L), a = mk[p*4+3]/255;   // en lo muy oscuro la saturación no es confiable
+      const w = a * (1 - suave(z.sat, z.sat+.18, sat)) * suave(z.lmin-25, z.lmin+15, Lc);
+      if (w < .02) continue;
+      idx.push(p); pes.push(w); lum.push(Lc);
+      A[p] = Lc*w; B[p] = w;
+    }
+    const R = Math.max(8, Math.round(W/70));
+    desenfocar(A, W, H, R, C, T);   desenfocar(B, W, H, R, U, T);     // luz suave (normalizada por la zona)
+    z.idx = Int32Array.from(idx); z.pes = Float32Array.from(pes);
+    z.luz = new Float32Array(idx.length); z.fino = new Float32Array(idx.length);
+    desenfocar(A, W, H, 2, T, T.slice ? new Float32Array(N) : T);       // detalle fino: textura del repello
+    let sum = 0, nn = 0;
+    for (let k = 0; k < idx.length; k++){
+      const p = idx[k], den = Math.max(U[p], 1e-3);
+      z.luz[k] = C[p]/den;
+      z.fino[k] = lum[k] - T[p]/Math.max(1e-3, 1);   // se corrige abajo
+      sum += z.luz[k]*pes[k]; nn += pes[k];
+    }
+    z.Lref = Math.max(40, sum/(nn||1));
+    // el detalle fino se calcula sobre luminancia pareja (sin manchas): lum - promedio local de 5x5
+    B.fill(0); for (let k = 0; k < idx.length; k++) B[idx[k]] = 1;
+    for (let k = 0; k < idx.length; k++) A[idx[k]] = lum[k];
+    A.fill(0); for (let k = 0; k < idx.length; k++) A[idx[k]] = lum[k]*pes[k];
+    const tmp2 = new Float32Array(N), loc = new Float32Array(N), locw = new Float32Array(N);
+    desenfocar(A, W, H, 2, loc, tmp2);
+    const Bw = new Float32Array(N); for (let k = 0; k < idx.length; k++) Bw[idx[k]] = pes[k];
+    desenfocar(Bw, W, H, 2, locw, tmp2);
+    for (let k = 0; k < idx.length; k++){ const p = idx[k]; z.fino[k] = lum[k] - loc[p]/Math.max(locw[p],1e-3); }
   }
 }
 
-// Pinta una zona: el color nuevo conserva las luces, sombras y manchas de la foto.
+// Pinta una zona: color nuevo y parejo, con la luz y las sombras de la foto y un grano fino de repello.
 function pintar(e, z){
   const d = e.original.data, s = e.salida.data, c = e.estado[z.id];
   const rgb = c ? hex2rgb(c) : null;
   for (let k = 0; k < z.idx.length; k++){
     const p = z.idx[k]*4;
     if (!rgb){ s[p]=d[p]; s[p+1]=d[p+1]; s[p+2]=d[p+2]; continue; }
-    const w = z.pes[k], L = .299*d[p] + .587*d[p+1] + .114*d[p+2];
-    let f = L / z.Lref; f = 1 + (f-1)*.5; if (f < .6) f = .6;   // pintura nueva: las manchas se notan menos
+    const w = z.pes[k];
+    let f = (z.luz[k] + z.fino[k]*.45) / z.Lref;
+    f = Math.min(1.3, Math.max(.5, f));
     for (let i = 0; i < 3; i++) s[p+i] = d[p+i]*(1-w) + Math.min(255, rgb[i]*f)*w;
   }
 }
 function dibujar(){
   if (!esc.original) return;
   ctx.putImageData(comparando ? esc.original : esc.salida, 0, 0);
-  if (!comparando){
+  if (!comparando && performance.now() < resaltarHasta){
     const z = esc.zonas.find(x => x.id === activa);
     ctx.save(); ctx.lineWidth = Math.max(2, esc.W/500); ctx.strokeStyle = 'rgba(158,216,238,.85)'; ctx.setLineDash([10,8]);
     ctx.beginPath(); z.poli.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.stroke();
     ctx.restore();
   }
 }
+function resaltar(){ resaltarHasta = performance.now() + 1400; dibujar(); setTimeout(dibujar, 1450); }
 function aplicar(id, color){ esc.estado[id] = color; pintar(esc, esc.zonas.find(z => z.id === id)); refrescarPanel(); dibujar(); }
 function repintarTodo(){ esc.zonas.forEach(z => pintar(esc, z)); refrescarPanel(); dibujar(); }
 
@@ -237,7 +291,7 @@ function refrescarPanel(){
     const caja = document.createElement('div'); caja.className = 'zona' + (z.id === activa ? ' activa' : '');
     const nombreP = col ? (PINTURAS.find(p => p[1].toLowerCase() === col.toLowerCase())?.[0] || col.toUpperCase()) : 'Original';
     caja.innerHTML = `<div class="cab"><span class="nombre">${z.nombre}</span><span class="actual">${nombreP}</span></div>`;
-    caja.querySelector('.nombre').onclick = () => { activa = z.id; refrescarPanel(); dibujar(); };
+    caja.querySelector('.nombre').onclick = () => { activa = z.id; refrescarPanel(); resaltar(); };
     const fila = document.createElement('div'); fila.className = 'muestras';
     const o = document.createElement('button'); o.className = 'm orig'; o.title = 'Color original'; o.setAttribute('aria-label','Color original de '+z.nombre);
     o.setAttribute('aria-pressed', String(!col)); o.onclick = () => { activa = z.id; aplicar(z.id, null); };
@@ -285,7 +339,7 @@ function dentro(x, y, poli){ let c = false; for (let i = 0, j = poli.length-1; i
 lienzo.addEventListener('click', ev => {
   const r = lienzo.getBoundingClientRect(), x = (ev.clientX-r.left)*esc.W/r.width, y = (ev.clientY-r.top)*esc.H/r.height;
   const z = esc.zonas.find(z => dentro(x,y,z.poli) && !(z.hueco||[]).some(h => dentro(x,y,h)));
-  if (z){ activa = z.id; refrescarPanel(); dibujar(); }
+  if (z){ activa = z.id; refrescarPanel(); resaltar(); }
 });
 
 irA('fachada');
