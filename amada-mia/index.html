@@ -13,8 +13,8 @@
 <style>
 :root{
   /* Paleta de atardecer (14/11/2026): rosa viejo, durazno, crema, terracota, olivo y tierra. Nada brillante. */
-  --crema:#F4EEE7;
-  --papel:#FAF5EE;
+  --crema:#E9DDD0;
+  --papel:#EFE4D8;
   --rosa:#DEBAB0;
   --rosa-hondo:#B9948F;
   --durazno:#CDA28B;
@@ -25,7 +25,7 @@
   --tierra:#6E5841;
   --tinta:#222328;
   --tinta-2:#5E5450;
-  --linea:#E2D3C8;
+  --linea:#D3C0B1;
   --serif:"Cormorant Garamond",Georgia,serif;
   --sans:"Jost",system-ui,-apple-system,sans-serif;
   --script:"Parisienne",cursive;
@@ -196,6 +196,31 @@ section.bloque{padding:76px 0}
   padding-bottom:2px;
 }
 
+/* ---------- Carta oscura con pestañas (críticas: demasiado blanco y demasiado larga) ---------- */
+.carta{background:linear-gradient(180deg,#5E3C34,#4B2F29);border-color:transparent;color:#F7EDE6}
+.carta .titulo-seccion{color:#FFF8F2}
+.carta .titulo-seccion em{color:var(--rosa)}
+.carta .etiqueta{color:var(--rosa)}
+.carta .grupo h3{color:#FFF8F2}
+.carta .grupo h3 .num{color:var(--rosa)}
+.carta .grupo .nota{color:rgba(247,237,230,.72)}
+.carta .plato{border-bottom-color:rgba(247,237,230,.2)}
+.carta .plato .n{color:#F7EDE6}
+.carta .plato .p{color:var(--rosa)}
+.carta .pie-carta{color:rgba(247,237,230,.75)}
+.carta .pie-carta a{color:#FFF8F2;border-bottom-color:var(--rosa)}
+.carta :focus-visible{outline:2px solid #F7EDE6;outline-offset:3px}
+.pestanas{display:flex;gap:8px;margin:36px -24px 0;padding:4px 24px 10px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity}
+.pestanas::-webkit-scrollbar{display:none}
+@media(min-width:760px){.pestanas{justify-content:center;flex-wrap:wrap;margin:36px 0 0;padding:4px 0 10px;overflow:visible}}
+.pestana{flex:0 0 auto;scroll-snap-align:center;font:400 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+  color:#F7EDE6;background:transparent;border:1px solid rgba(247,237,230,.4);border-radius:999px;padding:13px 18px;cursor:pointer;min-height:44px}
+.pestana:hover{border-color:#F7EDE6}
+.pestana[aria-selected="true"]{background:#F7EDE6;color:var(--vino-hondo);border-color:#F7EDE6}
+.con-pestanas .grupos{display:block;max-width:660px;margin:26px auto 0}
+.con-pestanas .grupo[hidden]{display:none}
+.con-pestanas .grupo h3 .num{display:none}
+
 /* ---------- El lugar ---------- */
 .marcos{display:grid;gap:18px;margin-top:44px}
 @media(min-width:720px){.marcos{grid-template-columns:repeat(3,1fr);gap:22px}}
@@ -265,6 +290,13 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
 /* ---------- Aparición ---------- */
 .sube{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .sube.dentro{opacity:1;transform:none}
+/* Aparición con CSS puro (guía scroll-entry-exit-effects): sin JS donde el navegador lo soporta */
+@media (prefers-reduced-motion:no-preference){
+  @supports ((animation-timeline:view()) and (animation-range:entry)){
+    @keyframes aparece{from{opacity:0;transform:translateY(18px)}}
+    .sube,.sube.dentro{opacity:1;transform:none;transition:none;animation:aparece linear backwards;animation-timeline:view();animation-range:entry 0% entry 70%}
+  }
+}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .sube{opacity:1;transform:none;transition:none}
@@ -525,6 +557,34 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
     });
   },{rootMargin:'0px 0px -8% 0px',threshold:.12});
   el.forEach(function(n){ io.observe(n); });
+})();
+</script>
+<script>
+// Carta en pestañas (sin JS se ve completa)
+(function(){
+  var g=document.querySelector('.carta .grupos'); if(!g) return;
+  var grupos=[].slice.call(g.querySelectorAll('.grupo'));
+  var lista=document.createElement('div'); lista.className='pestanas'; lista.setAttribute('role','tablist'); lista.setAttribute('aria-label','Categorías de la carta');
+  var tabs=grupos.map(function(el,i){
+    var h=el.querySelector('h3'); var t=h.textContent.replace(/^\s*[IVX]+\s*/,'').trim();
+    el.id='carta-p'+i; el.setAttribute('role','tabpanel'); el.setAttribute('aria-labelledby','carta-t'+i); el.tabIndex=0;
+    var b=document.createElement('button'); b.type='button'; b.className='pestana'; b.id='carta-t'+i; b.setAttribute('role','tab'); b.setAttribute('aria-controls',el.id); b.textContent=t;
+    lista.appendChild(b); return b;
+  });
+  function ir(i,foco){
+    tabs.forEach(function(b,j){ var on=i===j; b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1; grupos[j].hidden=!on; });
+    if(foco){ tabs[i].focus(); }
+    tabs[i].scrollIntoView({block:'nearest',inline:'center'});
+  }
+  lista.addEventListener('click',function(e){ var i=tabs.indexOf(e.target.closest('.pestana')); if(i>-1) ir(i,false); });
+  lista.addEventListener('keydown',function(e){
+    var i=tabs.indexOf(document.activeElement); if(i<0) return;
+    var n={ArrowRight:i+1,ArrowLeft:i-1,Home:0,End:tabs.length-1}[e.key]; if(n===undefined) return;
+    e.preventDefault(); ir((n+tabs.length)%tabs.length,true);
+  });
+  g.parentNode.insertBefore(lista,g); g.parentNode.classList.add('con-pestanas');
+  grupos.forEach(function(el){ el.classList.remove('sube'); });
+  ir(0,false);
 })();
 </script>
 </body>
