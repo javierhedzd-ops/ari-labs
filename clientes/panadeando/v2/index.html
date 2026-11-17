@@ -119,6 +119,8 @@
   #aviso{position:fixed;left:50%;bottom:76px;transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--crema);color:var(--tinta);padding:13px 18px;font-size:.95rem;max-width:calc(100% - 32px);text-align:center;transition:.25s;z-index:30}
   #aviso.ver{opacity:1;transform:translate(-50%,0)}
   @media (prefers-reduced-motion:reduce){ #aviso{transition:none} .sale img{height:100%} }
+/* sin el cuadro azul que Android pone al tocar */
+a,button,summary,label,[role=button],[role=tab]{-webkit-tap-highlight-color:transparent}
 </style>
 </head>
 <body>

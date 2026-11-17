@@ -277,6 +277,8 @@ legend{font-weight:800;font-size:15px;padding:0 6px}
 .ojo .tambor.sin-video .lavando{display:none}
 .ojo .tambor.sin-video .girando{display:block;animation:giro 9s linear infinite}
 @media (prefers-reduced-motion:reduce){.ojo .tambor.sin-video .girando{animation:none}}
+/* sin el cuadro azul que Android pone al tocar */
+a,button,summary,label,[role=button],[role=tab]{-webkit-tap-highlight-color:transparent}
 </style>
 </head>
 <body>

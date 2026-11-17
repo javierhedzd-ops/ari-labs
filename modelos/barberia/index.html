@@ -105,6 +105,8 @@
   .js .sube{opacity:0;translate:0 20px;transition:opacity .8s var(--seco),translate .8s var(--seco);transition-delay:var(--retraso,0s)}
   .js .sube.visto{opacity:1;translate:0 0}
   @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} html{scroll-behavior:auto} .js .sube{opacity:1;translate:none} }
+/* sin el cuadro azul que Android pone al tocar */
+a,button,summary,label,[role=button],[role=tab]{-webkit-tap-highlight-color:transparent}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>

@@ -55,7 +55,7 @@
   .centro{text-align:center}.centro>p{margin-left:auto;margin-right:auto}
   /* la carta en pestañas */
   .pestanas{display:flex;justify-content:center;gap:clamp(18px,5vw,48px);border-bottom:1px solid var(--linea);margin-bottom:10px}
-  .pestanas button{all:unset;cursor:pointer;min-height:48px;padding:0 2px;font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--crema-suave);position:relative;transition:color .4s}
+  .pestanas button{all:unset;-webkit-tap-highlight-color:transparent;cursor:pointer;min-height:48px;padding:0 2px;font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--crema-suave);position:relative;transition:color .4s}
   .pestanas button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--barro);transform:scaleX(0);transition:transform .5s var(--lento)}
   .pestanas button[aria-selected="true"]{color:var(--crema)} .pestanas button[aria-selected="true"]::after{transform:none}
   .pestanas button:focus-visible{outline:1px solid var(--barro);outline-offset:4px}
@@ -95,6 +95,8 @@
   .js .sube.visto{opacity:1;translate:0 0}
   @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} html{scroll-behavior:auto} .js .sube{opacity:1;translate:none} }
   .pie a{display:inline-block;padding:12px 4px;margin:-12px -4px}
+/* sin el cuadro azul que Android pone al tocar */
+a,button,summary,label,[role=button],[role=tab]{-webkit-tap-highlight-color:transparent}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>

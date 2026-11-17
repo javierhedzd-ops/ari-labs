@@ -52,6 +52,8 @@
   @media (max-width:520px){.recibo{padding:24px 18px 20px}.r-datos{grid-template-columns:1fr}}
   @page{size:Letter;margin:.6in}
   @media print{body{background:#fff}.control{display:none}.vista{padding:0}.recibo{box-shadow:none;max-width:none;border:1px solid #e3e8ef}}
+/* sin el cuadro azul que Android pone al tocar */
+a,button,summary,label,[role=button],[role=tab]{-webkit-tap-highlight-color:transparent}
 </style>
 </head>
 <body>
