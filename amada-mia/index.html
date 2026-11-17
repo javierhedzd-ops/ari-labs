@@ -116,6 +116,15 @@ a{color:inherit}
 .boton.hueco:hover{background:rgba(107,48,47,.07)}
 .boton:active{transform:translateY(1px)}
 :focus-visible{outline:2px solid var(--vino);outline-offset:3px}
+/* Sin cuadro azul al tocar en el teléfono; cada botón responde al presionar */
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.boton.solido:active{filter:brightness(.92)}
+.boton.hueco:active{background:rgba(94,60,52,.1)}
+.pestana:active{background:rgba(247,237,230,.18)}
+/* Pie de foto legible sobre fotos claras */
+.tira figure::after,.marco.foto::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(to top,rgba(34,35,40,.75),transparent);pointer-events:none}
+.tira figcaption,.marco.foto figcaption{z-index:1}
+.pestana[aria-selected="true"]:active{background:#F7EDE6}
 
 /* ---------- Franja de datos ---------- */
 .franja{background:var(--vino);color:#F7EDE6;padding:26px 0}

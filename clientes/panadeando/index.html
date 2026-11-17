@@ -235,11 +235,24 @@
   .sucursal,.sucursal:first-of-type,.sucursales .sucursal{border:0;margin-top:0;border-radius:var(--suave);background:#e8dccb;padding:26px}
   .sucursales{margin-top:30px}
   #aviso{border-radius:16px}
+  /* Sin cuadro azul al tocar en el teléfono; el botón responde con su propio efecto al presionar */
+  a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .btn.oro:active{background:var(--oro-claro)}
+  .btn.linea:active{background:rgba(244,236,222,.12)}
+  :focus-visible{outline:2px solid var(--oro-claro);outline-offset:3px}
+  #aviso{background:#e8dccb;color:var(--tinta);box-shadow:0 10px 30px rgba(0,0,0,.45)}
   /* Todo café: sin hojas marfil que alumbren (crítica: demasiado blanco al bajar) */
   .claro{background:linear-gradient(180deg,var(--nogal-2),#1d1510);color:var(--marfil);box-shadow:inset 0 0 0 1px rgba(201,164,92,.16)}
   .claro h2 em,.claro .num{color:var(--oro-claro)}
   .claro .sub,.horno p,.piezas span,.sucursal p,.pedir p{color:var(--humo)}
   .horno>div,.horno>div:not(:nth-child(3n+1)),.sucursal,.sucursal:first-of-type,.sucursales .sucursal{background:rgba(201,164,92,.07);box-shadow:inset 0 0 0 1px rgba(201,164,92,.16)}
+  /* El beige de la página de pedidos, solo donde pega: tarjetas de las casas y el aviso (superficies chicas, sin destello) */
+  .sucursal,.sucursal:first-of-type,.sucursales .sucursal{background:#e8dccb;box-shadow:none;color:var(--tinta)}
+  .sucursal h3{color:var(--tinta)}
+  .sucursal p{color:var(--tinta-suave)}
+  .claro .sucursal .btn.linea{color:var(--tinta);box-shadow:inset 0 0 0 1px rgba(42,29,22,.45)}
+  .claro .sucursal .btn.linea:hover{color:#7a5a22;box-shadow:inset 0 0 0 1px #7a5a22}
+  .claro .sucursal .btn.linea:active{background:rgba(42,29,22,.08)}
   .claro .btn.oro{background:var(--oro);color:var(--espresso)}
   .claro .btn.oro:hover{background:var(--oro-claro)}
   .claro .btn.linea{color:var(--marfil);box-shadow:inset 0 0 0 1px rgba(244,236,222,.4)}
@@ -366,6 +379,7 @@
         </div>
         <div class="sucursal">
           <h3>San Ángelo</h3>
+          <p>Calle 14 #201 x 61 y 63, Local 9, Plaza San Angelo</p>
           
           <div class="dos-btn"><a class="btn linea chico" href="https://www.google.com/maps/search/?api=1&amp;query=Panadeando+San+Angelo+M%C3%A9rida" target="_blank" rel="noopener">Cómo llegar <span class="flecha" aria-hidden="true"></span></a><button type="button" class="btn linea chico" data-contacto="Hola, les escribo a la sucursal San Ángelo">WhatsApp</button></div>
         </div>
