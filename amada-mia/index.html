@@ -6,6 +6,18 @@
 <title>Amada Mía · Bistró Café — Héroes, Mérida</title>
 <meta name="description" content="Amada Mía Bistró Café, sucursal Héroes en Mérida. Desayunos, brunch y cenas todos los días de 7 am a 10 pm. Calle 149, Fraccionamiento Los Héroes.">
 <meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:title" content="Amada Mía · Bistró Café, Héroes Mérida">
+<meta property="og:description" content="Muestra de página para Amada Mía: carta, horario y ubicación. Hecha por Ari Labs.">
+<meta property="og:url" content="https://arilabs.mx/amada-mia/">
+<meta property="og:image" content="https://arilabs.mx/amada-mia/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portada de la muestra de Amada Mía">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arilabs.mx/amada-mia/og.jpg">
 <meta name="theme-color" content="#E6CFC8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +94,7 @@ a{color:inherit}
   .rama.a{top:-20px;left:-10px}
   .rama.b{bottom:-20px;right:-10px}
 }
-.portada > *{position:relative}
+.portada > *:not(.rama){position:relative}
 
 .nombre{
   font-family:var(--script);
@@ -583,7 +595,8 @@ footer a{color:rgba(247,237,230,.85);text-decoration:none}
   function ir(i,foco){
     tabs.forEach(function(b,j){ var on=i===j; b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1; grupos[j].hidden=!on; });
     if(foco){ tabs[i].focus(); }
-    tabs[i].scrollIntoView({block:'nearest',inline:'center'});
+    // solo se mueve la fila de pestañas de lado (scrollIntoView movía TODA la página hasta la carta al cargar)
+    var d=tabs[i].offsetLeft-(lista.clientWidth-tabs[i].offsetWidth)/2; if(lista.scrollWidth>lista.clientWidth) lista.scrollTo({left:Math.max(0,d),behavior:foco||document.readyState==='complete'?'smooth':'auto'});
   }
   lista.addEventListener('click',function(e){ var i=tabs.indexOf(e.target.closest('.pestana')); if(i>-1) ir(i,false); });
   lista.addEventListener('keydown',function(e){
