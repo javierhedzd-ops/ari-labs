@@ -205,7 +205,7 @@
   function pintarSucursales() {
     $('#tarjetas').innerHTML = sucursales().map(s => {
       const e = estadoDe(s);
-      return `<article class="tarjeta"><h3>${esc(s.nombre)}</h3><p>${esc(s.direccion)}</p><p>Horario de ejemplo: ${s.horario.abre} a ${s.horario.cierra} · ${s.reparto === 'propio' ? 'Reparto propio' : 'Reparto con grupo externo'}</p><p><span class="estado ${e}">${textoEstado(e)}</span></p><button type="button" class="boton" data-recoger="${s.id}" style="width:100%">Recoger aquí</button></article>`;
+      return `<article class="tarjeta"><h3>${esc(s.nombre)}</h3><p>${esc(s.direccion)}</p><p>Horario de ejemplo: ${s.horario.abre} a ${s.horario.cierra} · ${s.reparto === 'propio' ? 'Reparto propio' : 'Reparto con grupo externo'}</p><p>Envío a domicilio desde ${L.dinero(s.minimo || 0)}</p><p><span class="estado ${e}">${textoEstado(e)}</span></p><button type="button" class="boton" data-recoger="${s.id}" style="width:100%">Recoger aquí</button></article>`;
     }).join('');
   }
 
@@ -233,8 +233,9 @@
   }
 
   function pintarMapa() {
+    const capa = $('#capaSuc'); if (!capa) return; // el mapa aún no está construido
     const eleg = entregaActual(), ss = sucursales();
-    $('#capaSuc').innerHTML = ss.map(s => {
+    capa.innerHTML = ss.map(s => {
       const e = estadoDe(s), cls = e === 'pausada' ? 'suc-pausada' : e === 'cerrada' ? 'suc-cerrada' : 'suc-punto';
       const x = sx(s.xKm), y = sy(s.yKm), ancla = x > ANCHO - 4.5 ? 'end' : 'start', dx = ancla === 'end' ? -.75 : .75;
       return `<g><circle class="${cls}" cx="${x}" cy="${y}" r=".45"/><text class="suc-texto" x="${x + dx}" y="${y + .25}" text-anchor="${ancla}">${esc(s.nombre)}</text></g>`;
@@ -284,7 +285,7 @@
       const km = e.km.toFixed(1), env = e.envio;
       let html = '';
       if (e.aviso) html += `<div class="caja-info aviso"><p><b>${esc(e.aviso.cercana)}</b> ${razonTexto(e.aviso.razon)}.</p><p>Tu pedido sale de <b>${esc(e.sucursal.nombre)}</b>, a ${km} km, así que el envío puede costar más.</p></div>`;
-      html += `<div class="caja-info"><p>Tu pedido sale de <b>${esc(e.sucursal.nombre)}</b></p><p>${esc(textoRuta(e))} · Envío ${L.dinero(env.costo)}${env.tipo === 'zona' ? ` (${esc(env.detalle)})` : ' (por kilómetro)'}${e.sucursal.reparto === 'externo' ? ' · lo lleva un grupo de repartidores' : ''}</p></div>`;
+      html += `<div class="caja-info"><p>Tu pedido sale de <b>${esc(e.sucursal.nombre)}</b></p><p>${esc(textoRuta(e))} · Envío ${L.dinero(env.costo)}${env.tipo === 'zona' ? ` (${esc(env.detalle)})` : ` (por kilómetro, mínimo ${L.dinero(e.sucursal.minimo || 0)})`}${e.sucursal.reparto === 'externo' ? ' · lo lleva un grupo de repartidores' : ''}</p></div>`;
       cont.innerHTML = html; btn.disabled = false;
     } else {
       cont.innerHTML = r.motivo === 'fuera-de-zona'
@@ -553,6 +554,6 @@
         () => avisar('No pudimos ver tu ubicación. Mueve el punto del mapa.'), { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
     });
   }
-  if (CONFIG.rutaReal && guardar.leer('eligio', false)) pedirRutas(0);
   pintarMenu(); barraArriba(); vigilarCategorias(); pintarSucursales(); pintarBarra(); pintarChip(); construirMapa(); enlazarMapa(); pintarDemo(); enlazar();
+  if (CONFIG.rutaReal && guardar.leer('eligio', false)) pedirRutas(0); // después de construir el mapa: pedirRutas pinta el mapa y antes no existía #capaSuc
 })();
