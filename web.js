@@ -9,28 +9,40 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
-  // ---- barra de vidrio, señal "baja" y botón flotante de WhatsApp ----
-  var barra = $('.barra'), bajar = $('.bajar'), flotante = $('.flotante'), contacto = $('#contacto');
-  // el botón flotante se aparta mientras se baja (para no tapar lo que se lee) y regresa al subir o al detenerse
-  var yAntes = scrollY, bajando = false, reposo = 0;
+  // ---- barra de vidrio y señal "baja" (el botón del agente se queda siempre fijo y visible) ----
+  var barra = $('.barra'), bajar = $('.bajar');
   function alBajar() {
     var y = scrollY;
-    bajando = y > yAntes + 2 ? true : (y < yAntes - 2 ? false : bajando); yAntes = y;
-    clearTimeout(reposo); reposo = setTimeout(function () { bajando = false; flotar(y); }, 900);
     barra.classList.toggle('vidrio', y > 24);
     if (y > 10) bajar.classList.add('fuera');
-    flotar(y);
   }
-  function flotar(y) {
-    var ver = !bajando && y > innerHeight * 0.7 && contacto.getBoundingClientRect().top > innerHeight * 0.85;
-    if (ver !== flotante.classList.contains('ver')) {
-      flotante.classList.toggle('ver', ver);
-      flotante.tabIndex = ver ? 0 : -1;
-      flotante.setAttribute('aria-hidden', ver ? 'false' : 'true');
-    }
-  }
-  flotante.setAttribute('aria-hidden', 'true');
   addEventListener('scroll', alBajar, { passive: true }); alBajar();
+
+  // ---- el botón fijo aparece cuando el botón grande de la portada sale de la pantalla y se queda fijo al bajar ----
+  var flotante = $('.flotante'), heroBoton = $('.portada .botones');
+  function mostrarFlotante(ver) { flotante.classList.toggle('ver', ver); flotante.tabIndex = ver ? 0 : -1; }
+  if (heroBoton && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) { mostrarFlotante(!e[0].isIntersecting); }, { threshold: 0 }).observe(heroBoton);
+  } else { mostrarFlotante(true); }
+
+  // ---- panel del chat con el agente: botones [data-chat] lo abren; cierra con Esc, tocando fuera o con la X ----
+  var chat = $('#chat'), marco = $('#chat-marco'), pronto = $('#chat-pronto');
+  if (chat && chat.showModal) {
+    var url = chat.getAttribute('data-url') || '';
+    $$('[data-chat]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (chat.open) return;
+        chat.showModal();
+        if (url) { if (!marco.getAttribute('src')) marco.setAttribute('src', url); marco.hidden = false; pronto.hidden = true; }
+        else { marco.hidden = true; pronto.hidden = false; }
+      });
+    });
+    $$('[data-cerrar-chat]').forEach(function (b) { b.addEventListener('click', function () { chat.close(); }); });
+    chat.addEventListener('click', function (e) { if (e.target === chat) chat.close(); });
+  } else {
+    // navegador sin <dialog>: los botones llevan al WhatsApp
+    $$('[data-chat]').forEach(function (b) { b.addEventListener('click', function () { window.open('https://wa.link/eut47p', '_blank', 'noopener'); }); });
+  }
 
   // ---- textos y tarjetas suben un poco al aparecer, escalonados ----
   var piezas = $$('.sube');
