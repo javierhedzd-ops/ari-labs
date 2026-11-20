@@ -5,7 +5,7 @@ import {Water} from './Water';
 const ramp = (t, a, b) => interpolate(t, [a,b], [0,1], {
   extrapolateLeft:'clamp', extrapolateRight:'clamp', easing:Easing.bezier(.22,.61,.36,1),
 });
-const visibility = (t, start, end) => ramp(t,start,start+.48) * (1-ramp(t,end-.48,end));
+const visibility = (t, start, end) => ramp(t,start,start+.48) * (1-ramp(t,end-.25,end));
 const layers = ['Datos','Reglas','Precios','Permisos','Supervisión','Registro'];
 const variants = [
   {start:21.4, title:'Tienda', sub:'Tallas y colores', rows:[['Talla','M'],['Color','Azul'],['Alternativa','Negra']]},
@@ -47,6 +47,8 @@ export function Ad({voice}) {
   const prompt=ramp(t,26.6,27.5);
   const parse=ramp(t,29.2,31.6);
   const approval=ramp(t,32.89,33.7);
+  const requestOut=ramp(t,32.89,33.13);
+  const approvalIn=ramp(t,33.13,33.65);
   const cursor=ramp(t,35.35,35.94)*(1-ramp(t,36.28,36.65));
   const pressed=ramp(t,35.9,36.2)*(1-ramp(t,36.2,36.5));
   const logged=ramp(t,36.98,37.5);
@@ -63,7 +65,7 @@ export function Ad({voice}) {
         height: 813-456*intro+185*settle+142*prompt-74*approval,
         transform:`translate(-50%, -50%) translateY(${-64*expand+64*settle}px)`,
       }}>
-        <div className="panel-label"><span className="dot"/>{t<6?'Mensajes':t<26.9?'Sistema del negocio':t<33.29?'Solicitud de cliente':'Panel del encargado'}<span className="demo">DEMO</span></div>
+        <div className="panel-label"><span className="dot"/>{t<6?'Mensajes':t<26.9?'Sistema del negocio':t<33.13?'Solicitud de cliente':'Panel del encargado'}<span className="demo">DEMO</span></div>
         <section style={{opacity:1-intro, transform:`translateY(${-40*intro}px)`}}>
           <div className="bubble">¿Tienes la azul en talla M?</div>
           <div className="bubble reply" style={{opacity:ramp(t,2.25,3.3)}}>Déjame consultar el inventario…</div>
@@ -80,13 +82,13 @@ export function Ad({voice}) {
             <h2>{title}</h2><div className="sub">{sub}</div><Rows rows={rows}/>
           </section>;
         })}
-        <section style={{opacity:prompt*(1-approval)}}>
+        <section style={{opacity:prompt*(1-requestOut)}}>
           <div className="bubble" style={{opacity:1-parse*.42}}>{message.slice(0,Math.floor(message.length*ramp(t,27.13,29.55)))}</div>
           <div style={{opacity:parse,transform:`translateY(${30*(1-parse)}px)`}}>
             <Rows rows={[[ 'Talla','M'],['Color','Azul'],['Alternativa','Negra'],['Solicitud','Apartar una']]}/>
           </div>
         </section>
-        <section style={{opacity:approval,transform:`translateY(${35*(1-approval)}px)`}}>
+        <section style={{opacity:approvalIn,transform:`translateY(${35*(1-approval)}px)`}}>
           <h2>{logged>.5?'Historial':'Apartar una playera'}</h2>
           <div className="sub">{logged>.5?'Acción registrada':'Azul · M · Alternativa negra'}</div>
           <div className="decision">
@@ -111,7 +113,7 @@ export function Ad({voice}) {
         }}><span className="dot"/>{name}</div>;
       })}
     </div>
-    {titles.map(([start,end,text])=><div key={start} className="headline" style={{opacity:visibility(t,start,end+.34)}}>
+    {titles.map(([start,end,text])=><div key={start} className="headline" style={{opacity:visibility(t,start,end)}}>
       <WordTitle text={text} time={t-start}/>
     </div>)}
     <div className="end" style={{opacity:ramp(t,39.11,40.05),transform:`translateY(${34*(1-ramp(t,39.11,40.05))}px)`}}>

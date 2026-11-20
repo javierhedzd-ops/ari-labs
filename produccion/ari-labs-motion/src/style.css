@@ -2,7 +2,7 @@
 body { margin: 0; }
 #root, body { font-family: 'Inter Tight Variable', sans-serif; color: #101518; }
 .water { position: absolute; width: 100%; height: 100%; background: #d9edf4; }
-.brand { position: absolute; top: 101px; left: 78px; font-size: 37px; font-weight: 750; letter-spacing: -1.4px; }
+.brand { position: absolute; top: 101px; left: 78px; font-size: 37px; font-weight: 750; letter-spacing: -.9px; }
 .stage { position: absolute; inset: 0; }
 .panel {
   position: absolute; left: 50%; top: 48%; z-index: 2; overflow: hidden;
@@ -35,7 +35,7 @@ h2 { font-size: 58px; line-height: 1; letter-spacing: -1.8px; margin: 7px 0 10px
 .headline { position: absolute; top: 1430px; left: 118px; width: 844px; font-size: 76px; line-height: .98; font-weight: 800; letter-spacing: -2.5px; }
 .word { display: inline-block; }
 .end { position: absolute; top: 540px; left: 130px; right: 130px; text-align: center; }
-h1 { margin: 0; font-size: 178px; line-height: 1; letter-spacing: -.073em; font-weight: 790; }
+h1 { margin: 0; font-size: 178px; line-height: 1; letter-spacing: -.052em; word-spacing: .035em; font-weight: 790; }
 .end p { margin: 35px auto 115px; max-width: 670px; font-size: 49px; line-height: 1.03; font-weight: 610; letter-spacing: -1.2px; }
 .cta { padding: 29px 32px; display: grid; gap: 12px; width: 710px; margin: 0 auto; background: #151e24; color: #f4faff; border: 1px solid #587080; border-radius: 36px; box-shadow: 0 16px 36px #162a4745; }
 .cta strong { font-size: 48px; }

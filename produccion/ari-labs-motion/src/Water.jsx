@@ -20,9 +20,9 @@ void main(){
   float t=time*.34;
   float g=causticas(p,t);
   float h=causticas(p*1.12+vec2(.41,.17),-t*.77);
-  vec3 base=mix(vec3(.70,.83,.91),vec3(.89,.965,.98),uv.y);
+  vec3 base=mix(vec3(.65,.79,.89),vec3(.88,.95,.98),uv.y);
   base=mix(base,vec3(.75,.94,.93),.22+.16*sin(uv.x*6.+uv.y*4.+t));
-  gl_FragColor=vec4(base+vec3(.79,.58,.39)*min(.42,g*.77+h*.34),1.);
+  gl_FragColor=vec4(base+vec3(.79,.58,.39)*min(.30,g*.63+h*.26),1.);
 }
 `;
 
