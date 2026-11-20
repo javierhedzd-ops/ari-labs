@@ -260,7 +260,7 @@
   .chat-cab h2{margin:0;font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
   .chat-cerrar{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--tinta);cursor:pointer}
   .chat-cerrar:hover{background:rgba(100,182,255,.16)}.chat-cerrar svg{width:20px;height:20px}
-  .chat-aviso{margin:0;padding:8px 20px;font-size:.8rem;color:var(--suave);background:rgba(100,182,255,.1)}
+  .chat-aviso{margin:0;padding:8px 20px;font-size:.8rem;color:var(--suave);background:rgba(100,182,255,.1)}.chat-aviso a{color:var(--azul-texto);white-space:nowrap}
   .chat-cuerpo{flex:1;min-height:0;position:relative}
   .chat-cuerpo iframe{display:block;width:100%;height:100%;border:0;background:#f8fafc}
   .chat-pronto{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:24px;overflow:auto}.chat-pronto[hidden]{display:none}
@@ -475,11 +475,11 @@ a,button,summary,label,[role=button],[role=tab]{-webkit-tap-highlight-color:tran
 
 <button type="button" class="flotante" data-chat aria-label="Conversa con nuestro agente" tabindex="-1"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg></span>Conversa con nuestro agente</button>
 
-<dialog id="chat" class="chat" aria-labelledby="chat-titulo" closedby="any" data-url="">
+<dialog id="chat" class="chat" aria-labelledby="chat-titulo" closedby="any" data-url="https://ari-labs-agente.javierhedzd.workers.dev/n/ari-labs/chat">
   <div class="chat-caja">
     <header class="chat-cab"><h2 id="chat-titulo">Agente de Ari Labs</h2>
       <button type="button" class="chat-cerrar" data-cerrar-chat aria-label="Cerrar el chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
-    <p class="chat-aviso">Es un asistente de inteligencia artificial y puede equivocarse. No escribas datos de tarjetas.</p>
+    <p class="chat-aviso">Es un asistente de inteligencia artificial y puede equivocarse. No escribas datos de tarjetas. <a href="https://ari-labs-agente.javierhedzd.workers.dev/n/ari-labs/chat" target="_blank" rel="noopener">¿No carga? Ábrelo en una pestaña nueva</a></p>
     <div class="chat-cuerpo">
       <iframe id="chat-marco" title="Chat con el agente de Ari Labs" referrerpolicy="no-referrer" allow="clipboard-write" hidden></iframe>
       <div id="chat-pronto" class="chat-pronto" hidden><p>Nuestro agente está por abrir. Mientras tanto, escríbenos por WhatsApp y te contestamos el mismo día.</p>
