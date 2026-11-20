@@ -70,32 +70,6 @@
     });
   });
 
-  // ---- las pantallas de Mis citas ----
-  var pantallas = $('.pantallas'), imgs = $$('img', pantallas), puntos = $$('.puntos button'), actual = 0;
-  function marcar(i) {
-    actual = i;
-    imgs.forEach(function (im, k) { im.classList.toggle('activa', k === i); im.classList.toggle('antes', k < i); });
-    puntos.forEach(function (p, k) { p.setAttribute('aria-current', k === i ? 'true' : 'false'); });
-  }
-  function mostrar(i) { marcar(Math.max(0, Math.min(imgs.length - 1, i))); }
-  puntos.forEach(function (p, k) { p.addEventListener('click', function () { mostrar(k); }); });
-  // deslizar a los lados sobre el teléfono cambia de pantalla; hacia arriba o abajo, la página baja normal
-  var x0 = null, y0 = 0;
-  var tel = $('.cuerpo');
-  tel.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') { x0 = e.clientX; y0 = e.clientY; } }, { passive: true });
-  tel.addEventListener('pointerup', function (e) {
-    if (x0 === null) return;
-    var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) mostrar(actual + (dx < 0 ? 1 : -1));
-  }, { passive: true });
-  tel.addEventListener('pointercancel', function () { x0 = null; }, { passive: true });
-  pantallas.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight') { mostrar(Math.min(2, actual + 1)); e.preventDefault(); }
-    if (e.key === 'ArrowLeft') { mostrar(Math.max(0, actual - 1)); e.preventDefault(); }
-  });
-  var cuerpo = $('.cuerpo');
-  function girar(gy, gx) { cuerpo.style.setProperty('--gy', gy.toFixed(2) + 'deg'); cuerpo.style.setProperty('--gx', gx.toFixed(2) + 'deg'); }
-
   // ---- la línea de luz de "Cómo trabajamos": va de nodo a nodo ----
   var caja = $('.pasos-caja'), linea = $('.linea'), pasos = $$('.paso');
   function colocarLinea() {
@@ -135,7 +109,7 @@
   }
 
   // ---- sin GSAP o con "reducir movimiento": todo visible y quieto ----
-  if (!conGsap) { llenar(1); girar(-12, 4); return; }
+  if (!conGsap) { llenar(1); return; }
   gsap.registerPlugin(ScrollTrigger);
 
   // scroll suave en toda la web
@@ -184,18 +158,8 @@
   ScrollTrigger.create({ trigger: caja, start: 'top 72%', end: 'bottom 60%', scrub: 0.5, onUpdate: function (s) { llenar(s.progress); }, onRefresh: function (s) { colocarLinea(); llenar(s.progress); } });
 
   var mm = gsap.matchMedia();
-  // compu: Trabajos se queda fija mientras el teléfono gira y cambian las pantallas; Modelos pasa de lado
+  // compu: la sección Modelos (si existe) pasa de lado
   mm.add('(min-width: 860px) and (min-height: 600px)', function () {
-    girar(-8, 6);
-    ScrollTrigger.create({
-      trigger: '.trabajos', start: 'top top', end: '+=70%', pin: true, scrub: 0.6, anticipatePin: 1,
-      onUpdate: function (s) {
-        var p = s.progress;
-        girar(-8 + p * 36, 6 - p * 4);
-        var i = Math.min(2, Math.floor(p * 3 + 0.0001));
-        if (i !== actual) marcar(i);
-      }
-    });
     var seccion = $('.modelos'), pista = $('.pista');
     if (!seccion || !pista) return;
     seccion.classList.add('fijo');
@@ -207,12 +171,9 @@
     }
     return function () { seccion.classList.remove('fijo'); if (tw) gsap.set(pista, { x: 0 }); };
   });
-  // teléfono: sin quedarse fija; el teléfono gira solo un poco
+  // teléfono: sin secciones fijas
   mm.add('(max-width: 859px), (max-height: 599px)', function () {
     if ($('.modelos')) $('.modelos').classList.remove('fijo');
-    girar(-12, 4);
-    ScrollTrigger.create({ trigger: '.telefono', start: 'top bottom', end: 'bottom top', scrub: 0.6,
-      onUpdate: function (s) { girar(-12 + s.progress * 20, 5 - s.progress * 3); } });
   });
 
   addEventListener('load', function () { ScrollTrigger.refresh(); });
